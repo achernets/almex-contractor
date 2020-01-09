@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/almex-constractor/static/css/main.d1b05096.chunk.css",
-    "main.js": "/almex-constractor/static/js/main.75587eab.chunk.js",
-    "main.js.map": "/almex-constractor/static/js/main.75587eab.chunk.js.map",
-    "runtime-main.js": "/almex-constractor/static/js/runtime-main.5a59df4c.js",
-    "runtime-main.js.map": "/almex-constractor/static/js/runtime-main.5a59df4c.js.map",
-    "static/js/2.ba28062d.chunk.js": "/almex-constractor/static/js/2.ba28062d.chunk.js",
-    "static/js/2.ba28062d.chunk.js.map": "/almex-constractor/static/js/2.ba28062d.chunk.js.map",
-    "index.html": "/almex-constractor/index.html",
-    "precache-manifest.e67e380ab9db29a68c515b1ccfb2f588.js": "/almex-constractor/precache-manifest.e67e380ab9db29a68c515b1ccfb2f588.js",
-    "service-worker.js": "/almex-constractor/service-worker.js",
-    "static/css/main.d1b05096.chunk.css.map": "/almex-constractor/static/css/main.d1b05096.chunk.css.map",
-    "static/js/2.ba28062d.chunk.js.LICENSE": "/almex-constractor/static/js/2.ba28062d.chunk.js.LICENSE",
-    "static/media/logo.svg": "/almex-constractor/static/media/logo.5d5d9eef.svg"
+    "main.css": "/almex-contractor/static/css/main.d1b05096.chunk.css",
+    "main.js": "/almex-contractor/static/js/main.5f4a0738.chunk.js",
+    "main.js.map": "/almex-contractor/static/js/main.5f4a0738.chunk.js.map",
+    "runtime-main.js": "/almex-contractor/static/js/runtime-main.d988fe7f.js",
+    "runtime-main.js.map": "/almex-contractor/static/js/runtime-main.d988fe7f.js.map",
+    "static/js/2.3b4d2f01.chunk.js": "/almex-contractor/static/js/2.3b4d2f01.chunk.js",
+    "static/js/2.3b4d2f01.chunk.js.map": "/almex-contractor/static/js/2.3b4d2f01.chunk.js.map",
+    "index.html": "/almex-contractor/index.html",
+    "precache-manifest.bd15781cc03e63bf141bc38f8c005cae.js": "/almex-contractor/precache-manifest.bd15781cc03e63bf141bc38f8c005cae.js",
+    "service-worker.js": "/almex-contractor/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/almex-contractor/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.3b4d2f01.chunk.js.LICENSE": "/almex-contractor/static/js/2.3b4d2f01.chunk.js.LICENSE",
+    "static/media/logo.svg": "/almex-contractor/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5a59df4c.js",
-    "static/js/2.ba28062d.chunk.js",
+    "static/js/runtime-main.d988fe7f.js",
+    "static/js/2.3b4d2f01.chunk.js",
     "static/css/main.d1b05096.chunk.css",
-    "static/js/main.75587eab.chunk.js"
+    "static/js/main.5f4a0738.chunk.js"
   ]
 }

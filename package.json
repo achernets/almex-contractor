@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -34,5 +34,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://achernets.github.io/almex-constractor/"
+  "homepage": "https://achernets.github.io/almex-constractor"
 }

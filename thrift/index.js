@@ -63,11 +63,10 @@ const generate = async () => {
     try {
       return await execPromise(`thrift --gen js:es6 -o ${dir} ${saveUrl}${item.name}`);
     } catch (error) {
-      console.log(error);
+      new Error(error);
     }
   })]));
-  const files = fs.readdirSync(`${dir}gen-js/`);
-  concat([`${dir}lib/thrift.js`, ...files.map(item => `${dir}gen-js/${item}`)], 'public/lib/thrift-gen.js');
+  concat([`${dir}lib/thrift.js`, ...[initFile, ...arrayUrls.map(item => item.name)].map(item => `${dir}gen-js/${item}`)], 'public/lib/thrift-gen.js');
 };
 
 generate();

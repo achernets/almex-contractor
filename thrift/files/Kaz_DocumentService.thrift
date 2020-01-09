@@ -330,7 +330,7 @@ enum ContentItemType {
     MULTILINE_TEXT_FIELD,
     MARK,
     CHECKBOX,
-    SWITCH,
+    SWITCH_ITEM,
     HTTP_LINK,
     CALENDAR_RANGE,
     CONTAINER,
@@ -1539,7 +1539,7 @@ enum HistoryLevel {
 }
 
 /** История */
-struct History {
+struct HistoryData {
   /** Идентификатор */
   1: optional common.ID id;
   /** Дата создания истории */
@@ -1574,6 +1574,14 @@ struct History {
   16: bool hasDetailData;
   /** Идентификатор номенклатурного номера */
   17: optional common.ID nomenclatureNumberId;
+}
+
+/** История с постраничным отображением  */
+struct HistoryPage {
+  /** История */
+  1: list<HistoryData> historyList;
+  /** Общее количество записей */
+  2: common.count totalCount;
 }
 
 /** История изменения конечного срока */
@@ -1821,7 +1829,8 @@ service DocumentService {
   /** Получение количества людей, которые уже вынесли решение */
   map<string, i32> getCountPeoplesWhenRenderedDecision(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3: common.ID stageId, 4:DocumentAccessPolicy accessPolicy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Вынесение решения по документу, флаг force используется для фонового вызова forceMoveToNextStage */
-  Document setDocumentDecision(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3: string decision, 4: string documentComment, 5: bool force, 6: string signature, 7:common.ID cardId, 8:list<AttCreateInfo> attachments, 9:list<ContentHolderLink> holderLinks, 10:DocumentAccessPolicy accessPolicy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  Document setDocumentDecision(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3: string decision, 4:string documentComment, 5:bool force, 6:string signature, 7:common.ID cardId, 8:list<AttCreateInfo> attachments, 9:list<ContentHolderLink> holderLinks, 10:DocumentAccessPolicy accessPolicy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  Document setDocumentDecisionUsingServerKeyStorage(1: common.AuthTokenBase64 token, 2:common.ID documentId, 3:string decision, 4:string documentComment, 5:bool force, 6:common.ID pKeyId, 7:string password, 8:common.ID cardId, 9:list<AttCreateInfo> attachments, 10:list<ContentHolderLink> holderLinks, 11:DocumentAccessPolicy accessPolicy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /*** Утверждение решения по документу */
   bool approveDocumentDecision(1: common.AuthTokenBase64 token, 2: common.ID executionId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Предоставление доступа к документу */
@@ -1836,6 +1845,7 @@ service DocumentService {
 
   /** Разовое перепоручение документа */
   list<DocumentExecution> reassignDocument(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3: list<DocumentReassign> documentReassign, 4: common.ID cardId, 5: string signature) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  list<DocumentExecution> reassignDocumentUsingServerKeyStorage(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3: list<DocumentReassign> documentReassign, 4: common.ID cardId, 5: common.ID pKeyId, 6: string password) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Отменить свои разовые перепоручения */
   bool revokeChildCards(1: common.AuthTokenBase64 token, 2: common.ID cardId,  3: bool deleteCard, 4: DocumentAccessPolicy accessPolicy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Cоздание/изменение автоматического перепоручения */
@@ -1913,9 +1923,7 @@ service DocumentService {
   bool removeResponsibleForDocument(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3: list<common.UserOrGroup> users, 4:DocumentAccessPolicy accessPolicy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
   /** Получение истории по документу */
-  list<History> getHistory(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3:DocumentAccessPolicy accessPolicy, 4: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  /** Получение количества истории по документу */
-  common.count getCountHistory(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3:DocumentAccessPolicy accessPolicy, 4: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  HistoryPage getDocHistoryPage(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3:DocumentAccessPolicy accessPolicy, 4: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
   /** Получение всех новостей */
   list<Kaz_types.News> getAllNews(1: common.AuthTokenBase64 token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
@@ -1982,9 +1990,13 @@ service DocumentService {
   /** Изменить текст комментария статуса документа*/
   bool updateSubStatusComment(1:common.AuthTokenBase64 token, 2: common.ID docCommentId, 3: string comment, 4: DocumentAccessPolicy policy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** отправить док на этап другого шаблона */
-  bool changeDocumentType(1: common.AuthTokenBase64 token, 2: common.ID docId, 3: string startStageId, 4: list<DocumentPatternStage> stages, 5: list<ContentItem> contentItems, 6:list<ContentTab> contentTabs, 7:list<PatternProcessRole> roles, 8:list<PatternVariable> patternVariables, 9:DocumentAccessPolicy accessPolicy, 10:string newRegNumber) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  bool changeDocumentType(1: common.AuthTokenBase64 token, 2: common.ID docId, 3: string startStageId, 4: list<DocumentPatternStage> stages, 5: list<ContentItem> contentItems, 6:list<PatternProcessRole> roles, 7:list<PatternVariable> patternVariables, 8:DocumentAccessPolicy accessPolicy, 9:string newRegNumber) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Получить структуру зависимостей документа */
   DocumentRelationModel getDocumentRelationModel(1: common.AuthTokenBase64 token, 2: common.ID docId, 3:filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Возвращает последнюю версию вложения */
   Attachment getNewConvertedAttachmentVersion(1: common.AuthTokenBase64 token, 2: string prevAttId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  /** Экспорт документа в xml*/
+  binary exportAsXML(1:common.AuthTokenBase64 token, 2:common.ID documentId, 3:DocumentAccessPolicy accessPolicy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  /** */
+  list<ContentItem> getDocContentItemsForChangeType(1:common.AuthTokenBase64 token, 2:common.ID documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 }

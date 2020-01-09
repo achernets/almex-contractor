@@ -3,11 +3,11 @@ include "filter.thrift"
 include "common.thrift"
 include "Kaz_DocumentService.thrift"
 
-/** Открытое api системы AlmexECM mrk version ${thrift.version} */
+/** Открытое api системы AlmexECM mrk version mrk-1.0.1 */
 namespace java com.devtech.mrk.thrift.gen
 
 /** Версия продукта AlmexECM mrk */
-const string MRK_CURRENT_VERSION = "${thrift.version}";
+const string MRK_CURRENT_VERSION = "mrk-1.0.1";
 
 enum MrkContactType {
   EMAIL,

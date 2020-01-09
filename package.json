@@ -17,7 +17,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "thrift": "node Thrift/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,5 +35,10 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://achernets.github.io/almex-constractor"
+  "homepage": "https://achernets.github.io/almex-constractor",
+  "devDependencies": {
+    "child_process": "^1.0.2",
+    "concat-files": "^0.1.1",
+    "replace-in-file": "^5.0.2"
+  }
 }

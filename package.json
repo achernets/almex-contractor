@@ -6,22 +6,50 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "antd": "^3.26.6",
     "gh-pages": "^2.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "EXTEND_ESLINT=true CHOKIDAR_USEPOLLING=true react-scripts start",
+    "build": "EXTEND_ESLINT=true CHOKIDAR_USEPOLLING=true react-scripts build",
+    "test": "EXTEND_ESLINT=true CHOKIDAR_USEPOLLING=true react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "thrift": "node Thrift/index.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "globals": {
+      "KazFilter": true,
+      "FilterFieldType": true,
+      "FilterCondition": true,
+      "FilterItem": true
+    },
+    "rules": {
+      "react-hooks/exhaustive-deps": "off",
+      "no-console": "warn",
+      "no-unused-vars": "warn",
+      "no-unexpected-multiline": "warn",
+      "quotes": [
+        "warn",
+        "single",
+        {
+          "allowTemplateLiterals": true
+        }
+      ],
+      "semi": [
+        "warn",
+        "always"
+      ],
+      "jsx-quotes": [
+        "warn",
+        "prefer-double"
+      ]
+    }
   },
   "browserslist": {
     "production": [

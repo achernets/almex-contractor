@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/almex-contractor/static/css/main.ce4b7954.chunk.css",
-    "main.js": "/almex-contractor/static/js/main.5b42b73c.chunk.js",
-    "main.js.map": "/almex-contractor/static/js/main.5b42b73c.chunk.js.map",
+    "main.js": "/almex-contractor/static/js/main.5f1e832d.chunk.js",
+    "main.js.map": "/almex-contractor/static/js/main.5f1e832d.chunk.js.map",
     "runtime-main.js": "/almex-contractor/static/js/runtime-main.d988fe7f.js",
     "runtime-main.js.map": "/almex-contractor/static/js/runtime-main.d988fe7f.js.map",
     "static/css/2.2bcbc079.chunk.css": "/almex-contractor/static/css/2.2bcbc079.chunk.css",
     "static/js/2.4c28ec75.chunk.js": "/almex-contractor/static/js/2.4c28ec75.chunk.js",
     "static/js/2.4c28ec75.chunk.js.map": "/almex-contractor/static/js/2.4c28ec75.chunk.js.map",
     "index.html": "/almex-contractor/index.html",
-    "precache-manifest.b58a86789fd5f6e0b3d9b1aa5fb0aab0.js": "/almex-contractor/precache-manifest.b58a86789fd5f6e0b3d9b1aa5fb0aab0.js",
+    "precache-manifest.aff9ab665d57b42fd29f4e92de133967.js": "/almex-contractor/precache-manifest.aff9ab665d57b42fd29f4e92de133967.js",
     "service-worker.js": "/almex-contractor/service-worker.js",
     "static/css/2.2bcbc079.chunk.css.map": "/almex-contractor/static/css/2.2bcbc079.chunk.css.map",
     "static/css/main.ce4b7954.chunk.css.map": "/almex-contractor/static/css/main.ce4b7954.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.2bcbc079.chunk.css",
     "static/js/2.4c28ec75.chunk.js",
     "static/css/main.ce4b7954.chunk.css",
-    "static/js/main.5b42b73c.chunk.js"
+    "static/js/main.5f1e832d.chunk.js"
   ]
 }

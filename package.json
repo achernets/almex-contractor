@@ -3,14 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "antd": "^3.26.6",
-    "gh-pages": "^2.2.0",
+    "connected-react-router": "^6.6.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "react-redux": "^7.1.3",
+    "react-redux-i18n": "^1.9.3",
+    "react-redux-modals": "^1.1.4",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0",
+    "redux": "^4.0.5",
+    "redux-async-initial-state": "^0.3.0",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.4.1"
   },
   "scripts": {
     "start": "EXTEND_ESLINT=true CHOKIDAR_USEPOLLING=true react-scripts start",
@@ -67,6 +75,8 @@
   "devDependencies": {
     "child_process": "^1.0.2",
     "concat-files": "^0.1.1",
-    "replace-in-file": "^5.0.2"
+    "gh-pages": "^2.2.0",
+    "replace-in-file": "^5.0.2",
+    "node-sass": "^4.13.0"
   }
 }

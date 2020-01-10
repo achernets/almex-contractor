@@ -1,0 +1,10 @@
+.list {
+  margin: 10px 0;
+  .item {
+    text-transform: uppercase;
+    cursor: pointer;
+    &.active {
+      color: #388ded;
+    }
+  }
+}

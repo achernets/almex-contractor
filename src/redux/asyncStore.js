@@ -1,6 +1,6 @@
 import { setThrift, MrkClientServiceClient } from 'api';
 import { reduce } from 'lodash';
-import { log } from 'utils/helpers';
+import { log, PUBLIC_URL } from 'utils/helpers';
 import moment from 'moment';
 
 const getInitialState = currentState => {
@@ -8,7 +8,7 @@ const getInitialState = currentState => {
     let store = currentState();
     let auth = { ...store.auth };
     try {
-      const frontRequest = await fetch(`${process.env.PUBLIC_URL}/web-config.json`);
+      const frontRequest = await fetch(`${PUBLIC_URL}/web-config.json`);
       const frontSettings = await frontRequest.json();
       await setThrift(frontSettings);
       if (auth.token !== null) {
@@ -31,7 +31,7 @@ const getInitialState = currentState => {
       }
       const DEFAULT_TRANSLATE = localStorage.getItem('lang') || frontSettings.LANG;
       const translate = await fetch(
-        `${process.env.PUBLIC_URL}/translates/${DEFAULT_TRANSLATE}.json`
+        `${PUBLIC_URL}/translates/${DEFAULT_TRANSLATE}.json`
       );
       let translations = {
         [DEFAULT_TRANSLATE]: await translate.json()

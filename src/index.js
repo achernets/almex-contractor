@@ -8,6 +8,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import store, { history } from 'redux/store';
 import { ModalRoot } from 'react-redux-modals';
 import * as modalComponents from 'components/Modals';
+import { PUBLIC_URL } from 'utils/helpers';
+import { BrowserRouter } from 'react-router-dom';
 
 const ModalRootWithStore = ModalRoot(store);
 
@@ -15,7 +17,9 @@ const render = Component => {
   return ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <Component />
+        <BrowserRouter basename={PUBLIC_URL}>
+          <Component />
+        </BrowserRouter>
         <ModalRootWithStore modalComponents={modalComponents} />
       </ConnectedRouter>
     </Provider>,

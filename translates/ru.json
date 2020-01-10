@@ -1,0 +1,8 @@
+{
+  "common": {
+    "error": "Ошибка"
+  },
+  "SignIn": {
+    "locale_not_found": "Файл не найден"
+  }
+}

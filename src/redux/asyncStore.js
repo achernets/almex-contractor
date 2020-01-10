@@ -13,12 +13,12 @@ const getInitialState = currentState => {
       await setThrift(frontSettings);
       if (auth.token !== null) {
         try {
-          let authenticate = await MrkClientServiceClient.isAuthSessionExpired(
+          let authenticate = await MrkClientServiceClient.refreshMrkClientSession(
             auth.token
           );
           if (authenticate) auth = {
-            ...auth,
-            token: null
+            ...authenticate,
+            token: authenticate.id
           };
         } catch (error) {
           log(error);

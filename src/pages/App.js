@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignIn from 'pages/SignIn';
+import MrkDocuments from 'pages/MrkDocuments';
 import Loader from 'components/Loader';
+import PrivateRoute from 'components/PrivateRoute';
 import StartAppFail from 'components/StartAppFail';
 
 const App = ({ loading, error }) => {
@@ -12,10 +14,10 @@ const App = ({ loading, error }) => {
       {loading ? <Loader /> :
         <Switch>
           <Route exact path="/signIn" component={SignIn} />
-          <Redirect to="/signIn" />
+          <PrivateRoute exact path="/" component={MrkDocuments} />
+          <Redirect to="/" />
         </Switch>}
     </>
-
   );
 };
 

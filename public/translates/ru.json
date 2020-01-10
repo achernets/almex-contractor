@@ -2,7 +2,14 @@
   "common": {
     "error": "Ошибка"
   },
+  "form": {
+    "required": "Обязательное для заполнения"
+  },
   "SignIn": {
-    "locale_not_found": "Файл не найден"
+    "locale_not_found": "Файл не найден",
+    "login": "Логин",
+    "password": "Пароль",
+    "sign_in": "Войти",
+    "sign_up": "Зарегистрироватся"
   }
 }

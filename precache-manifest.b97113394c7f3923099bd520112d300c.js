@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8fbbdbabcf0cc3b5fb34efed566c9780",
+    "revision": "2988374e2adbe5383d84a3f6e35bc608",
     "url": "/almex-contractor/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/almex-contractor/static/css/2.2bcbc079.chunk.css"
   },
   {
-    "revision": "9fd4c1c02d8abeaa5203",
+    "revision": "011dc58b193ab6f0e187",
     "url": "/almex-contractor/static/css/main.ce4b7954.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/almex-contractor/static/js/2.4c28ec75.chunk.js.LICENSE"
   },
   {
-    "revision": "9fd4c1c02d8abeaa5203",
-    "url": "/almex-contractor/static/js/main.e0bf8f76.chunk.js"
+    "revision": "011dc58b193ab6f0e187",
+    "url": "/almex-contractor/static/js/main.fb43b2b0.chunk.js"
   },
   {
     "revision": "03ae4f21d3ce657cd0c1",

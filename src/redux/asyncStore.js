@@ -8,7 +8,7 @@ const getInitialState = currentState => {
     let store = currentState();
     let auth = { ...store.auth };
     try {
-      const frontRequest = await fetch('../web-config.json');
+      const frontRequest = await fetch(`${process.env.PUBLIC_URL}/web-config.json`);
       const frontSettings = await frontRequest.json();
       await setThrift(frontSettings);
       if (auth.token !== null) {
@@ -29,16 +29,16 @@ const getInitialState = currentState => {
           localStorage.removeItem('token');
         }
       }
-      const languages = await MrkClientServiceClient.getAllLanguages();
-      const settings = await MrkClientServiceClient.getInfo();
       const DEFAULT_TRANSLATE = localStorage.getItem('lang') || frontSettings.LANG;
       const translate = await fetch(
-        `../translates/${DEFAULT_TRANSLATE}.json`
+        `${process.env.PUBLIC_URL}/translates/${DEFAULT_TRANSLATE}.json`
       );
       let translations = {
         [DEFAULT_TRANSLATE]: await translate.json()
       };
       moment.locale(DEFAULT_TRANSLATE);
+      const languages = await MrkClientServiceClient.getAllLanguages();
+      const settings = await MrkClientServiceClient.getInfo();
       resolve({
         ...store,
         auth,

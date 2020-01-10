@@ -12,7 +12,7 @@ class LangItem extends Component {
     const { locale } = this.props;
     if (locale === lang.value) return null;
     try {
-      const request = await fetch(`../translates/${lang.value}.json`);
+      const request = await fetch(`${process.env.PUBLIC_URL}/translates/${lang.value}.json`);
       const translates = await request.json();
       this.props.loadTranslations({ [lang.value]: translates });
       this.props.setLocale(lang.value);

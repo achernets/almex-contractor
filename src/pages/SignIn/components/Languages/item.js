@@ -9,8 +9,10 @@ import { loadTranslations, setLocale, I18n } from 'react-redux-i18n';
 
 class LangItem extends Component {
   setlang = async lang => {
+    const { locale } = this.props;
+    if (locale === lang.value) return null;
     try {
-      const request = await fetch(`/translates/${lang.value}.json`);
+      const request = await fetch(`../translates/${lang.value}.json`);
       const translates = await request.json();
       this.props.loadTranslations({ [lang.value]: translates });
       this.props.setLocale(lang.value);

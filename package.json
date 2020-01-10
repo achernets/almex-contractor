@@ -27,7 +27,7 @@
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "thrift": "node Thrift/index.js"
+    "thrift": "node thrift/index.js"
   },
   "eslintConfig": {
     "extends": "react-app",

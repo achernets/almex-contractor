@@ -1,11 +1,13 @@
-const { URL, API } = window.SERVER;
+let MrkClientServiceClient = null;
 
-const MrkClientServiceClient = new window.MrkClientServiceClient(
-  new window.Thrift.Protocol(
-    new window.Thrift.Transport(`${URL}/${API}/thrift/mrk-client-json`)
-  )
-);
-
+const setThrift = async ({ THRIFT }) => {
+  MrkClientServiceClient = new window.MrkClientServiceClient(
+    new window.Thrift.Protocol(
+      new window.Thrift.Transport(`${THRIFT.URL}/${THRIFT.API}/thrift/mrk-client-json`)
+    )
+  );
+};
 export {
+  setThrift,
   MrkClientServiceClient
 };

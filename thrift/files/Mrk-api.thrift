@@ -78,6 +78,7 @@ struct MrkUserSession {
 }
 
 enum MrkDocumentType {
+  DRAFT,
   INPUT,
   OUTPUT
 }
@@ -85,15 +86,22 @@ enum MrkDocumentType {
 struct MrkDocument {
   1: optional string id;
   2: optional string extId;
-  3: string name;
-  4: MrkDocumentType type;
-  5: optional i64 createDate;
-  6: optional string parentId;
-  7: bool viewed;
-  8: optional i64 sendDate;
-  9: optional i64 receiveDate;
-  10: optional string creatorId;
-  11: optional string accountId;
+  3: optional string accountId;
+  4: string patternId;
+  5: string patternName;
+  6: string name;
+  7: MrkDocumentType type;
+  8: optional i64 createDate;
+  9: optional string parentId;
+  10: bool viewed;
+  11: optional i64 sendDate;
+  12: optional i64 receiveDate;
+  13: optional string creatorId;
+}
+
+struct MrkDocumentPage {
+  1: list<MrkDocument> documentData;
+  2: i32 count;
 }
 
 struct MrkAttachment {
@@ -121,6 +129,8 @@ enum MrkHistoryKey {
   ORGANIZATION_CREATED,
   DOCUMENT_UPDATE,
   DOCUMENT_CREATE,
+  DOCUMENT_VIEW,
+  ATTACHMENT_CREATED,
   USER_REMOVED,
   USER_CHANGED
 }
@@ -153,16 +163,21 @@ struct MrkAlmexSysUserPage {
 
 service MrkClientService {
   map<string, string> getInfo();
+  map<string, string> getAllLanguages() throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+
   MrkClientSession authMrkClient(1: string login; 2: string password, 3: string ip, 4: string langCode, 5: i32 cacheVersion) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  bool isAuthSessionExpired(1: string token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkAccount registration(1:MrkClient cl, 2: string password, 3:MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkAccount convert(1: string token, 2: MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);//из фил лица в юр лицо
   list<MrkClient> changeClientInfo(1: string token, 2:MrkClient cl, 3:MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   string getProfileInfoForSing(1: string token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  bool signProfile(1: common.AuthTokenBase64 token, 2: string signature) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  bool signProfile(1: common.AuthTokenBase64 token, 2: string signature, 3: string publicKey) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
-
-  list<MrkDocument> getAllMrkDocuments(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  i32 getCountAllMrkDocuments(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  /*
+  type - тип документа
+  */
+  MrkDocumentPage getMrkDocumentPage(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  MrkDocumentData markMrkDocumentAsRead(1: string token, 2: string documentId, 3: bool read) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData getMrkDocumentData(1: string token, 2: string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocument createOrUpdateMrkDocument(1: string token, 2: MrkDocument document) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
@@ -181,6 +196,7 @@ service MrkClientService {
 //  sign
 //  send
 //requestConfirmation
+  bool logout(1: string token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 }
 
 service MrkUserService {

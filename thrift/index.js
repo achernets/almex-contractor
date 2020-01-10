@@ -66,7 +66,8 @@ const generate = async () => {
       new Error(error);
     }
   })]));
-  concat([`${dir}lib/thrift.js`, ...[initFile, ...arrayUrls.map(item => item.name)].map(item => `${dir}gen-js/${item}`)], 'public/lib/thrift-gen.js');
+  const files = fs.readdirSync(`${dir}gen-js/`);
+  concat([`${dir}lib/thrift.js`, ...files.map(item => `${dir}gen-js/${item}`)], 'public/lib/thrift-gen.js');
 };
 
 generate();

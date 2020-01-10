@@ -1,4 +1,6 @@
-import { MrkClientServiceClient } from 'api';
+import { setThrift, MrkClientServiceClient } from 'api';
+import { reduce } from 'lodash';
+import { log } from 'utils/helpers';
 import moment from 'moment';
 
 const getInitialState = currentState => {
@@ -6,45 +8,32 @@ const getInitialState = currentState => {
     let store = currentState();
     let auth = { ...store.auth };
     try {
-      // if (store.auth.token !== null) {
-      //   try {
-      //     let authenticate = await AuthServiceClient.refreshAuthSession(
-      //       store.auth.token
-      //     );
-      //     let accounts = await UserManagementServiceClient.getAccounts(
-      //       authenticate.id,
-      //       null
-      //     );
-      //     let delegates = await UserManagementServiceClient.getAllClientsForDelegate(
-      //       localStorage.getItem('originalUserToken') || authenticate.id,
-      //       authenticate.delegateClientInfo !== null
-      //         ? authenticate.delegateClientInfo.id
-      //         : authenticate.clientInfo.id,
-      //       null
-      //     );
-      //     auth = {
-      //       token: authenticate.id,
-      //       user: authenticate,
-      //       accounts,
-      //       delegates
-      //     };
-      //   } catch (error) {
-      //     auth = {
-      //       ...auth,
-      //       token: null
-      //     };
-      //     localStorage.removeItem('token');
-      //     localStorage.removeItem('originalUserToken');
-      //   }
-      // }
-      // const languages = await AuthServiceClient.getAllLanguages();
-      const settings = await MrkClientServiceClient.getInfo();
-      const frontRequest = await fetch('/web-config.json');
+      const frontRequest = await fetch('../web-config.json');
       const frontSettings = await frontRequest.json();
-      const DEFAULT_TRANSLATE =
-        localStorage.getItem('lang') || frontSettings.LANG;
+      await setThrift(frontSettings);
+      if (auth.token !== null) {
+        try {
+          let authenticate = await MrkClientServiceClient.isAuthSessionExpired(
+            auth.token
+          );
+          if (authenticate) auth = {
+            ...auth,
+            token: null
+          };
+        } catch (error) {
+          log(error);
+          auth = {
+            ...auth,
+            token: null
+          };
+          localStorage.removeItem('token');
+        }
+      }
+      const languages = await MrkClientServiceClient.getAllLanguages();
+      const settings = await MrkClientServiceClient.getInfo();
+      const DEFAULT_TRANSLATE = localStorage.getItem('lang') || frontSettings.LANG;
       const translate = await fetch(
-        `/translates/${DEFAULT_TRANSLATE}.json`
+        `../translates/${DEFAULT_TRANSLATE}.json`
       );
       let translations = {
         [DEFAULT_TRANSLATE]: await translate.json()
@@ -60,23 +49,35 @@ const getInitialState = currentState => {
         i18n: {
           locale: DEFAULT_TRANSLATE,
           translations,
-          list: [
-            {
-              name: 'English',
-              value: 'en'
+          // list: [
+          //   {
+          //     name: 'English',
+          //     value: 'en'
+          //   },
+          //   {
+          //     name: 'Русский',
+          //     value: 'ru'
+          //   },
+          //   {
+          //     name: 'Қазақша',
+          //     value: 'kk'
+          //   }
+          // ]
+          list: reduce(
+            languages,
+            (array, item, key) => {
+              array.push({
+                name: item,
+                value: key
+              });
+              return array;
             },
-            {
-              name: 'Русский',
-              value: 'ru'
-            },
-            {
-              name: 'Қазақша',
-              value: 'kk'
-            }
-          ]
+            []
+          )
         }
       });
     } catch (error) {
+      log(error);
       reject(error);
     }
   });

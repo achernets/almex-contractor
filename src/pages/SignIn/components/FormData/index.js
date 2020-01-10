@@ -27,7 +27,7 @@ const FormData = ({ login, token, isFetching }) => {
       login(values);
     }}
   >
-    {props => (
+    {() => (
       <Form style={{ width: 260 }}>
         <Form.Item name="login" >
           <Input name="login" placeholder={I18n.t('SignIn.login')} size={'large'} />

@@ -1,0 +1,23 @@
+.table {
+  height: 100%;
+  :global {
+    .ant-table-wrapper {
+      height: 100%;
+      background: #ffffff;
+      .ant-spin-nested-loading {
+        height: 100%;
+        .ant-spin-container {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          .ant-table {
+            flex: 1;
+          }
+          .ant-pagination {
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,12 @@
 import React from 'react';
-
-const MrkDocuments = () => <div>MrkDocuments</div>;
+import { SubLayout } from 'components/LayoutApp';
+import HeaderDocs from './components/HeaderDocs';
+import Content from './components/Content';
+const MrkDocuments = () => <>
+  <HeaderDocs />
+  <SubLayout>
+    <Content />
+  </SubLayout>
+</>;
 
 export default MrkDocuments;

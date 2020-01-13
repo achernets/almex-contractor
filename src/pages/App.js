@@ -6,6 +6,7 @@ import MrkDocuments from 'pages/MrkDocuments';
 import Loader from 'components/Loader';
 import PrivateRoute from 'components/PrivateRoute';
 import StartAppFail from 'components/StartAppFail';
+import { LayoutApp } from 'components/LayoutApp';
 
 const App = ({ loading, error }) => {
   if (error !== null) return <StartAppFail />;
@@ -14,7 +15,12 @@ const App = ({ loading, error }) => {
       {loading ? <Loader /> :
         <Switch>
           <Route exact path="/signIn" component={SignIn} />
-          <PrivateRoute exact path="/" component={MrkDocuments} />
+          <LayoutApp>
+            <Switch>
+              <PrivateRoute exact path="/" component={MrkDocuments} />
+              <Redirect to="/" />
+            </Switch>
+          </LayoutApp>
           <Redirect to="/" />
         </Switch>}
     </>

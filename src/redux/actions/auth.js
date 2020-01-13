@@ -35,3 +35,32 @@ export const login = values => {
     }
   };
 };
+
+
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+
+export const logout = () => {
+  return async (dispatch, getState, api) => {
+    dispatch({ type: LOGOUT_REQUEST });
+    try {
+      const {
+        auth: { token }
+      } = getState();
+      await api.MrkClientServiceClient.logout(token);
+      localStorage.removeItem('token');
+      dispatch({
+        type: LOGOUT_SUCCESS
+      });
+    } catch (error) {
+      if (error.preconditionExceptionKey)
+        notification.error({
+          key: 'logout',
+          message: error.message
+        });
+      dispatch({ type: LOGOUT_FAILURE });
+      log(error);
+    }
+  };
+};

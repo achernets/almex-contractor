@@ -1,7 +1,8 @@
 import {
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
-  SIGN_IN_FAILURE
+  SIGN_IN_FAILURE,
+  LOGOUT_SUCCESS
 } from '../actions/auth';
 
 const initialState = {
@@ -28,6 +29,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: false
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        token: null
       };
     default:
       return state;

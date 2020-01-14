@@ -10,6 +10,7 @@ const initialState = {
   count: 0,
   page: 1,
   searchText: '',
+  isSearch: false,
   isFetching: false
 };
 
@@ -26,6 +27,7 @@ export default (state = initialState, action) => {
         mrkDocuments: action.payload.documentData,
         count: action.payload.count,
         page: action.payload.page,
+        isSearch: action.payload.isSearch,
         isFetching: false
       };
     case GET_MRK_DOCUMENT_FAILURE:

@@ -10,7 +10,7 @@ import { Button, Typography } from 'antd';
 import moment from 'moment';
 import { actions } from 'react-redux-modals';
 
-const Content = ({ getMrkDocuments, showModal, mrkDocuments, count, page, isFetching }) => {
+const Content = ({ getMrkDocuments, showModal, mrkDocuments, isSearch, count, page, isFetching }) => {
   useEffect(() => {
     getMrkDocuments();
   }, []);
@@ -47,17 +47,20 @@ const Content = ({ getMrkDocuments, showModal, mrkDocuments, count, page, isFetc
       };
     }}
     locale={{
-      emptyText: <Empty
+      emptyText: isSearch ? <Empty
+        description={I18n.t('MrkDocuments.no_data_search')}
+      >
+      </Empty> : <Empty
         imageStyle={{
           height: 0
         }}
         image={null}
-        description={<Typography.Text style={{ fontSize: 24 }} strong>{I18n.t('MrkDocuments.no_data')}</Typography.Text>}
+        description={<Typography.Text>{I18n.t('MrkDocuments.no_data')}</Typography.Text>}
       >
-        <Button type="primary" onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
-          mrkDocument: null
-        })}>{I18n.t('MrkDocuments.create_empty')}</Button>
-      </Empty>,
+          <Button type="primary" onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
+            mrkDocument: null
+          })}>{I18n.t('MrkDocuments.create_empty')}</Button>
+        </Empty>,
     }}
   />;
 };
@@ -67,6 +70,7 @@ const mapStateToProps = state => ({
   mrkDocuments: state.mrkDocuments.mrkDocuments,
   count: state.mrkDocuments.count,
   page: state.mrkDocuments.page,
+  isSearch: state.mrkDocuments.isSearch,
   isFetching: state.mrkDocuments.isFetching
 });
 const mapDispatchToProps = dispatch =>

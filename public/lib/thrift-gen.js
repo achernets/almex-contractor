@@ -39015,6 +39015,194 @@ MrkClientService_registration_result = class {
   }
 
 };
+MrkClientService_changePassword_args = class {
+  constructor(args) {
+    this.token = null;
+    this.oldPassword = null;
+    this.password = null;
+    this.confirmation = null;
+    if (args) {
+      if (args.token !== undefined && args.token !== null) {
+        this.token = args.token;
+      }
+      if (args.oldPassword !== undefined && args.oldPassword !== null) {
+        this.oldPassword = args.oldPassword;
+      }
+      if (args.password !== undefined && args.password !== null) {
+        this.password = args.password;
+      }
+      if (args.confirmation !== undefined && args.confirmation !== null) {
+        this.confirmation = args.confirmation;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 1:
+        if (ftype == Thrift.Type.STRING) {
+          this.token = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRING) {
+          this.oldPassword = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 3:
+        if (ftype == Thrift.Type.STRING) {
+          this.password = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 4:
+        if (ftype == Thrift.Type.STRING) {
+          this.confirmation = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_changePassword_args');
+    if (this.token !== null && this.token !== undefined) {
+      output.writeFieldBegin('token', Thrift.Type.STRING, 1);
+      output.writeString(this.token);
+      output.writeFieldEnd();
+    }
+    if (this.oldPassword !== null && this.oldPassword !== undefined) {
+      output.writeFieldBegin('oldPassword', Thrift.Type.STRING, 2);
+      output.writeString(this.oldPassword);
+      output.writeFieldEnd();
+    }
+    if (this.password !== null && this.password !== undefined) {
+      output.writeFieldBegin('password', Thrift.Type.STRING, 3);
+      output.writeString(this.password);
+      output.writeFieldEnd();
+    }
+    if (this.confirmation !== null && this.confirmation !== undefined) {
+      output.writeFieldBegin('confirmation', Thrift.Type.STRING, 4);
+      output.writeString(this.confirmation);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkClientService_changePassword_result = class {
+  constructor(args) {
+    this.success = null;
+    this.validError = null;
+    this.error = null;
+    if (args instanceof PreconditionException) {
+        this.validError = args;
+        return;
+    }
+    if (args instanceof ServerException) {
+        this.error = args;
+        return;
+    }
+    if (args) {
+      if (args.success !== undefined && args.success !== null) {
+        this.success = args.success;
+      }
+      if (args.validError !== undefined && args.validError !== null) {
+        this.validError = args.validError;
+      }
+      if (args.error !== undefined && args.error !== null) {
+        this.error = args.error;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 0:
+        if (ftype == Thrift.Type.BOOL) {
+          this.success = input.readBool().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 1:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.validError = new PreconditionException();
+          this.validError.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.error = new ServerException();
+          this.error.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_changePassword_result');
+    if (this.success !== null && this.success !== undefined) {
+      output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+      output.writeBool(this.success);
+      output.writeFieldEnd();
+    }
+    if (this.validError !== null && this.validError !== undefined) {
+      output.writeFieldBegin('validError', Thrift.Type.STRUCT, 1);
+      this.validError.write(output);
+      output.writeFieldEnd();
+    }
+    if (this.error !== null && this.error !== undefined) {
+      output.writeFieldBegin('error', Thrift.Type.STRUCT, 2);
+      this.error.write(output);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
 MrkClientService_convert_args = class {
   constructor(args) {
     this.token = null;
@@ -42160,6 +42348,71 @@ MrkClientServiceClient = class {
       return result.success;
     }
     throw 'registration failed: unknown result';
+  }
+
+  changePassword (token, oldPassword, password, confirmation) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      self.send_changePassword(token, oldPassword, password, confirmation, (error, result) => {
+        return error ? reject(error) : resolve(result);
+      });
+    });
+  }
+
+  send_changePassword (token, oldPassword, password, confirmation, callback) {
+    const params = {
+      token: token,
+      oldPassword: oldPassword,
+      password: password,
+      confirmation: confirmation
+    };
+    const args = new MrkClientService_changePassword_args(params);
+    try {
+      this.output.writeMessageBegin('changePassword', Thrift.MessageType.CALL, this.seqid);
+      args.write(this.output);
+      this.output.writeMessageEnd();
+      const self = this;
+      this.output.getTransport().flush(true, () => {
+        let error = null, result = null;
+        try {
+          result = self.recv_changePassword();
+        } catch (e) {
+          error = e;
+        }
+        callback(error, result);
+      });
+    }
+    catch (e) {
+      if (typeof this.output.getTransport().reset === 'function') {
+        this.output.getTransport().reset();
+      }
+      throw e;
+    }
+  }
+
+  recv_changePassword () {
+    const ret = this.input.readMessageBegin();
+    const mtype = ret.mtype;
+    if (mtype == Thrift.MessageType.EXCEPTION) {
+      const x = new Thrift.TApplicationException();
+      x.read(this.input);
+      this.input.readMessageEnd();
+      throw x;
+    }
+    const result = new MrkClientService_changePassword_result();
+    result.read(this.input);
+    this.input.readMessageEnd();
+
+    if (null !== result.validError) {
+      throw result.validError;
+    }
+    if (null !== result.error) {
+      throw result.error;
+    }
+    if (null !== result.success) {
+      return result.success;
+    }
+    throw 'changePassword failed: unknown result';
   }
 
   convert (token, organization) {

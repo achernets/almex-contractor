@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import { Form, Input } from 'formik-antd';
 import { Formik } from 'formik';
 import { I18n } from 'react-redux-i18n';
@@ -8,24 +8,36 @@ import { bindActionCreators } from 'redux';
 import { actions } from 'react-redux-modals';
 import { log } from 'utils/helpers';
 import * as Yup from 'yup';
+import { MrkClientServiceClient } from 'api';
 
-const ChangePassword = (props) => {
-  const { hideModal } = props;
+const ChangePassword = ({ hideModal, token }) => {
   return (
     <Formik
       initialValues={{
         oldPassword: '',
-        newPassword: '',
-        confirmPassword: ''
+        password: '',
+        confirmation: ''
       }}
       validationSchema={Yup.object({
         oldPassword: Yup.string().required(I18n.t('form.required')),
-        newPassword: Yup.string().required(I18n.t('form.required')),
-        confirmPassword: Yup.string().required(I18n.t('form.required'))
-          .oneOf([Yup.ref('newPassword'), null], I18n.t('ChangePassword.password_not_match'))
+        password: Yup.string().required(I18n.t('form.required')),
+        confirmation: Yup.string().required(I18n.t('form.required'))
+          .oneOf([Yup.ref('password'), null], I18n.t('ChangePassword.password_not_match'))
       })}
-      onSubmit={async (values) => {
-        log(values);
+      onSubmit={async (values, { setSubmitting }) => {
+        setSubmitting(true);
+        try {
+          await MrkClientServiceClient.changePassword(token, { ...values });
+          hideModal('MODAL_CHANGE_PASSWORD');
+        } catch (error) {
+          notification.error({
+            key: 'changePassword',
+            message: error.preconditionExceptionKey,
+            description: error.message
+          });
+          log(error);
+        }
+        setSubmitting(false);
       }}
     >
       {({ handleSubmit, isSubmitting }) => <Modal
@@ -53,25 +65,29 @@ const ChangePassword = (props) => {
             labelAlign="left"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
-            name="newPassword"
-            label={I18n.t('ChangePassword.newPassword')}
+            name="password"
+            label={I18n.t('ChangePassword.password')}
           >
-            <Input.Password name="newPassword" />
+            <Input.Password name="password" />
           </Form.Item>
           <Form.Item
             labelAlign="left"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
-            name="confirmPassword"
-            label={I18n.t('ChangePassword.confirmPassword')}
+            name="confirmation"
+            label={I18n.t('ChangePassword.confirmation')}
           >
-            <Input.Password name="confirmPassword" />
+            <Input.Password name="confirmation" />
           </Form.Item>
         </Form>
       </ Modal>}
     </Formik>
   );
 };
+
+const mapStateToProps = state => ({
+  token: state.auth.token
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -80,4 +96,4 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
-export default connect(null, mapDispatchToProps)(ChangePassword);
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);

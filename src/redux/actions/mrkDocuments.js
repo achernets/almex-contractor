@@ -37,7 +37,8 @@ export const getMrkDocuments = (page = 1) => {
         type: GET_MRK_DOCUMENT_SUCCESS,
         payload: {
           ...result,
-          page
+          page,
+          isSearch: !isEmpty(searchText)
         }
       });
     } catch (error) {

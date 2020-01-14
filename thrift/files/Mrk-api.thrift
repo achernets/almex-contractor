@@ -167,6 +167,7 @@ service MrkClientService {
 
   MrkClientSession authMrkClient(1: string login; 2: string password, 3: string ip, 4: string langCode, 5: i32 cacheVersion) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkClientSession refreshMrkClientSession(1: common.AuthTokenBase64 token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);MrkAccount registration(1:MrkClient cl, 2: string password, 3:MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  bool changePassword(1: string token, 2: string oldPassword, 3: string password, 4: string confirmation) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkAccount convert(1: string token, 2: MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);//из фил лица в юр лицо
   list<MrkClient> changeClientInfo(1: string token, 2:MrkClient cl, 3:MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   string getProfileInfoForSing(1: string token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
@@ -174,6 +175,7 @@ service MrkClientService {
 
   /*
   type - тип документа
+  name - название
   */
   MrkDocumentPage getMrkDocumentPage(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData markMrkDocumentAsRead(1: string token, 2: string documentId, 3: bool read) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);

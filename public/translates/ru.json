@@ -22,8 +22,8 @@
   "ChangePassword": {
     "title": "Изменить пароль",
     "oldPassword": "Старый пароль",
-    "newPassword": "Новый пароль",
-    "confirmPassword": "Повторите пароль",
+    "password": "Новый пароль",
+    "confirmation": "Повторите пароль",
     "password_not_match": "Пароль не совпадает"
   },
   "MrkDocuments": {
@@ -31,6 +31,7 @@
     "name": "Краткое содержание",
     "createDate": "Дата",
     "no_data": "Добро пожаловать в AlmexECM! Теперь вы можете написать обращение.",
+    "no_data_search": "По вашему запросу ничего не найдено",
     "create": "Создать",
     "create_empty": "Создать обращение"
   }

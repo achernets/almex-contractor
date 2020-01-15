@@ -1,6 +1,8 @@
 {
   "common": {
-    "error": "Ошибка"
+    "error": "Ошибка",
+    "cancel": "Отменить",
+    "save": "Сохранить"
   },
   "form": {
     "required": "Обязательное для заполнения"
@@ -11,5 +13,35 @@
     "password": "Пароль",
     "sign_in": "Войти",
     "sign_up": "Зарегистрироватся"
+  },
+  "UserMenu": {
+    "edit": "Редактировать информацию",
+    "change_password": "Изменить пароль",
+    "logout": "Выйти"
+  },
+  "ChangePassword": {
+    "title": "Изменить пароль",
+    "oldPassword": "Старый пароль",
+    "password": "Новый пароль",
+    "confirmation": "Повторите пароль",
+    "password_not_match": "Пароль не совпадает"
+  },
+  "MrkDocuments": {
+    "patternName": "Тип документа",
+    "name": "Краткое содержание",
+    "createDate": "Дата",
+    "no_data": "Добро пожаловать в AlmexECM! Теперь вы можете написать обращение.",
+    "no_data_search": "По вашему запросу ничего не найдено",
+    "create": "Создать",
+    "create_empty": "Создать обращение"
+  },
+  "MrkDocumentType": {
+    "DRAFT": "Черновики",
+    "INPUT": "Входящие",
+    "OUTPUT": "Исходящие"
+  },
+  "CreateMrkDocument": {
+    "title": "Создать документ",
+    "allowedDocumentPatterns": "Доступные типы документов"
   }
 }

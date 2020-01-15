@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-import { isEmpty } from 'lodash';
+import { isEmpty, keys } from 'lodash';
 import { PAGE_SIZE } from 'constants/table';
 import { log } from 'utils/helpers';
 
@@ -13,13 +13,18 @@ export const getMrkDocuments = (page = 1) => {
     try {
       const {
         auth: { token },
-        mrkDocuments: { searchText }
+        mrkDocuments: { mrkDocumentType, searchText }
       } = getState();
       const filter = new KazFilter({
         position: page * PAGE_SIZE - PAGE_SIZE,
         countFilter: PAGE_SIZE,
         orders: [],
-        items: []
+        items: [new FilterItem({
+          field: 'type',
+          value: `MrkDocumentType.${keys(MrkDocumentType)[mrkDocumentType]}`,
+          condition: FilterCondition.EQUAL,
+          fType: FilterFieldType.ENUMERATED
+        })]
       });
       if (!isEmpty(searchText)) filter.items.push(
         new FilterItem({
@@ -45,7 +50,8 @@ export const getMrkDocuments = (page = 1) => {
       if (error.preconditionExceptionKey)
         notification.error({
           key: 'getMrkDocuments',
-          message: error.message
+          message: error.preconditionExceptionKey,
+          description: error.message
         });
       dispatch({ type: GET_MRK_DOCUMENT_FAILURE });
       log(error);
@@ -54,12 +60,22 @@ export const getMrkDocuments = (page = 1) => {
 };
 
 export const CHANGE_SEARCH_TEXT = 'CHANGE_SEARCH_TEXT';
-
 export const changeTextSearch = (text = '') => {
   return async (dispatch) => {
     dispatch({
       type: CHANGE_SEARCH_TEXT,
       payload: text
     });
+  };
+};
+
+export const CHANGE_MRK_DOCUMENT_TYPE = 'CHANGE_MRK_DOCUMENT_TYPE';
+export const changeMrkDocumentType = type => {
+  return async (dispatch) => {
+    dispatch({
+      type: CHANGE_MRK_DOCUMENT_TYPE,
+      payload: type
+    });
+    dispatch(getMrkDocuments());
   };
 };

@@ -2,6 +2,8 @@ include "ex.thrift"
 include "filter.thrift"
 include "common.thrift"
 include "Kaz_DocumentService.thrift"
+include "Kaz_types.thrift"
+include "HB.thrift"
 
 /** Открытое api системы AlmexECM mrk version mrk-1.0.1 */
 namespace java com.devtech.mrk.thrift.gen

@@ -2,7 +2,8 @@ import {
   GET_MRK_DOCUMENT_REQUEST,
   GET_MRK_DOCUMENT_SUCCESS,
   GET_MRK_DOCUMENT_FAILURE,
-  CHANGE_SEARCH_TEXT
+  CHANGE_SEARCH_TEXT,
+  CHANGE_MRK_DOCUMENT_TYPE,
 } from '../actions/mrkDocuments';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   count: 0,
   page: 1,
   searchText: '',
+  mrkDocumentType: MrkDocumentType.INPUT,
   isSearch: false,
   isFetching: false
 };
@@ -42,6 +44,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         searchText: action.payload
+      };
+    case CHANGE_MRK_DOCUMENT_TYPE:
+      return {
+        ...state,
+        mrkDocumentType: action.payload
       };
     default:
       return state;

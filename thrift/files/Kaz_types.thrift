@@ -276,7 +276,9 @@ enum KeyState {
   /** не подтвержден*/
   PROHIBITED
   /** нет фыйла*/
-  NO_FILE
+  NO_FILE,
+  /** */
+  DELETED
 }
 
 /** Информация о сертификате */

@@ -7,6 +7,7 @@ const setThrift = async ({ THRIFT }) => {
     )
   );
 };
+
 export {
   setThrift,
   MrkClientServiceClient

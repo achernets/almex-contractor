@@ -2,16 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Header } from 'components/LayoutApp';
-import { getMrkDocuments, changeTextSearch } from 'redux/actions/mrkDocuments';
+import { getMrkDocuments, changeMrkDocumentType, changeTextSearch } from 'redux/actions/mrkDocuments';
 import UserMenu from 'components/UserMenu';
-import { Row, Col, Button } from 'antd';
+import MenuFilters from 'components/MenuFilters';
+import { Row, Col, Button, Input } from 'antd';
 import { I18n } from 'react-redux-i18n';
 import { actions } from 'react-redux-modals';
-import { Input } from 'antd';
+import { keys, reverse, get } from 'lodash';
 
-const HeaderDocs = ({ showModal, isFetching, getMrkDocuments, changeTextSearch, searchText }) => <Header >
+const HeaderDocs = ({ showModal, isFetching, getMrkDocuments, changeMrkDocumentType, mrkDocumentType, changeTextSearch, searchText }) => <Header >
   <Row type="flex" justify="space-between" align="middle">
     <Col span={12}>
+      <MenuFilters
+        prefix="MrkDocumentType"
+        data={keys(MrkDocumentType)}
+        active={keys(MrkDocumentType)[mrkDocumentType]}
+        onClick={type => changeMrkDocumentType(get(reverse(MrkDocumentType), type, MrkDocumentType.INPUT))}
+      />
     </Col>
     <Col span={12}>
       <Row type="flex" justify="end" align="middle" gutter={[16, 0]}>
@@ -43,6 +50,7 @@ const HeaderDocs = ({ showModal, isFetching, getMrkDocuments, changeTextSearch, 
 
 const mapStateToProps = state => ({
   searchText: state.mrkDocuments.searchText,
+  mrkDocumentType: state.mrkDocuments.mrkDocumentType,
   isFetching: state.mrkDocuments.isFetching
 });
 
@@ -51,6 +59,7 @@ const mapDispatchToProps = dispatch =>
     {
       showModal: actions.showModal,
       getMrkDocuments,
+      changeMrkDocumentType,
       changeTextSearch
     },
     dispatch

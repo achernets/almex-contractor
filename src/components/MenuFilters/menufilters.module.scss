@@ -1,0 +1,13 @@
+.menu {
+  :global {
+    .ant-typography {
+      cursor: pointer;
+      &:hover {
+        color: #1890ff;
+      }
+      &.active {
+        color: #1890ff;
+      }
+    }
+  }
+}

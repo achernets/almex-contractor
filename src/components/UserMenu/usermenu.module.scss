@@ -1,0 +1,13 @@
+.avatart {
+  color: "#f56a00";
+  background-color: "#fde3cf";
+}
+.text {
+  margin-left: 8px;
+  &:hover {
+    color: #1890ff;
+  }
+}
+.line {
+  cursor: pointer;
+}

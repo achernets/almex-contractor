@@ -1,0 +1,31 @@
+.list {
+  padding: 12px 0px 0 0px;
+  :global {
+    .ReactVirtualized__List {
+      padding: 0 24px;
+    }
+  }
+}
+.wrapper {
+  height: 100%;
+  width: 100%;
+  padding: 12px 0;
+}
+.title {
+  padding: 0 24px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  :global {
+    .ant-typography {
+      cursor: pointer;
+      &:hover {
+        color: #1890ff;
+      }
+    }
+    .anticon {
+      color: #1890ff;
+    }
+  }
+}

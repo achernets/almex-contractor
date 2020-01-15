@@ -34,5 +34,14 @@
     "no_data_search": "По вашему запросу ничего не найдено",
     "create": "Создать",
     "create_empty": "Создать обращение"
+  },
+  "MrkDocumentType": {
+    "DRAFT": "Черновики",
+    "INPUT": "Входящие",
+    "OUTPUT": "Исходящие"
+  },
+  "CreateMrkDocument": {
+    "title": "Создать документ",
+    "allowedDocumentPatterns": "Доступные типы документов"
   }
 }

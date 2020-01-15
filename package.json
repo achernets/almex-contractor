@@ -16,6 +16,7 @@
     "react-redux-modals": "^1.1.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "react-virtualized": "^9.21.2",
     "redux": "^4.0.5",
     "redux-async-initial-state": "^0.3.0",
     "redux-devtools-extension": "^2.13.8",
@@ -39,7 +40,8 @@
       "FilterFieldType": true,
       "FilterCondition": true,
       "FilterItem": true,
-      "MrkClientSession": true
+      "MrkClientSession": true,
+      "MrkDocumentType": true
     },
     "rules": {
       "react-hooks/exhaustive-deps": "off",

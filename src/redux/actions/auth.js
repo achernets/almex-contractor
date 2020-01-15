@@ -28,7 +28,8 @@ export const login = values => {
       if (error.preconditionExceptionKey)
         notification.error({
           key: 'login',
-          message: error.message
+          message: error.preconditionExceptionKey,
+          description: error.message
         });
       dispatch({ type: SIGN_IN_FAILURE });
       log(error);
@@ -57,7 +58,8 @@ export const logout = () => {
       if (error.preconditionExceptionKey)
         notification.error({
           key: 'logout',
-          message: error.message
+          message: error.preconditionExceptionKey,
+          description: error.message
         });
       dispatch({ type: LOGOUT_FAILURE });
       log(error);

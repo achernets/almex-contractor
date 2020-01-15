@@ -4,15 +4,17 @@ import { bindActionCreators } from 'redux';
 import { logout } from 'redux/actions/auth';
 import { Menu, Dropdown, Typography } from 'antd';
 import { I18n } from 'react-redux-i18n';
-//import * as styles from './header.module.scss';
+import { Link } from 'react-router-dom';
 import { Avatar } from 'antd';
 import { userName } from 'utils/helpers';
 import { actions } from 'react-redux-modals';
-
+import * as styles from './usermenu.module.scss';
 const UserMenu = ({ logout, client, showModal }) => {
 
   const menu = <Menu>
-    <Menu.Item key="0">{I18n.t('UserMenu.edit')}</Menu.Item>
+    <Menu.Item key="0">
+      <Link to="/profile">{I18n.t('UserMenu.edit')}</Link>
+    </Menu.Item>
     <Menu.Item key="1" onClick={() => showModal('MODAL_CHANGE_PASSWORD')}>{I18n.t('UserMenu.change_password')}
     </Menu.Item>
     <Menu.Divider />
@@ -20,9 +22,9 @@ const UserMenu = ({ logout, client, showModal }) => {
   </Menu>;
 
   return <Dropdown overlay={menu} trigger={['click']}>
-    <div style={{ cursor: 'pointer' }}>
-      <Avatar size={24} src="https://klike.net/uploads/posts/2019-03/1551511801_1.jpg" />
-      <Typography.Text style={{ marginLeft: 8 }}>{userName(client)}</Typography.Text>
+    <div className={styles.line}>
+      <Avatar size={24} className={styles.avatar}>{client.firstName[0]}{client.lastName[0]}</Avatar>
+      <Typography.Text className={styles.text}>{userName(client)}</Typography.Text>
     </div>
   </Dropdown>;
 };

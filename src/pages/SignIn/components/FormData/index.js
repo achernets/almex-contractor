@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input } from 'formik-antd';
 import { Formik } from 'formik';
-import { Button, Row, Col } from 'antd';
+import { Button, Row, Col, Icon } from 'antd';
 import { I18n } from 'react-redux-i18n';
 import { login } from 'redux/actions/auth';
 import { connect } from 'react-redux';
@@ -30,12 +30,12 @@ const FormData = ({ login, token, isFetching }) => {
     {() => (
       <Form style={{ width: 260 }}>
         <Form.Item name="login" >
-          <Input name="login" placeholder={I18n.t('SignIn.login')} size={'large'} />
+          <Input name="login" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder={I18n.t('SignIn.login')} size={'large'} />
         </Form.Item>
         <Form.Item name="password" extra={null} >
-          <Input.Password name="password" placeholder={I18n.t('SignIn.password')} size={'large'} />
+          <Input.Password prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} name="password" placeholder={I18n.t('SignIn.password')} size={'large'} />
         </Form.Item>
-        <Row gutter={[24, 24]}>
+        <Row gutter={[12, 12]}>
           <Col>
             <Button
               type="primary"

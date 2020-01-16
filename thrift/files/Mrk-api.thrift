@@ -120,6 +120,7 @@ struct MrkAttachment {
 
 struct MrkDocumentData {
   1: MrkDocument document;
+  2: list<Kaz_DocumentService.ContentItem> items;
   3: list<MrkAttachment> atts;
 }
 
@@ -182,7 +183,9 @@ service MrkClientService {
   MrkDocumentPage getMrkDocumentPage(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData markMrkDocumentAsRead(1: string token, 2: string documentId, 3: bool read) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData getMrkDocumentData(1: string token, 2: string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  MrkDocument createOrUpdateMrkDocument(1: string token, 2: MrkDocument document) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  MrkDocumentData createOrUpdateMrkDocument(1: string token, 2: MrkDocumentData document) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  string getDocumentInfoForSing(1: string token, 2: string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  MrkDocumentData sendDocument(1: string token, 2: string documentId, 3: string signature, 4: string publicKey) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
   MrkAttachment getMrkAttachmentById(1: string token, 2: string attachmentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   list<MrkAttachment> getAllMrkAttachments(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);

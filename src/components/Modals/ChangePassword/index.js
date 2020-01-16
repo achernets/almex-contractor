@@ -1,12 +1,12 @@
 import React from 'react';
-import { Modal, notification } from 'antd';
+import { Modal } from 'antd';
 import { Form, Input } from 'formik-antd';
 import { Formik } from 'formik';
 import { I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions } from 'react-redux-modals';
-import { log } from 'utils/helpers';
+import { NotificationError } from 'utils/helpers';
 import * as Yup from 'yup';
 import { MrkClientServiceClient } from 'api';
 
@@ -30,12 +30,7 @@ const ChangePassword = ({ hideModal, token }) => {
           await MrkClientServiceClient.changePassword(token, { ...values });
           hideModal('MODAL_CHANGE_PASSWORD');
         } catch (error) {
-          notification.error({
-            key: 'changePassword',
-            message: error.preconditionExceptionKey,
-            description: error.message
-          });
-          log(error);
+          NotificationError(error, 'changePassword');
         }
         setSubmitting(false);
       }}

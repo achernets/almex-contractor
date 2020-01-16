@@ -6,7 +6,7 @@ import { get } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { Icon, Typography } from 'antd';
 import { MrkClientServiceClient } from 'api';
-import { log } from 'utils/helpers';
+import { NotificationError } from 'utils/helpers';
 import { AutoSizer, List } from 'react-virtualized';
 import * as styles from './listDocumentPatterns.module.scss';
 const ListDocumentPatterns = ({ token, documentPattern, setDocumentPattern }) => {
@@ -34,7 +34,7 @@ const ListDocumentPatterns = ({ token, documentPattern, setDocumentPattern }) =>
         }
       } catch (error) {
         if (!isCancelled) setLoading(false);
-        log(error);
+        NotificationError(error, 'getAllDocumentPatterns');
       }
 
     };

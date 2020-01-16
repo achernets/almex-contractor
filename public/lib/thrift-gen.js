@@ -39736,10 +39736,14 @@ MrkAttachment = class {
 MrkDocumentData = class {
   constructor(args) {
     this.document = null;
+    this.items = null;
     this.atts = null;
     if (args) {
       if (args.document !== undefined && args.document !== null) {
         this.document = new MrkDocument(args.document);
+      }
+      if (args.items !== undefined && args.items !== null) {
+        this.items = Thrift.copyList(args.items, [ContentItem]);
       }
       if (args.atts !== undefined && args.atts !== null) {
         this.atts = Thrift.copyList(args.atts, [MrkAttachment]);
@@ -39765,16 +39769,32 @@ MrkDocumentData = class {
           input.skip(ftype);
         }
         break;
-        case 3:
+        case 2:
         if (ftype == Thrift.Type.LIST) {
-          this.atts = [];
+          this.items = [];
           const _rtmp311 = input.readListBegin();
           const _size10 = _rtmp311.size || 0;
           for (let _i12 = 0; _i12 < _size10; ++_i12) {
             let elem13 = null;
-            elem13 = new MrkAttachment();
+            elem13 = new ContentItem();
             elem13.read(input);
-            this.atts.push(elem13);
+            this.items.push(elem13);
+          }
+          input.readListEnd();
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 3:
+        if (ftype == Thrift.Type.LIST) {
+          this.atts = [];
+          const _rtmp315 = input.readListBegin();
+          const _size14 = _rtmp315.size || 0;
+          for (let _i16 = 0; _i16 < _size14; ++_i16) {
+            let elem17 = null;
+            elem17 = new MrkAttachment();
+            elem17.read(input);
+            this.atts.push(elem17);
           }
           input.readListEnd();
         } else {
@@ -39797,13 +39817,25 @@ MrkDocumentData = class {
       this.document.write(output);
       output.writeFieldEnd();
     }
+    if (this.items !== null && this.items !== undefined) {
+      output.writeFieldBegin('items', Thrift.Type.LIST, 2);
+      output.writeListBegin(Thrift.Type.STRUCT, this.items.length);
+      for (let iter18 in this.items) {
+        if (this.items.hasOwnProperty(iter18)) {
+          iter18 = this.items[iter18];
+          iter18.write(output);
+        }
+      }
+      output.writeListEnd();
+      output.writeFieldEnd();
+    }
     if (this.atts !== null && this.atts !== undefined) {
       output.writeFieldBegin('atts', Thrift.Type.LIST, 3);
       output.writeListBegin(Thrift.Type.STRUCT, this.atts.length);
-      for (let iter14 in this.atts) {
-        if (this.atts.hasOwnProperty(iter14)) {
-          iter14 = this.atts[iter14];
-          iter14.write(output);
+      for (let iter19 in this.atts) {
+        if (this.atts.hasOwnProperty(iter19)) {
+          iter19 = this.atts[iter19];
+          iter19.write(output);
         }
       }
       output.writeListEnd();
@@ -40068,13 +40100,13 @@ MrkHistoryPage = class {
         case 1:
         if (ftype == Thrift.Type.LIST) {
           this.historyData = [];
-          const _rtmp316 = input.readListBegin();
-          const _size15 = _rtmp316.size || 0;
-          for (let _i17 = 0; _i17 < _size15; ++_i17) {
-            let elem18 = null;
-            elem18 = new MrkHistory();
-            elem18.read(input);
-            this.historyData.push(elem18);
+          const _rtmp321 = input.readListBegin();
+          const _size20 = _rtmp321.size || 0;
+          for (let _i22 = 0; _i22 < _size20; ++_i22) {
+            let elem23 = null;
+            elem23 = new MrkHistory();
+            elem23.read(input);
+            this.historyData.push(elem23);
           }
           input.readListEnd();
         } else {
@@ -40102,10 +40134,10 @@ MrkHistoryPage = class {
     if (this.historyData !== null && this.historyData !== undefined) {
       output.writeFieldBegin('historyData', Thrift.Type.LIST, 1);
       output.writeListBegin(Thrift.Type.STRUCT, this.historyData.length);
-      for (let iter19 in this.historyData) {
-        if (this.historyData.hasOwnProperty(iter19)) {
-          iter19 = this.historyData[iter19];
-          iter19.write(output);
+      for (let iter24 in this.historyData) {
+        if (this.historyData.hasOwnProperty(iter24)) {
+          iter24 = this.historyData[iter24];
+          iter24.write(output);
         }
       }
       output.writeListEnd();
@@ -40149,13 +40181,13 @@ MrkAlmexSysUserPage = class {
         case 1:
         if (ftype == Thrift.Type.LIST) {
           this.almexUsersData = [];
-          const _rtmp321 = input.readListBegin();
-          const _size20 = _rtmp321.size || 0;
-          for (let _i22 = 0; _i22 < _size20; ++_i22) {
-            let elem23 = null;
-            elem23 = new MrkAlmexSysUser();
-            elem23.read(input);
-            this.almexUsersData.push(elem23);
+          const _rtmp326 = input.readListBegin();
+          const _size25 = _rtmp326.size || 0;
+          for (let _i27 = 0; _i27 < _size25; ++_i27) {
+            let elem28 = null;
+            elem28 = new MrkAlmexSysUser();
+            elem28.read(input);
+            this.almexUsersData.push(elem28);
           }
           input.readListEnd();
         } else {
@@ -40183,10 +40215,10 @@ MrkAlmexSysUserPage = class {
     if (this.almexUsersData !== null && this.almexUsersData !== undefined) {
       output.writeFieldBegin('almexUsersData', Thrift.Type.LIST, 1);
       output.writeListBegin(Thrift.Type.STRUCT, this.almexUsersData.length);
-      for (let iter24 in this.almexUsersData) {
-        if (this.almexUsersData.hasOwnProperty(iter24)) {
-          iter24 = this.almexUsersData[iter24];
-          iter24.write(output);
+      for (let iter29 in this.almexUsersData) {
+        if (this.almexUsersData.hasOwnProperty(iter29)) {
+          iter29 = this.almexUsersData[iter29];
+          iter29.write(output);
         }
       }
       output.writeListEnd();
@@ -40266,19 +40298,19 @@ MrkClientService_getInfo_result = class {
         case 0:
         if (ftype == Thrift.Type.MAP) {
           this.success = {};
-          const _rtmp326 = input.readMapBegin();
-          const _size25 = _rtmp326.size || 0;
-          for (let _i27 = 0; _i27 < _size25; ++_i27) {
-            if (_i27 > 0 ) {
+          const _rtmp331 = input.readMapBegin();
+          const _size30 = _rtmp331.size || 0;
+          for (let _i32 = 0; _i32 < _size30; ++_i32) {
+            if (_i32 > 0 ) {
               if (input.rstack.length > input.rpos[input.rpos.length -1] + 1) {
                 input.rstack.pop();
               }
             }
-            let key28 = null;
-            let val29 = null;
-            key28 = input.readString().value;
-            val29 = input.readString().value;
-            this.success[key28] = val29;
+            let key33 = null;
+            let val34 = null;
+            key33 = input.readString().value;
+            val34 = input.readString().value;
+            this.success[key33] = val34;
           }
           input.readMapEnd();
         } else {
@@ -40302,11 +40334,11 @@ MrkClientService_getInfo_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.MAP, 0);
       output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(this.success));
-      for (let kiter30 in this.success) {
-        if (this.success.hasOwnProperty(kiter30)) {
-          let viter31 = this.success[kiter30];
-          output.writeString(kiter30);
-          output.writeString(viter31);
+      for (let kiter35 in this.success) {
+        if (this.success.hasOwnProperty(kiter35)) {
+          let viter36 = this.success[kiter35];
+          output.writeString(kiter35);
+          output.writeString(viter36);
         }
       }
       output.writeMapEnd();
@@ -40384,19 +40416,19 @@ MrkClientService_getAllLanguages_result = class {
         case 0:
         if (ftype == Thrift.Type.MAP) {
           this.success = {};
-          const _rtmp333 = input.readMapBegin();
-          const _size32 = _rtmp333.size || 0;
-          for (let _i34 = 0; _i34 < _size32; ++_i34) {
-            if (_i34 > 0 ) {
+          const _rtmp338 = input.readMapBegin();
+          const _size37 = _rtmp338.size || 0;
+          for (let _i39 = 0; _i39 < _size37; ++_i39) {
+            if (_i39 > 0 ) {
               if (input.rstack.length > input.rpos[input.rpos.length -1] + 1) {
                 input.rstack.pop();
               }
             }
-            let key35 = null;
-            let val36 = null;
-            key35 = input.readString().value;
-            val36 = input.readString().value;
-            this.success[key35] = val36;
+            let key40 = null;
+            let val41 = null;
+            key40 = input.readString().value;
+            val41 = input.readString().value;
+            this.success[key40] = val41;
           }
           input.readMapEnd();
         } else {
@@ -40433,11 +40465,11 @@ MrkClientService_getAllLanguages_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.MAP, 0);
       output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(this.success));
-      for (let kiter37 in this.success) {
-        if (this.success.hasOwnProperty(kiter37)) {
-          let viter38 = this.success[kiter37];
-          output.writeString(kiter37);
-          output.writeString(viter38);
+      for (let kiter42 in this.success) {
+        if (this.success.hasOwnProperty(kiter42)) {
+          let viter43 = this.success[kiter42];
+          output.writeString(kiter42);
+          output.writeString(viter43);
         }
       }
       output.writeMapEnd();
@@ -41451,13 +41483,13 @@ MrkClientService_changeClientInfo_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp340 = input.readListBegin();
-          const _size39 = _rtmp340.size || 0;
-          for (let _i41 = 0; _i41 < _size39; ++_i41) {
-            let elem42 = null;
-            elem42 = new MrkClient();
-            elem42.read(input);
-            this.success.push(elem42);
+          const _rtmp345 = input.readListBegin();
+          const _size44 = _rtmp345.size || 0;
+          for (let _i46 = 0; _i46 < _size44; ++_i46) {
+            let elem47 = null;
+            elem47 = new MrkClient();
+            elem47.read(input);
+            this.success.push(elem47);
           }
           input.readListEnd();
         } else {
@@ -41494,10 +41526,10 @@ MrkClientService_changeClientInfo_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter43 in this.success) {
-        if (this.success.hasOwnProperty(iter43)) {
-          iter43 = this.success[iter43];
-          iter43.write(output);
+      for (let iter48 in this.success) {
+        if (this.success.hasOwnProperty(iter48)) {
+          iter48 = this.success[iter48];
+          iter48.write(output);
         }
       }
       output.writeListEnd();
@@ -42331,7 +42363,7 @@ MrkClientService_createOrUpdateMrkDocument_args = class {
         this.token = args.token;
       }
       if (args.document !== undefined && args.document !== null) {
-        this.document = new MrkDocument(args.document);
+        this.document = new MrkDocumentData(args.document);
       }
     }
   }
@@ -42355,7 +42387,7 @@ MrkClientService_createOrUpdateMrkDocument_args = class {
         break;
         case 2:
         if (ftype == Thrift.Type.STRUCT) {
-          this.document = new MrkDocument();
+          this.document = new MrkDocumentData();
           this.document.read(input);
         } else {
           input.skip(ftype);
@@ -42403,7 +42435,7 @@ MrkClientService_createOrUpdateMrkDocument_result = class {
     }
     if (args) {
       if (args.success !== undefined && args.success !== null) {
-        this.success = new MrkDocument(args.success);
+        this.success = new MrkDocumentData(args.success);
       }
       if (args.validError !== undefined && args.validError !== null) {
         this.validError = args.validError;
@@ -42426,7 +42458,7 @@ MrkClientService_createOrUpdateMrkDocument_result = class {
       switch (fid) {
         case 0:
         if (ftype == Thrift.Type.STRUCT) {
-          this.success = new MrkDocument();
+          this.success = new MrkDocumentData();
           this.success.read(input);
         } else {
           input.skip(ftype);
@@ -42459,6 +42491,351 @@ MrkClientService_createOrUpdateMrkDocument_result = class {
 
   write (output) {
     output.writeStructBegin('MrkClientService_createOrUpdateMrkDocument_result');
+    if (this.success !== null && this.success !== undefined) {
+      output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
+      this.success.write(output);
+      output.writeFieldEnd();
+    }
+    if (this.validError !== null && this.validError !== undefined) {
+      output.writeFieldBegin('validError', Thrift.Type.STRUCT, 1);
+      this.validError.write(output);
+      output.writeFieldEnd();
+    }
+    if (this.error !== null && this.error !== undefined) {
+      output.writeFieldBegin('error', Thrift.Type.STRUCT, 2);
+      this.error.write(output);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkClientService_getDocumentInfoForSing_args = class {
+  constructor(args) {
+    this.token = null;
+    this.documentId = null;
+    if (args) {
+      if (args.token !== undefined && args.token !== null) {
+        this.token = args.token;
+      }
+      if (args.documentId !== undefined && args.documentId !== null) {
+        this.documentId = args.documentId;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 1:
+        if (ftype == Thrift.Type.STRING) {
+          this.token = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRING) {
+          this.documentId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_getDocumentInfoForSing_args');
+    if (this.token !== null && this.token !== undefined) {
+      output.writeFieldBegin('token', Thrift.Type.STRING, 1);
+      output.writeString(this.token);
+      output.writeFieldEnd();
+    }
+    if (this.documentId !== null && this.documentId !== undefined) {
+      output.writeFieldBegin('documentId', Thrift.Type.STRING, 2);
+      output.writeString(this.documentId);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkClientService_getDocumentInfoForSing_result = class {
+  constructor(args) {
+    this.success = null;
+    this.validError = null;
+    this.error = null;
+    if (args instanceof PreconditionException) {
+        this.validError = args;
+        return;
+    }
+    if (args instanceof ServerException) {
+        this.error = args;
+        return;
+    }
+    if (args) {
+      if (args.success !== undefined && args.success !== null) {
+        this.success = args.success;
+      }
+      if (args.validError !== undefined && args.validError !== null) {
+        this.validError = args.validError;
+      }
+      if (args.error !== undefined && args.error !== null) {
+        this.error = args.error;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 0:
+        if (ftype == Thrift.Type.STRING) {
+          this.success = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 1:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.validError = new PreconditionException();
+          this.validError.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.error = new ServerException();
+          this.error.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_getDocumentInfoForSing_result');
+    if (this.success !== null && this.success !== undefined) {
+      output.writeFieldBegin('success', Thrift.Type.STRING, 0);
+      output.writeString(this.success);
+      output.writeFieldEnd();
+    }
+    if (this.validError !== null && this.validError !== undefined) {
+      output.writeFieldBegin('validError', Thrift.Type.STRUCT, 1);
+      this.validError.write(output);
+      output.writeFieldEnd();
+    }
+    if (this.error !== null && this.error !== undefined) {
+      output.writeFieldBegin('error', Thrift.Type.STRUCT, 2);
+      this.error.write(output);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkClientService_sendDocument_args = class {
+  constructor(args) {
+    this.token = null;
+    this.documentId = null;
+    this.signature = null;
+    this.publicKey = null;
+    if (args) {
+      if (args.token !== undefined && args.token !== null) {
+        this.token = args.token;
+      }
+      if (args.documentId !== undefined && args.documentId !== null) {
+        this.documentId = args.documentId;
+      }
+      if (args.signature !== undefined && args.signature !== null) {
+        this.signature = args.signature;
+      }
+      if (args.publicKey !== undefined && args.publicKey !== null) {
+        this.publicKey = args.publicKey;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 1:
+        if (ftype == Thrift.Type.STRING) {
+          this.token = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRING) {
+          this.documentId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 3:
+        if (ftype == Thrift.Type.STRING) {
+          this.signature = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 4:
+        if (ftype == Thrift.Type.STRING) {
+          this.publicKey = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_sendDocument_args');
+    if (this.token !== null && this.token !== undefined) {
+      output.writeFieldBegin('token', Thrift.Type.STRING, 1);
+      output.writeString(this.token);
+      output.writeFieldEnd();
+    }
+    if (this.documentId !== null && this.documentId !== undefined) {
+      output.writeFieldBegin('documentId', Thrift.Type.STRING, 2);
+      output.writeString(this.documentId);
+      output.writeFieldEnd();
+    }
+    if (this.signature !== null && this.signature !== undefined) {
+      output.writeFieldBegin('signature', Thrift.Type.STRING, 3);
+      output.writeString(this.signature);
+      output.writeFieldEnd();
+    }
+    if (this.publicKey !== null && this.publicKey !== undefined) {
+      output.writeFieldBegin('publicKey', Thrift.Type.STRING, 4);
+      output.writeString(this.publicKey);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkClientService_sendDocument_result = class {
+  constructor(args) {
+    this.success = null;
+    this.validError = null;
+    this.error = null;
+    if (args instanceof PreconditionException) {
+        this.validError = args;
+        return;
+    }
+    if (args instanceof ServerException) {
+        this.error = args;
+        return;
+    }
+    if (args) {
+      if (args.success !== undefined && args.success !== null) {
+        this.success = new MrkDocumentData(args.success);
+      }
+      if (args.validError !== undefined && args.validError !== null) {
+        this.validError = args.validError;
+      }
+      if (args.error !== undefined && args.error !== null) {
+        this.error = args.error;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 0:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.success = new MrkDocumentData();
+          this.success.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 1:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.validError = new PreconditionException();
+          this.validError.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.error = new ServerException();
+          this.error.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_sendDocument_result');
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
       this.success.write(output);
@@ -42742,13 +43119,13 @@ MrkClientService_getAllMrkAttachments_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp345 = input.readListBegin();
-          const _size44 = _rtmp345.size || 0;
-          for (let _i46 = 0; _i46 < _size44; ++_i46) {
-            let elem47 = null;
-            elem47 = new MrkAttachment();
-            elem47.read(input);
-            this.success.push(elem47);
+          const _rtmp350 = input.readListBegin();
+          const _size49 = _rtmp350.size || 0;
+          for (let _i51 = 0; _i51 < _size49; ++_i51) {
+            let elem52 = null;
+            elem52 = new MrkAttachment();
+            elem52.read(input);
+            this.success.push(elem52);
           }
           input.readListEnd();
         } else {
@@ -42785,10 +43162,10 @@ MrkClientService_getAllMrkAttachments_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter48 in this.success) {
-        if (this.success.hasOwnProperty(iter48)) {
-          iter48 = this.success[iter48];
-          iter48.write(output);
+      for (let iter53 in this.success) {
+        if (this.success.hasOwnProperty(iter53)) {
+          iter53 = this.success[iter53];
+          iter53.write(output);
         }
       }
       output.writeListEnd();
@@ -43639,13 +44016,13 @@ MrkClientService_getAllDocumentPatterns_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp350 = input.readListBegin();
-          const _size49 = _rtmp350.size || 0;
-          for (let _i51 = 0; _i51 < _size49; ++_i51) {
-            let elem52 = null;
-            elem52 = new DocumentPattern();
-            elem52.read(input);
-            this.success.push(elem52);
+          const _rtmp355 = input.readListBegin();
+          const _size54 = _rtmp355.size || 0;
+          for (let _i56 = 0; _i56 < _size54; ++_i56) {
+            let elem57 = null;
+            elem57 = new DocumentPattern();
+            elem57.read(input);
+            this.success.push(elem57);
           }
           input.readListEnd();
         } else {
@@ -43682,10 +44059,10 @@ MrkClientService_getAllDocumentPatterns_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter53 in this.success) {
-        if (this.success.hasOwnProperty(iter53)) {
-          iter53 = this.success[iter53];
-          iter53.write(output);
+      for (let iter58 in this.success) {
+        if (this.success.hasOwnProperty(iter58)) {
+          iter58 = this.success[iter58];
+          iter58.write(output);
         }
       }
       output.writeListEnd();
@@ -44889,6 +45266,134 @@ MrkClientServiceClient = class {
     throw 'createOrUpdateMrkDocument failed: unknown result';
   }
 
+  getDocumentInfoForSing (token, documentId) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      self.send_getDocumentInfoForSing(token, documentId, (error, result) => {
+        return error ? reject(error) : resolve(result);
+      });
+    });
+  }
+
+  send_getDocumentInfoForSing (token, documentId, callback) {
+    const params = {
+      token: token,
+      documentId: documentId
+    };
+    const args = new MrkClientService_getDocumentInfoForSing_args(params);
+    try {
+      this.output.writeMessageBegin('getDocumentInfoForSing', Thrift.MessageType.CALL, this.seqid);
+      args.write(this.output);
+      this.output.writeMessageEnd();
+      const self = this;
+      this.output.getTransport().flush(true, () => {
+        let error = null, result = null;
+        try {
+          result = self.recv_getDocumentInfoForSing();
+        } catch (e) {
+          error = e;
+        }
+        callback(error, result);
+      });
+    }
+    catch (e) {
+      if (typeof this.output.getTransport().reset === 'function') {
+        this.output.getTransport().reset();
+      }
+      throw e;
+    }
+  }
+
+  recv_getDocumentInfoForSing () {
+    const ret = this.input.readMessageBegin();
+    const mtype = ret.mtype;
+    if (mtype == Thrift.MessageType.EXCEPTION) {
+      const x = new Thrift.TApplicationException();
+      x.read(this.input);
+      this.input.readMessageEnd();
+      throw x;
+    }
+    const result = new MrkClientService_getDocumentInfoForSing_result();
+    result.read(this.input);
+    this.input.readMessageEnd();
+
+    if (null !== result.validError) {
+      throw result.validError;
+    }
+    if (null !== result.error) {
+      throw result.error;
+    }
+    if (null !== result.success) {
+      return result.success;
+    }
+    throw 'getDocumentInfoForSing failed: unknown result';
+  }
+
+  sendDocument (token, documentId, signature, publicKey) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      self.send_sendDocument(token, documentId, signature, publicKey, (error, result) => {
+        return error ? reject(error) : resolve(result);
+      });
+    });
+  }
+
+  send_sendDocument (token, documentId, signature, publicKey, callback) {
+    const params = {
+      token: token,
+      documentId: documentId,
+      signature: signature,
+      publicKey: publicKey
+    };
+    const args = new MrkClientService_sendDocument_args(params);
+    try {
+      this.output.writeMessageBegin('sendDocument', Thrift.MessageType.CALL, this.seqid);
+      args.write(this.output);
+      this.output.writeMessageEnd();
+      const self = this;
+      this.output.getTransport().flush(true, () => {
+        let error = null, result = null;
+        try {
+          result = self.recv_sendDocument();
+        } catch (e) {
+          error = e;
+        }
+        callback(error, result);
+      });
+    }
+    catch (e) {
+      if (typeof this.output.getTransport().reset === 'function') {
+        this.output.getTransport().reset();
+      }
+      throw e;
+    }
+  }
+
+  recv_sendDocument () {
+    const ret = this.input.readMessageBegin();
+    const mtype = ret.mtype;
+    if (mtype == Thrift.MessageType.EXCEPTION) {
+      const x = new Thrift.TApplicationException();
+      x.read(this.input);
+      this.input.readMessageEnd();
+      throw x;
+    }
+    const result = new MrkClientService_sendDocument_result();
+    result.read(this.input);
+    this.input.readMessageEnd();
+
+    if (null !== result.validError) {
+      throw result.validError;
+    }
+    if (null !== result.error) {
+      throw result.error;
+    }
+    if (null !== result.success) {
+      return result.success;
+    }
+    throw 'sendDocument failed: unknown result';
+  }
+
   getMrkAttachmentById (token, attachmentId) {
     const self = this;
     return new Promise((resolve, reject) => {
@@ -45783,13 +46288,13 @@ MrkUserService_getAllMrkUsers_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp355 = input.readListBegin();
-          const _size54 = _rtmp355.size || 0;
-          for (let _i56 = 0; _i56 < _size54; ++_i56) {
-            let elem57 = null;
-            elem57 = new MrkUser();
-            elem57.read(input);
-            this.success.push(elem57);
+          const _rtmp360 = input.readListBegin();
+          const _size59 = _rtmp360.size || 0;
+          for (let _i61 = 0; _i61 < _size59; ++_i61) {
+            let elem62 = null;
+            elem62 = new MrkUser();
+            elem62.read(input);
+            this.success.push(elem62);
           }
           input.readListEnd();
         } else {
@@ -45826,10 +46331,10 @@ MrkUserService_getAllMrkUsers_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter58 in this.success) {
-        if (this.success.hasOwnProperty(iter58)) {
-          iter58 = this.success[iter58];
-          iter58.write(output);
+      for (let iter63 in this.success) {
+        if (this.success.hasOwnProperty(iter63)) {
+          iter63 = this.success[iter63];
+          iter63.write(output);
         }
       }
       output.writeListEnd();
@@ -46303,13 +46808,13 @@ MrkUserService_getAllMrkClients_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp360 = input.readListBegin();
-          const _size59 = _rtmp360.size || 0;
-          for (let _i61 = 0; _i61 < _size59; ++_i61) {
-            let elem62 = null;
-            elem62 = new MrkClient();
-            elem62.read(input);
-            this.success.push(elem62);
+          const _rtmp365 = input.readListBegin();
+          const _size64 = _rtmp365.size || 0;
+          for (let _i66 = 0; _i66 < _size64; ++_i66) {
+            let elem67 = null;
+            elem67 = new MrkClient();
+            elem67.read(input);
+            this.success.push(elem67);
           }
           input.readListEnd();
         } else {
@@ -46346,10 +46851,10 @@ MrkUserService_getAllMrkClients_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter63 in this.success) {
-        if (this.success.hasOwnProperty(iter63)) {
-          iter63 = this.success[iter63];
-          iter63.write(output);
+      for (let iter68 in this.success) {
+        if (this.success.hasOwnProperty(iter68)) {
+          iter68 = this.success[iter68];
+          iter68.write(output);
         }
       }
       output.writeListEnd();
@@ -46633,13 +47138,13 @@ MrkUserService_getAllMrkAccounts_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp365 = input.readListBegin();
-          const _size64 = _rtmp365.size || 0;
-          for (let _i66 = 0; _i66 < _size64; ++_i66) {
-            let elem67 = null;
-            elem67 = new MrkAccount();
-            elem67.read(input);
-            this.success.push(elem67);
+          const _rtmp370 = input.readListBegin();
+          const _size69 = _rtmp370.size || 0;
+          for (let _i71 = 0; _i71 < _size69; ++_i71) {
+            let elem72 = null;
+            elem72 = new MrkAccount();
+            elem72.read(input);
+            this.success.push(elem72);
           }
           input.readListEnd();
         } else {
@@ -46676,10 +47181,10 @@ MrkUserService_getAllMrkAccounts_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter68 in this.success) {
-        if (this.success.hasOwnProperty(iter68)) {
-          iter68 = this.success[iter68];
-          iter68.write(output);
+      for (let iter73 in this.success) {
+        if (this.success.hasOwnProperty(iter73)) {
+          iter73 = this.success[iter73];
+          iter73.write(output);
         }
       }
       output.writeListEnd();

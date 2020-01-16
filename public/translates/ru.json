@@ -2,7 +2,10 @@
   "common": {
     "error": "Ошибка",
     "cancel": "Отменить",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "next": "Дальше",
+    "attachments": "Вложения",
+    "add_file": "Добавить файл"
   },
   "form": {
     "required": "Обязательное для заполнения"
@@ -35,6 +38,9 @@
     "create": "Создать",
     "create_empty": "Создать обращение"
   },
+  "MrkDocument": {
+    "name": "Краткое содержание"
+  },
   "MrkDocumentType": {
     "DRAFT": "Черновики",
     "INPUT": "Входящие",
@@ -42,6 +48,9 @@
   },
   "CreateMrkDocument": {
     "title": "Создать документ",
-    "allowedDocumentPatterns": "Доступные типы документов"
+    "allowedDocumentPatterns": "Доступные типы документов",
+    "send_doc_ecp": "Отправить с ЭЦП",
+    "send_doc": "Отправить",
+    "send_in_draft": "В черновики"
   }
 }

@@ -41,7 +41,9 @@
       "FilterCondition": true,
       "FilterItem": true,
       "MrkClientSession": true,
-      "MrkDocumentType": true
+      "MrkDocumentType": true,
+      "MrkDocumentData": true,
+      "ContentItemType": true
     },
     "rules": {
       "react-hooks/exhaustive-deps": "off",

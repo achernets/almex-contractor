@@ -37,6 +37,7 @@ const getInitialState = currentState => {
         [DEFAULT_TRANSLATE]: await translate.json()
       };
       moment.locale(DEFAULT_TRANSLATE);
+      moment.suppressDeprecationWarnings = true;
       const languages = await MrkClientServiceClient.getAllLanguages();
       const settings = await MrkClientServiceClient.getInfo();
       resolve({

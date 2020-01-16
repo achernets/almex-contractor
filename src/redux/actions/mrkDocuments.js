@@ -1,7 +1,6 @@
-import { notification } from 'antd';
 import { isEmpty, keys } from 'lodash';
 import { PAGE_SIZE } from 'constants/table';
-import { log } from 'utils/helpers';
+import { NotificationError } from 'utils/helpers';
 
 export const GET_MRK_DOCUMENT_REQUEST = 'GET_MRK_DOCUMENT_REQUEST';
 export const GET_MRK_DOCUMENT_SUCCESS = 'GET_MRK_DOCUMENT_SUCCESS';
@@ -47,14 +46,8 @@ export const getMrkDocuments = (page = 1) => {
         }
       });
     } catch (error) {
-      if (error.preconditionExceptionKey)
-        notification.error({
-          key: 'getMrkDocuments',
-          message: error.preconditionExceptionKey,
-          description: error.message
-        });
+      NotificationError(error, 'getMrkDocuments');
       dispatch({ type: GET_MRK_DOCUMENT_FAILURE });
-      log(error);
     }
   };
 };

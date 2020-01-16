@@ -1,5 +1,4 @@
-import { notification } from 'antd';
-import { log } from 'utils/helpers';
+import { NotificationError } from 'utils/helpers';
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
@@ -25,14 +24,8 @@ export const login = values => {
         payload: authenticate
       });
     } catch (error) {
-      if (error.preconditionExceptionKey)
-        notification.error({
-          key: 'login',
-          message: error.preconditionExceptionKey,
-          description: error.message
-        });
+      NotificationError(error, 'authMrkClient');
       dispatch({ type: SIGN_IN_FAILURE });
-      log(error);
     }
   };
 };
@@ -55,14 +48,8 @@ export const logout = () => {
         type: LOGOUT_SUCCESS
       });
     } catch (error) {
-      if (error.preconditionExceptionKey)
-        notification.error({
-          key: 'logout',
-          message: error.preconditionExceptionKey,
-          description: error.message
-        });
+      NotificationError(error, 'logout');
       dispatch({ type: LOGOUT_FAILURE });
-      log(error);
     }
   };
 };

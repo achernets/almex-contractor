@@ -1,31 +1,31 @@
 {
   "files": {
-    "static/js/0.39a77da3.chunk.js": "/almex-contractor/static/js/0.39a77da3.chunk.js",
-    "static/js/0.39a77da3.chunk.js.map": "/almex-contractor/static/js/0.39a77da3.chunk.js.map",
-    "main.css": "/almex-contractor/static/css/main.afecf922.chunk.css",
-    "main.js": "/almex-contractor/static/js/main.60508fbb.chunk.js",
-    "main.js.map": "/almex-contractor/static/js/main.60508fbb.chunk.js.map",
-    "runtime-main.js": "/almex-contractor/static/js/runtime-main.e3583e4f.js",
-    "runtime-main.js.map": "/almex-contractor/static/js/runtime-main.e3583e4f.js.map",
+    "static/js/0.139021b5.chunk.js": "/almex-contractor/static/js/0.139021b5.chunk.js",
+    "static/js/0.139021b5.chunk.js.map": "/almex-contractor/static/js/0.139021b5.chunk.js.map",
+    "main.css": "/almex-contractor/static/css/main.c0d18140.chunk.css",
+    "main.js": "/almex-contractor/static/js/main.7c5c8f20.chunk.js",
+    "main.js.map": "/almex-contractor/static/js/main.7c5c8f20.chunk.js.map",
+    "runtime-main.js": "/almex-contractor/static/js/runtime-main.a174d4d2.js",
+    "runtime-main.js.map": "/almex-contractor/static/js/runtime-main.a174d4d2.js.map",
     "static/css/3.717bbcbd.chunk.css": "/almex-contractor/static/css/3.717bbcbd.chunk.css",
-    "static/js/3.d5cb5d55.chunk.js": "/almex-contractor/static/js/3.d5cb5d55.chunk.js",
-    "static/js/3.d5cb5d55.chunk.js.map": "/almex-contractor/static/js/3.d5cb5d55.chunk.js.map",
-    "static/js/4.d63827f9.chunk.js": "/almex-contractor/static/js/4.d63827f9.chunk.js",
-    "static/js/4.d63827f9.chunk.js.map": "/almex-contractor/static/js/4.d63827f9.chunk.js.map",
-    "static/js/5.3f21eb53.chunk.js": "/almex-contractor/static/js/5.3f21eb53.chunk.js",
-    "static/js/5.3f21eb53.chunk.js.map": "/almex-contractor/static/js/5.3f21eb53.chunk.js.map",
+    "static/js/3.8f7bb911.chunk.js": "/almex-contractor/static/js/3.8f7bb911.chunk.js",
+    "static/js/3.8f7bb911.chunk.js.map": "/almex-contractor/static/js/3.8f7bb911.chunk.js.map",
+    "static/js/4.836241f0.chunk.js": "/almex-contractor/static/js/4.836241f0.chunk.js",
+    "static/js/4.836241f0.chunk.js.map": "/almex-contractor/static/js/4.836241f0.chunk.js.map",
+    "static/js/5.14bad2f8.chunk.js": "/almex-contractor/static/js/5.14bad2f8.chunk.js",
+    "static/js/5.14bad2f8.chunk.js.map": "/almex-contractor/static/js/5.14bad2f8.chunk.js.map",
     "index.html": "/almex-contractor/index.html",
-    "precache-manifest.13c95d3cbc805f9debb2b6d0766a6bce.js": "/almex-contractor/precache-manifest.13c95d3cbc805f9debb2b6d0766a6bce.js",
+    "precache-manifest.a7bd615de5ee2d16cc4ebeb0d3e879c2.js": "/almex-contractor/precache-manifest.a7bd615de5ee2d16cc4ebeb0d3e879c2.js",
     "service-worker.js": "/almex-contractor/service-worker.js",
     "static/css/3.717bbcbd.chunk.css.map": "/almex-contractor/static/css/3.717bbcbd.chunk.css.map",
-    "static/css/main.afecf922.chunk.css.map": "/almex-contractor/static/css/main.afecf922.chunk.css.map",
-    "static/js/3.d5cb5d55.chunk.js.LICENSE": "/almex-contractor/static/js/3.d5cb5d55.chunk.js.LICENSE"
+    "static/css/main.c0d18140.chunk.css.map": "/almex-contractor/static/css/main.c0d18140.chunk.css.map",
+    "static/js/3.8f7bb911.chunk.js.LICENSE": "/almex-contractor/static/js/3.8f7bb911.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.e3583e4f.js",
+    "static/js/runtime-main.a174d4d2.js",
     "static/css/3.717bbcbd.chunk.css",
-    "static/js/3.d5cb5d55.chunk.js",
-    "static/css/main.afecf922.chunk.css",
-    "static/js/main.60508fbb.chunk.js"
+    "static/js/3.8f7bb911.chunk.js",
+    "static/css/main.c0d18140.chunk.css",
+    "static/js/main.7c5c8f20.chunk.js"
   ]
 }

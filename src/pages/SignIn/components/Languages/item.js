@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import * as styles from './languages.module.scss';
 import { notification, Typography, Col } from 'antd';
 import moment from 'moment';
-import { PUBLIC_URL } from 'utils/helpers';
+import { PUBLIC_URL, getLocaleCode } from 'utils/helpers';
 import { loadTranslations, setLocale, I18n } from 'react-redux-i18n';
 
 class LangItem extends Component {
@@ -15,7 +15,13 @@ class LangItem extends Component {
     try {
       const request = await fetch(`${PUBLIC_URL}/translates/${lang.value}.json`);
       const translates = await request.json();
-      this.props.loadTranslations({ [lang.value]: translates });
+      const antdLocales = await getLocaleCode(lang.value);
+      this.props.loadTranslations({
+        [lang.value]: {
+          antd: antdLocales.default,
+          ...translates
+        }
+      });
       this.props.setLocale(lang.value);
       localStorage.setItem('lang', lang.value);
       moment.locale(lang.value);

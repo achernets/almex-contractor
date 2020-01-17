@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'antd';
+import { Button } from 'antd';
 import { Formik } from 'formik';
 import { I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import { log, NotificationError } from 'utils/helpers';
 import ListDocumentPatterns from './components/ListDocumentPatterns';
 import FormData from './components/FormData';
 import { MrkClientServiceClient } from 'api';
+import { Modal } from 'components/Modals';
 
 const CreateMrkDocument = ({ token, hideModal }) => {
   const [step, setStep] = useState(1);
@@ -24,7 +25,7 @@ const CreateMrkDocument = ({ token, hideModal }) => {
       try {
         const result = await MrkClientServiceClient.prepareDocumentByPattern(token, documentPattern.id);
         if (!isCancelled) setDocumentData(result);
-        log(result);
+        log('prepareDocumentByPattern', { ...result });
       } catch (error) {
         NotificationError(error, 'prepareDocumentByPattern');
       }

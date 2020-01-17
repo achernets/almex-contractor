@@ -1,10 +1,8 @@
 import React from 'react';
 import { Form, Input, Checkbox, DatePicker, Radio, Select } from 'formik-antd';
 import moment from 'moment';
-import { get, keys } from 'lodash';
+import { get, keys, map } from 'lodash';
 import { useFormikContext } from 'formik';
-
-const { Option } = Select;
 
 const ContentItemTemplate = ({ item, name }) => {
   const { values, setFieldValue } = useFormikContext();
@@ -38,11 +36,9 @@ const ContentItemTemplate = ({ item, name }) => {
             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="tom">Tom</Option>
+          {map(item.fields).map((itm, index) => <Select.Option key={index} value={itm}>{itm}</Select.Option>)}
         </Select>
-      </Form.Item>;
+      </Form.Item >;
     case ContentItemType.CHECKBOX:
       return <Form.Item
         {...settingLayout}
@@ -85,10 +81,7 @@ const ContentItemTemplate = ({ item, name }) => {
         name={`${name}.value.strValue`}
       >
         <Radio.Group name={`${name}.value.strValue`}>
-          <Radio value={1}>ACOMBO_BOX</Radio>
-          <Radio value={2}>BCOMBO_BOX</Radio>
-          <Radio value={3}>CCOMBO_BOX</Radio>
-          <Radio value={4}>DCOMBO_BOX</Radio>
+          {map(item.fields).map((itm, index) => <Radio key={index} value={itm}>{itm}</Radio>)}
         </Radio.Group>
       </Form.Item>;
     default:

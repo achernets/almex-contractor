@@ -1,6 +1,6 @@
 import { setThrift, MrkClientServiceClient } from 'api';
 import { reduce } from 'lodash';
-import { log, PUBLIC_URL } from 'utils/helpers';
+import { log, PUBLIC_URL, getLocaleCode } from 'utils/helpers';
 import moment from 'moment';
 
 const getInitialState = currentState => {
@@ -40,6 +40,13 @@ const getInitialState = currentState => {
       moment.suppressDeprecationWarnings = true;
       const languages = await MrkClientServiceClient.getAllLanguages();
       const settings = await MrkClientServiceClient.getInfo();
+      const antdLocales = await getLocaleCode(DEFAULT_TRANSLATE);
+      translations = {
+        [DEFAULT_TRANSLATE]: {
+          antd: antdLocales.default,
+          ...translations[DEFAULT_TRANSLATE]
+        }
+      };
       resolve({
         ...store,
         auth,

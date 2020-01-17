@@ -1,5 +1,6 @@
 import { isEmpty, upperFirst, uniqueId } from 'lodash';
 import { notification } from 'antd';
+import store from 'redux/store';
 
 export const log = (...props) => {
   /* eslint-disable-next-line */
@@ -61,4 +62,23 @@ export const getPortions = (size = 0, string = '') => {
     count: 1,
     portions: string.length
   };
+};
+
+export const getLocaleCode = (locale) => {
+  switch (locale) {
+    case 'en':
+      return import('antd/lib/locale/en_US');
+    case 'ru':
+      return import('antd/lib/locale/ru_RU');
+    case 'uk':
+      return import('antd/lib/locale/uk_UA');
+    default:
+      return import('antd/lib/locale/en_US');
+  }
+};
+
+export const getAntdLocale = () => {
+  const state = store.getState();
+  const { locale, translations } = state.i18n;
+  return translations[locale].antd;
 };

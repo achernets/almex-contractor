@@ -8,23 +8,27 @@ import Loader from 'components/Loader';
 import PrivateRoute from 'components/PrivateRoute';
 import StartAppFail from 'components/StartAppFail';
 import { LayoutApp } from 'components/LayoutApp';
+import { ConfigProvider } from 'antd';
+import { getAntdLocale } from 'utils/helpers';
 
 const App = ({ loading, error }) => {
   if (error !== null) return <StartAppFail />;
   return (
     <>
       {loading ? <Loader /> :
-        <Switch>
-          <Route exact path="/signIn" component={SignIn} />
-          <LayoutApp>
-            <Switch>
-              <PrivateRoute exact path="/mrkDocuments" component={MrkDocuments} />
-              <PrivateRoute exact path="/profile" component={Profile} />
-              <Redirect to="/mrkDocuments" />
-            </Switch>
-          </LayoutApp>
-          <Redirect to="/" />
-        </Switch>}
+        <ConfigProvider locale={getAntdLocale()}>
+          <Switch>
+            <Route exact path="/signIn" component={SignIn} />
+            <LayoutApp>
+              <Switch>
+                <PrivateRoute exact path="/mrkDocuments" component={MrkDocuments} />
+                <PrivateRoute exact path="/profile" component={Profile} />
+                <Redirect to="/mrkDocuments" />
+              </Switch>
+            </LayoutApp>
+            <Redirect to="/" />
+          </Switch>
+        </ConfigProvider>}
     </>
   );
 };

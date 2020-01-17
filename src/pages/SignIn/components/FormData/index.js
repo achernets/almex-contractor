@@ -64,6 +64,7 @@ const FormData = ({ login, token, isFetching }) => {
 
 const mapStateToProps = state => ({
   token: state.auth.token,
+  locale: state.i18n.locale,
   isFetching: state.auth.isFetching
 });
 const mapDispatchToProps = dispatch =>

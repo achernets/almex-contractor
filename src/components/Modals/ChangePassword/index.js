@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal } from 'components/Modals';
 import { Form, Input } from 'formik-antd';
 import { Formik } from 'formik';
 import { I18n } from 'react-redux-i18n';

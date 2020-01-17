@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal } from 'components/Modals';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions } from 'react-redux-modals';

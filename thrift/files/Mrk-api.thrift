@@ -99,6 +99,7 @@ struct MrkDocument {
   11: optional i64 sendDate;
   12: optional i64 receiveDate;
   13: optional string creatorId;
+  14: optional string groupNumber;
 }
 
 struct MrkDocumentPage {
@@ -179,6 +180,7 @@ service MrkClientService {
   /*
   type - тип документа
   name - название
+  groupNumber - получение цепочки(int)
   */
   MrkDocumentPage getMrkDocumentPage(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData markMrkDocumentAsRead(1: string token, 2: string documentId, 3: bool read) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);

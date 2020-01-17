@@ -1997,6 +1997,8 @@ service DocumentService {
   Attachment getNewConvertedAttachmentVersion(1: common.AuthTokenBase64 token, 2: string prevAttId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Экспорт документа в xml*/
   binary exportAsXML(1:common.AuthTokenBase64 token, 2:common.ID documentId, 3:DocumentAccessPolicy accessPolicy) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  /** */
+  /** Создание документа из xml*/
+  Document importFromXML(1:common.AuthTokenBase64 token, 2:binary xml) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  /** Выгрузка всех контентов вне зависимости от доступных контент контейнеров*/
   list<ContentItem> getDocContentItemsForChangeType(1:common.AuthTokenBase64 token, 2:common.ID documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 }

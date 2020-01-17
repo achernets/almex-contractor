@@ -1,5 +1,7 @@
-import { isEmpty, upperFirst, uniqueId } from 'lodash';
+import { isEmpty, upperFirst, get, uniqueId } from 'lodash';
+import { I18n } from 'react-redux-i18n';
 import { notification } from 'antd';
+import moment from 'moment';
 import store from 'redux/store';
 
 export const log = (...props) => {
@@ -81,4 +83,17 @@ export const getAntdLocale = () => {
   const state = store.getState();
   const { locale, translations } = state.i18n;
   return translations[locale].antd;
+};
+
+export const getContentItemValue = item => {
+  const value = get(item, 'value.strValue', null);
+  switch (item.type) {
+    case ContentItemType.CHECKBOX:
+      return I18n.t(value === 'true' ? 'common.true' : 'common.false');
+    case ContentItemType.CALENDAR:
+      return value === null || value === -1 ? null : moment(Number(value)).format('DD.MM.YYYY HH:mm');
+    default:
+      return value;
+  }
+
 };

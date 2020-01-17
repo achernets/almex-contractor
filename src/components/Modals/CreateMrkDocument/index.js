@@ -11,8 +11,9 @@ import ListDocumentPatterns from './components/ListDocumentPatterns';
 import FormData from './components/FormData';
 import { MrkClientServiceClient } from 'api';
 import { Modal } from 'components/Modals';
+import { getMrkDocuments } from 'redux/actions/mrkDocuments';
 
-const CreateMrkDocument = ({ token, hideModal }) => {
+const CreateMrkDocument = ({ token, hideModal, getMrkDocuments }) => {
   const [step, setStep] = useState(1);
   const [documentPattern, setDocumentPattern] = useState(null);
   const [isLoadingDocumentData, setLoadingDocumentData] = useState(false);
@@ -58,8 +59,8 @@ const CreateMrkDocument = ({ token, hideModal }) => {
             await MrkClientServiceClient.sendDocument(token, resultDocument.document.id);
           }
           setSubmitting(false);
+          getMrkDocuments();
           hideModal('MODAL_CREATE_MRK_DOCUMENT');
-          //log(result);
         } catch (error) {
           NotificationError(error, 'createOrUpdateMrkDocument');
           setSubmitting(false);
@@ -124,7 +125,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      hideModal: actions.hideModal
+      hideModal: actions.hideModal,
+      getMrkDocuments
     },
     dispatch
   );

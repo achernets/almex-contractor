@@ -10,7 +10,7 @@ const MenuFilters = ({
   active = null,
   prefix = '',
   onClick = () => { }
-}) => <Row className={styles.menu} type="flex" justify="start" align="middle" gutter={[24, 0]}>
+}) => <Row className={styles.menu} type="flex" justify="start" align="middle" gutter={[24, 1]}>
     {data.map(item => <Col key={item}>
       <Typography.Text className={classnames({ 'active': active === item })} onClick={() => onClick(item)} strong>
         {isEmpty(prefix) ? I18n.t(item) : I18n.t(`${prefix}.${item}`)}

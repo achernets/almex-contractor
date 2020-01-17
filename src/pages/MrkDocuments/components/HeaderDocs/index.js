@@ -11,7 +11,7 @@ import { actions } from 'react-redux-modals';
 import { keys, reverse, get } from 'lodash';
 
 const HeaderDocs = ({ showModal, isFetching, getMrkDocuments, changeMrkDocumentType, mrkDocumentType, changeTextSearch, searchText }) => <Header >
-  <Row type="flex" justify="space-between" align="middle">
+  <Row type="flex" justify="space-between">
     <Col span={12}>
       <MenuFilters
         prefix="MrkDocumentType"

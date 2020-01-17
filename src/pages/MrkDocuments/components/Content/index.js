@@ -20,15 +20,17 @@ const Content = ({ getMrkDocuments, showModal, mrkDocuments, isSearch, count, pa
       {
         title: I18n.t('MrkDocuments.patternName'),
         dataIndex: 'patternName',
+        ellipsis: true
       },
       {
         title: I18n.t('MrkDocuments.name'),
         dataIndex: 'name',
+        ellipsis: true
       },
       {
         title: I18n.t('MrkDocuments.createDate'),
         key: 'createDate',
-        render: text => moment(text).format('DD.MM.YYYY'),
+        render: ({ createDate }) => moment(createDate).format('DD.MM.YYYY HH:mm:ss')
       },
     ]}
     dataSource={mrkDocuments}

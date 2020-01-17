@@ -1,0 +1,23 @@
+.modal {
+  :global {
+    .ant-modal-header {
+      padding: 6px 24px;
+      border-bottom: unset;
+      .ant-modal-title {
+        padding-top: 16px;
+        font-size: 14px;
+      }
+    }
+    .ant-modal-close-x {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+    }
+    .ant-typography {
+      width: 100%;
+    }
+  }
+}
+.wrapper {
+  display: flex;
+}

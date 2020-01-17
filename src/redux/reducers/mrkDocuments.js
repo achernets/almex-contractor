@@ -1,7 +1,7 @@
 import {
-  GET_MRK_DOCUMENT_REQUEST,
-  GET_MRK_DOCUMENT_SUCCESS,
-  GET_MRK_DOCUMENT_FAILURE,
+  GET_MRK_DOCUMENTS_REQUEST,
+  GET_MRK_DOCUMENTS_SUCCESS,
+  GET_MRK_DOCUMENTS_FAILURE,
   CHANGE_SEARCH_TEXT,
   CHANGE_MRK_DOCUMENT_TYPE,
 } from '../actions/mrkDocuments';
@@ -18,12 +18,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_MRK_DOCUMENT_REQUEST:
+    case GET_MRK_DOCUMENTS_REQUEST:
       return {
         ...state,
         isFetching: true
       };
-    case GET_MRK_DOCUMENT_SUCCESS:
+    case GET_MRK_DOCUMENTS_SUCCESS:
       return {
         ...state,
         mrkDocuments: action.payload.documentData,
@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
         isSearch: action.payload.isSearch,
         isFetching: false
       };
-    case GET_MRK_DOCUMENT_FAILURE:
+    case GET_MRK_DOCUMENTS_FAILURE:
       return {
         ...state,
         mrkDocuments: [],

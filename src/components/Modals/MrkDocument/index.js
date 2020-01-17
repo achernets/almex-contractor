@@ -1,40 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Modal } from 'components/Modals';
 import { connect } from 'react-redux';
 import { I18n } from 'react-redux-i18n';
 import { bindActionCreators } from 'redux';
 import { actions } from 'react-redux-modals';
-import { log, getContentItemValue } from 'utils/helpers';
 import { Button, Row, Col, Typography } from 'antd';
-import { get, map } from 'lodash';
+import { get } from 'lodash';
 import moment from 'moment';
-import Attachment from 'components/Attachment';
-import { MrkClientServiceClient } from 'api';
+import { getMrkDocumentData, sendDocument, initState } from 'redux/actions/Modal/mrkDocument';
+import Information from './components/Information';
+import Loader from 'components/Loader';
 import * as styles from './mrkDocument.module.scss';
-const MrkDocument = ({ hideModal, showModal, token, mrkDocument }) => {
-  const [mrkDocumentData, setMrkDocumentData] = useState(null);
-  const getMrkDocumentData = async () => {
-    const result = await MrkClientServiceClient.getMrkDocumentData(token, mrkDocument.id);
-    setMrkDocumentData(result);
-  };
-  const sendDocument = async (ecp) => {
-    if (ecp) log('ecp');
-    //await MrkClientServiceClient.sendDocument(token, mrkDocumentData.document.id);
-  };
+const MrkDocument = ({
+  hideModal,
+  showModal,
+  getMrkDocumentData,
+  sendDocument,
+  initState,
+  mrkDocumentData,
+  isFetching,
+  isFetchingSend,
+  mrkDocument
+}) => {
+
   useEffect(() => {
-    getMrkDocumentData();
+    getMrkDocumentData(mrkDocument.id);
+    return () => initState();
   }, []);
-  log(mrkDocumentData);
+
   const Footer = () => {
     const CloseButton = <Button key="close" onClick={() => hideModal('MODAL_MRK_DOCUMENT')} >
       {I18n.t('common.close')}
     </Button>;
     switch (get(mrkDocumentData, 'document.type', mrkDocument.type)) {
       case MrkDocumentType.DRAFT:
-        return [<Button icon="lock" key="send_ecp" type="primary" onClick={() => sendDocument(true)}>
+        return [<Button icon="lock" key="send_ecp" loading={isFetchingSend} type="primary" onClick={() => sendDocument()}>
           {I18n.t('CreateMrkDocument.send_doc_ecp')}
         </Button>,
-        <Button key="send" onClick={() => sendDocument(false)}>
+        <Button key="send" loading={isFetchingSend} onClick={() => sendDocument()}>
           {I18n.t('CreateMrkDocument.send_doc')}
         </Button>,
           CloseButton];
@@ -73,36 +76,25 @@ const MrkDocument = ({ hideModal, showModal, token, mrkDocument }) => {
       onOk={() => { }}
       footer={Footer()}
     >
-      {get(mrkDocumentData, 'items', []).map(item =>
-        <Row key={item.id} type="flex" gutter={[24, 48]}>
-          <Col span={8}>
-            <Typography.Text ellipsis>{item.oName}:</Typography.Text>
-          </Col>
-          <Col span={16}>
-            <Typography.Text>{getContentItemValue(item)}</Typography.Text>
-          </Col>
-        </Row>
-      )}
-      {get(mrkDocumentData, 'atts', []).length > 0 && <Row type="flex" gutter={[24, 48]}>
-        <Col span={8}>
-          <Typography.Text strong ellipsis>{I18n.t('common.attachments')}</Typography.Text>
-        </Col>
-        <Col span={16}>
-          {map(mrkDocumentData.atts, item => <Attachment attachment={item} key={item.id} />)}
-        </Col>
-      </Row>}
-    </ Modal>
+      {isFetching && <Loader />}
+      <Information mrkDocumentData={mrkDocumentData} />
+    </Modal>
   );
 
 };
 const mapStateToProps = state => ({
-  token: state.auth.token
+  mrkDocumentData: state.modal.mrkDocument.mrkDocumentData,
+  isFetching: state.modal.mrkDocument.isFetching,
+  isFetchingSend: state.modal.mrkDocument.isFetchingSend
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       hideModal: actions.hideModal,
-      showModal: actions.showModal
+      showModal: actions.showModal,
+      getMrkDocumentData,
+      sendDocument,
+      initState
     },
     dispatch
   );

@@ -2,13 +2,13 @@ import { isEmpty, keys } from 'lodash';
 import { PAGE_SIZE } from 'constants/table';
 import { NotificationError } from 'utils/helpers';
 
-export const GET_MRK_DOCUMENT_REQUEST = 'GET_MRK_DOCUMENT_REQUEST';
-export const GET_MRK_DOCUMENT_SUCCESS = 'GET_MRK_DOCUMENT_SUCCESS';
-export const GET_MRK_DOCUMENT_FAILURE = 'GET_MRK_DOCUMENT_FAILURE';
+export const GET_MRK_DOCUMENTS_REQUEST = 'PAGE_MRK_DOCUMENTS/GET_MRK_DOCUMENTS_REQUEST';
+export const GET_MRK_DOCUMENTS_SUCCESS = 'PAGE_MRK_DOCUMENTS/GET_MRK_DOCUMENTS_SUCCESS';
+export const GET_MRK_DOCUMENTS_FAILURE = 'PAGE_MRK_DOCUMENTS/GET_MRK_DOCUMENTS_FAILURE';
 
 export const getMrkDocuments = (page = 1) => {
   return async (dispatch, getState, api) => {
-    dispatch({ type: GET_MRK_DOCUMENT_REQUEST });
+    dispatch({ type: GET_MRK_DOCUMENTS_REQUEST });
     try {
       const {
         auth: { token },
@@ -38,7 +38,7 @@ export const getMrkDocuments = (page = 1) => {
         filter
       );
       dispatch({
-        type: GET_MRK_DOCUMENT_SUCCESS,
+        type: GET_MRK_DOCUMENTS_SUCCESS,
         payload: {
           ...result,
           page,
@@ -47,12 +47,12 @@ export const getMrkDocuments = (page = 1) => {
       });
     } catch (error) {
       NotificationError(error, 'getMrkDocuments');
-      dispatch({ type: GET_MRK_DOCUMENT_FAILURE });
+      dispatch({ type: GET_MRK_DOCUMENTS_FAILURE });
     }
   };
 };
 
-export const CHANGE_SEARCH_TEXT = 'CHANGE_SEARCH_TEXT';
+export const CHANGE_SEARCH_TEXT = 'PAGE_MRK_DOCUMENTS/CHANGE_SEARCH_TEXT';
 export const changeTextSearch = (text = '') => {
   return async (dispatch) => {
     dispatch({
@@ -62,7 +62,7 @@ export const changeTextSearch = (text = '') => {
   };
 };
 
-export const CHANGE_MRK_DOCUMENT_TYPE = 'CHANGE_MRK_DOCUMENT_TYPE';
+export const CHANGE_MRK_DOCUMENT_TYPE = 'PAGE_MRK_DOCUMENTS/CHANGE_MRK_DOCUMENT_TYPE';
 export const changeMrkDocumentType = type => {
   return async (dispatch) => {
     dispatch({

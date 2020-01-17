@@ -6,6 +6,7 @@ import { i18nReducer } from 'react-redux-i18n';
 import auth from './auth';
 import mrkDocuments from './mrkDocuments';
 import settings from './settings';
+import modal from './Modal';
 export default history =>
   asyncInitialState.outerReducer(
     combineReducers({
@@ -13,6 +14,7 @@ export default history =>
       asyncInitialState: asyncInitialState.innerReducer,
       i18n: i18nReducer,
       modals,
+      modal,
       auth,
       mrkDocuments,
       settings

@@ -13,6 +13,9 @@
   "form": {
     "required": "Обязательное для заполнения"
   },
+  "notification": {
+    "sendDocument_title": "Ваше письмо отправлено"
+  },
   "SignIn": {
     "locale_not_found": "Файл не найден",
     "login": "Логин",

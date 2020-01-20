@@ -54,7 +54,7 @@
     "OUTPUT": "Исходящие"
   },
   "CreateMrkDocument": {
-    "title": "Создать документ",
+    "title": "Создать/редактировать документ",
     "allowedDocumentPatterns": "Доступные типы документов",
     "send_doc_ecp": "Отправить с ЭЦП",
     "send_doc": "Отправить",

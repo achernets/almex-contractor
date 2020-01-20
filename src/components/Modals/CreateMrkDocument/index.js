@@ -1,72 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'antd';
 import { Formik } from 'formik';
 import { I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions } from 'react-redux-modals';
-import { isEmpty } from 'lodash';
-import { log, NotificationError } from 'utils/helpers';
+import { get, isEmpty } from 'lodash';
 import ListDocumentPatterns from './components/ListDocumentPatterns';
 import FormData from './components/FormData';
-import { MrkClientServiceClient } from 'api';
 import { Modal } from 'components/Modals';
-import { getMrkDocuments } from 'redux/actions/mrkDocuments';
+import { initState, prepareDocumentByPattern, createOrUpdateMrkDocument } from 'redux/actions/Modal/createMrkDocument';
+import Loader from 'components/Loader';
 
-const CreateMrkDocument = ({ token, hideModal, getMrkDocuments }) => {
-  const [step, setStep] = useState(1);
-  const [documentPattern, setDocumentPattern] = useState(null);
-  const [isLoadingDocumentData, setLoadingDocumentData] = useState(false);
-  const [documentData, setDocumentData] = useState({});
+const CreateMrkDocument = ({ hideModal,
+  parentId,
+  step,
+  documentPattern,
+  isPrepareFetching,
+  isFetching,
+  mrkDocumentData,
+  prepareDocumentByPattern,
+  createOrUpdateMrkDocument,
+  initState
+}) => {
   useEffect(() => {
-    if (documentPattern === null) return;
-    let isCancelled = false;
-    const prepareDocumentByPattern = async () => {
-      if (!isCancelled) setLoadingDocumentData(true);
-      try {
-        const result = await MrkClientServiceClient.prepareDocumentByPattern(token, documentPattern.id);
-        if (!isCancelled) setDocumentData(result);
-        log('prepareDocumentByPattern', { ...result });
-      } catch (error) {
-        NotificationError(error, 'prepareDocumentByPattern');
-      }
-      if (!isCancelled) setLoadingDocumentData(false);
-    };
-    prepareDocumentByPattern();
-    return () => {
-      isCancelled = true;
-    };
-  }, [documentPattern]);
+    return () => initState();
+  }, []);
   return (
     <Formik
       enableReinitialize={true}
       initialValues={{
-        ...documentData,
+        ...mrkDocumentData,
         ECP: false,
         send: false,
-        attachments: []
+        attachments: get(mrkDocumentData, 'atts', []).map(item => Object.assign({
+          attachment: item,
+          file: null
+        }))
       }}
-      onSubmit={async (values, { setSubmitting }) => {
-        setSubmitting(true);
+      onSubmit={(values) => {
         const data = new MrkDocumentData({
           ...values,
           atts: values.attachments.map(item => item.attachment)
         });
-        log(data);
-        try {
-          const resultDocument = await MrkClientServiceClient.createOrUpdateMrkDocument(token, data);
-          if (values.send) {
-            await MrkClientServiceClient.sendDocument(token, resultDocument.document.id);
-          }
-          setSubmitting(false);
-          getMrkDocuments();
-          hideModal('MODAL_CREATE_MRK_DOCUMENT');
-        } catch (error) {
-          NotificationError(error, 'createOrUpdateMrkDocument');
-          setSubmitting(false);
-        }
+        createOrUpdateMrkDocument(data, values.send, values.ECP);
       }}
-    >{({ handleSubmit, isSubmitting, values, setValues }) => {
+    >{({ handleSubmit, values, setValues }) => {
       return (
         <Modal
           visible={true}
@@ -81,7 +60,7 @@ const CreateMrkDocument = ({ token, hideModal, getMrkDocuments }) => {
           title={I18n.t('CreateMrkDocument.title')}
           onCancel={() => hideModal('MODAL_CREATE_MRK_DOCUMENT')}
           footer={step === 2 ? [
-            <Button icon="lock" key="id" type="primary" loading={isSubmitting} onClick={(e) => {
+            <Button icon="lock" key="id" type="primary" loading={isFetching} onClick={(e) => {
               setValues({
                 ...values, ECP: true, send: true
               });
@@ -89,7 +68,7 @@ const CreateMrkDocument = ({ token, hideModal, getMrkDocuments }) => {
             }}>
               {I18n.t('CreateMrkDocument.send_doc_ecp')}
             </Button>,
-            <Button key="back" loading={isSubmitting} onClick={(e) => {
+            <Button key="back" loading={isFetching} onClick={(e) => {
               setValues({
                 ...values, ECP: false, send: true
               });
@@ -97,7 +76,7 @@ const CreateMrkDocument = ({ token, hideModal, getMrkDocuments }) => {
             }}>
               {I18n.t('CreateMrkDocument.send_doc')}
             </Button>,
-            <Button key="submit" loading={isSubmitting} onClick={(e) => {
+            <Button key="submit" loading={isFetching} onClick={(e) => {
               setValues({
                 ...values, ECP: false, send: false
               });
@@ -105,12 +84,13 @@ const CreateMrkDocument = ({ token, hideModal, getMrkDocuments }) => {
             }}>
               {I18n.t('CreateMrkDocument.send_in_draft')}
             </Button>
-          ] : [<Button key="submit" loading={isLoadingDocumentData} disabled={isEmpty(documentData)} onClick={() => setStep(2)}>
+          ] : [<Button key="submit" loading={isPrepareFetching} disabled={isEmpty(documentPattern)} onClick={() => prepareDocumentByPattern(documentPattern.id, parentId)}>
             {I18n.t('common.next')}
           </Button>
             ]}
         >
-          {step === 1 && <ListDocumentPatterns documentPattern={documentPattern} setDocumentPattern={setDocumentPattern} />}
+          {isFetching && <Loader />}
+          {step === 1 && <ListDocumentPatterns />}
           {step === 2 && <FormData />}
         </Modal>
       );
@@ -119,14 +99,21 @@ const CreateMrkDocument = ({ token, hideModal, getMrkDocuments }) => {
   );
 };
 const mapStateToProps = state => ({
-  token: state.auth.token
+  token: state.auth.token,
+  step: state.modal.createMrkDocument.step,
+  documentPattern: state.modal.createMrkDocument.documentPattern,
+  mrkDocumentData: state.modal.createMrkDocument.mrkDocumentData,
+  isFetching: state.modal.createMrkDocument.isFetching,
+  isPrepareFetching: state.modal.createMrkDocument.isPrepareFetching,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       hideModal: actions.hideModal,
-      getMrkDocuments
+      prepareDocumentByPattern,
+      createOrUpdateMrkDocument,
+      initState
     },
     dispatch
   );

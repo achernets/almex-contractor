@@ -6,6 +6,11 @@
       .ant-modal-title {
         padding-top: 16px;
         font-size: 14px;
+        .anticon-link {
+          color: #1890ff;
+          margin-right: 8px;
+          cursor: pointer;
+        }
       }
     }
     .ant-modal-close-x {
@@ -20,4 +25,18 @@
 }
 .wrapper {
   display: flex;
+}
+.timeline {
+  :global {
+    .active {
+      .ant-timeline-item-head-blue {
+        background: #1890ff;
+      }
+    }
+    .ant-timeline-item-content {
+      > div {
+        cursor: pointer;
+      }
+    }
+  }
 }

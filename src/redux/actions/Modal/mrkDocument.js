@@ -30,6 +30,15 @@ export const getMrkDocumentData = documentId => {
   };
 };
 
+export const updateMrkDocumentData = documentId => {
+  return (dispatch, getState) => {
+    const {
+      modal: { mrkDocument: { mrkDocumentData: { document: { id } } } }
+    } = getState();
+    if (id === documentId) dispatch(getMrkDocumentData(documentId));
+  };
+};
+
 export const SEND_DOCUMENT_REQUEST = 'MODAL_MRK_DOCUMENT/SEND_DOCUMENT_REQUEST';
 export const SEND_DOCUMENT_SUCCESS = 'MODAL_MRK_DOCUMENT/SEND_DOCUMENT_SUCCESS';
 export const SEND_DOCUMENT_FAILURE = 'MODAL_MRK_DOCUMENT/SEND_DOCUMENT_FAILURE';
@@ -58,6 +67,87 @@ export const sendDocument = () => {
     } catch (error) {
       NotificationError(error, 'sendDocument');
       dispatch({ type: SEND_DOCUMENT_FAILURE });
+    }
+  };
+};
+
+export const CHANGE_INFO_TYPE = 'MODAL_MRK_DOCUMENT/CHANGE_INFO_TYPE';
+export const changeShowChain = showChain => {
+  return async (dispatch, getState) => {
+    const {
+      modal: { mrkDocument: { chain } }
+    } = getState();
+    dispatch({
+      type: CHANGE_INFO_TYPE,
+      payload: showChain
+    });
+    if (showChain && chain.length === 0) dispatch(getChainDocuments());
+  };
+};
+
+export const GET_CHAIN_REQUEST = 'MODAL_MRK_DOCUMENT/GET_CHAIN_REQUEST';
+export const GET_CHAIN_SUCCESS = 'MODAL_MRK_DOCUMENT/GET_CHAIN_SUCCESS';
+export const GET_CHAIN_FAILURE = 'MODAL_MRK_DOCUMENT/GET_CHAIN_FAILURE';
+
+export const getChainDocuments = () => {
+  return async (dispatch, getState, api) => {
+    dispatch({ type: GET_CHAIN_REQUEST });
+    try {
+      const {
+        auth: { token },
+        modal: { mrkDocument: { mrkDocumentData } }
+      } = getState();
+      const filter = new KazFilter({
+        position: 0,
+        countFilter: 50,
+        orders: ['createDate'],
+        items: [new FilterItem({
+          field: 'groupNumber',
+          value: mrkDocumentData.document.groupNumber,
+          condition: FilterCondition.EQUAL,
+          fType: FilterFieldType.NUMBER
+        })]
+      });
+      const result = await api.MrkClientServiceClient.getMrkDocumentPage(
+        token,
+        filter
+      );
+      dispatch({
+        type: GET_CHAIN_SUCCESS,
+        payload: {
+          ...result,
+          activeChain: mrkDocumentData
+        }
+      });
+    } catch (error) {
+      NotificationError(error, 'getMrkDocumentPage');
+      dispatch({ type: GET_CHAIN_FAILURE });
+    }
+  };
+};
+
+export const CHANGE_CHAIN_REQUEST = 'MODAL_MRK_DOCUMENT/CHANGE_CHAIN_REQUEST';
+export const CHANGE_CHAIN_SUCCESS = 'MODAL_MRK_DOCUMENT/CHANGE_CHAIN_SUCCESS';
+export const CHANGE_CHAIN_FAILURE = 'MODAL_MRK_DOCUMENT/CHANGE_CHAIN_FAILURE';
+
+export const changeChain = documentId => {
+  return async (dispatch, getState, api) => {
+    dispatch({ type: CHANGE_CHAIN_REQUEST });
+    try {
+      const {
+        auth: { token }
+      } = getState();
+      const result = await api.MrkClientServiceClient.getMrkDocumentData(
+        token,
+        documentId
+      );
+      dispatch({
+        type: CHANGE_CHAIN_SUCCESS,
+        payload: result
+      });
+    } catch (error) {
+      NotificationError(error, 'getMrkDocumentData');
+      dispatch({ type: CHANGE_CHAIN_FAILURE });
     }
   };
 };

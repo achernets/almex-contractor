@@ -3,6 +3,7 @@ import Table from 'components/Table';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getMrkDocuments } from 'redux/actions/mrkDocuments';
+import { editDocument } from 'redux/actions/Modal/createMrkDocument';
 import { PAGE_SIZE } from 'constants/table';
 import { I18n } from 'react-redux-i18n';
 import Empty from 'components/Empty';
@@ -10,7 +11,7 @@ import { Button, Typography } from 'antd';
 import moment from 'moment';
 import { actions } from 'react-redux-modals';
 
-const Content = ({ getMrkDocuments, showModal, mrkDocuments, isSearch, count, page, isFetching }) => {
+const Content = ({ getMrkDocuments, showModal, editDocument, mrkDocuments, isSearch, count, page, isFetching }) => {
   useEffect(() => {
     getMrkDocuments();
   }, []);
@@ -43,9 +44,11 @@ const Content = ({ getMrkDocuments, showModal, mrkDocuments, isSearch, count, pa
     }}
     onRow={(record) => {
       return {
-        onClick: () => showModal('MODAL_MRK_DOCUMENT', {
-          mrkDocument: record
-        })
+        onClick: () => {
+          record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showModal('MODAL_MRK_DOCUMENT', {
+            mrkDocument: record
+          });
+        }
       };
     }}
     locale={{
@@ -79,6 +82,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getMrkDocuments,
+      editDocument,
       showModal: actions.showModal
     },
     dispatch

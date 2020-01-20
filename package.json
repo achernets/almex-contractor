@@ -43,6 +43,7 @@
       "MrkClientSession": true,
       "MrkDocumentType": true,
       "MrkDocumentData": true,
+      "MrkDocument": true,
       "ContentItemType": true
     },
     "rules": {

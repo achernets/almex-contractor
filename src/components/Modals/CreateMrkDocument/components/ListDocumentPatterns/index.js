@@ -1,47 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Loader from 'components/Loader';
+import React, { useEffect } from 'react';
 import { I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { Icon, Typography } from 'antd';
-import { MrkClientServiceClient } from 'api';
-import { NotificationError } from 'utils/helpers';
 import { AutoSizer, List } from 'react-virtualized';
 import * as styles from './listDocumentPatterns.module.scss';
-const ListDocumentPatterns = ({ token, documentPattern, setDocumentPattern }) => {
-  const [documentPatterns, setDocumentPatterns] = useState([]);
-  const [loading, setLoading] = useState(false);
+import { getAllDocumentPatterns, setDocumentPattern } from 'redux/actions/Modal/createMrkDocument';
+const ListDocumentPatterns = ({ documentPattern, documentPatterns, getAllDocumentPatterns, setDocumentPattern }) => {
   useEffect(() => {
-    let isCancelled = false;
-    const getAllDocumentPatterns = async (data) => {
-      if (!isCancelled) setLoading(true);
-      try {
-        const filter = new KazFilter({
-          position: data.length,
-          countFilter: 50,
-          orders: [],
-          items: []
-        });
-        const result = await MrkClientServiceClient.getAllDocumentPatterns(token, filter);
-        if (result.length === 50) {
-          getAllDocumentPatterns([...data, ...result]);
-        } else {
-          if (!isCancelled) {
-            setLoading(false);
-            setDocumentPatterns([...data, ...result]);
-          }
-        }
-      } catch (error) {
-        if (!isCancelled) setLoading(false);
-        NotificationError(error, 'getAllDocumentPatterns');
-      }
-
-    };
-    getAllDocumentPatterns([]);
-    return () => {
-      isCancelled = true;
-    };
+    getAllDocumentPatterns();
   }, []);
   const rowRenderer = ({
     key,
@@ -73,19 +41,20 @@ const ListDocumentPatterns = ({ token, documentPattern, setDocumentPattern }) =>
           />
         )}
       </AutoSizer>
-      {loading && <Loader />}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  token: state.auth.token
+  documentPatterns: state.modal.createMrkDocument.documentPatterns,
+  documentPattern: state.modal.createMrkDocument.documentPattern
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-
+      getAllDocumentPatterns,
+      setDocumentPattern
     },
     dispatch
   );

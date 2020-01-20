@@ -5,11 +5,21 @@ import {
   SEND_DOCUMENT_REQUEST,
   SEND_DOCUMENT_SUCCESS,
   SEND_DOCUMENT_FAILURE,
+  CHANGE_INFO_TYPE,
+  GET_CHAIN_REQUEST,
+  GET_CHAIN_SUCCESS,
+  GET_CHAIN_FAILURE,
+  CHANGE_CHAIN_REQUEST,
+  CHANGE_CHAIN_SUCCESS,
+  CHANGE_CHAIN_FAILURE,
   INIT_STATE
 } from 'redux/actions/Modal/mrkDocument';
 
 const initState = {
+  showChain: false,
   mrkDocumentData: null,
+  chain: [],
+  activeChain: null,
   isFetching: false,
   isFetchingSend: false
 };
@@ -17,6 +27,8 @@ const initState = {
 export default (state = initState, action) => {
   switch (action.type) {
     case GET_MRK_DOCUMENT_REQUEST:
+    case GET_CHAIN_REQUEST:
+    case CHANGE_CHAIN_REQUEST:
       return {
         ...state,
         isFetching: true
@@ -38,6 +50,8 @@ export default (state = initState, action) => {
         isFetchingSend: false
       };
     case GET_MRK_DOCUMENT_FAILURE:
+    case GET_CHAIN_FAILURE:
+    case CHANGE_CHAIN_FAILURE:
       return {
         ...state,
         isFetching: false
@@ -46,6 +60,24 @@ export default (state = initState, action) => {
       return {
         ...state,
         isFetchingSend: false
+      };
+    case CHANGE_INFO_TYPE:
+      return {
+        ...state,
+        showChain: action.payload
+      };
+    case GET_CHAIN_SUCCESS:
+      return {
+        ...state,
+        chain: action.payload.documentData,
+        activeChain: action.payload.activeChain,
+        isFetching: false
+      };
+    case CHANGE_CHAIN_SUCCESS:
+      return {
+        ...state,
+        activeChain: action.payload,
+        isFetching: false
       };
     case INIT_STATE:
       return initState;

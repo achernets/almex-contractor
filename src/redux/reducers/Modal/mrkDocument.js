@@ -20,15 +20,20 @@ const initState = {
   mrkDocumentData: null,
   chain: [],
   activeChain: null,
+  loadChainId: null,
   isFetching: false,
   isFetchingSend: false
 };
 
 export default (state = initState, action) => {
   switch (action.type) {
+    case CHANGE_CHAIN_REQUEST:
+      return {
+        ...state,
+        loadChainId: action.payload
+      };
     case GET_MRK_DOCUMENT_REQUEST:
     case GET_CHAIN_REQUEST:
-    case CHANGE_CHAIN_REQUEST:
       return {
         ...state,
         isFetching: true
@@ -51,7 +56,6 @@ export default (state = initState, action) => {
       };
     case GET_MRK_DOCUMENT_FAILURE:
     case GET_CHAIN_FAILURE:
-    case CHANGE_CHAIN_FAILURE:
       return {
         ...state,
         isFetching: false
@@ -77,7 +81,13 @@ export default (state = initState, action) => {
       return {
         ...state,
         activeChain: action.payload,
+        loadChainId: null,
         isFetching: false
+      };
+    case CHANGE_CHAIN_FAILURE:
+      return {
+        ...state,
+        loadChainId: null,
       };
     case INIT_STATE:
       return initState;

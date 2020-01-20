@@ -17,9 +17,9 @@ const Information = ({ mrkDocumentData }) => <>
       </Col>
     </Row>
   )}
-  {get(mrkDocumentData, 'atts', []).length > 0 && <Row type="flex" gutter={[24, 48]}>
+  {get(mrkDocumentData, 'atts', []).length > 0 && <Row type="flex" gutter={[16, 16]}>
     <Col span={8}>
-      <Typography.Text strong ellipsis>{I18n.t('common.attachments')}</Typography.Text>
+      <Typography.Text ellipsis>{I18n.t('common.attachments')}</Typography.Text>
     </Col>
     <Col span={16}>
       {map(mrkDocumentData.atts, item => <Attachment attachment={item} key={item.id} />)}

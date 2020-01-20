@@ -1,7 +1,9 @@
 .wrapper {
   line-height: normal;
-  margin-bottom: 16px;
   display: flex;
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
   :global {
     .anticon-file {
       font-size: 36px;

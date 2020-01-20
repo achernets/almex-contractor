@@ -46,7 +46,9 @@
   },
   "MrkDocument": {
     "name": "Краткое содержание",
-    "send_answer": "Сформировать ответ"
+    "send_answer": "Сформировать ответ",
+    "show_chain": "Показать цепочку",
+    "hide_chain": "Спрятать цепочку"
   },
   "MrkDocumentType": {
     "DRAFT": "Черновики",

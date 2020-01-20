@@ -11,6 +11,7 @@ import { getMrkDocumentData, sendDocument, changeShowChain, changeChain, initSta
 import Information from './components/Information';
 import Chain from './components/Chain';
 import Loader from 'components/Loader';
+import Tooltip from 'components/Tooltip';
 import * as styles from './mrkDocument.module.scss';
 const MrkDocument = ({
   hideModal,
@@ -25,6 +26,7 @@ const MrkDocument = ({
   isFetchingSend,
   mrkDocument,
   showChain,
+  loadChainId,
   chain,
   activeChain
 }) => {
@@ -68,13 +70,19 @@ const MrkDocument = ({
       bodyStyle={{
         height: 'calc(100vh - 180px)',
         overflowY: 'auto',
-        padding: 24
+        padding: '12px 24px 12px 24px'
       }}
       className={styles.modal}
       maskClosable={false}
       title={<Row>
         <Col span={19}>
-          <Typography.Text strong ellipsis>{get(mrkDocumentData, 'document.groupNumber', mrkDocument.groupNumber) !== null && <Icon type="link" onClick={() => changeShowChain(!showChain)} />}{get(mrkDocumentData, 'document.name', mrkDocument.name)}</Typography.Text>
+          <Typography.Text strong ellipsis>
+            {get(mrkDocumentData, 'document.groupNumber', mrkDocument.groupNumber) !== null &&
+              <Tooltip title={I18n.t(showChain ? 'MrkDocument.hide_chain' : 'MrkDocument.show_chain')} placement="bottom">
+                <Icon type="link" onClick={() => changeShowChain(!showChain)} />
+              </Tooltip>}
+            {get(mrkDocumentData, 'document.name', mrkDocument.name)}
+          </Typography.Text>
         </Col>
         <Col span={5}>
           <Typography.Text>{moment(get(mrkDocumentData, 'document.createDate', mrkDocument.createDate)).format('DD.MM.YYYY HH:mm')}</Typography.Text>
@@ -86,7 +94,7 @@ const MrkDocument = ({
     >
       {isFetching && <Loader />}
       {!showChain && <Information mrkDocumentData={mrkDocumentData} />}
-      {showChain && <Chain activeChain={activeChain} chain={chain} changeChain={changeChain} />}
+      {showChain && <Chain activeChain={activeChain} chain={chain} changeChain={changeChain} loadChainId={loadChainId} />}
     </Modal>
   );
 
@@ -94,6 +102,7 @@ const MrkDocument = ({
 const mapStateToProps = state => ({
   mrkDocumentData: state.modal.mrkDocument.mrkDocumentData,
   showChain: state.modal.mrkDocument.showChain,
+  loadChainId: state.modal.mrkDocument.loadChainId,
   chain: state.modal.mrkDocument.chain,
   activeChain: state.modal.mrkDocument.activeChain,
   isFetching: state.modal.mrkDocument.isFetching,

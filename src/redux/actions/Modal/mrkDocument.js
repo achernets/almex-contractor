@@ -136,7 +136,10 @@ export const CHANGE_CHAIN_FAILURE = 'MODAL_MRK_DOCUMENT/CHANGE_CHAIN_FAILURE';
 
 export const changeChain = documentId => {
   return async (dispatch, getState, api) => {
-    dispatch({ type: CHANGE_CHAIN_REQUEST });
+    dispatch({
+      type: CHANGE_CHAIN_REQUEST,
+      payload: documentId
+    });
     try {
       const {
         auth: { token }

@@ -8,7 +8,7 @@ import { I18n } from 'react-redux-i18n';
 
 const Information = ({ mrkDocumentData }) => <>
   {get(mrkDocumentData, 'items', []).map(item =>
-    <Row key={item.id} type="flex" gutter={[24, 48]}>
+    <Row key={item.id} type="flex" gutter={[16, 16]}>
       <Col span={8}>
         <Typography.Text ellipsis>{item.oName}:</Typography.Text>
       </Col>

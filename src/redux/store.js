@@ -8,13 +8,20 @@ import * as api from 'api';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { syncTranslationWithStore } from 'react-redux-i18n';
 import { createBrowserHistory } from 'history';
+import { createLogger } from 'redux-logger';
 export const history = createBrowserHistory();
+
+const logger = createLogger({
+  duration: true,
+  collapsed: true
+});
 
 const create = () => {
   const middlewares = [
     thunk.withExtraArgument(api),
     routerMiddleware(history),
-    asyncInitialState.middleware(getInitialState)
+    asyncInitialState.middleware(getInitialState),
+    logger
   ];
   const enhancers = [composeWithDevTools(applyMiddleware(...middlewares))];
   let store = createStore(rootReducer(history), compose(...enhancers));

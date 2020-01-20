@@ -32,10 +32,23 @@
       .ant-timeline-item-head-blue {
         background: #1890ff;
       }
+      .anticon-caret-up,
+      .anticon-caret-down {
+        color: #1890ff;
+      }
     }
-    .ant-timeline-item-content {
-      > div {
-        cursor: pointer;
+    .ant-timeline-item {
+      padding: 0;
+    }
+  }
+}
+.timeline_item_title {
+  cursor: pointer;
+  :global {
+    .anticon-caret-up,
+    .anticon-caret-down {
+      &:hover {
+        color: #1890ff;
       }
     }
   }

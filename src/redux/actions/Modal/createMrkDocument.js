@@ -1,5 +1,6 @@
 import { NotificationError } from 'utils/helpers';
 import { getMrkDocuments } from 'redux/actions/mrkDocuments';
+import { updateMrkDocumentData } from 'redux/actions/Modal/mrkDocument';
 import { actions } from 'react-redux-modals';
 import { notification } from 'antd';
 import { I18n } from 'react-redux-i18n';
@@ -116,9 +117,13 @@ export const createOrUpdateMrkDocument = (data, send = false, ecp = false) => {
         type: CREATE_OR_UPDATE_MRK_DOCUMENT_SUCCESS,
         payload: result
       });
-      if (send) dispatch(sendDocument());
+      if (send) {
+        dispatch(sendDocument());
+      } else {
+        dispatch(getMrkDocuments());
+      }
       dispatch(actions.hideModal('MODAL_CREATE_MRK_DOCUMENT'));
-      dispatch(getMrkDocuments());
+      dispatch(updateMrkDocumentData());
     } catch (error) {
       NotificationError(error, 'createOrUpdateMrkDocument');
       dispatch({ type: CREATE_OR_UPDATE_MRK_DOCUMENT_FAILURE });

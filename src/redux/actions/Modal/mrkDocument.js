@@ -3,6 +3,7 @@ import { getMrkDocuments } from 'redux/actions/mrkDocuments';
 import { actions } from 'react-redux-modals';
 import { notification } from 'antd';
 import { I18n } from 'react-redux-i18n';
+import { get } from 'lodash';
 
 export const GET_MRK_DOCUMENT_REQUEST = 'MODAL_MRK_DOCUMENT/GET_MRK_DOCUMENT_REQUEST';
 export const GET_MRK_DOCUMENT_SUCCESS = 'MODAL_MRK_DOCUMENT/GET_MRK_DOCUMENT_SUCCESS';
@@ -33,9 +34,12 @@ export const getMrkDocumentData = documentId => {
 export const updateMrkDocumentData = documentId => {
   return (dispatch, getState) => {
     const {
-      modal: { mrkDocument: { mrkDocumentData: { document: { id } } } }
+      modal: { mrkDocument: { mrkDocumentData, showChain, activeChain } }
     } = getState();
-    if (id === documentId) dispatch(getMrkDocumentData(documentId));
+    if (get(mrkDocumentData, 'document.id', null) !== null) {
+      dispatch(getMrkDocumentData(mrkDocumentData.document.id));
+      if (showChain) dispatch(getChainDocuments(activeChain));
+    }
   };
 };
 
@@ -89,7 +93,7 @@ export const GET_CHAIN_REQUEST = 'MODAL_MRK_DOCUMENT/GET_CHAIN_REQUEST';
 export const GET_CHAIN_SUCCESS = 'MODAL_MRK_DOCUMENT/GET_CHAIN_SUCCESS';
 export const GET_CHAIN_FAILURE = 'MODAL_MRK_DOCUMENT/GET_CHAIN_FAILURE';
 
-export const getChainDocuments = () => {
+export const getChainDocuments = (activeChain) => {
   return async (dispatch, getState, api) => {
     dispatch({ type: GET_CHAIN_REQUEST });
     try {
@@ -116,7 +120,7 @@ export const getChainDocuments = () => {
         type: GET_CHAIN_SUCCESS,
         payload: {
           ...result,
-          activeChain: mrkDocumentData
+          activeChain: activeChain ? activeChain : mrkDocumentData
         }
       });
     } catch (error) {
@@ -137,7 +141,7 @@ export const changeChain = documentId => {
       const {
         auth: { token }
       } = getState();
-      const result = await api.MrkClientServiceClient.getMrkDocumentData(
+      const result = documentId === null ? null : await api.MrkClientServiceClient.getMrkDocumentData(
         token,
         documentId
       );

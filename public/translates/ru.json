@@ -76,7 +76,8 @@
     "contacts": "Контакты",
     "contacts_email": "Контактный email",
     "contacts_phone": "Контактный телефон",
-    "inn": "ИНН"
+    "inn": "ИНН",
+    "login": "Логин"
   },
   "MrkOrganization": {
     "name": "Название компании",

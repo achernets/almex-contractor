@@ -1,3 +1,4 @@
+@import "styles/general.scss";
 .avatart {
   color: "#f56a00";
   background-color: "#fde3cf";
@@ -5,7 +6,7 @@
 .text {
   margin-left: 8px;
   &:hover {
-    color: #1890ff;
+    color: $blue;
   }
 }
 .line {

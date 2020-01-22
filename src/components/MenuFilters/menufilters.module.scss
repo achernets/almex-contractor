@@ -1,12 +1,13 @@
+@import "styles/general.scss";
 .menu {
   :global {
     .ant-typography {
       cursor: pointer;
       &:hover {
-        color: #1890ff;
+        color: $blue;
       }
       &.active {
-        color: #1890ff;
+        color: $blue;
       }
     }
   }

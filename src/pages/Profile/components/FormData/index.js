@@ -42,7 +42,7 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
         changeAccountInfo(values);
       }}
     >
-      {({ setValues, values }) =>
+      {({ setValues, values }) => (
         <Form layout={'horizontal'} className={styles.form}>
           <Row type="flex" align="middle" justify="center" gutter={[16, 16]}>
             {organization === null && <Col span={24}>
@@ -60,9 +60,10 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
               <Typography.Text strong>{I18n.t(values.useOrganization ? 'Profile.info_legal_entity' : 'Profile.info_basic')}</Typography.Text>
             </Col>
             <Col span={24}>
-              {values.organization !== null ? <>
-                <Organization formItemProps={formItemProps} />
-              </> : <Client prefix="clientList.0." formItemProps={formItemProps} />}
+              {values.organization !== null ?
+                <Organization formItemProps={formItemProps} /> :
+                <Client prefix="clientList.0." formItemProps={formItemProps} />
+              }
             </Col>
             <Col span={24}>
               <Row type="flex" justify="space-between" align="middle">
@@ -79,8 +80,8 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
               </Row>
             </Col>
           </Row>
-        </Form>
-      };
+        </Form>)
+      }
     </Formik>}
   </div>;
 };

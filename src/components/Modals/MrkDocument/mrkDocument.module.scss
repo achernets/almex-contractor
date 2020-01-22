@@ -1,3 +1,4 @@
+@import "styles/general.scss";
 .modal {
   :global {
     .ant-modal-header {
@@ -7,7 +8,7 @@
         padding-top: 16px;
         font-size: 14px;
         .anticon-link {
-          color: #1890ff;
+          color: $blue;
           margin-right: 8px;
           cursor: pointer;
         }
@@ -30,7 +31,7 @@
   :global {
     .active {
       .ant-timeline-item-head-blue {
-        background: #1890ff;
+        background: $blue;
       }
     }
     .ant-timeline-item {
@@ -44,7 +45,7 @@
     .anticon-caret-up,
     .anticon-caret-down {
       padding-left: 4px;
-      color: #1890ff;
+      color: $blue;
     }
   }
 }

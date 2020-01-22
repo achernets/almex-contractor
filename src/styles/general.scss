@@ -1,0 +1,23 @@
+$blue: #1890ff;
+
+@mixin icon-remove {
+  :global {
+    .remove {
+      display: none;
+      position: absolute;
+      right: -7px;
+      top: -7px;
+      cursor: pointer;
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
+  &:hover {
+    :global {
+      .remove {
+        display: block;
+      }
+    }
+  }
+}

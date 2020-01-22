@@ -2,13 +2,20 @@ import React from 'react';
 import { Form, Input, DatePicker } from 'formik-antd';
 import { FieldArray, useFormikContext } from 'formik';
 import { I18n } from 'react-redux-i18n';
-import { Button, Row, Col, Form as AForm } from 'antd';
+import { Button, Row, Col, Form as AForm, Icon } from 'antd';
 import { map, get } from 'lodash';
 import moment from 'moment';
+import * as styles from './profile.module.scss';
 
 const Client = ({ formItemProps, prefix = '' }) => {
   const { values, setFieldValue } = useFormikContext();
   return <>
+    <Form.Item name={`${prefix}login`}
+      {...formItemProps}
+      label={I18n.t('MrkClient.login')}
+    >
+      <Input name={`${prefix}login`} placeholder={I18n.t('form.enter_value')} size={'large'} />
+    </Form.Item>
     <Form.Item name={`${prefix}lastName`}
       {...formItemProps}
       label={I18n.t('MrkClient.lastName')}
@@ -56,8 +63,9 @@ const Client = ({ formItemProps, prefix = '' }) => {
         >
           <Row gutter={[0, 24]}>
             {map(get(values, `${prefix}contacts`, []), (item, index) =>
-              item.cType === MrkContactType.EMAIL ? <Col key={index}>
+              item.cType === MrkContactType.EMAIL ? <Col key={index} className={styles.contact_info}>
                 <Input name={`${prefix}contacts.${index}.cValue`} placeholder={I18n.t('form.enter_value')} size={'large'} />
+                <Icon type="close-circle" className="remove" onClick={() => arrayHelpers.remove(index)} />
               </Col> : null
             )}
             <Col>
@@ -79,8 +87,9 @@ const Client = ({ formItemProps, prefix = '' }) => {
         >
           <Row gutter={[0, 16]}>
             {map(get(values, `${prefix}contacts`, []), (item, index) =>
-              item.cType === MrkContactType.PHONE ? <Col key={index}>
+              item.cType === MrkContactType.PHONE ? <Col key={index} className={styles.contact_info}>
                 <Input name={`${prefix}contacts.${index}.cValue`} placeholder={I18n.t('form.enter_value')} size={'large'} />
+                <Icon type="close-circle" className="remove" onClick={() => arrayHelpers.remove(index)} />
               </Col> : null
             )}
             <Col>

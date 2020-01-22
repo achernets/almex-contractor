@@ -8,10 +8,15 @@
     "add_file": "Добавить файл",
     "true": "Да",
     "false": "Нет",
-    "close": "Закрыть"
+    "close": "Закрыть",
+    "add_more": "Добавить еще",
+    "reset": "Сбросить",
+    "save_changes": "Сохранить"
   },
   "form": {
-    "required": "Обязательное для заполнения"
+    "required": "Обязательное для заполнения",
+    "enter_value": "Введите значение",
+    "select_date": "Укажите дату"
   },
   "notification": {
     "sendDocument_title": "Ваше письмо отправлено"
@@ -46,7 +51,9 @@
   },
   "MrkDocument": {
     "name": "Краткое содержание",
-    "send_answer": "Сформировать ответ"
+    "send_answer": "Сформировать ответ",
+    "show_chain": "Показать цепочку",
+    "hide_chain": "Спрятать цепочку"
   },
   "MrkDocumentType": {
     "DRAFT": "Черновики",
@@ -59,5 +66,31 @@
     "send_doc_ecp": "Отправить с ЭЦП",
     "send_doc": "Отправить",
     "send_in_draft": "В черновики"
+  },
+  "MrkClient": {
+    "lastName": "Фамилия",
+    "firstName": "Имя",
+    "middleName": "Отчество",
+    "position": "Должность",
+    "birthDate": "Дата рождения",
+    "contacts": "Контакты",
+    "contacts_email": "Контактный email",
+    "contacts_phone": "Контактный телефон",
+    "inn": "ИНН"
+  },
+  "MrkOrganization": {
+    "name": "Название компании",
+    "adress": "Почтовый адрес",
+    "edrpo": "ЕГРПОУ"
+  },
+  "Profile": {
+    "title": "Информация",
+    "type_account": "Тип аккаунта",
+    "legal_entity": "Юридическое лицо",
+    "info_legal_entity": "Информация о Юр. Лице",
+    "info_basic": "Основная информация",
+    "add_user": "Добавить сотрудника",
+    "select_chief": "Назначить главным",
+    "client": " Сотрудник"
   }
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { SubLayout, HeaderLogo } from 'components/LayoutApp';
-import ListDocumentPatterns from 'components/Modals/CreateMrkDocument/components/ListDocumentPatterns';
+import FormData from './components/FormData';
 const Profile = () => <>
   <HeaderLogo />
   <SubLayout>
-    <ListDocumentPatterns />
+    <FormData />
   </SubLayout>
 </>;
 

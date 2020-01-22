@@ -45,7 +45,12 @@
       "MrkDocumentType": true,
       "MrkDocumentData": true,
       "MrkDocument": true,
-      "ContentItemType": true
+      "ContentItemType": true,
+      "MrkOrganization": true,
+      "MrkContactType": true,
+      "MrkContactInfo": true,
+      "MrkClient": true,
+      "MrkAccount": true
     },
     "rules": {
       "react-hooks/exhaustive-deps": "off",

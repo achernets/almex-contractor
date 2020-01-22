@@ -4,5 +4,6 @@
     "THRIFT": {
         "URL": "https://dev.almexecm.com:8443",
         "API": "almex-mrk-server"
-    }
+    },
+    "MAX_CLIENTS_ORGANIZATION": 5
 }

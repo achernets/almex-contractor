@@ -6,6 +6,7 @@ import { i18nReducer } from 'react-redux-i18n';
 import auth from './auth';
 import mrkDocuments from './mrkDocuments';
 import settings from './settings';
+import profile from './profile';
 import modal from './Modal';
 export default history =>
   asyncInitialState.outerReducer(
@@ -17,6 +18,7 @@ export default history =>
       modal,
       auth,
       mrkDocuments,
-      settings
+      settings,
+      profile
     })
   );

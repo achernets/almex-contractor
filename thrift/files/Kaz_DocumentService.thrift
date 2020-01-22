@@ -47,6 +47,8 @@ struct AccessRule {
   6: optional list<common.UserOrGroup> allowList;
   /** Перечень ролей для которых переход доступен, работает в паре с forRole */
   7: optional set<string> allowRole;
+  /** Доступность всем кто видит документ */
+  8: bool forAllDocView;
 }
 
 /** Действие которое необходимо выполнить при переходе на след этап с вложениями */
@@ -1775,6 +1777,8 @@ service DocumentService {
    Document updateDocument(1: common.AuthTokenBase64 token, 2: Document document, 3: DocumentAccessPolicy accessPolicy, 4: list<common.UserOrGroup> addedResponsibles, 5: list<common.UserOrGroup> removedResponsibles, 6: list<common.ID> addedSecurityClassificationIds, 7: list<common.ID> removedSecurityClassificationIds) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /* Создание документа */
   Document createDocument(1: common.AuthTokenBase64 token, 2: Document document, 3: list<common.UserOrGroup> users, 4: list<ContentHolderLink> holderLinks, 5: set<common.ID> securityClassificationsId, 6: list<AttCreateInfo> attachments, 7: list<DocumentRelation> docRelations) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  /** Создание документа из xml черновика*/
+  Document createDocumentFromXML(1:common.AuthTokenBase64 token, 2:binary xmlDoc) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Получение документа по идентификатору */
   Document getDocument(1: common.AuthTokenBase64 token, 2: common.ID documentId, 3:DocumentAccessPolicy accessPolicy, 4: bool decrypt, 5: i32 executorsPortion) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Список всех документов.

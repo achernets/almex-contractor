@@ -36,6 +36,7 @@ struct MrkClient {
   9: list<MrkContactInfo> contacts;
   10: string inn;
   11: i64 birthDate;
+  12: bool chief;
 }
 
 struct MrkOrganization {
@@ -49,11 +50,12 @@ struct MrkOrganization {
 
 struct MrkAccount {
   1: string id;
-  2: MrkClient cl;
+  2: list<MrkClient> clientList;
   3: MrkOrganization organization;
   4: bool confirmed;
   5: bool contragent;
   6: bool blocked;
+  7: bool signed;
  }
 
 struct MrkClientSession {
@@ -172,8 +174,9 @@ service MrkClientService {
   MrkClientSession authMrkClient(1: string login; 2: string password, 3: string ip, 4: string langCode, 5: i32 cacheVersion) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkClientSession refreshMrkClientSession(1: common.AuthTokenBase64 token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);MrkAccount registration(1:MrkClient cl, 2: string password, 3:MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   bool changePassword(1: string token, 2: string oldPassword, 3: string password, 4: string confirmation) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  MrkAccount convert(1: string token, 2: MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);//из фил лица в юр лицо
-  list<MrkClient> changeClientInfo(1: string token, 2:MrkClient cl, 3:MrkOrganization organization) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+
+  MrkAccount getFullAccountInfo(1: string token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  MrkAccount changeAccountInfo(1: string token, 2:MrkAccount mrkAccount) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   string getProfileInfoForSing(1: string token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   bool signProfile(1: common.AuthTokenBase64 token, 2: string signature, 3: string publicKey) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
@@ -187,7 +190,7 @@ service MrkClientService {
   MrkDocumentData getMrkDocumentData(1: string token, 2: string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData createOrUpdateMrkDocument(1: string token, 2: MrkDocumentData document) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   string getDocumentInfoForSing(1: string token, 2: string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  MrkDocumentData sendDocument(1: string token, 2: string documentId, 3: string signature, 4: string publicKey) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  MrkDocumentData sendDocument(1: string token, 2: string documentId, 3: string signature, 4: map<string, string> attachmentSignature, 5: string publicKey) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
   MrkAttachment getMrkAttachmentById(1: string token, 2: string attachmentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   list<MrkAttachment> getAllMrkAttachments(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);

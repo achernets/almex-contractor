@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Form, Input, Checkbox } from 'formik-antd';
 import { Button, Row, Form as AForm, Icon } from 'antd';
 import { I18n } from 'react-redux-i18n';
 import { useFormikContext, FieldArray } from 'formik';
 import { get } from 'lodash';
-import Client from './client';
-import * as styles from './profile.module.scss';
+import Client from '../Client';
+import { mrkClient } from 'utils/structures';
+import * as styles from '../styles.module.scss';
 
 const Organization = ({ formItemProps, MAX_CLIENTS_ORGANIZATION }) => {
   const { values, setFieldValue, setValues } = useFormikContext();
@@ -45,7 +45,7 @@ const Organization = ({ formItemProps, MAX_CLIENTS_ORGANIZATION }) => {
                 if (e.target.checked) {
                   setValues({
                     ...values, clientList: get(values, 'clientList', []).map((item, idx) => {
-                      return new MrkClient({
+                      return mrkClient({
                         ...item,
                         chief: index === idx
                       });
@@ -54,7 +54,7 @@ const Organization = ({ formItemProps, MAX_CLIENTS_ORGANIZATION }) => {
                 } else {
                   setValues({
                     ...values, clientList: get(values, 'clientList', []).map((item, idx) => {
-                      return new MrkClient({
+                      return mrkClient({
                         ...item,
                         chief: idx === 0
                       });
@@ -68,20 +68,10 @@ const Organization = ({ formItemProps, MAX_CLIENTS_ORGANIZATION }) => {
           {get(values, 'clientList', []).length > 1 && <Icon type="close-circle" onClick={() => {
             if (get(values, `clientList.${index}.chief`, false)) setFieldValue('clientList.0.chief', true);
             arrayHelpers.remove(index);
-          }} className="remove" />}
+          }} className={styles.remove} />}
         </div>)}
         {MAX_CLIENTS_ORGANIZATION > get(values, 'clientList', []).length && <Row type="flex" align="middle" justify="center">
-          <Button icon="plus" type="ghost" onClick={() => arrayHelpers.push(new MrkClient({
-            chief: false,
-            birthDate: -1,
-            contacts: [new MrkContactInfo({
-              cType: MrkContactType.EMAIL,
-              cValue: ''
-            }), new MrkContactInfo({
-              cType: MrkContactType.PHONE,
-              cValue: ''
-            })]
-          }))}>{I18n.t('Profile.add_user')}</Button>
+          <Button icon="plus" type="ghost" onClick={() => arrayHelpers.push(mrkClient())}>{I18n.t('Profile.add_user')}</Button>
         </Row>}
       </>
       )}
@@ -89,8 +79,4 @@ const Organization = ({ formItemProps, MAX_CLIENTS_ORGANIZATION }) => {
   </>;
 };
 
-
-const mapStateToProps = state => ({
-  MAX_CLIENTS_ORGANIZATION: state.settings.MAX_CLIENTS_ORGANIZATION
-});
-export default connect(mapStateToProps)(Organization);
+export default Organization;

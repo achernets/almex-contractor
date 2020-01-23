@@ -3,12 +3,13 @@ import { Form, Input, DatePicker } from 'formik-antd';
 import { FieldArray, useFormikContext } from 'formik';
 import { I18n } from 'react-redux-i18n';
 import { Button, Row, Col, Form as AForm, Icon } from 'antd';
-import { map, get } from 'lodash';
+import { map, get, filter } from 'lodash';
 import moment from 'moment';
-import * as styles from './profile.module.scss';
+import { mrkContactInfo } from 'utils/structures';
+import * as styles from '../styles.module.scss';
 
 const Client = ({ formItemProps, prefix = '' }) => {
-  const { values, setFieldValue } = useFormikContext();
+  const { values, setFieldValue, errors, submitCount } = useFormikContext();
   return <>
     <Form.Item name={`${prefix}login`}
       {...formItemProps}
@@ -51,7 +52,7 @@ const Client = ({ formItemProps, prefix = '' }) => {
         format={'DD.MM.YYYY'}
         showTime={false}
         value={get(values, `${prefix}birthDate`, -1) === -1 || get(values, `${prefix}birthDate`, -1) === null ? null : moment(get(values, `${prefix}birthDate`, -1), 'x')}
-        onChange={(e) => setFieldValue(`${prefix}birthDate`, e === null ? null : e.format('x'))}
+        onChange={(e) => setFieldValue(`${prefix}birthDate`, e === null ? null : Number(e.format('x')))}
       />
     </Form.Item>
     <FieldArray
@@ -61,17 +62,20 @@ const Client = ({ formItemProps, prefix = '' }) => {
           {...formItemProps}
           label={I18n.t('MrkClient.contacts_email')}
         >
-          <Row gutter={[0, 24]}>
+          <Row>
             {map(get(values, `${prefix}contacts`, []), (item, index) =>
               item.cType === MrkContactType.EMAIL ? <Col key={index} className={styles.contact_info}>
-                <Input name={`${prefix}contacts.${index}.cValue`} placeholder={I18n.t('form.enter_value')} size={'large'} />
-                <Icon type="close-circle" className="remove" onClick={() => arrayHelpers.remove(index)} />
+                <Form.Item name={`${prefix}contacts.${index}.cValue`}>
+                  <Input name={`${prefix}contacts.${index}.cValue`} placeholder={I18n.t('form.enter_value')} size={'large'} />
+                </Form.Item>
+                <Icon type="close-circle" className={styles.remove} onClick={() => arrayHelpers.remove(index)} />
               </Col> : null
             )}
             <Col>
-              <Button icon="plus" type="ghost" onClick={() => arrayHelpers.push(new MrkContactInfo({
-                cType: MrkContactType.EMAIL,
-                cValue: ''
+              <Button icon="plus" type={submitCount > 0 && get(errors, `${prefix}contacts`, false) && filter(get(values, `${prefix}contacts`, []), {
+                cType: MrkContactType.EMAIL
+              }).length === 0 ? 'danger' : 'ghost'} onClick={() => arrayHelpers.push(mrkContactInfo({
+                cType: MrkContactType.EMAIL
               }))}>{I18n.t('common.add_more')}</Button>
             </Col>
           </Row>
@@ -85,17 +89,20 @@ const Client = ({ formItemProps, prefix = '' }) => {
           {...formItemProps}
           label={I18n.t('MrkClient.contacts_phone')}
         >
-          <Row gutter={[0, 16]}>
+          <Row>
             {map(get(values, `${prefix}contacts`, []), (item, index) =>
               item.cType === MrkContactType.PHONE ? <Col key={index} className={styles.contact_info}>
-                <Input name={`${prefix}contacts.${index}.cValue`} placeholder={I18n.t('form.enter_value')} size={'large'} />
-                <Icon type="close-circle" className="remove" onClick={() => arrayHelpers.remove(index)} />
+                <Form.Item name={`${prefix}contacts.${index}.cValue`}>
+                  <Input name={`${prefix}contacts.${index}.cValue`} placeholder={I18n.t('form.enter_value')} size={'large'} />
+                </Form.Item>
+                <Icon type="close-circle" className={styles.remove} onClick={() => arrayHelpers.remove(index)} />
               </Col> : null
             )}
             <Col>
-              <Button icon="plus" type="ghost" onClick={() => arrayHelpers.push(new MrkContactInfo({
-                cType: MrkContactType.PHONE,
-                cValue: ''
+              <Button icon="plus" type={submitCount > 0 && get(errors, `${prefix}contacts`, false) && filter(get(values, `${prefix}contacts`, []), {
+                cType: MrkContactType.PHONE
+              }).length === 0 ? 'danger' : 'ghost'} onClick={() => arrayHelpers.push(mrkContactInfo({
+                cType: MrkContactType.PHONE
               }))}>{I18n.t('common.add_more')}</Button>
             </Col>
           </Row>

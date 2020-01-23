@@ -18,6 +18,9 @@
   max-width: calc(100% - 37px);
   min-width: 150px;
   position: relative;
+  @include icon-remove-hover;
+}
+.remove {
   @include icon-remove;
 }
 .desc {

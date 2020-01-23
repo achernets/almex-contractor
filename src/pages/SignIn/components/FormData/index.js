@@ -52,6 +52,7 @@ const FormData = ({ login, token, isFetching }) => {
               block
               size={'large'}
               htmlType="button"
+              href={'/signUp'}
             >
               {I18n.t('SignIn.sign_up')}
             </Button>

@@ -1,0 +1,14 @@
+@import "styles/general.scss";
+.organization {
+  position: relative;
+  @include icon-remove-hover;
+}
+
+.contact_info {
+  position: relative;
+  @include icon-remove-hover;
+}
+
+.remove {
+  @include icon-remove;
+}

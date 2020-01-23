@@ -19,7 +19,11 @@
     "select_date": "Укажите дату"
   },
   "notification": {
-    "sendDocument_title": "Ваше письмо отправлено"
+    "sendDocument_title": "Ваше письмо отправлено",
+    "registration_message": "Вы успешно зарегистрировались",
+    "registration_description": "Необходимо подтвердить ваш электронный ящик",
+    "profile_update_message": "Успешное обновление профиля",
+    "profile_update_description": "Все изменения вступят в силу после выхода из системы"
   },
   "SignIn": {
     "locale_not_found": "Файл не найден",
@@ -93,5 +97,9 @@
     "add_user": "Добавить сотрудника",
     "select_chief": "Назначить главным",
     "client": " Сотрудник"
+  },
+  "SignUp": {
+    "title": "Регистрация",
+    "registration": "Зарегистрироваться"
   }
 }

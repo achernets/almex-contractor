@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignIn from 'pages/SignIn';
+import SignUp from 'pages/SignUp';
 import MrkDocuments from 'pages/MrkDocuments';
 import Profile from 'pages/Profile';
 import Loader from 'components/Loader';
@@ -19,6 +20,7 @@ const App = ({ loading, error }) => {
         <ConfigProvider locale={getAntdLocale()}>
           <Switch>
             <Route exact path="/signIn" component={SignIn} />
+            <Route exact path="/SignUp" component={SignUp} />
             <LayoutApp>
               <Switch>
                 <PrivateRoute exact path="/mrkDocuments" component={MrkDocuments} />

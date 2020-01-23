@@ -6,15 +6,14 @@ import { I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getFullAccountInfo, changeAccountInfo } from 'redux/actions/profile';
-import Client from './client';
+import { Client, Organization } from 'components/FormData';
 import { get } from 'lodash';
-import Organization from './organization';
 import Loader from 'components/Loader';
+import { MrkClientSchema, MrkOrganizationSchema } from 'constants/schema';
 import * as styles from './profile.module.scss';
+import * as Yup from 'yup';
 
-//import * as Yup from 'yup';
-
-const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetching, isSaving }) => {
+const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetching, isSaving, MAX_CLIENTS_ORGANIZATION }) => {
   useEffect(() => {
     getFullAccountInfo();
   }, []);
@@ -34,10 +33,13 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
         ...mrkAccount,
         useOrganization: organization !== null
       }}
-      // validationSchema={Yup.object().shape({
-      //   login: Yup.string().required(I18n.t('form.required')),
-      //   password: Yup.string().required(I18n.t('form.required'))
-      // })}
+      validationSchema={Yup.object().shape({
+        organization: Yup.object().nullable().when('useOrganization', {
+          is: true,
+          then: MrkOrganizationSchema()
+        }),
+        clientList: Yup.array().min(1).max(MAX_CLIENTS_ORGANIZATION).of(MrkClientSchema())
+      })}
       onSubmit={async (values) => {
         changeAccountInfo(values);
       }}
@@ -61,7 +63,7 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
             </Col>
             <Col span={24}>
               {values.organization !== null ?
-                <Organization formItemProps={formItemProps} /> :
+                <Organization formItemProps={formItemProps} MAX_CLIENTS_ORGANIZATION={MAX_CLIENTS_ORGANIZATION} /> :
                 <Client prefix="clientList.0." formItemProps={formItemProps} />
               }
             </Col>
@@ -89,7 +91,8 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
 const mapStateToProps = state => ({
   mrkAccount: state.profile.mrkAccount,
   isFetching: state.profile.isFetching,
-  isSaving: state.profile.isSaving
+  isSaving: state.profile.isSaving,
+  MAX_CLIENTS_ORGANIZATION: state.settings.MAX_CLIENTS_ORGANIZATION
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

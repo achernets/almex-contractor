@@ -10,7 +10,7 @@ const Attachment = ({ attachment, removeAttachment = null }) => <div className={
   <div className={styles.info}>
     <Typography.Text ellipsis>{attachment.fileName}</Typography.Text>
     <Typography.Text ellipsis className={styles.desc}>{getFio(attachment.creator)}/{moment(attachment.createDate).format('DD.MM.YYYY HH:mm')}</Typography.Text>
-    {removeAttachment !== null && <Icon type="close-circle" onClick={removeAttachment} className="remove" />}
+    {removeAttachment !== null && <Icon type="close-circle" onClick={removeAttachment} className={styles.remove} />}
   </div>
 </div>;
 

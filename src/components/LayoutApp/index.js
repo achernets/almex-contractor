@@ -20,17 +20,17 @@ const SubLayout = ({ children }) => <Layout className={styles.layuot_sub}>
 
 const Header = ({ children, className }) => <Layout.Header className={classnames(className, styles.header)}>{children}</Layout.Header>;
 
-const HeaderLogo = ({ children, className }) =>
+const HeaderLogo = ({ children, className, enableMenu = true }) =>
   <Layout.Header className={classnames(className, styles.header)}>
     <Row type="flex" justify="space-between" align="middle">
       <Col span={12}>
         <Link to="/mrkDocuments"><img src={LOGO} alt="logo" /></Link>
       </Col>
-      <Col span={12}>
+      {enableMenu && <Col span={12}>
         <Row type="flex" justify="end" align="middle" gutter={[16, 0]}>
           <UserMenu />
         </Row>
-      </Col>
+      </Col>}
     </Row>
     {children}
   </Layout.Header>;

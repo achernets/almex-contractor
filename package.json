@@ -7,6 +7,7 @@
     "connected-react-router": "^6.6.1",
     "formik": "^2.1.1",
     "formik-antd": "^1.7.1",
+    "jsrsasign": "^8.0.12",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "react": "^16.12.0",

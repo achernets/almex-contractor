@@ -21,7 +21,8 @@ const CreateMrkDocument = ({ hideModal,
   mrkDocumentData,
   prepareDocumentByPattern,
   createOrUpdateMrkDocument,
-  initState
+  initState,
+  showModal
 }) => {
   useEffect(() => {
     return () => initState();
@@ -31,7 +32,7 @@ const CreateMrkDocument = ({ hideModal,
       enableReinitialize={true}
       initialValues={{
         ...mrkDocumentData,
-        ECP: false,
+        certificate: null,
         send: false,
         attachments: get(mrkDocumentData, 'atts', []).map(item => Object.assign({
           attachment: item,
@@ -43,7 +44,7 @@ const CreateMrkDocument = ({ hideModal,
           ...values,
           atts: values.attachments.map(item => item.attachment)
         });
-        createOrUpdateMrkDocument(data, values.send, values.ECP);
+        createOrUpdateMrkDocument(data, values.send, values.certificate);
       }}
     >{({ handleSubmit, values, setValues }) => {
       return (
@@ -60,17 +61,19 @@ const CreateMrkDocument = ({ hideModal,
           title={I18n.t('CreateMrkDocument.title')}
           onCancel={() => hideModal('MODAL_CREATE_MRK_DOCUMENT')}
           footer={step === 2 ? [
-            <Button icon="lock" key="id" type="primary" loading={isFetching} onClick={(e) => {
-              setValues({
-                ...values, ECP: true, send: true
-              });
-              handleSubmit(e);
-            }}>
+            <Button icon="lock" key="id" type="primary" loading={isFetching}
+              onClick={() => showModal('MODAL_FILE_SIGN', {
+                submitModal: async (result) => {
+                  setValues({ ...values, certificate: result, send: true });
+                  handleSubmit();
+                }
+              })}
+            >
               {I18n.t('CreateMrkDocument.send_doc_ecp')}
             </Button>,
             <Button key="back" loading={isFetching} onClick={(e) => {
               setValues({
-                ...values, ECP: false, send: true
+                ...values, certificate: null, send: true
               });
               handleSubmit(e);
             }}>
@@ -78,7 +81,7 @@ const CreateMrkDocument = ({ hideModal,
             </Button>,
             <Button key="submit" loading={isFetching} onClick={(e) => {
               setValues({
-                ...values, ECP: false, send: false
+                ...values, certificate: null, send: false
               });
               handleSubmit(e);
             }}>
@@ -111,6 +114,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       hideModal: actions.hideModal,
+      showModal: actions.showModal,
       prepareDocumentByPattern,
       createOrUpdateMrkDocument,
       initState

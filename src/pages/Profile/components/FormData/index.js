@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+import { actions } from 'react-redux-modals';
 import { Form, Checkbox } from 'formik-antd';
 import { Formik } from 'formik';
-import { Button, Typography, Row, Col } from 'antd';
+import { Button, Typography, Row, Col, Form as AForm } from 'antd';
 import { I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getFullAccountInfo, changeAccountInfo } from 'redux/actions/profile';
+import { getFullAccountInfo, changeAccountInfo, signProfile } from 'redux/actions/profile';
 import { Client, Organization } from 'components/FormData';
 import { get } from 'lodash';
 import Loader from 'components/Loader';
@@ -13,7 +14,7 @@ import { MrkClientSchema, MrkOrganizationSchema } from 'constants/schema';
 import * as styles from './profile.module.scss';
 import * as Yup from 'yup';
 
-const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetching, isSaving, MAX_CLIENTS_ORGANIZATION }) => {
+const FormData = ({ getFullAccountInfo, changeAccountInfo, signProfile, showModal, mrkAccount, isFetching, isSaving, MAX_CLIENTS_ORGANIZATION }) => {
   useEffect(() => {
     getFullAccountInfo();
   }, []);
@@ -31,7 +32,8 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
       enableReinitialize={true}
       initialValues={{
         ...mrkAccount,
-        useOrganization: organization !== null
+        useOrganization: organization !== null,
+        certificate: null
       }}
       validationSchema={Yup.object().shape({
         organization: Yup.object().nullable().when('useOrganization', {
@@ -44,7 +46,7 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
         changeAccountInfo(values);
       }}
     >
-      {({ setValues, values }) => (
+      {({ setValues, values, handleSubmit, dirty }) => (
         <Form layout={'horizontal'} className={styles.form}>
           <Row type="flex" align="middle" justify="center" gutter={[16, 16]}>
             {organization === null && <Col span={24}>
@@ -66,6 +68,27 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, mrkAccount, isFetchin
                 <Organization formItemProps={formItemProps} MAX_CLIENTS_ORGANIZATION={MAX_CLIENTS_ORGANIZATION} /> :
                 <Client prefix="clientList.0." formItemProps={formItemProps} />
               }
+            </Col>
+            <Col span={24}>
+              <AForm.Item
+                {...formItemProps}
+                label={I18n.t('Profile.verify_your_identity')}
+              >
+                <Button type="primary" htmlType="button" loading={isSaving}
+                  onClick={() => showModal('MODAL_FILE_SIGN', {
+                    submitModal: async (result) => {
+                      if (dirty) {
+                        setValues({ ...values, certificate: result });
+                        handleSubmit();
+                      } else {
+                        signProfile(result);
+                      }
+                    }
+                  })}
+                >
+                  {I18n.t(dirty ? 'common.save_changes_with_ecp' : 'common.confirm_with_ecp')}
+                </Button>
+              </AForm.Item>
             </Col>
             <Col span={24}>
               <Row type="flex" justify="space-between" align="middle">
@@ -98,7 +121,9 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getFullAccountInfo,
-      changeAccountInfo
+      changeAccountInfo,
+      signProfile,
+      showModal: actions.showModal
     },
     dispatch
   );

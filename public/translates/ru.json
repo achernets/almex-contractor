@@ -11,7 +11,14 @@
     "close": "Закрыть",
     "add_more": "Добавить еще",
     "reset": "Сбросить",
-    "save_changes": "Сохранить"
+    "save_changes": "Сохранить изменения",
+    "save_changes_with_ecp": "Сохранить изменения с ЭЦП",
+    "confirm_with_ecp": "Подтвердить с ЭЦП"
+  },
+  "errors": {
+    "UNKNOWN_ERROR": "Неизвестная ошибка",
+    "INVALID_PASSWORD": "Неверный пароль",
+    "FILE_NOT_SUPPORT": "Файл не поддерживается"
   },
   "form": {
     "required": "Обязательное для заполнения",
@@ -96,10 +103,16 @@
     "info_basic": "Основная информация",
     "add_user": "Добавить сотрудника",
     "select_chief": "Назначить главным",
-    "client": " Сотрудник"
+    "client": "Сотрудник",
+    "verify_your_identity": "Подтвердите свою личность"
   },
   "SignUp": {
     "title": "Регистрация",
     "registration": "Зарегистрироваться"
+  },
+  "GetFileSign": {
+    "title": "Подтвердить c ЭЦП",
+    "file": "Укажите файл ЭЦП",
+    "password": "Введите пароль"
   }
 }

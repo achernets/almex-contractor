@@ -3,6 +3,7 @@ import { getMrkDocuments } from 'redux/actions/mrkDocuments';
 import { updateMrkDocumentData } from 'redux/actions/Modal/mrkDocument';
 import { actions } from 'react-redux-modals';
 import { notification } from 'antd';
+import { singData } from 'utils/pkcs12';
 import { I18n } from 'react-redux-i18n';
 
 export const GET_DOCUMENT_PATTERNS_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCUMENT_PATTERNS_REQUEST';
@@ -102,7 +103,7 @@ export const CREATE_OR_UPDATE_MRK_DOCUMENT_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/
 export const CREATE_OR_UPDATE_MRK_DOCUMENT_SUCCESS = 'MODAL_CREATE_MRK_DOCUMENT/CREATE_OR_UPDATE_MRK_DOCUMENT_SUCCESS';
 export const CREATE_OR_UPDATE_MRK_DOCUMENT_FAILURE = 'MODAL_CREATE_MRK_DOCUMENT/CREATE_OR_UPDATE_MRK_DOCUMENT_FAILURE';
 
-export const createOrUpdateMrkDocument = (data, send = false, ecp = false) => {
+export const createOrUpdateMrkDocument = (data, send = false, certificate = null) => {
   return async (dispatch, getState, api) => {
     dispatch({ type: CREATE_OR_UPDATE_MRK_DOCUMENT_REQUEST });
     try {
@@ -118,7 +119,17 @@ export const createOrUpdateMrkDocument = (data, send = false, ecp = false) => {
         payload: result
       });
       if (send) {
-        dispatch(sendDocument());
+        let signature = null;
+        let attachmentSignature = null;
+        if (certificate !== null) {
+          const infoForSing = await api.MrkClientServiceClient.getDocumentInfoForSing(
+            token,
+            result.document.id
+          );
+          const signature = await singData(certificate, infoForSing);
+          await api.MrkClientServiceClient.signProfile(token, signature, certificate.publicKey);
+        }
+        dispatch(sendDocument(signature, attachmentSignature));
       } else {
         dispatch(getMrkDocuments());
       }
@@ -135,7 +146,7 @@ export const SEND_DOCUMENT_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_RE
 export const SEND_DOCUMENT_SUCCESS = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_SUCCESS';
 export const SEND_DOCUMENT_FAILURE = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_FAILURE';
 
-export const sendDocument = () => {
+export const sendDocument = (signature = null, attachmentSignature = null) => {
   return async (dispatch, getState, api) => {
     dispatch({ type: SEND_DOCUMENT_REQUEST });
     try {
@@ -144,7 +155,7 @@ export const sendDocument = () => {
         mrkDocuments: { page, mrkDocuments },
         modal: { createMrkDocument: { mrkDocumentData: { document: { id } } } }
       } = getState();
-      const result = await api.MrkClientServiceClient.sendDocument(token, id);
+      const result = await api.MrkClientServiceClient.sendDocument(token, id, signature, attachmentSignature);
       dispatch({
         type: SEND_DOCUMENT_SUCCESS,
         payload: result

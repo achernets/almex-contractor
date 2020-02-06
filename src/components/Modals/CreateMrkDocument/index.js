@@ -11,6 +11,7 @@ import FormData from './components/FormData';
 import { Modal } from 'components/Modals';
 import { initState, prepareDocumentByPattern, createOrUpdateMrkDocument } from 'redux/actions/Modal/createMrkDocument';
 import Loader from 'components/Loader';
+import * as Yup from 'yup';
 
 const CreateMrkDocument = ({ hideModal,
   parentId,
@@ -30,6 +31,11 @@ const CreateMrkDocument = ({ hideModal,
   return (
     <Formik
       enableReinitialize={true}
+      validationSchema={Yup.object({
+        document: Yup.object({
+          name: Yup.string().required(I18n.t('form.required'))
+        })
+      })}
       initialValues={{
         ...mrkDocumentData,
         certificate: null,

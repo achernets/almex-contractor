@@ -72,3 +72,59 @@ export const changeMrkDocumentType = type => {
     dispatch(getMrkDocuments());
   };
 };
+
+export const SHOW_PREVIEW_DOCUMENT = 'PAGE_MRK_DOCUMENTS/SHOW_PREVIEW_DOCUMENT';
+export const showPreviewDocument = mrkDocument => {
+  return async (dispatch) => {
+    dispatch({
+      type: SHOW_PREVIEW_DOCUMENT
+    });
+    dispatch(getMrkDocumentData(mrkDocument.id));
+  };
+};
+
+export const HIDE_PREVIEW_DOCUMENT = 'PAGE_MRK_DOCUMENTS/HIDE_PREVIEW_DOCUMENT';
+export const hidePreviewDocument = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: HIDE_PREVIEW_DOCUMENT
+    });
+  };
+};
+
+export const GET_MRK_DOCUMENT_REQUEST = 'PAGE_MRK_DOCUMENTS/GET_MRK_DOCUMENT_REQUEST';
+export const GET_MRK_DOCUMENT_SUCCESS = 'PAGE_MRK_DOCUMENTS/GET_MRK_DOCUMENT_SUCCESS';
+export const GET_MRK_DOCUMENT_FAILURE = 'PAGE_MRK_DOCUMENTS/GET_MRK_DOCUMENT_FAILURE';
+
+export const getMrkDocumentData = documentId => {
+  return async (dispatch, getState, api) => {
+    dispatch({ type: GET_MRK_DOCUMENT_REQUEST });
+    try {
+      const {
+        auth: { token }
+      } = getState();
+      const result = await api.MrkClientServiceClient.getMrkDocumentData(
+        token,
+        documentId
+      );
+      dispatch({
+        type: GET_MRK_DOCUMENT_SUCCESS,
+        payload: result
+      });
+    } catch (error) {
+      NotificationError(error, 'getMrkDocumentData');
+      dispatch({ type: GET_MRK_DOCUMENT_FAILURE });
+    }
+  };
+};
+
+export const SELECTED_ATTACHMENT = 'PAGE_MRK_DOCUMENTS/SELECTED_ATTACHMENT';
+
+export const selectedAttachment = mrkAttachment => {
+  return async (dispatch, getState, api) => {
+    dispatch({
+      type: SELECTED_ATTACHMENT,
+      payload: mrkAttachment
+    });
+  };
+};

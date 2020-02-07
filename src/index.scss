@@ -1,6 +1,7 @@
 // @import "~react-virtualized/styles.css";
+@import-normalize;
 @import "~antd/dist/antd.css";
-// @import "styles/general.scss";
+@import "styles/fonts.scss";
 body {
   overflow: hidden;
 }

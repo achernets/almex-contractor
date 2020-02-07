@@ -2,20 +2,22 @@ import React, { useEffect } from 'react';
 import Table from 'components/Table';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getMrkDocuments } from 'redux/actions/mrkDocuments';
+import { getMrkDocuments, showPreviewDocument, selectedAttachment } from 'redux/actions/mrkDocuments';
 import { editDocument } from 'redux/actions/Modal/createMrkDocument';
 import { PAGE_SIZE } from 'constants/table';
 import { I18n } from 'react-redux-i18n';
 import Empty from 'components/Empty';
 import { Button, Typography } from 'antd';
 import moment from 'moment';
+import RightMrkDocumentInfo from 'components/RightMrkDocumentInfo';
+import LeftOnlyOffice from 'components/LeftOnlyOffice';
 import { actions } from 'react-redux-modals';
 
-const Content = ({ getMrkDocuments, showModal, editDocument, mrkDocuments, isSearch, count, page, isFetching }) => {
+const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAttachment, editDocument, mrkDocuments, isSearch, count, page, isFetching }) => {
   useEffect(() => {
     getMrkDocuments();
   }, []);
-  return <Table
+  return <><Table
     loading={isFetching}
     columns={[
       {
@@ -45,10 +47,13 @@ const Content = ({ getMrkDocuments, showModal, editDocument, mrkDocuments, isSea
     onRow={(record) => {
       return {
         onClick: () => {
-          record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showModal('MODAL_MRK_DOCUMENT', {
-            mrkDocument: record
-          });
-        }
+          record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showPreviewDocument(record);
+        },
+        // onDoubleClick: () => {
+        //   record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showModal('MODAL_MRK_DOCUMENT', {
+        //     mrkDocument: record
+        //   });
+        // }
       };
     }}
     locale={{
@@ -67,7 +72,10 @@ const Content = ({ getMrkDocuments, showModal, editDocument, mrkDocuments, isSea
           })}>{I18n.t('MrkDocuments.create_empty')}</Button>
         </Empty>,
     }}
-  />;
+  />
+    <LeftOnlyOffice close={() => selectedAttachment(null)} />
+    <RightMrkDocumentInfo />
+  </>;
 };
 
 
@@ -83,6 +91,8 @@ const mapDispatchToProps = dispatch =>
     {
       getMrkDocuments,
       editDocument,
+      showPreviewDocument,
+      selectedAttachment,
       showModal: actions.showModal
     },
     dispatch

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/almex-contractor/precache-manifest.3dd53748cdbdedc89a0a329da1ebeb4e.js"
+  "/almex-contractor/precache-manifest.5c6b615fe2ca609d16d712095834bb9d.js"
 );
 
 self.addEventListener('message', (event) => {

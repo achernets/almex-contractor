@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "33c0894f348834b818b211cf74c5146b",
+    "revision": "7ac294917fd57f09ab5cc91cebcb8173",
     "url": "/almex-contractor/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/almex-contractor/static/css/3.07c8a804.chunk.css"
   },
   {
-    "revision": "d28ac3277d10b5c068e7",
-    "url": "/almex-contractor/static/css/main.e8c07e2a.chunk.css"
+    "revision": "b0509f09af319d9881fd",
+    "url": "/almex-contractor/static/css/main.c92f7a1e.chunk.css"
   },
   {
     "revision": "221c0035ee764e09c840",
@@ -32,11 +32,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/almex-contractor/static/js/5.d0eea68e.chunk.js"
   },
   {
-    "revision": "d28ac3277d10b5c068e7",
+    "revision": "b0509f09af319d9881fd",
     "url": "/almex-contractor/static/js/main.58bc5ffe.chunk.js"
   },
   {
     "revision": "116db5bc54cc88c52914",
     "url": "/almex-contractor/static/js/runtime-main.df5a1c9d.js"
+  },
+  {
+    "revision": "436a59e6f00881d8d65b1e1f3aab14d3",
+    "url": "/almex-contractor/static/media/SFUIText-Medium.436a59e6.woff"
+  },
+  {
+    "revision": "8aa25e349564cbdcb46d2003d441eea7",
+    "url": "/almex-contractor/static/media/SFUIText-Regular.8aa25e34.woff"
   }
 ]);

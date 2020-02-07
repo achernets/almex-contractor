@@ -1,0 +1,9 @@
+.close {
+  color: #bfbfbf;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  &:hover {
+    color: #40a9ff;
+  }
+}

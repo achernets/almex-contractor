@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row } from 'antd';
 import { map } from 'lodash';
 import InfoRow from './InfoRow';
 import moment from 'moment';
@@ -7,7 +6,7 @@ import { getContentItemValue } from 'utils/helpers';
 
 const Info = ({ mrkDocumentData }) => {
   const { document, items } = mrkDocumentData;
-  return <Row gutter={[0, 8]} >
+  return <>
     <InfoRow
       title={'Документ получен'}
       text={moment(document.createDate).format('HH.mm / DD.MM.YYYY')}
@@ -33,7 +32,7 @@ const Info = ({ mrkDocumentData }) => {
       title={item.oName}
       text={getContentItemValue(item)}
     />)}
-  </Row>;
+  </>;
 };
 
 export default Info;

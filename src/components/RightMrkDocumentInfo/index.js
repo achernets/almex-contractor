@@ -1,28 +1,27 @@
 import React from 'react';
-import { Drawer, Typography, Row, Button, Col, Icon } from 'antd';
+import { Drawer, Typography, Row, Button, Col } from 'antd';
 import { MrkDocumentView } from './components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { hidePreviewDocument, selectedAttachment } from 'redux/actions/mrkDocuments';
+import { hideMrkDocument, selectedAttachment } from 'redux/actions/mrkDocument';
 import Loader from 'components/Loader';
 import { get } from 'lodash';
 import { actions } from 'react-redux-modals';
+import { Close } from 'components/Icons';
 
-const RightMrkDocumentInfo = ({ selectedAttachment, placement = 'right', previewDocument, mrkDocumentData, mrkAttachment, mrkDocumentDataIsFetching, hidePreviewDocument, showModal }) => {
-  //console.log(mrkDocument)
-  //const { document, items, atts } = mrkDocumentData;
+const RightMrkDocumentInfo = ({ selectedAttachment, mrkDocumentData, mrkAttachment, isFetching, hideMrkDocument, showModal }) => {
   return <Drawer
     width={496}
-    placement={placement}
+    placement={'right'}
     closable={false}
     mask={false}
     onClose={false}
-    visible={previewDocument}
+    visible={mrkDocumentData !== null || isFetching}
   >
-    {mrkDocumentDataIsFetching && <Loader />}
-    <Icon type={'close'}
-      onClick={hidePreviewDocument}
-      style={{ color: '#bfbfbf', position: 'absolute', left: 4, top: 4 }} />
+    {isFetching && <Loader />}
+    <Close
+      onClick={hideMrkDocument}
+    />
     {mrkDocumentData !== null && <Row gutter={[0, 16]} justify={'center'} align={'middle'}>
       <Col span={24} style={{ textAlign: 'center' }}>
         <Typography.Text style={{ color: '#262626', fontFamily: 'SFUIText Medium', fontSize: 16 }} >{mrkDocumentData.document.patternName}</Typography.Text>
@@ -49,7 +48,7 @@ const RightMrkDocumentInfo = ({ selectedAttachment, placement = 'right', preview
             Сформировать ответ
             </Button>
         }
-        <Button size={'large'} onClick={hidePreviewDocument}>Закрыть</Button>
+        <Button size={'large'} onClick={hideMrkDocument}>Закрыть</Button>
       </Col>
     </Row>}
 
@@ -57,15 +56,14 @@ const RightMrkDocumentInfo = ({ selectedAttachment, placement = 'right', preview
 
 };
 const mapStateToProps = state => ({
-  mrkDocumentData: state.mrkDocuments.mrkDocumentData,
-  mrkAttachment: state.mrkDocuments.mrkAttachment,
-  mrkDocumentDataIsFetching: state.mrkDocuments.mrkDocumentDataIsFetching,
-  previewDocument: state.mrkDocuments.previewDocument
+  mrkDocumentData: state.mrkDocument.mrkDocumentData,
+  mrkAttachment: state.mrkDocument.mrkAttachment,
+  isFetching: state.mrkDocument.isFetching
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      hidePreviewDocument,
+      hideMrkDocument,
       selectedAttachment,
       showModal: actions.showModal,
     },

@@ -5,6 +5,7 @@ import { reducer as modals } from 'react-redux-modals';
 import { i18nReducer } from 'react-redux-i18n';
 import auth from './auth';
 import mrkDocuments from './mrkDocuments';
+import mrkDocument from './mrkDocument';
 import settings from './settings';
 import profile from './profile';
 import modal from './Modal';
@@ -18,6 +19,7 @@ export default history =>
       modal,
       auth,
       mrkDocuments,
+      mrkDocument,
       settings,
       profile
     })

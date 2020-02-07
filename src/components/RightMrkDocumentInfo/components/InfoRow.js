@@ -1,13 +1,14 @@
 import React from 'react';
-import { Typography, Col } from 'antd';
+import { Typography, Row, Col } from 'antd';
+import * as styles from '../right-preview.module.scss';
 
-const InfoRow = ({ title, text, leftColWidth = 10 }) => <>
+const InfoRow = ({ title, text, leftColWidth = 10 }) => <Row gutter={[0, 8]} >
   <Col span={leftColWidth}>
-    <Typography.Text style={{ color: '#8c8c8c', fontFamily: 'SFUIText Regular' }} >{title}</Typography.Text>
+    <Typography.Text className={styles.infoLeft} >{title}</Typography.Text>
   </Col>
   <Col span={24 - leftColWidth}>
-    <Typography.Text style={{ color: '#595959', fontFamily: 'SFUIText Regular' }} >{text}</Typography.Text>
+    <Typography.Text className={styles.infoRight} >{text}</Typography.Text>
   </Col>
-</>;
+</Row>;
 
 export default InfoRow;

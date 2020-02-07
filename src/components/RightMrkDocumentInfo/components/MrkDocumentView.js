@@ -4,6 +4,8 @@ import Info from './Info';
 import { map, size, get } from 'lodash';
 import Attachment from './Attachment';
 import TitleBlock from './TitleBlock';
+
+import * as styles from '../right-preview.module.scss';
 const MrkDocumentView = ({ selectedAttachment, mrkDocumentData, mrkAttachment }) => <>
   <Col span={24}>
     <TitleBlock
@@ -17,7 +19,7 @@ const MrkDocumentView = ({ selectedAttachment, mrkDocumentData, mrkAttachment })
     <TitleBlock
       text={'Вложения и подписи'}
     >
-      <Typography.Text style={{ color: '#595959', fontFamily: 'SFUIText Regular' }} >Ожидает подписания</Typography.Text>
+      <Typography.Text className={styles.titleRight} >Ожидает подписания</Typography.Text>
     </TitleBlock>
   </Col>}
   {map(mrkDocumentData.atts, item => <Col span={24} key={item.id}>

@@ -52,9 +52,6 @@
     "password_not_match": "Пароль не совпадает"
   },
   "MrkDocuments": {
-    "patternName": "Тип документа",
-    "name": "Краткое содержание",
-    "createDate": "Дата",
     "no_data": "Добро пожаловать в AlmexECM! Теперь вы можете написать обращение.",
     "no_data_search": "По вашему запросу ничего не найдено",
     "create": "Создать",
@@ -62,6 +59,12 @@
   },
   "MrkDocument": {
     "name": "Краткое содержание",
+    "extNumber": "Исходящий номер",
+    "extCameFrom": "Отправитель",
+    "extAuthorName": "Автор документа",
+    "extAuthorEmail": "Email",
+    "patternName": "Тип документа",
+    "createDate": "Дата",
     "send_answer": "Сформировать ответ",
     "show_chain": "Показать цепочку",
     "hide_chain": "Спрятать цепочку"

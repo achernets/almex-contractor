@@ -27,7 +27,8 @@ const Table = ({
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  const newHeight = dimensions.height === 0 ? 0 : (dimensions.height - 105);
+  const newHeight = dimensions.height === 0 ? 0 : (dimensions.height - 105);  //middle
+  //const newHeight = dimensions.height === 0 ? 0 : (dimensions.height - 95);  //small
   const { emptyText } = locale;
   return <div ref={targetRef} className={styles.table}>
     <ATable

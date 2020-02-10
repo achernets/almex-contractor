@@ -3,28 +3,29 @@ import { map } from 'lodash';
 import InfoRow from './InfoRow';
 import moment from 'moment';
 import { getContentItemValue } from 'utils/helpers';
+import { I18n } from 'react-redux-i18n';
 
 const Info = ({ mrkDocumentData }) => {
   const { document, items } = mrkDocumentData;
   return <>
     <InfoRow
-      title={'Документ получен'}
+      title={I18n.t('MrkDocument.createDate')}
       text={moment(document.createDate).format('HH.mm / DD.MM.YYYY')}
     />
     <InfoRow
-      title={'Отправитель'}
+      title={I18n.t('MrkDocument.extCameFrom')}
       text={document.extCameFrom}
     />
     <InfoRow
-      title={'Исходящий номер'}
+      title={I18n.t('MrkDocument.extNumber')}
       text={document.extNumber}
     />
     <InfoRow
-      title={'Автор документа'}
+      title={I18n.t('MrkDocument.extCameFrom')}
       text={document.extAuthorName}
     />
     <InfoRow
-      title={'Email'}
+      title={I18n.t('MrkDocument.extAuthorEmail')}
       text={document.extAuthorEmail}
     />
     {map(items, item => <InfoRow

@@ -22,17 +22,37 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
     loading={isFetching}
     columns={[
       {
-        title: I18n.t('MrkDocuments.patternName'),
-        dataIndex: 'patternName',
-        ellipsis: true
-      },
-      {
-        title: I18n.t('MrkDocuments.name'),
+        title: I18n.t('MrkDocument.name'),
         dataIndex: 'name',
         ellipsis: true
       },
       {
-        title: I18n.t('MrkDocuments.createDate'),
+        title: I18n.t('MrkDocument.extNumber'),
+        dataIndex: 'extNumber',
+        ellipsis: true
+      },
+      {
+        title: I18n.t('MrkDocument.extCameFrom'),
+        dataIndex: 'extCameFrom',
+        ellipsis: true
+      },
+      {
+        title: I18n.t('MrkDocument.extAuthorName'),
+        dataIndex: 'extAuthorName',
+        ellipsis: true
+      },
+      {
+        title: I18n.t('MrkDocument.extAuthorEmail'),
+        dataIndex: 'extAuthorEmail',
+        ellipsis: true
+      },
+      {
+        title: I18n.t('MrkDocument.patternName'),
+        dataIndex: 'patternName',
+        ellipsis: true
+      },
+      {
+        title: I18n.t('MrkDocument.createDate'),
         key: 'createDate',
         render: ({ createDate }) => moment(createDate).format('DD.MM.YYYY HH:mm:ss')
       },
@@ -50,11 +70,11 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
         onClick: () => {
           record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showPreviewDocument(record);
         },
-        // onDoubleClick: () => {
-        //   record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showModal('MODAL_MRK_DOCUMENT', {
-        //     mrkDocument: record
-        //   });
-        // }
+        onDoubleClick: () => {
+          record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showModal('MODAL_MRK_DOCUMENT', {
+            mrkDocument: record
+          });
+        }
       };
     }}
     locale={{

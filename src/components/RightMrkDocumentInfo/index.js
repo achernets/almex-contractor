@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Typography, Row, Button, Col } from 'antd';
+import { Drawer, Typography, Row, Button, Col, Icon } from 'antd';
 import { MrkDocumentView } from './components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -25,6 +25,7 @@ const RightMrkDocumentInfo = ({ selectedAttachment, mrkDocumentData, mrkAttachme
     />
     {mrkDocumentData !== null && <Row gutter={[0, 16]} justify={'center'} align={'middle'}>
       <Col span={24} className={styles.tc}>
+        {get(mrkDocumentData, 'document.groupNumber', null) !== null && <Icon type="link" onClick={() => console.log('s1')} style={{ color: '#1890ff' }} />}
         <Typography.Text className={styles.title} >{mrkDocumentData.document.patternName}</Typography.Text>
       </Col>
       <Col span={24}>
@@ -35,7 +36,7 @@ const RightMrkDocumentInfo = ({ selectedAttachment, mrkDocumentData, mrkAttachme
         mrkAttachment={mrkAttachment}
         selectedAttachment={selectedAttachment}
       />
-      <Col span={24} className={styles.tr}>
+      <Col span={24}>
         <Row gutter={[8, 0]} type="flex" align="middle" justify="end">
           {
             get(mrkDocumentData, 'document.type', null) === MrkDocumentType.INPUT && <Col>

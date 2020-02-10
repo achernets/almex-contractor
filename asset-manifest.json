@@ -2,34 +2,34 @@
   "files": {
     "static/js/0.07b358c4.chunk.js": "/almex-contractor/static/js/0.07b358c4.chunk.js",
     "static/js/0.07b358c4.chunk.js.map": "/almex-contractor/static/js/0.07b358c4.chunk.js.map",
-    "main.css": "/almex-contractor/static/css/main.16455519.chunk.css",
-    "main.js": "/almex-contractor/static/js/main.2f79a321.chunk.js",
-    "main.js.map": "/almex-contractor/static/js/main.2f79a321.chunk.js.map",
+    "main.css": "/almex-contractor/static/css/main.b8a9c564.chunk.css",
+    "main.js": "/almex-contractor/static/js/main.8c92989e.chunk.js",
+    "main.js.map": "/almex-contractor/static/js/main.8c92989e.chunk.js.map",
     "runtime-main.js": "/almex-contractor/static/js/runtime-main.e56928d2.js",
     "runtime-main.js.map": "/almex-contractor/static/js/runtime-main.e56928d2.js.map",
     "static/css/3.f01f319d.chunk.css": "/almex-contractor/static/css/3.f01f319d.chunk.css",
-    "static/js/3.56f6e8ae.chunk.js": "/almex-contractor/static/js/3.56f6e8ae.chunk.js",
-    "static/js/3.56f6e8ae.chunk.js.map": "/almex-contractor/static/js/3.56f6e8ae.chunk.js.map",
+    "static/js/3.6346fa79.chunk.js": "/almex-contractor/static/js/3.6346fa79.chunk.js",
+    "static/js/3.6346fa79.chunk.js.map": "/almex-contractor/static/js/3.6346fa79.chunk.js.map",
     "static/js/4.e81a06e4.chunk.js": "/almex-contractor/static/js/4.e81a06e4.chunk.js",
     "static/js/4.e81a06e4.chunk.js.map": "/almex-contractor/static/js/4.e81a06e4.chunk.js.map",
     "static/js/5.e19d1fd0.chunk.js": "/almex-contractor/static/js/5.e19d1fd0.chunk.js",
     "static/js/5.e19d1fd0.chunk.js.map": "/almex-contractor/static/js/5.e19d1fd0.chunk.js.map",
     "index.html": "/almex-contractor/index.html",
-    "precache-manifest.65de4f98231f4c039cd527a2a4dc023f.js": "/almex-contractor/precache-manifest.65de4f98231f4c039cd527a2a4dc023f.js",
+    "precache-manifest.b9db80cd9bce01471bc8fc32aeffc68a.js": "/almex-contractor/precache-manifest.b9db80cd9bce01471bc8fc32aeffc68a.js",
     "service-worker.js": "/almex-contractor/service-worker.js",
     "static/css/3.f01f319d.chunk.css.map": "/almex-contractor/static/css/3.f01f319d.chunk.css.map",
-    "static/css/main.16455519.chunk.css.map": "/almex-contractor/static/css/main.16455519.chunk.css.map",
-    "static/js/3.56f6e8ae.chunk.js.LICENSE.txt": "/almex-contractor/static/js/3.56f6e8ae.chunk.js.LICENSE.txt",
+    "static/css/main.b8a9c564.chunk.css.map": "/almex-contractor/static/css/main.b8a9c564.chunk.css.map",
+    "static/js/3.6346fa79.chunk.js.LICENSE.txt": "/almex-contractor/static/js/3.6346fa79.chunk.js.LICENSE.txt",
     "static/media/Document.svg": "/almex-contractor/static/media/Document.7f90e9a8.svg",
     "static/media/Ecp.svg": "/almex-contractor/static/media/Ecp.ef00a0a9.svg",
     "static/media/Logo.svg": "/almex-contractor/static/media/Logo.a577cd2a.svg",
-    "static/media/index.scss": "/almex-contractor/static/media/SFUIText-Regular.8aa25e34.woff"
+    "static/media/index.scss": "/almex-contractor/static/media/SFUIText-SemiboldItalic.ad541dd7.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.e56928d2.js",
     "static/css/3.f01f319d.chunk.css",
-    "static/js/3.56f6e8ae.chunk.js",
-    "static/css/main.16455519.chunk.css",
-    "static/js/main.2f79a321.chunk.js"
+    "static/js/3.6346fa79.chunk.js",
+    "static/css/main.b8a9c564.chunk.css",
+    "static/js/main.8c92989e.chunk.js"
   ]
 }

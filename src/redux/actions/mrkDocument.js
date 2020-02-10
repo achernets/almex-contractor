@@ -54,3 +54,87 @@ export const selectedAttachment = mrkAttachment => {
     });
   };
 };
+
+export const TOOGLE_VIEW_MODE = 'MRK_DOCUMENT/TOOGLE_VIEW_MODE';
+export const toogleView = () => {
+  return async (dispatch, getState, api) => {
+    const {
+      mrkDocument: { showChain, chain }
+    } = getState();
+    dispatch({
+      type: TOOGLE_VIEW_MODE,
+      payload: !showChain
+    });
+    if (!showChain && chain.length === 0) dispatch(getChainDocuments());
+  };
+};
+
+export const GET_CHAIN_REQUEST = 'MRK_DOCUMENT/GET_CHAIN_REQUEST';
+export const GET_CHAIN_SUCCESS = 'MRK_DOCUMENT/GET_CHAIN_SUCCESS';
+export const GET_CHAIN_FAILURE = 'MRK_DOCUMENT/GET_CHAIN_FAILURE';
+
+export const getChainDocuments = () => {
+  return async (dispatch, getState, api) => {
+    dispatch({ type: GET_CHAIN_REQUEST });
+    try {
+      const {
+        auth: { token },
+        mrkDocument: { mrkDocumentData, activeChain }
+      } = getState();
+      const filter = new KazFilter({
+        position: 0,
+        countFilter: 50,
+        orders: ['createDate'],
+        items: [new FilterItem({
+          field: 'groupNumber',
+          value: mrkDocumentData.document.groupNumber,
+          condition: FilterCondition.EQUAL,
+          fType: FilterFieldType.NUMBER
+        })]
+      });
+      const result = await api.MrkClientServiceClient.getMrkDocumentPage(
+        token,
+        filter
+      );
+      dispatch({
+        type: GET_CHAIN_SUCCESS,
+        payload: {
+          chain: result.documentData,
+          activeChain: activeChain ? activeChain : mrkDocumentData
+        }
+      });
+    } catch (error) {
+      NotificationError(error, 'getMrkDocumentPage');
+      dispatch({ type: GET_CHAIN_FAILURE });
+    }
+  };
+};
+
+export const CHANGE_CHAIN_REQUEST = 'MRK_DOCUMENT/CHANGE_CHAIN_REQUEST';
+export const CHANGE_CHAIN_SUCCESS = 'MRK_DOCUMENT/CHANGE_CHAIN_SUCCESS';
+export const CHANGE_CHAIN_FAILURE = 'MRK_DOCUMENT/CHANGE_CHAIN_FAILURE';
+
+export const changeChain = documentId => {
+  return async (dispatch, getState, api) => {
+    dispatch({
+      type: CHANGE_CHAIN_REQUEST,
+      payload: documentId
+    });
+    try {
+      const {
+        auth: { token }
+      } = getState();
+      const result = documentId === null ? null : await api.MrkClientServiceClient.getMrkDocumentData(
+        token,
+        documentId
+      );
+      dispatch({
+        type: CHANGE_CHAIN_SUCCESS,
+        payload: result
+      });
+    } catch (error) {
+      NotificationError(error, 'getMrkDocumentData');
+      dispatch({ type: CHANGE_CHAIN_FAILURE });
+    }
+  };
+};

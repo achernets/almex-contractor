@@ -14,7 +14,27 @@ const Ecp = (props) => <Icon
   {...props}
 />;
 
+const Chain = (props) => <Icon type={'link'}
+  className={styles.chain}
+  {...props}
+/>;
+
+const CaretUp = (props) => <Icon
+  type={'caret-up'}
+  className={styles.caret}
+  {...props}
+/>;
+
+const CaretDown = (props) => <Icon
+  type={'caret-down'}
+  className={styles.caret}
+  {...props}
+/>;
+
 export {
   Close,
-  Ecp
+  Ecp,
+  Chain,
+  CaretUp,
+  CaretDown
 };

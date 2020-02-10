@@ -5,8 +5,8 @@ import { map, size, get } from 'lodash';
 import Attachment from './Attachment';
 import TitleBlock from './TitleBlock';
 import classnames from 'classnames';
-
 import * as styles from '../right-preview.module.scss';
+
 const MrkDocumentView = ({ selectedAttachment, mrkDocumentData, mrkAttachment }) => <>
   <Col span={24}>
     <TitleBlock

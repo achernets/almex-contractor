@@ -53,6 +53,31 @@ const Attachment = ({ attachment, onClick, active }) => <>
               />
             </Row>
           </div>
+          <div className={styles.ecp_wrapper}>
+            <Ecp />
+            <Row className={styles.ecp_content} gutter={[0, 8]}>
+              <InfoRow
+                title={'Физ. лицо'}
+                text={'Приходько Игорь Валерьевич'}
+                leftColWidth={8}
+              />
+              <InfoRow
+                title={'ИНН'}
+                text={'403956572019'}
+                leftColWidth={8}
+              />
+              <InfoRow
+                title={'Email'}
+                text={'prikhodko_igor@ukr.net'}
+                leftColWidth={8}
+              />
+              <InfoRow
+                title={'Подписано'}
+                text={'12.23 / 12.03.2019'}
+                leftColWidth={8}
+              />
+            </Row>
+          </div>
         </Col>
       </Row>
     </Col>

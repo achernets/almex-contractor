@@ -1,3 +1,4 @@
+@import "styles/general.scss";
 .close {
   color: #bfbfbf;
   position: absolute;
@@ -11,4 +12,18 @@
 .ecp {
   width: 22px;
   margin-right: 8px;
+}
+
+.chain {
+  color: $blue;
+  &:hover {
+    color: #40a9ff;
+  }
+}
+
+.caret {
+  color: $blue;
+  &:hover {
+    color: #40a9ff;
+  }
 }

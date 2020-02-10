@@ -27,6 +27,7 @@
   color: #262626;
   font-family: "SFUIText Medium";
   font-size: 16px;
+  margin-left: 4px;
 }
 
 .subtitle {
@@ -49,6 +50,9 @@
   }
   .ecp_wrapper {
     display: flex;
+    &:not(:first-child) {
+      padding-top: 16px;
+    }
     .ecp_content {
       flex: 1;
     }
@@ -60,4 +64,25 @@
   color: $blue;
   margin: 0 5px;
   font-size: 15px;
+}
+
+.timeline_active {
+  :global {
+    .ant-timeline-item-head-blue {
+      background-color: $blue;
+    }
+  }
+}
+
+.timeline_item_title {
+  cursor: pointer;
+  :global {
+    .anticon-caret-down,
+    .anticon-caret-up {
+      color: $blue;
+      &:hover {
+        color: #40a9ff;
+      }
+    }
+  }
 }

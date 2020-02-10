@@ -42,7 +42,7 @@ const RightMrkDocumentInfo = ({ selectedAttachment, mrkDocumentData, mrkAttachme
               <Button
                 onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
                   parentId: get(mrkDocumentData, 'document.id', null),
-                  extRespPatternId: get(mrkDocumentData, 'extRespPatternId.id', 'b4712862-c993-4899-81b6-4696e1660a5a')
+                  extRespPatternId: get(mrkDocumentData, 'extRespPatternId.id', null)
                 })}
                 type={'primary'}
               >

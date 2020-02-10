@@ -13,19 +13,19 @@ const Info = ({ mrkDocumentData }) => {
     />
     <InfoRow
       title={'Отправитель'}
-      text={'Казахмыс Бухгалтерия'}
+      text={document.extCameFrom}
     />
     <InfoRow
       title={'Исходящий номер'}
-      text={'12345677'}
+      text={document.extNumber}
     />
     <InfoRow
       title={'Автор документа'}
-      text={document.creatorId}
+      text={document.extAuthorName}
     />
     <InfoRow
       title={'Email'}
-      text={'Фамилия Имя Отчество'}
+      text={document.extAuthorEmail}
     />
     {map(items, item => <InfoRow
       key={item.id}

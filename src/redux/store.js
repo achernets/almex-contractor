@@ -9,7 +9,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { syncTranslationWithStore } from 'react-redux-i18n';
 import { createBrowserHistory } from 'history';
 import { createLogger } from 'redux-logger';
-export const history = createBrowserHistory();
+
+export const history = createBrowserHistory({
+  basename: process.env.PUBLIC_URL + '/'
+});
 
 const logger = createLogger({
   duration: true,

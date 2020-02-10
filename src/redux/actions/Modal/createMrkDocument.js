@@ -4,27 +4,43 @@ import { updateMrkDocumentData } from 'redux/actions/Modal/mrkDocument';
 import { actions } from 'react-redux-modals';
 import { notification } from 'antd';
 import { singData } from 'utils/pkcs12';
+import { isEmpty, find } from 'lodash';
 import { I18n } from 'react-redux-i18n';
 
 export const GET_DOCUMENT_PATTERNS_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCUMENT_PATTERNS_REQUEST';
 export const GET_DOCUMENT_PATTERNS_SUCCESS = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCUMENT_PATTERNS_SUCCESS';
 export const GET_DOCUMENT_PATTERNS_FAILURE = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCUMENT_PATTERNS_FAILURE';
 
-export const getAllDocumentPatterns = () => {
+export const getAllDocumentPatterns = (extRespPatternId) => {
   return async (dispatch, getState, api) => {
     dispatch({ type: GET_DOCUMENT_PATTERNS_REQUEST });
     try {
       const {
         auth: { token }
       } = getState();
+      const filter = new KazFilter({
+        position: 0,
+        countFilter: 999,
+        orders: [],
+        items: isEmpty(extRespPatternId) ? [] : [new FilterItem({
+          field: 'id',
+          value: extRespPatternId,
+          condition: FilterCondition.CONTAIN,
+          fType: FilterFieldType.STRING
+        })]
+      });
       const result = await api.MrkClientServiceClient.getAllDocumentPatterns(
         token,
-        null
+        filter
       );
       dispatch({
         type: GET_DOCUMENT_PATTERNS_SUCCESS,
         payload: result
       });
+      if (!isEmpty(extRespPatternId)) {
+        dispatch(setDocumentPattern(find(result, { id: extRespPatternId })));
+        dispatch(prepareDocumentByPattern(extRespPatternId));
+      }
     } catch (error) {
       NotificationError(error, 'getAllDocumentPatterns');
       dispatch({ type: GET_DOCUMENT_PATTERNS_FAILURE });

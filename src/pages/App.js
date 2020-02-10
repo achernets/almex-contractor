@@ -19,12 +19,12 @@ const App = ({ loading, error }) => {
       {loading ? <Loader /> :
         <ConfigProvider locale={getAntdLocale()}>
           <Switch>
-            <Route exact path="/signIn" component={SignIn} />
-            <Route exact path="/SignUp" component={SignUp} />
+            <Route path="/signIn" component={SignIn} />
+            <Route path="/SignUp" component={SignUp} />
             <LayoutApp>
               <Switch>
-                <PrivateRoute exact path="/mrkDocuments" component={MrkDocuments} />
-                <PrivateRoute exact path="/profile" component={Profile} />
+                <PrivateRoute path="/mrkDocuments" component={MrkDocuments} />
+                <PrivateRoute path="/profile" component={Profile} />
                 <Redirect to="/mrkDocuments" />
               </Switch>
             </LayoutApp>

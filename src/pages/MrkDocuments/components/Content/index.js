@@ -69,7 +69,8 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
         description={<Typography.Text>{I18n.t('MrkDocuments.no_data')}</Typography.Text>}
       >
           <Button type="primary" onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
-            mrkDocument: null
+            parentId: null,
+            extRespPatternId: null
           })}>{I18n.t('MrkDocuments.create_empty')}</Button>
         </Empty>,
     }}

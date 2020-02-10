@@ -1,15 +1,63 @@
+@import "styles/general.scss";
+
 .titleLeft {
-  color: #262626;
+  color: $title_color;
   font-family: "SFUIText Medium";
 }
 
 .infoLeft {
-  color: #8c8c8c;
+  color: $text_left;
   font-family: "SFUIText Regular";
 }
 
 .titleRight,
 .infoRight {
-  color: #595959;
+  color: $text_right;
   font-family: "SFUIText Regular";
+}
+
+.tr {
+  text-align: right;
+}
+.tc {
+  text-align: center;
+}
+
+.title {
+  color: #262626;
+  font-family: "SFUIText Medium";
+  font-size: 16px;
+}
+
+.subtitle {
+  color: $text_right;
+  font-family: "SFUIText Regular";
+  margin-bottom: unset;
+}
+
+.attachment {
+  border-radius: 2px;
+  padding: 8px;
+  border: 1px solid #e8e8e8;
+  font-family: "SFUIText Regular";
+  &.att_active {
+    border: 1px solid $blue;
+    background: rgba(24, 144, 255, 0.05);
+  }
+  .ecp_title {
+    color: $title_color;
+  }
+  .ecp_wrapper {
+    display: flex;
+    .ecp_content {
+      flex: 1;
+    }
+  }
+}
+
+.before_dot:before {
+  content: "•";
+  color: $blue;
+  margin: 0 5px;
+  font-size: 15px;
 }

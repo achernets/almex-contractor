@@ -9,7 +9,7 @@ const TitleBlock = ({ text, children }) => <>
       <Col span={12}>
         <Typography.Text className={styles.titleLeft} >{text}</Typography.Text>
       </Col>
-      <Col span={12} style={{ textAlign: 'right' }}>
+      <Col span={12} className={styles.tr}>
         {children}
       </Col>
     </Row>}

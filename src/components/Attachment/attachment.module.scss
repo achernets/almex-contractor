@@ -26,3 +26,36 @@
 .desc {
   color: $blue;
 }
+
+.attachment {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .img {
+    margin-left: -4;
+    margin-right: 4;
+  }
+  .information {
+    flex: 1;
+    overflow: hidden;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .name {
+      color: $text_right;
+      font-family: "SFUIText Regular";
+      text-overflow: "ellipsis";
+      width: 100%;
+      word-break: break-word;
+    }
+    .date {
+      color: $text_left;
+      font-family: "SFUIText Regular";
+      text-overflow: "ellipsis";
+      width: 100%;
+      word-break: break-word;
+      font-size: 12px;
+    }
+  }
+}

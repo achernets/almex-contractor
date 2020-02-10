@@ -1218,6 +1218,14 @@ struct AttachmentVersionInfo {
   3: i32 precalculatedRank;
 }
 
+/** Система в которой подпись создана */
+enum SignInSystem {
+  NONE,
+  ALMEX,
+  EXTERNAL,
+  BOTH
+}
+
 /** Вложение */
 struct Attachment {
   /** Уникальный идентификатор вложения и одновременно имя файла в хранилище */
@@ -1244,6 +1252,7 @@ struct Attachment {
   11: optional common.ID stageId;
   /** Есть ли цифровая подпись*/
   12: bool hasDigitalSign;
+  //12: SignInSystem signInSystem;
   /** Идентификатор карточки исполнения */
   13: optional common.ID docExecId;
   /** Признак автозамены */

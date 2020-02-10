@@ -52,7 +52,8 @@ const MrkDocument = ({
       case MrkDocumentType.INPUT:
         return [
           <Button key="answer" type="primary" onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
-            parentId: get(mrkDocumentData, 'document.id', null)
+            parentId: get(mrkDocumentData, 'document.id', null),
+            extRespPatternId: get(mrkDocumentData, 'extRespPatternId.id', null)
           })}>
             {I18n.t('MrkDocument.send_answer')}
           </Button>,

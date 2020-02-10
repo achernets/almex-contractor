@@ -15,6 +15,7 @@ import * as Yup from 'yup';
 
 const CreateMrkDocument = ({ hideModal,
   parentId,
+  extRespPatternId,
   step,
   documentPattern,
   isPrepareFetching,
@@ -99,7 +100,7 @@ const CreateMrkDocument = ({ hideModal,
             ]}
         >
           {isFetching && <Loader />}
-          {step === 1 && <ListDocumentPatterns />}
+          {step === 1 && <ListDocumentPatterns extRespPatternId={extRespPatternId} />}
           {step === 2 && <FormData />}
         </Modal>
       );

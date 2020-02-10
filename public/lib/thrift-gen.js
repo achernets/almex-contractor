@@ -25531,6 +25531,12 @@ AttachmentExtStatus = {
   'CARD' : 2,
   'CONTENT' : 3
 };
+SignInSystem = {
+  'NONE' : 0,
+  'ALMEX' : 1,
+  'EXTERNAL' : 2,
+  'BOTH' : 3
+};
 DocRelationType = {
   'PARENT' : 0,
   'CHILD' : 1,
@@ -39751,6 +39757,14 @@ MrkDocument = class {
     this.receiveDate = null;
     this.creatorId = null;
     this.groupNumber = null;
+    this.signInSystem = null;
+    this.extCameFrom = null;
+    this.extNumber = null;
+    this.extAuthorName = null;
+    this.extAuthorEmail = null;
+    this.extRespExecId = null;
+    this.extRespPatternId = null;
+    this.extRespReq = null;
     if (args) {
       if (args.id !== undefined && args.id !== null) {
         this.id = args.id;
@@ -39793,6 +39807,30 @@ MrkDocument = class {
       }
       if (args.groupNumber !== undefined && args.groupNumber !== null) {
         this.groupNumber = args.groupNumber;
+      }
+      if (args.signInSystem !== undefined && args.signInSystem !== null) {
+        this.signInSystem = args.signInSystem;
+      }
+      if (args.extCameFrom !== undefined && args.extCameFrom !== null) {
+        this.extCameFrom = args.extCameFrom;
+      }
+      if (args.extNumber !== undefined && args.extNumber !== null) {
+        this.extNumber = args.extNumber;
+      }
+      if (args.extAuthorName !== undefined && args.extAuthorName !== null) {
+        this.extAuthorName = args.extAuthorName;
+      }
+      if (args.extAuthorEmail !== undefined && args.extAuthorEmail !== null) {
+        this.extAuthorEmail = args.extAuthorEmail;
+      }
+      if (args.extRespExecId !== undefined && args.extRespExecId !== null) {
+        this.extRespExecId = args.extRespExecId;
+      }
+      if (args.extRespPatternId !== undefined && args.extRespPatternId !== null) {
+        this.extRespPatternId = args.extRespPatternId;
+      }
+      if (args.extRespReq !== undefined && args.extRespReq !== null) {
+        this.extRespReq = args.extRespReq;
       }
     }
   }
@@ -39905,6 +39943,62 @@ MrkDocument = class {
           input.skip(ftype);
         }
         break;
+        case 15:
+        if (ftype == Thrift.Type.I32) {
+          this.signInSystem = input.readI32().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 16:
+        if (ftype == Thrift.Type.STRING) {
+          this.extCameFrom = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 17:
+        if (ftype == Thrift.Type.STRING) {
+          this.extNumber = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 18:
+        if (ftype == Thrift.Type.STRING) {
+          this.extAuthorName = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 19:
+        if (ftype == Thrift.Type.STRING) {
+          this.extAuthorEmail = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 20:
+        if (ftype == Thrift.Type.STRING) {
+          this.extRespExecId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 21:
+        if (ftype == Thrift.Type.STRING) {
+          this.extRespPatternId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 22:
+        if (ftype == Thrift.Type.I32) {
+          this.extRespReq = input.readI32().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
         default:
           input.skip(ftype);
       }
@@ -39984,6 +40078,46 @@ MrkDocument = class {
     if (this.groupNumber !== null && this.groupNumber !== undefined) {
       output.writeFieldBegin('groupNumber', Thrift.Type.STRING, 14);
       output.writeString(this.groupNumber);
+      output.writeFieldEnd();
+    }
+    if (this.signInSystem !== null && this.signInSystem !== undefined) {
+      output.writeFieldBegin('signInSystem', Thrift.Type.I32, 15);
+      output.writeI32(this.signInSystem);
+      output.writeFieldEnd();
+    }
+    if (this.extCameFrom !== null && this.extCameFrom !== undefined) {
+      output.writeFieldBegin('extCameFrom', Thrift.Type.STRING, 16);
+      output.writeString(this.extCameFrom);
+      output.writeFieldEnd();
+    }
+    if (this.extNumber !== null && this.extNumber !== undefined) {
+      output.writeFieldBegin('extNumber', Thrift.Type.STRING, 17);
+      output.writeString(this.extNumber);
+      output.writeFieldEnd();
+    }
+    if (this.extAuthorName !== null && this.extAuthorName !== undefined) {
+      output.writeFieldBegin('extAuthorName', Thrift.Type.STRING, 18);
+      output.writeString(this.extAuthorName);
+      output.writeFieldEnd();
+    }
+    if (this.extAuthorEmail !== null && this.extAuthorEmail !== undefined) {
+      output.writeFieldBegin('extAuthorEmail', Thrift.Type.STRING, 19);
+      output.writeString(this.extAuthorEmail);
+      output.writeFieldEnd();
+    }
+    if (this.extRespExecId !== null && this.extRespExecId !== undefined) {
+      output.writeFieldBegin('extRespExecId', Thrift.Type.STRING, 20);
+      output.writeString(this.extRespExecId);
+      output.writeFieldEnd();
+    }
+    if (this.extRespPatternId !== null && this.extRespPatternId !== undefined) {
+      output.writeFieldBegin('extRespPatternId', Thrift.Type.STRING, 21);
+      output.writeString(this.extRespPatternId);
+      output.writeFieldEnd();
+    }
+    if (this.extRespReq !== null && this.extRespReq !== undefined) {
+      output.writeFieldBegin('extRespReq', Thrift.Type.I32, 22);
+      output.writeI32(this.extRespReq);
       output.writeFieldEnd();
     }
     output.writeFieldStop();
@@ -40084,6 +40218,7 @@ MrkAttachment = class {
     this.attHash = null;
     this.status = null;
     this.fType = null;
+    this.hasDigitalSign = null;
     if (args) {
       if (args.id !== undefined && args.id !== null) {
         this.id = args.id;
@@ -40111,6 +40246,9 @@ MrkAttachment = class {
       }
       if (args.fType !== undefined && args.fType !== null) {
         this.fType = args.fType;
+      }
+      if (args.hasDigitalSign !== undefined && args.hasDigitalSign !== null) {
+        this.hasDigitalSign = args.hasDigitalSign;
       }
     }
   }
@@ -40190,6 +40328,13 @@ MrkAttachment = class {
           input.skip(ftype);
         }
         break;
+        case 10:
+        if (ftype == Thrift.Type.BOOL) {
+          this.hasDigitalSign = input.readBool().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
         default:
           input.skip(ftype);
       }
@@ -40244,6 +40389,11 @@ MrkAttachment = class {
     if (this.fType !== null && this.fType !== undefined) {
       output.writeFieldBegin('fType', Thrift.Type.I32, 9);
       output.writeI32(this.fType);
+      output.writeFieldEnd();
+    }
+    if (this.hasDigitalSign !== null && this.hasDigitalSign !== undefined) {
+      output.writeFieldBegin('hasDigitalSign', Thrift.Type.BOOL, 10);
+      output.writeBool(this.hasDigitalSign);
       output.writeFieldEnd();
     }
     output.writeFieldStop();

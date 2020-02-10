@@ -102,6 +102,14 @@ struct MrkDocument {
   12: optional i64 receiveDate;
   13: optional string creatorId;
   14: optional string groupNumber;
+  15: optional Kaz_DocumentService.SignInSystem signInSystem;
+  16: optional string extCameFrom;
+  17: optional string extNumber;
+  18: optional string extAuthorName;
+  19: optional string extAuthorEmail;
+  20: optional string extRespExecId;
+  21: optional string extRespPatternId;
+  22: optional Kaz_DocumentService.DocPatternStageRequirement extRespReq;
 }
 
 struct MrkDocumentPage {
@@ -119,6 +127,7 @@ struct MrkAttachment {
   7: optional string attHash;
   8: common.AttachmentStatus status;
   9: optional common.FileType fType;
+  10: bool hasDigitalSign;
 }
 
 struct MrkDocumentData {

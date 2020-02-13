@@ -103,12 +103,36 @@ export const getOnlyOfficeUrl = () => {
   return `${ONLY_OFFICE_URL}/web-apps/apps/api/documents/api.js`;
 };
 
-export const getAttachmentUrl = (mrkAttachment, type = AttachmentType.ORIGINAL) => {
+export const onlyOfficeCallBackUrl = ({ id }) => {
+  const {
+    settings: { THRIFT }
+  } = store.getState();
+  return `${THRIFT.URL}/${THRIFT.API}/onlyOfficeCallBack?attachmentId=${id}`;
+};
+
+export const getTypeOnlyOffice = (mrkAttachment) => {
+  switch (getAttachmentExt(mrkAttachment)) {
+    case 'xlsx':
+    case 'xls':
+    case 'ods':
+    case 'csv':
+      return 'spreadsheet';
+    case 'pptx':
+    case 'ppt':
+    case 'odp':
+      return 'presentation';
+    default:
+      return 'text';
+  }
+};
+
+export const getAttachmentUrl = ({ id }, type = AttachmentType.ORIGINAL) => {
   const {
     auth: { token },
     settings: { THRIFT }
   } = store.getState();
-  return `${THRIFT.URL}/${THRIFT.API}/attachment?token=${token}&id=${mrkAttachment.id}&type=${type}`;
+  return `${THRIFT.URL}/${THRIFT.API}/attachment?token=${token}&id=${id}`;
+  //return `${THRIFT.URL}/${THRIFT.API}/attachment?token=${token}&id=${mrkAttachment.id}&type=${type}`;
 };
 
 export const getAttachmentName = ({ fileName }) => {

@@ -1,0 +1,1 @@
+export const ATTACHMENT_ACCEPT = '.pdf, .odt, .txt, .rtf, .doc, .docx, .xls, .xlsx';

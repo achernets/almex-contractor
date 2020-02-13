@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Drawer } from 'antd';
+import { Modal } from 'components/Modals';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actions } from 'react-redux-modals';
 import ScriptLoader from 'react-render-props-script-loader';
 import Loader from 'components/Loader';
 import { uniqueId } from 'lodash';
-import { getOnlyOfficeUrl, getAttachmentUrl, getAttachmentName, getAttachmentExt, log } from 'utils/helpers';
-import { Close } from 'components/Icons';
+import { I18n } from 'react-redux-i18n';
+import { getOnlyOfficeUrl, getAttachmentUrl, getFio, getTypeOnlyOffice, onlyOfficeCallBackUrl, getAttachmentName, getAttachmentExt, log } from 'utils/helpers';
 const editorId = uniqueId('editor_');
 
-const LeftOnlyOffice = ({ mrkAttachment, close }) => {
+const AttachmentEdit = ({ mrkAttachment, client, hideModal }) => {
   const [editor, setEditor] = useState(null);
   const loadEditor = () => {
-    log(mrkAttachment, getAttachmentUrl(mrkAttachment));
+    log('mrkAttachment', mrkAttachment);
+    log('url', getAttachmentUrl(mrkAttachment));
+    log('callback', onlyOfficeCallBackUrl(mrkAttachment));
     setEditor(new DocsAPI.DocEditor(editorId, {
       'document': {
         'fileType': getAttachmentExt(mrkAttachment),
         'key': mrkAttachment.id,
         'permissions': {
           'download': false,
-          'edit': false,
+          'edit': true,
           'print': true,
           'review': false
         },
@@ -26,10 +30,19 @@ const LeftOnlyOffice = ({ mrkAttachment, close }) => {
         'url': getAttachmentUrl(mrkAttachment)
       },
       'editorConfig': {
+        'callbackUrl': onlyOfficeCallBackUrl(mrkAttachment),
         'lang': 'ru-RU',
-        'mode': 'view',
+        'mode': 'edit',
+        'user': {
+          'id': client.id,
+          'name': getFio(client)
+        },
+        'plugins': {
+          'url': '',
+          'pluginsData': []
+        }
       },
-      'documentType': 'text',
+      'documentType': getTypeOnlyOffice(mrkAttachment),
       'height': '100%',
       'width': '100%',
       'type': 'desktop'
@@ -43,20 +56,23 @@ const LeftOnlyOffice = ({ mrkAttachment, close }) => {
     };
   }, [mrkAttachment]);
 
-  return <Drawer
+  return <Modal
+    visible={true}
+    centered
     width={'100%'}
-    style={{ width: mrkAttachment !== null ? 'calc(100% - 496px)' : 0 }}
-    placement={'left'}
-    closable={false}
-    mask={false}
-    onClose={false}
-    destroyOnClose={true}
-    visible={mrkAttachment !== null}
-    bodyStyle={{ height: '100%', padding: 'unset', paddingTop: 24, position: 'relative' }}
+    style={{
+      height: '100%'
+    }}
+    onCancel={() => hideModal('MODAL_ATTACHMENT_EDIT')}
+    maskClosable={false}
+    bodyStyle={{
+      height: 'calc(100vh - 55px)',
+      padding: 0,
+      overflowY: 'hidden'
+    }}
+    title={I18n.t('ONLY_OFFICE')}
+    footer={null}
   >
-    <Close
-      onClick={close}
-    />
     <ScriptLoader
       type="text/javascript"
       src={getOnlyOfficeUrl()}
@@ -70,11 +86,19 @@ const LeftOnlyOffice = ({ mrkAttachment, close }) => {
         }}></div>;
       }}
     </ScriptLoader>
-
-  </Drawer>;
-
+  </ Modal>;
 };
+
 const mapStateToProps = state => ({
-  mrkAttachment: state.mrkDocument.mrkAttachment
+  token: state.auth.token,
+  client: state.auth.client
 });
-export default connect(mapStateToProps, null)(LeftOnlyOffice);
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      hideModal: actions.hideModal
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(AttachmentEdit);

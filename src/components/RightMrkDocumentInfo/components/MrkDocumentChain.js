@@ -23,7 +23,7 @@ const MrkDocumentChain = ({ mrkAttachment, selectedAttachment, changeChain, chai
           <Col span={15}>
             <Paragraph
               onClick={() => changeChain(get(activeChain, 'document.id', null) === item.id ? null : item.id)}
-              strong={get(activeChain, 'document.id', null) === item.id}
+              // strong={get(activeChain, 'document.id', null) === item.id}
               ellipsis={{ rows: get(activeChain, 'document.id', null) === item.id ? null : 2, expandable: get(activeChain, 'document.id', null) !== item.id }}
             >
               {item.name}

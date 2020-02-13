@@ -95,5 +95,26 @@ export const getContentItemValue = item => {
     default:
       return value;
   }
+};
 
+export const getOnlyOfficeUrl = () => {
+  const state = store.getState();
+  const { ONLY_OFFICE_URL } = state.settings;
+  return `${ONLY_OFFICE_URL}/web-apps/apps/api/documents/api.js`;
+};
+
+export const getAttachmentUrl = (mrkAttachment, type = AttachmentType.ORIGINAL) => {
+  const {
+    auth: { token },
+    settings: { THRIFT }
+  } = store.getState();
+  return `${THRIFT.URL}/${THRIFT.API}/attachment?token=${token}&id=${mrkAttachment.id}&type=${type}`;
+};
+
+export const getAttachmentName = ({ fileName }) => {
+  return fileName.substr(0, fileName.lastIndexOf('.'));
+};
+
+export const getAttachmentExt = ({ fileName }) => {
+  return fileName.substr(fileName.lastIndexOf('.') + 1, fileName.length);
 };

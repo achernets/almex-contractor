@@ -11,12 +11,12 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "react": "^16.12.0",
-    "react-async-script-loader": "^0.3.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
     "react-redux-i18n": "^1.9.3",
     "react-redux-modals": "^1.1.4",
+    "react-render-props-script-loader": "^1.2.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
     "react-virtualized": "^9.21.2",
@@ -54,6 +54,7 @@
       "MrkContactInfo": true,
       "MrkClient": true,
       "MrkAccount": true,
+      "AttachmentType": true,
       "DocsAPI": true
     },
     "rules": {

@@ -64,7 +64,7 @@
     "extAuthorName": "Автор документа",
     "extAuthorEmail": "Email",
     "patternName": "Тип документа",
-    "createDate": "Дата",
+    "createDate": "Дата поручения",
     "send_answer": "Сформировать ответ",
     "show_chain": "Показать цепочку",
     "hide_chain": "Спрятать цепочку"

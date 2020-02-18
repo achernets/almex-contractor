@@ -7,7 +7,7 @@ import * as styles from './table.module.scss';
 const Table = ({
   size = 'middle',
   tableLayout = 'fixed',
-  bordered = true,
+  bordered = false,
   columns = [],
   dataSource = [],
   rowKey = 'id',

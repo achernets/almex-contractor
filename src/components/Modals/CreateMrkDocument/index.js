@@ -100,7 +100,7 @@ const CreateMrkDocument = ({ hideModal,
             ]}
         >
           {isFetching && <Loader />}
-          {step === 1 && <ListDocumentPatterns extRespPatternId={extRespPatternId} />}
+          {step === 1 && <ListDocumentPatterns extRespPatternId={extRespPatternId} parentId={parentId} />}
           {step === 2 && <FormData showModal={showModal} />}
         </Modal>
       );

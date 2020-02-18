@@ -7,9 +7,9 @@ import { Icon, Typography } from 'antd';
 import { AutoSizer, List } from 'react-virtualized';
 import * as styles from './listDocumentPatterns.module.scss';
 import { getAllDocumentPatterns, setDocumentPattern } from 'redux/actions/Modal/createMrkDocument';
-const ListDocumentPatterns = ({ extRespPatternId, documentPattern, documentPatterns, getAllDocumentPatterns, setDocumentPattern }) => {
+const ListDocumentPatterns = ({ extRespPatternId, parentId, documentPattern, documentPatterns, getAllDocumentPatterns, setDocumentPattern }) => {
   useEffect(() => {
-    getAllDocumentPatterns(extRespPatternId);
+    getAllDocumentPatterns(extRespPatternId, parentId);
   }, []);
   const rowRenderer = ({
     key,

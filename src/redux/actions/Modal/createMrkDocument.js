@@ -11,7 +11,7 @@ export const GET_DOCUMENT_PATTERNS_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCU
 export const GET_DOCUMENT_PATTERNS_SUCCESS = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCUMENT_PATTERNS_SUCCESS';
 export const GET_DOCUMENT_PATTERNS_FAILURE = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCUMENT_PATTERNS_FAILURE';
 
-export const getAllDocumentPatterns = (extRespPatternId) => {
+export const getAllDocumentPatterns = (extRespPatternId, parentId) => {
   return async (dispatch, getState, api) => {
     dispatch({ type: GET_DOCUMENT_PATTERNS_REQUEST });
     try {
@@ -39,7 +39,7 @@ export const getAllDocumentPatterns = (extRespPatternId) => {
       });
       if (!isEmpty(extRespPatternId)) {
         dispatch(setDocumentPattern(find(result, { id: extRespPatternId })));
-        dispatch(prepareDocumentByPattern(extRespPatternId));
+        dispatch(prepareDocumentByPattern(extRespPatternId, parentId));
       }
     } catch (error) {
       NotificationError(error, 'getAllDocumentPatterns');

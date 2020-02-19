@@ -12,7 +12,7 @@ import { createLogger } from 'redux-logger';
 
 export const history = createHashHistory({
   hashType: 'slash',
-  basename: process.env.PUBLIC_URL + '/'
+  //basename: process.env.PUBLIC_URL + '/'
 });
 
 const logger = createLogger({

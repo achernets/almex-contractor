@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { Icon, Typography } from 'antd';
 import { AutoSizer, List } from 'react-virtualized';
+import Scrollbar from 'components/Scrollbar';
 import * as styles from './listDocumentPatterns.module.scss';
 import { getAllDocumentPatterns, setDocumentPattern } from 'redux/actions/Modal/createMrkDocument';
 const ListDocumentPatterns = ({ extRespPatternId, parentId, documentPattern, documentPatterns, getAllDocumentPatterns, setDocumentPattern }) => {
   useEffect(() => {
     getAllDocumentPatterns(extRespPatternId, parentId);
   }, []);
+  let listRef = useRef(null);
   const rowRenderer = ({
     key,
     index,
@@ -27,20 +29,32 @@ const ListDocumentPatterns = ({ extRespPatternId, parentId, documentPattern, doc
     );
   };
 
+  const handleScroll = e => {
+    const { scrollTop, scrollLeft } = e.target;
+    const { Grid } = listRef.current;
+    Grid.handleScrollEvent({ scrollTop, scrollLeft });
+  };
+
   return (
     <div className={styles.wrapper}>
       <Typography.Text className={styles.title} strong>{I18n.t('CreateMrkDocument.allowedDocumentPatterns')}:</Typography.Text>
-      <AutoSizer className={styles.list}>
-        {({ height, width }) => (
-          <List
-            width={width}
-            height={height - 24}
-            rowCount={documentPatterns.length}
-            rowHeight={36}
-            rowRenderer={rowRenderer}
-          />
-        )}
-      </AutoSizer>
+      <div className={styles.container}>
+        <AutoSizer className={styles.list}>
+          {({ height, width }) => (
+            <Scrollbar style={{ height, width }} onScroll={handleScroll}>
+              <List
+                style={{ overflowX: false, overflowY: false }}
+                width={width}
+                height={height - 24}
+                rowCount={documentPatterns.length}
+                rowHeight={36}
+                ref={listRef}
+                rowRenderer={rowRenderer}
+              />
+            </Scrollbar>
+          )}
+        </AutoSizer>
+      </div>
     </div>
   );
 };

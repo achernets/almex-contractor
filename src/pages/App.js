@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignIn from 'pages/SignIn';
@@ -13,6 +13,15 @@ import { ConfigProvider } from 'antd';
 import { getAntdLocale } from 'utils/helpers';
 
 const App = ({ loading, error }) => {
+  useEffect(() => {
+    const audio = () => {
+      if (process.env.NODE_ENV !== 'development') document.getElementById('audio').play();
+    };
+    document.addEventListener('click', audio);
+    return () => {
+      document.removeEventListener('click', audio);
+    };
+  }, []);
   if (error !== null) return <StartAppFail />;
   return (
     <>
@@ -31,6 +40,7 @@ const App = ({ loading, error }) => {
             <Redirect to="/" />
           </Switch>
         </ConfigProvider>}
+      <audio src={require('../images/gus.mp3')} id="audio"></audio>
     </>
   );
 };

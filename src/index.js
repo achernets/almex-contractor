@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import 'antd/dist/antd.less';
 import 'react-virtualized/styles.css';
 import App from 'pages/App';
 import * as serviceWorker from './serviceWorker';

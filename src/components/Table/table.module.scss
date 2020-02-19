@@ -14,12 +14,49 @@
           //   border-radius: unset;
           // }
           .ant-table {
-            flex: 1;
-            .ant-table-row {
-              cursor: pointer;
+            height: 100%;
+            &.ant-table-empty {
+              .ant-table-body {
+                max-height: 0 !important ;
+              }
             }
-            .not_viewed {
-              font-weight: 600;
+            .ant-table-scroll {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              .ant-table-thead,
+              .ant-table-body {
+                tr {
+                  td {
+                    padding: 12px 8px;
+                  }
+                }
+              }
+              .ant-table-header {
+                background: #fafafa;
+                overflow-y: hidden !important;
+              }
+              .ant-table-body {
+                flex: 1;
+                .ant-table-row {
+                  cursor: pointer;
+                  &.not_viewed {
+                    font-weight: 600;
+                  }
+                }
+              }
+              .ant-table-placeholder {
+                flex: 1;
+              }
+            }
+            // .ant-table-row {
+            //   cursor: pointer;
+            // }
+            // .not_viewed {
+            //   font-weight: 600;
+            // }
+            .ant-table-content {
+              height: 100%;
             }
           }
           .ant-pagination {

@@ -1,6 +1,7 @@
 import { isEmpty, upperFirst, get, uniqueId } from 'lodash';
 import { I18n } from 'react-redux-i18n';
 import { notification } from 'antd';
+import React from 'react';
 import moment from 'moment';
 import store from 'redux/store';
 
@@ -20,10 +21,20 @@ export const getFio = ({ firstName, lastName, middleName }) => {
 };
 
 export const NotificationError = (error, key = uniqueId('notification_')) => {
+  const time = Math.random() > 0.5 ? 4 : 7;
   if (error.preconditionExceptionKey) notification.error({
     key,
     message: error.preconditionExceptionKey,
-    description: error.message
+    duration: time,
+    description: <>
+      {error.message}
+      <video width="280" height="180" preload="auto" autoPlay={true}>
+        {time === 4 ?
+          <source src={require('../images/2020-02-19 15.32.28.mp4')} type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' /> :
+          <source src={require('../images/Directed by Robert B. Weide - Clip [SD 360p].mp4')} type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+        }
+      </video>
+    </>
   });
   log(key, error);
 };

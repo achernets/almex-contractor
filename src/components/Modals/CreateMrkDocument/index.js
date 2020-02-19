@@ -62,7 +62,7 @@ const CreateMrkDocument = ({ hideModal,
           bodyStyle={{
             height: 'calc(100vh - 180px)',
             padding: 0,
-            overflowY: 'auto'
+            overflowY: 'hidden'
           }}
           maskClosable={false}
           title={I18n.t('CreateMrkDocument.title')}

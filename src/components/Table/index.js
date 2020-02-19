@@ -1,9 +1,8 @@
-import React, { useRef, useLayoutEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Table as ATable } from 'antd';
-import Empty from 'components/Empty';
 import { PAGE_SIZE } from 'constants/table';
-import { isEmpty } from 'lodash';
 import * as styles from './table.module.scss';
+import Scrollbar from 'components/Scrollbar';
 const Table = ({
   size = 'middle',
   tableLayout = 'fixed',
@@ -14,37 +13,38 @@ const Table = ({
   locale = {},
   ...props
 }) => {
-  const targetRef = useRef();
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      if (targetRef.current) setDimensions({
-        width: targetRef.current.offsetWidth,
-        height: targetRef.current.offsetHeight
-      });
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+  let tableRef = useRef(null);
+  useEffect(() => {
+    tableRef.current
+      .closest('.ant-table-scroll')
+      .getElementsByClassName('ant-table-body')[0].style.overflow = 'hidden';
   }, []);
-  const newHeight = dimensions.height === 0 ? 0 : (dimensions.height - 105);  //middle
-  //const newHeight = dimensions.height === 0 ? 0 : (dimensions.height - 95);  //small
   const { emptyText } = locale;
-  return <div ref={targetRef} className={styles.table}>
+  return <div className={styles.table}>
     <ATable
       tableLayout={tableLayout}
       bordered={bordered}
       size={size}
       locale={{
-        emptyText: isEmpty(emptyText) ? <Empty style={{ height: newHeight + 25 }} /> : <div style={{ height: newHeight + 25 }}>
-          {emptyText}
-        </div>
+        emptyText: emptyText
       }}
       pagination={{
         simple: true,
         defaultPageSize: PAGE_SIZE
       }}
-      scroll={{ y: newHeight }}
+      components={{
+        table: ({ children, ...props }) => {
+          return (
+            <Scrollbar
+            >
+              <table {...props} ref={tableRef}>
+                {children}
+              </table>
+            </Scrollbar>
+          );
+        }
+      }}
+      scroll={{ y: '100%' }}
       columns={columns}
       rowKey={rowKey}
       hasData={dataSource.length === 0}

@@ -27,7 +27,8 @@
               .ant-table-thead,
               .ant-table-body {
                 tr {
-                  td {
+                  td,
+                  th {
                     padding: 12px 8px;
                   }
                 }

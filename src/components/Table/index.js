@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { Table as ATable } from 'antd';
+import { size } from 'lodash';
 import { PAGE_SIZE } from 'constants/table';
 import * as styles from './table.module.scss';
 import Scrollbar from 'components/Scrollbar';
 const Table = ({
-  size = 'middle',
   tableLayout = 'fixed',
   bordered = false,
   columns = [],
@@ -24,7 +24,7 @@ const Table = ({
     <ATable
       tableLayout={tableLayout}
       bordered={bordered}
-      size={size}
+      size={'fixed'}
       locale={{
         emptyText: emptyText
       }}
@@ -47,7 +47,7 @@ const Table = ({
       scroll={{ y: '100%' }}
       columns={columns}
       rowKey={rowKey}
-      hasData={dataSource.length === 0}
+      hasData={size(dataSource) === 0}
       dataSource={dataSource}
       {...props}
     />

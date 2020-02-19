@@ -40316,6 +40316,7 @@ MrkAttachment = class {
     this.status = null;
     this.fType = null;
     this.hasDigitalSign = null;
+    this.digitalSigns = null;
     if (args) {
       if (args.id !== undefined && args.id !== null) {
         this.id = args.id;
@@ -40346,6 +40347,9 @@ MrkAttachment = class {
       }
       if (args.hasDigitalSign !== undefined && args.hasDigitalSign !== null) {
         this.hasDigitalSign = args.hasDigitalSign;
+      }
+      if (args.digitalSigns !== undefined && args.digitalSigns !== null) {
+        this.digitalSigns = Thrift.copyList(args.digitalSigns, [null]);
       }
     }
   }
@@ -40432,6 +40436,22 @@ MrkAttachment = class {
           input.skip(ftype);
         }
         break;
+        case 11:
+        if (ftype == Thrift.Type.LIST) {
+          this.digitalSigns = [];
+          const _rtmp321 = input.readListBegin();
+          const _size20 = _rtmp321.size || 0;
+          for (let _i22 = 0; _i22 < _size20; ++_i22) {
+            let elem23 = null;
+            elem23 = new MrkDigitalSign();
+            elem23.read(input);
+            this.digitalSigns.push(elem23);
+          }
+          input.readListEnd();
+        } else {
+          input.skip(ftype);
+        }
+        break;
         default:
           input.skip(ftype);
       }
@@ -40493,6 +40513,308 @@ MrkAttachment = class {
       output.writeBool(this.hasDigitalSign);
       output.writeFieldEnd();
     }
+    if (this.digitalSigns !== null && this.digitalSigns !== undefined) {
+      output.writeFieldBegin('digitalSigns', Thrift.Type.LIST, 11);
+      output.writeListBegin(Thrift.Type.STRUCT, this.digitalSigns.length);
+      for (let iter24 in this.digitalSigns) {
+        if (this.digitalSigns.hasOwnProperty(iter24)) {
+          iter24 = this.digitalSigns[iter24];
+          iter24.write(output);
+        }
+      }
+      output.writeListEnd();
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkDigitalSign = class {
+  constructor(args) {
+    this.id = null;
+    this.documentId = null;
+    this.attachmentId = null;
+    this.clientId = null;
+    this.signDetails = null;
+    this.signature = null;
+    if (args) {
+      if (args.id !== undefined && args.id !== null) {
+        this.id = args.id;
+      }
+      if (args.documentId !== undefined && args.documentId !== null) {
+        this.documentId = args.documentId;
+      }
+      if (args.attachmentId !== undefined && args.attachmentId !== null) {
+        this.attachmentId = args.attachmentId;
+      }
+      if (args.clientId !== undefined && args.clientId !== null) {
+        this.clientId = args.clientId;
+      }
+      if (args.signDetails !== undefined && args.signDetails !== null) {
+        this.signDetails = Thrift.copyList(args.signDetails, [null]);
+      }
+      if (args.signature !== undefined && args.signature !== null) {
+        this.signature = args.signature;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 1:
+        if (ftype == Thrift.Type.STRING) {
+          this.id = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRING) {
+          this.documentId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 3:
+        if (ftype == Thrift.Type.STRING) {
+          this.attachmentId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 4:
+        if (ftype == Thrift.Type.STRING) {
+          this.clientId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 5:
+        if (ftype == Thrift.Type.LIST) {
+          this.signDetails = [];
+          const _rtmp326 = input.readListBegin();
+          const _size25 = _rtmp326.size || 0;
+          for (let _i27 = 0; _i27 < _size25; ++_i27) {
+            let elem28 = null;
+            elem28 = new MrkDigitalSignDetails();
+            elem28.read(input);
+            this.signDetails.push(elem28);
+          }
+          input.readListEnd();
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 6:
+        if (ftype == Thrift.Type.STRING) {
+          this.signature = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkDigitalSign');
+    if (this.id !== null && this.id !== undefined) {
+      output.writeFieldBegin('id', Thrift.Type.STRING, 1);
+      output.writeString(this.id);
+      output.writeFieldEnd();
+    }
+    if (this.documentId !== null && this.documentId !== undefined) {
+      output.writeFieldBegin('documentId', Thrift.Type.STRING, 2);
+      output.writeString(this.documentId);
+      output.writeFieldEnd();
+    }
+    if (this.attachmentId !== null && this.attachmentId !== undefined) {
+      output.writeFieldBegin('attachmentId', Thrift.Type.STRING, 3);
+      output.writeString(this.attachmentId);
+      output.writeFieldEnd();
+    }
+    if (this.clientId !== null && this.clientId !== undefined) {
+      output.writeFieldBegin('clientId', Thrift.Type.STRING, 4);
+      output.writeString(this.clientId);
+      output.writeFieldEnd();
+    }
+    if (this.signDetails !== null && this.signDetails !== undefined) {
+      output.writeFieldBegin('signDetails', Thrift.Type.LIST, 5);
+      output.writeListBegin(Thrift.Type.STRUCT, this.signDetails.length);
+      for (let iter29 in this.signDetails) {
+        if (this.signDetails.hasOwnProperty(iter29)) {
+          iter29 = this.signDetails[iter29];
+          iter29.write(output);
+        }
+      }
+      output.writeListEnd();
+      output.writeFieldEnd();
+    }
+    if (this.signature !== null && this.signature !== undefined) {
+      output.writeFieldBegin('signature', Thrift.Type.STRING, 6);
+      output.writeString(this.signature);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkDigitalSignDetails = class {
+  constructor(args) {
+    this.id = null;
+    this.userName = null;
+    this.serialNumber = null;
+    this.issuerDN = null;
+    this.subjectDN = null;
+    this.signDate = null;
+    this.signInSystem = null;
+    if (args) {
+      if (args.id !== undefined && args.id !== null) {
+        this.id = args.id;
+      }
+      if (args.userName !== undefined && args.userName !== null) {
+        this.userName = args.userName;
+      }
+      if (args.serialNumber !== undefined && args.serialNumber !== null) {
+        this.serialNumber = args.serialNumber;
+      }
+      if (args.issuerDN !== undefined && args.issuerDN !== null) {
+        this.issuerDN = args.issuerDN;
+      }
+      if (args.subjectDN !== undefined && args.subjectDN !== null) {
+        this.subjectDN = args.subjectDN;
+      }
+      if (args.signDate !== undefined && args.signDate !== null) {
+        this.signDate = args.signDate;
+      }
+      if (args.signInSystem !== undefined && args.signInSystem !== null) {
+        this.signInSystem = args.signInSystem;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 1:
+        if (ftype == Thrift.Type.STRING) {
+          this.id = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRING) {
+          this.userName = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 3:
+        if (ftype == Thrift.Type.STRING) {
+          this.serialNumber = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 4:
+        if (ftype == Thrift.Type.STRING) {
+          this.issuerDN = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 5:
+        if (ftype == Thrift.Type.STRING) {
+          this.subjectDN = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 6:
+        if (ftype == Thrift.Type.I64) {
+          this.signDate = input.readI64().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 7:
+        if (ftype == Thrift.Type.STRING) {
+          this.signInSystem = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkDigitalSignDetails');
+    if (this.id !== null && this.id !== undefined) {
+      output.writeFieldBegin('id', Thrift.Type.STRING, 1);
+      output.writeString(this.id);
+      output.writeFieldEnd();
+    }
+    if (this.userName !== null && this.userName !== undefined) {
+      output.writeFieldBegin('userName', Thrift.Type.STRING, 2);
+      output.writeString(this.userName);
+      output.writeFieldEnd();
+    }
+    if (this.serialNumber !== null && this.serialNumber !== undefined) {
+      output.writeFieldBegin('serialNumber', Thrift.Type.STRING, 3);
+      output.writeString(this.serialNumber);
+      output.writeFieldEnd();
+    }
+    if (this.issuerDN !== null && this.issuerDN !== undefined) {
+      output.writeFieldBegin('issuerDN', Thrift.Type.STRING, 4);
+      output.writeString(this.issuerDN);
+      output.writeFieldEnd();
+    }
+    if (this.subjectDN !== null && this.subjectDN !== undefined) {
+      output.writeFieldBegin('subjectDN', Thrift.Type.STRING, 5);
+      output.writeString(this.subjectDN);
+      output.writeFieldEnd();
+    }
+    if (this.signDate !== null && this.signDate !== undefined) {
+      output.writeFieldBegin('signDate', Thrift.Type.I64, 6);
+      output.writeI64(this.signDate);
+      output.writeFieldEnd();
+    }
+    if (this.signInSystem !== null && this.signInSystem !== undefined) {
+      output.writeFieldBegin('signInSystem', Thrift.Type.STRING, 7);
+      output.writeString(this.signInSystem);
+      output.writeFieldEnd();
+    }
     output.writeFieldStop();
     output.writeStructEnd();
     return;
@@ -40538,13 +40860,13 @@ MrkDocumentData = class {
         case 2:
         if (ftype == Thrift.Type.LIST) {
           this.items = [];
-          const _rtmp321 = input.readListBegin();
-          const _size20 = _rtmp321.size || 0;
-          for (let _i22 = 0; _i22 < _size20; ++_i22) {
-            let elem23 = null;
-            elem23 = new ContentItem();
-            elem23.read(input);
-            this.items.push(elem23);
+          const _rtmp331 = input.readListBegin();
+          const _size30 = _rtmp331.size || 0;
+          for (let _i32 = 0; _i32 < _size30; ++_i32) {
+            let elem33 = null;
+            elem33 = new ContentItem();
+            elem33.read(input);
+            this.items.push(elem33);
           }
           input.readListEnd();
         } else {
@@ -40554,13 +40876,13 @@ MrkDocumentData = class {
         case 3:
         if (ftype == Thrift.Type.LIST) {
           this.atts = [];
-          const _rtmp325 = input.readListBegin();
-          const _size24 = _rtmp325.size || 0;
-          for (let _i26 = 0; _i26 < _size24; ++_i26) {
-            let elem27 = null;
-            elem27 = new MrkAttachment();
-            elem27.read(input);
-            this.atts.push(elem27);
+          const _rtmp335 = input.readListBegin();
+          const _size34 = _rtmp335.size || 0;
+          for (let _i36 = 0; _i36 < _size34; ++_i36) {
+            let elem37 = null;
+            elem37 = new MrkAttachment();
+            elem37.read(input);
+            this.atts.push(elem37);
           }
           input.readListEnd();
         } else {
@@ -40586,10 +40908,10 @@ MrkDocumentData = class {
     if (this.items !== null && this.items !== undefined) {
       output.writeFieldBegin('items', Thrift.Type.LIST, 2);
       output.writeListBegin(Thrift.Type.STRUCT, this.items.length);
-      for (let iter28 in this.items) {
-        if (this.items.hasOwnProperty(iter28)) {
-          iter28 = this.items[iter28];
-          iter28.write(output);
+      for (let iter38 in this.items) {
+        if (this.items.hasOwnProperty(iter38)) {
+          iter38 = this.items[iter38];
+          iter38.write(output);
         }
       }
       output.writeListEnd();
@@ -40598,10 +40920,10 @@ MrkDocumentData = class {
     if (this.atts !== null && this.atts !== undefined) {
       output.writeFieldBegin('atts', Thrift.Type.LIST, 3);
       output.writeListBegin(Thrift.Type.STRUCT, this.atts.length);
-      for (let iter29 in this.atts) {
-        if (this.atts.hasOwnProperty(iter29)) {
-          iter29 = this.atts[iter29];
-          iter29.write(output);
+      for (let iter39 in this.atts) {
+        if (this.atts.hasOwnProperty(iter39)) {
+          iter39 = this.atts[iter39];
+          iter39.write(output);
         }
       }
       output.writeListEnd();
@@ -40866,13 +41188,13 @@ MrkHistoryPage = class {
         case 1:
         if (ftype == Thrift.Type.LIST) {
           this.historyData = [];
-          const _rtmp331 = input.readListBegin();
-          const _size30 = _rtmp331.size || 0;
-          for (let _i32 = 0; _i32 < _size30; ++_i32) {
-            let elem33 = null;
-            elem33 = new MrkHistory();
-            elem33.read(input);
-            this.historyData.push(elem33);
+          const _rtmp341 = input.readListBegin();
+          const _size40 = _rtmp341.size || 0;
+          for (let _i42 = 0; _i42 < _size40; ++_i42) {
+            let elem43 = null;
+            elem43 = new MrkHistory();
+            elem43.read(input);
+            this.historyData.push(elem43);
           }
           input.readListEnd();
         } else {
@@ -40900,10 +41222,10 @@ MrkHistoryPage = class {
     if (this.historyData !== null && this.historyData !== undefined) {
       output.writeFieldBegin('historyData', Thrift.Type.LIST, 1);
       output.writeListBegin(Thrift.Type.STRUCT, this.historyData.length);
-      for (let iter34 in this.historyData) {
-        if (this.historyData.hasOwnProperty(iter34)) {
-          iter34 = this.historyData[iter34];
-          iter34.write(output);
+      for (let iter44 in this.historyData) {
+        if (this.historyData.hasOwnProperty(iter44)) {
+          iter44 = this.historyData[iter44];
+          iter44.write(output);
         }
       }
       output.writeListEnd();
@@ -40947,13 +41269,13 @@ MrkAlmexSysUserPage = class {
         case 1:
         if (ftype == Thrift.Type.LIST) {
           this.almexUsersData = [];
-          const _rtmp336 = input.readListBegin();
-          const _size35 = _rtmp336.size || 0;
-          for (let _i37 = 0; _i37 < _size35; ++_i37) {
-            let elem38 = null;
-            elem38 = new MrkAlmexSysUser();
-            elem38.read(input);
-            this.almexUsersData.push(elem38);
+          const _rtmp346 = input.readListBegin();
+          const _size45 = _rtmp346.size || 0;
+          for (let _i47 = 0; _i47 < _size45; ++_i47) {
+            let elem48 = null;
+            elem48 = new MrkAlmexSysUser();
+            elem48.read(input);
+            this.almexUsersData.push(elem48);
           }
           input.readListEnd();
         } else {
@@ -40981,10 +41303,10 @@ MrkAlmexSysUserPage = class {
     if (this.almexUsersData !== null && this.almexUsersData !== undefined) {
       output.writeFieldBegin('almexUsersData', Thrift.Type.LIST, 1);
       output.writeListBegin(Thrift.Type.STRUCT, this.almexUsersData.length);
-      for (let iter39 in this.almexUsersData) {
-        if (this.almexUsersData.hasOwnProperty(iter39)) {
-          iter39 = this.almexUsersData[iter39];
-          iter39.write(output);
+      for (let iter49 in this.almexUsersData) {
+        if (this.almexUsersData.hasOwnProperty(iter49)) {
+          iter49 = this.almexUsersData[iter49];
+          iter49.write(output);
         }
       }
       output.writeListEnd();
@@ -41001,7 +41323,7 @@ MrkAlmexSysUserPage = class {
   }
 
 };
-MRK_CURRENT_VERSION = 'mrk-1.0.1';
+MRK_CURRENT_VERSION = 'mrk-1.0.2';
 //
 // Autogenerated by Thrift Compiler (0.13.0)
 //
@@ -41064,19 +41386,19 @@ MrkClientService_getInfo_result = class {
         case 0:
         if (ftype == Thrift.Type.MAP) {
           this.success = {};
-          const _rtmp341 = input.readMapBegin();
-          const _size40 = _rtmp341.size || 0;
-          for (let _i42 = 0; _i42 < _size40; ++_i42) {
-            if (_i42 > 0 ) {
+          const _rtmp351 = input.readMapBegin();
+          const _size50 = _rtmp351.size || 0;
+          for (let _i52 = 0; _i52 < _size50; ++_i52) {
+            if (_i52 > 0 ) {
               if (input.rstack.length > input.rpos[input.rpos.length -1] + 1) {
                 input.rstack.pop();
               }
             }
-            let key43 = null;
-            let val44 = null;
-            key43 = input.readString().value;
-            val44 = input.readString().value;
-            this.success[key43] = val44;
+            let key53 = null;
+            let val54 = null;
+            key53 = input.readString().value;
+            val54 = input.readString().value;
+            this.success[key53] = val54;
           }
           input.readMapEnd();
         } else {
@@ -41100,11 +41422,11 @@ MrkClientService_getInfo_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.MAP, 0);
       output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(this.success));
-      for (let kiter45 in this.success) {
-        if (this.success.hasOwnProperty(kiter45)) {
-          let viter46 = this.success[kiter45];
-          output.writeString(kiter45);
-          output.writeString(viter46);
+      for (let kiter55 in this.success) {
+        if (this.success.hasOwnProperty(kiter55)) {
+          let viter56 = this.success[kiter55];
+          output.writeString(kiter55);
+          output.writeString(viter56);
         }
       }
       output.writeMapEnd();
@@ -41182,19 +41504,19 @@ MrkClientService_getAllLanguages_result = class {
         case 0:
         if (ftype == Thrift.Type.MAP) {
           this.success = {};
-          const _rtmp348 = input.readMapBegin();
-          const _size47 = _rtmp348.size || 0;
-          for (let _i49 = 0; _i49 < _size47; ++_i49) {
-            if (_i49 > 0 ) {
+          const _rtmp358 = input.readMapBegin();
+          const _size57 = _rtmp358.size || 0;
+          for (let _i59 = 0; _i59 < _size57; ++_i59) {
+            if (_i59 > 0 ) {
               if (input.rstack.length > input.rpos[input.rpos.length -1] + 1) {
                 input.rstack.pop();
               }
             }
-            let key50 = null;
-            let val51 = null;
-            key50 = input.readString().value;
-            val51 = input.readString().value;
-            this.success[key50] = val51;
+            let key60 = null;
+            let val61 = null;
+            key60 = input.readString().value;
+            val61 = input.readString().value;
+            this.success[key60] = val61;
           }
           input.readMapEnd();
         } else {
@@ -41231,11 +41553,11 @@ MrkClientService_getAllLanguages_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.MAP, 0);
       output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(this.success));
-      for (let kiter52 in this.success) {
-        if (this.success.hasOwnProperty(kiter52)) {
-          let viter53 = this.success[kiter52];
-          output.writeString(kiter52);
-          output.writeString(viter53);
+      for (let kiter62 in this.success) {
+        if (this.success.hasOwnProperty(kiter62)) {
+          let viter63 = this.success[kiter62];
+          output.writeString(kiter62);
+          output.writeString(viter63);
         }
       }
       output.writeMapEnd();
@@ -43448,19 +43770,19 @@ MrkClientService_sendDocument_args = class {
         case 4:
         if (ftype == Thrift.Type.MAP) {
           this.attachmentSignature = {};
-          const _rtmp355 = input.readMapBegin();
-          const _size54 = _rtmp355.size || 0;
-          for (let _i56 = 0; _i56 < _size54; ++_i56) {
-            if (_i56 > 0 ) {
+          const _rtmp365 = input.readMapBegin();
+          const _size64 = _rtmp365.size || 0;
+          for (let _i66 = 0; _i66 < _size64; ++_i66) {
+            if (_i66 > 0 ) {
               if (input.rstack.length > input.rpos[input.rpos.length -1] + 1) {
                 input.rstack.pop();
               }
             }
-            let key57 = null;
-            let val58 = null;
-            key57 = input.readString().value;
-            val58 = input.readString().value;
-            this.attachmentSignature[key57] = val58;
+            let key67 = null;
+            let val68 = null;
+            key67 = input.readString().value;
+            val68 = input.readString().value;
+            this.attachmentSignature[key67] = val68;
           }
           input.readMapEnd();
         } else {
@@ -43503,11 +43825,11 @@ MrkClientService_sendDocument_args = class {
     if (this.attachmentSignature !== null && this.attachmentSignature !== undefined) {
       output.writeFieldBegin('attachmentSignature', Thrift.Type.MAP, 4);
       output.writeMapBegin(Thrift.Type.STRING, Thrift.Type.STRING, Thrift.objectLength(this.attachmentSignature));
-      for (let kiter59 in this.attachmentSignature) {
-        if (this.attachmentSignature.hasOwnProperty(kiter59)) {
-          let viter60 = this.attachmentSignature[kiter59];
-          output.writeString(kiter59);
-          output.writeString(viter60);
+      for (let kiter69 in this.attachmentSignature) {
+        if (this.attachmentSignature.hasOwnProperty(kiter69)) {
+          let viter70 = this.attachmentSignature[kiter69];
+          output.writeString(kiter69);
+          output.writeString(viter70);
         }
       }
       output.writeMapEnd();
@@ -43878,13 +44200,13 @@ MrkClientService_getAllMrkAttachments_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp362 = input.readListBegin();
-          const _size61 = _rtmp362.size || 0;
-          for (let _i63 = 0; _i63 < _size61; ++_i63) {
-            let elem64 = null;
-            elem64 = new MrkAttachment();
-            elem64.read(input);
-            this.success.push(elem64);
+          const _rtmp372 = input.readListBegin();
+          const _size71 = _rtmp372.size || 0;
+          for (let _i73 = 0; _i73 < _size71; ++_i73) {
+            let elem74 = null;
+            elem74 = new MrkAttachment();
+            elem74.read(input);
+            this.success.push(elem74);
           }
           input.readListEnd();
         } else {
@@ -43921,10 +44243,10 @@ MrkClientService_getAllMrkAttachments_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter65 in this.success) {
-        if (this.success.hasOwnProperty(iter65)) {
-          iter65 = this.success[iter65];
-          iter65.write(output);
+      for (let iter75 in this.success) {
+        if (this.success.hasOwnProperty(iter75)) {
+          iter75 = this.success[iter75];
+          iter75.write(output);
         }
       }
       output.writeListEnd();
@@ -44775,13 +45097,13 @@ MrkClientService_getAllDocumentPatterns_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp367 = input.readListBegin();
-          const _size66 = _rtmp367.size || 0;
-          for (let _i68 = 0; _i68 < _size66; ++_i68) {
-            let elem69 = null;
-            elem69 = new DocumentPattern();
-            elem69.read(input);
-            this.success.push(elem69);
+          const _rtmp377 = input.readListBegin();
+          const _size76 = _rtmp377.size || 0;
+          for (let _i78 = 0; _i78 < _size76; ++_i78) {
+            let elem79 = null;
+            elem79 = new DocumentPattern();
+            elem79.read(input);
+            this.success.push(elem79);
           }
           input.readListEnd();
         } else {
@@ -44818,10 +45140,10 @@ MrkClientService_getAllDocumentPatterns_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter70 in this.success) {
-        if (this.success.hasOwnProperty(iter70)) {
-          iter70 = this.success[iter70];
-          iter70.write(output);
+      for (let iter80 in this.success) {
+        if (this.success.hasOwnProperty(iter80)) {
+          iter80 = this.success[iter80];
+          iter80.write(output);
         }
       }
       output.writeListEnd();
@@ -47394,13 +47716,13 @@ MrkUserService_getAllMrkClients_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp372 = input.readListBegin();
-          const _size71 = _rtmp372.size || 0;
-          for (let _i73 = 0; _i73 < _size71; ++_i73) {
-            let elem74 = null;
-            elem74 = new MrkClient();
-            elem74.read(input);
-            this.success.push(elem74);
+          const _rtmp382 = input.readListBegin();
+          const _size81 = _rtmp382.size || 0;
+          for (let _i83 = 0; _i83 < _size81; ++_i83) {
+            let elem84 = null;
+            elem84 = new MrkClient();
+            elem84.read(input);
+            this.success.push(elem84);
           }
           input.readListEnd();
         } else {
@@ -47437,10 +47759,10 @@ MrkUserService_getAllMrkClients_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter75 in this.success) {
-        if (this.success.hasOwnProperty(iter75)) {
-          iter75 = this.success[iter75];
-          iter75.write(output);
+      for (let iter85 in this.success) {
+        if (this.success.hasOwnProperty(iter85)) {
+          iter85 = this.success[iter85];
+          iter85.write(output);
         }
       }
       output.writeListEnd();
@@ -47724,13 +48046,13 @@ MrkUserService_getAllMrkAccounts_result = class {
         case 0:
         if (ftype == Thrift.Type.LIST) {
           this.success = [];
-          const _rtmp377 = input.readListBegin();
-          const _size76 = _rtmp377.size || 0;
-          for (let _i78 = 0; _i78 < _size76; ++_i78) {
-            let elem79 = null;
-            elem79 = new MrkAccount();
-            elem79.read(input);
-            this.success.push(elem79);
+          const _rtmp387 = input.readListBegin();
+          const _size86 = _rtmp387.size || 0;
+          for (let _i88 = 0; _i88 < _size86; ++_i88) {
+            let elem89 = null;
+            elem89 = new MrkAccount();
+            elem89.read(input);
+            this.success.push(elem89);
           }
           input.readListEnd();
         } else {
@@ -47767,10 +48089,10 @@ MrkUserService_getAllMrkAccounts_result = class {
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.LIST, 0);
       output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-      for (let iter80 in this.success) {
-        if (this.success.hasOwnProperty(iter80)) {
-          iter80 = this.success[iter80];
-          iter80.write(output);
+      for (let iter90 in this.success) {
+        if (this.success.hasOwnProperty(iter90)) {
+          iter90 = this.success[iter90];
+          iter90.write(output);
         }
       }
       output.writeListEnd();

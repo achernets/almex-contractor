@@ -7,6 +7,7 @@ import { login } from 'redux/actions/auth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
 const FormData = ({ login, token, isFetching }) => {
@@ -52,9 +53,8 @@ const FormData = ({ login, token, isFetching }) => {
               block
               size={'large'}
               htmlType="button"
-              href={'/signUp'}
             >
-              {I18n.t('SignIn.sign_up')}
+              <Link to={'/signUp'}>{I18n.t('SignIn.sign_up')}</Link>
             </Button>
           </Col>
         </Row>

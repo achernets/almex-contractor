@@ -32,12 +32,12 @@ const RightMrkDocumentInfo = ({ selectedAttachment, toogleViewDocument, mrkDocum
     }}
     visible={mrkDocumentData !== null || isFetching}
   >
+    {isFetching && <Loader />}
+    <Close
+      onClick={hideMrkDocument}
+    />
     <Scrollbar>
       <div style={{ padding: 24 }}>
-        {isFetching && <Loader />}
-        <Close
-          onClick={hideMrkDocument}
-        />
         {mrkDocumentData !== null && <Row gutter={[0, 16]} justify={'center'} align={'middle'}>
           <Col span={24} className={styles.tc}>
             {get(mrkDocumentData, 'document.groupNumber', null) !== null &&

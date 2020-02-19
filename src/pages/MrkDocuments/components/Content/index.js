@@ -98,7 +98,8 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
         title: I18n.t('MrkDocument.createDate'),
         key: 'createDate',
         width: 140,
-        render: ({ createDate }) => moment(createDate).format('DD.MM.YYYY HH:mm')
+        render: ({ createDate }) => moment(createDate).format('DD.MM.YYYY HH:mm'),
+        ellipsis: true
       },
     ]}
     dataSource={mrkDocuments}

@@ -5,11 +5,11 @@ include "Kaz_DocumentService.thrift"
 include "Kaz_types.thrift"
 include "HB.thrift"
 
-/** Открытое api системы AlmexECM mrk version mrk-1.0.1 */
+/** Открытое api системы AlmexECM mrk version mrk-1.0.2 */
 namespace java com.devtech.mrk.thrift.gen
 
 /** Версия продукта AlmexECM mrk */
-const string MRK_CURRENT_VERSION = "mrk-1.0.1";
+const string MRK_CURRENT_VERSION = "mrk-1.0.2";
 
 enum MrkContactType {
   EMAIL,
@@ -134,6 +134,33 @@ struct MrkAttachment {
   8: common.AttachmentStatus status;
   9: optional common.FileType fType;
   10: bool hasDigitalSign;
+  11: optional list<MrkDigitalSign> digitalSigns;
+}
+
+/** Список подписей*/
+struct MrkDigitalSign {
+  1: optional string id;
+  /** идентификатор документа */
+  2: optional string documentId;
+  /** идентификатор вложения */
+  3: optional string attachmentId;
+  4: optional string clientId;
+  /** Детальная информация о подписях (пользователь, время, сертификат)*/
+  5: optional list<MrkDigitalSignDetails> signDetails;
+  6: optional string signature;
+}
+
+/** Детальная информация о подписи*/
+struct MrkDigitalSignDetails {
+   1: optional string id;
+  /** Пользователь */
+   2: optional string userName;
+   /** информации о публичном сертификате пользователя */
+   3: optional string serialNumber;
+   4: optional string issuerDN;
+   5: optional string subjectDN;
+   6: optional i64 signDate;
+   7: optional string signInSystem;
 }
 
 struct MrkDocumentData {

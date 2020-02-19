@@ -57,7 +57,10 @@ const FormData = ({ showModal }) => {
                           mrkAttachment: item.attachment
                         })}
                         attachment={item.attachment}
-                        removeAttachment={() => arrayHelpers.remove(index)}
+                        removeAttachment={(e) => {
+                          e.stopPropagation();
+                          arrayHelpers.remove(index);
+                        }}
                       />}
                   </Col>)}
                   <Col span={24}>

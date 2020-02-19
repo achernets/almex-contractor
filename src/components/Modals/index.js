@@ -1,4 +1,3 @@
-import MrkDocument from './MrkDocument';
 import CreateMrkDocument from './CreateMrkDocument';
 import ChangePassword from './ChangePassword';
 import GetFileSign from './GetFileSign';
@@ -13,7 +12,6 @@ export const Modal = ({ children, ...props }) => <ConfigProvider locale={getAntd
   </AModal>
 </ConfigProvider>;
 
-export const MODAL_MRK_DOCUMENT = MrkDocument;
 export const MODAL_CREATE_MRK_DOCUMENT = CreateMrkDocument;
 export const MODAL_CHANGE_PASSWORD = ChangePassword;
 export const MODAL_FILE_SIGN = GetFileSign;

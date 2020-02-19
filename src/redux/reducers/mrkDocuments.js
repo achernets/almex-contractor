@@ -3,7 +3,8 @@ import {
   GET_MRK_DOCUMENTS_SUCCESS,
   GET_MRK_DOCUMENTS_FAILURE,
   CHANGE_SEARCH_TEXT,
-  CHANGE_MRK_DOCUMENT_TYPE
+  CHANGE_MRK_DOCUMENT_TYPE,
+  UPDATE_DOCUMENT
 } from '../actions/mrkDocuments';
 
 const initialState = {
@@ -49,6 +50,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         mrkDocumentType: action.payload
+      };
+    case UPDATE_DOCUMENT:
+      return {
+        ...state,
+        mrkDocuments: action.payload
       };
     default:
       return state;

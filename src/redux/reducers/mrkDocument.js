@@ -10,7 +10,8 @@ import {
   GET_CHAIN_FAILURE,
   CHANGE_CHAIN_REQUEST,
   CHANGE_CHAIN_SUCCESS,
-  CHANGE_CHAIN_FAILURE
+  CHANGE_CHAIN_FAILURE,
+  TOOGLE_VIEWED
 } from '../actions/mrkDocument';
 
 const initialState = {
@@ -33,6 +34,7 @@ export default (state = initialState, action) => {
         activeChain: null
       };
     case GET_MRK_DOCUMENT_SUCCESS:
+    case TOOGLE_VIEWED:
       return {
         ...state,
         mrkDocumentData: action.payload,

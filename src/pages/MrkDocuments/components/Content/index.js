@@ -8,11 +8,13 @@ import { editDocument } from 'redux/actions/Modal/createMrkDocument';
 import { PAGE_SIZE } from 'constants/table';
 import { I18n } from 'react-redux-i18n';
 import Empty from 'components/Empty';
-import { Button, Typography } from 'antd';
+import { Button, Typography, Tooltip } from 'antd';
 import moment from 'moment';
+import classnames from 'classnames';
 import RightMrkDocumentInfo from 'components/RightMrkDocumentInfo';
 import LeftOnlyOffice from 'components/LeftOnlyOffice';
 import { actions } from 'react-redux-modals';
+import { Attach, Ecp } from 'components/Icons';
 
 const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAttachment, editDocument, mrkDocuments, isSearch, count, page, isFetching }) => {
   useEffect(() => {
@@ -22,8 +24,49 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
     loading={isFetching}
     columns={[
       {
+        title: null,
+        dataIndex: 'signInSystem',
+        width: 34,
+        align: 'center',
+        render: (signInSystem) => {
+          switch (signInSystem) {
+            case SignInSystem.ALMEX:
+              return <Tooltip placement={'right'} title={I18n.t('SignInSystem.ALMEX_TOOLTIP')}>
+                <Ecp style={{ height: 18, width: 18 }} fill={'#faad14'} />
+              </Tooltip>;
+            case SignInSystem.EXTERNAL:
+              return <Tooltip placement={'right'} title={I18n.t('SignInSystem.EXTERNAL_TOOLTIP')}>
+                <Ecp style={{ height: 18, width: 18 }} fill={'#8c8c8c'} />
+              </Tooltip>;
+            case SignInSystem.BOTH:
+              return <Tooltip placement={'right'} title={I18n.t('SignInSystem.BOTH_TOOLTIP')}>
+                <Ecp style={{ height: 18, width: 18 }} fill={'#1890ff'} />
+              </Tooltip>;
+            default:
+              return '';
+          }
+        }
+      },
+      {
         title: I18n.t('MrkDocument.name'),
         dataIndex: 'name',
+        render: (text, { hasAttachments = false }) => {
+          return <span style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center'
+          }}>
+            <span style={{
+              maxWidth: '100%',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              marginRight: 4
+            }}>{text}</span>
+            {hasAttachments && <Tooltip title={I18n.t('MrkDocument.hasAttachments')}>
+              <Attach />
+            </Tooltip>}
+          </span>;
+        },
         ellipsis: true
       },
       {
@@ -54,7 +97,8 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
       {
         title: I18n.t('MrkDocument.createDate'),
         key: 'createDate',
-        render: ({ createDate }) => moment(createDate).format('DD.MM.YYYY HH:mm:ss')
+        width: 140,
+        render: ({ createDate }) => moment(createDate).format('DD.MM.YYYY HH:mm')
       },
     ]}
     dataSource={mrkDocuments}
@@ -67,13 +111,9 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
     }}
     onRow={(record) => {
       return {
+        className: classnames({ 'not_viewed': !record.viewed }),
         onClick: () => {
           record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showPreviewDocument(record);
-        },
-        onDoubleClick: () => {
-          record.type === MrkDocumentType.DRAFT ? editDocument(record.id) : showModal('MODAL_MRK_DOCUMENT', {
-            mrkDocument: record
-          });
         }
       };
     }}

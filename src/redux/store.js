@@ -7,10 +7,11 @@ import { getInitialState } from './asyncStore';
 import * as api from 'api';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { syncTranslationWithStore } from 'react-redux-i18n';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 import { createLogger } from 'redux-logger';
 
-export const history = createBrowserHistory({
+export const history = createHashHistory({
+  hashType: 'slash',
   basename: process.env.PUBLIC_URL + '/'
 });
 

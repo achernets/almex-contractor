@@ -1,5 +1,5 @@
 import { NotificationError } from 'utils/helpers';
-
+import { updateDocument } from 'redux/actions/mrkDocuments';
 export const SELECTED_MRK_DOCUMENT = 'MRK_DOCUMENT/SELECTED_MRK_DOCUMENT';
 export const showPreviewDocument = mrkDocument => {
   return async (dispatch) => {
@@ -135,6 +135,30 @@ export const changeChain = documentId => {
     } catch (error) {
       NotificationError(error, 'getMrkDocumentData');
       dispatch({ type: CHANGE_CHAIN_FAILURE });
+    }
+  };
+};
+
+export const TOOGLE_VIEWED = 'MRK_DOCUMENT/TOOGLE_VIEWED';
+export const toogleViewDocument = (documentId, read = true) => {
+  return async (dispatch, getState, api) => {
+
+    try {
+      const {
+        auth: { token }
+      } = getState();
+      const result = await api.MrkClientServiceClient.markMrkDocumentAsRead(
+        token,
+        documentId,
+        read
+      );
+      dispatch({
+        type: TOOGLE_VIEWED,
+        payload: result
+      });
+      dispatch(updateDocument(result.document));
+    } catch (error) {
+      NotificationError(error, 'getMrkDocumentData');
     }
   };
 };

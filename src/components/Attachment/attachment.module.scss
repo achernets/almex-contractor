@@ -45,14 +45,12 @@
     @include icon-remove-hover;
     .name {
       color: $text_right;
-      font-family: "SFUIText Regular";
       text-overflow: "ellipsis";
       width: 100%;
       word-break: break-word;
     }
     .date {
       color: $text_left;
-      font-family: "SFUIText Regular";
       text-overflow: "ellipsis";
       width: 100%;
       word-break: break-word;

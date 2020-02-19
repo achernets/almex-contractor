@@ -37,7 +37,7 @@ const HeaderDocs = ({ showModal, isFetching, getMrkDocuments, changeMrkDocumentT
             value={searchText}
             onChange={e => changeTextSearch(e.target.value)}
             onSearch={() => getMrkDocuments()}
-            placeholder={I18n.t('MrkDocuments.name')}
+            placeholder={I18n.t('MrkDocuments.search')}
             disabled={isFetching}
           />
         </Col>

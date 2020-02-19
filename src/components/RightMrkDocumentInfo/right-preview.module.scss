@@ -2,18 +2,15 @@
 
 .titleLeft {
   color: $title_color;
-  font-family: "SFUIText Medium";
 }
 
 .infoLeft {
   color: $text_left;
-  font-family: "SFUIText Regular";
 }
 
 .titleRight,
 .infoRight {
   color: $text_right;
-  font-family: "SFUIText Regular";
 }
 
 .tr {
@@ -25,14 +22,12 @@
 
 .title {
   color: #262626;
-  font-family: "SFUIText Medium";
   font-size: 16px;
   margin-left: 4px;
 }
 
 .subtitle {
   color: $text_right;
-  font-family: "SFUIText Regular";
   margin-bottom: unset;
 }
 
@@ -40,7 +35,6 @@
   border-radius: 2px;
   padding: 8px;
   border: 1px solid #e8e8e8;
-  font-family: "SFUIText Regular";
   &.att_active {
     border: 1px solid $blue;
     background: rgba(24, 144, 255, 0.05);
@@ -54,6 +48,7 @@
       padding-top: 16px;
     }
     .ecp_content {
+      margin-left: 8px;
       flex: 1;
     }
   }

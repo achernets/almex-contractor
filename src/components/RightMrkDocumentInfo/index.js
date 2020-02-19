@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Drawer, Typography, Row, Button, Col, Tooltip } from 'antd';
 import { MrkDocumentView, MrkDocumentChain } from './components';
 import { connect } from 'react-redux';
 import { I18n } from 'react-redux-i18n';
 import { bindActionCreators } from 'redux';
-import { hideMrkDocument, toogleView, selectedAttachment } from 'redux/actions/mrkDocument';
+import { hideMrkDocument, toogleView, toogleViewDocument, selectedAttachment } from 'redux/actions/mrkDocument';
 import Loader from 'components/Loader';
 import { get } from 'lodash';
 import { actions } from 'react-redux-modals';
 import { Close, Chain } from 'components/Icons';
 import * as styles from './right-preview.module.scss';
 
-const RightMrkDocumentInfo = ({ selectedAttachment, mrkDocumentData, mrkAttachment, isFetching, hideMrkDocument, showModal, toogleView, showChain }) => {
+const RightMrkDocumentInfo = ({ selectedAttachment, toogleViewDocument, mrkDocumentData, mrkAttachment, isFetching, hideMrkDocument, showModal, toogleView, showChain }) => {
+
+  useEffect(() => {
+    let timeoutViewed = null;
+    if (get(mrkDocumentData, 'document.viewed', true) === false) timeoutViewed = setTimeout(() => toogleViewDocument(get(mrkDocumentData, 'document.id', null), true), 7000);
+    return () => clearTimeout(timeoutViewed);
+  }, [mrkDocumentData]);
+
   return <Drawer
     width={496}
     placement={'right'}
@@ -85,6 +92,7 @@ const mapDispatchToProps = dispatch =>
       hideMrkDocument,
       selectedAttachment,
       toogleView,
+      toogleViewDocument,
       showModal: actions.showModal,
     },
     dispatch

@@ -1,4 +1,4 @@
-import { isEmpty, keys } from 'lodash';
+import { isEmpty, keys, map } from 'lodash';
 import { PAGE_SIZE } from 'constants/table';
 import { NotificationError } from 'utils/helpers';
 
@@ -70,5 +70,18 @@ export const changeMrkDocumentType = type => {
       payload: type
     });
     dispatch(getMrkDocuments());
+  };
+};
+
+export const UPDATE_DOCUMENT = 'PAGE_MRK_DOCUMENTS/UPDATE_DOCUMENT';
+export const updateDocument = document => {
+  return async (dispatch, getState, api) => {
+    const {
+      mrkDocuments: { mrkDocuments }
+    } = getState();
+    dispatch({
+      type: UPDATE_DOCUMENT,
+      payload: map(mrkDocuments, item => new MrkDocument(item.id === document.id ? document : item))
+    });
   };
 };

@@ -55,7 +55,8 @@
     "no_data": "Добро пожаловать в AlmexECM! Теперь вы можете написать обращение.",
     "no_data_search": "По вашему запросу ничего не найдено",
     "create": "Создать",
-    "create_empty": "Создать обращение"
+    "create_empty": "Создать обращение",
+    "search": "Краткое содержание"
   },
   "MrkDocument": {
     "name": "Краткое содержание",
@@ -67,7 +68,8 @@
     "createDate": "Дата поручения",
     "send_answer": "Сформировать ответ",
     "show_chain": "Показать цепочку",
-    "hide_chain": "Спрятать цепочку"
+    "hide_chain": "Спрятать цепочку",
+    "hasAttachments": "Есть вложения"
   },
   "MrkDocumentType": {
     "DRAFT": "Черновики",
@@ -117,5 +119,13 @@
     "title": "Подтвердить c ЭЦП",
     "file": "Укажите файл ЭЦП",
     "password": "Введите пароль"
+  },
+  "SignInSystem": {
+    "ALMEX": "ALMEX",
+    "EXTERNAL": "EXTERNAL",
+    "BOTH": "BOTH",
+    "ALMEX_TOOLTIP": "Подписано контрагентом",
+    "EXTERNAL_TOOLTIP": "Подписано Вами",
+    "BOTH_TOOLTIP": "Подписано двумя сторонами"
   }
 }

@@ -75,6 +75,11 @@ struct MrkUser {
   7: string middleName;
 }
 
+struct MrkUserPage {
+  1: list<MrkUser> users;
+  2: i32 count;
+}
+
 struct MrkUserSession {
   1: string id;
   2: i64 createDate;
@@ -110,6 +115,7 @@ struct MrkDocument {
   20: optional string extRespExecId;
   21: optional string extRespPatternId;
   22: optional Kaz_DocumentService.DocPatternStageRequirement extRespReq;
+  23: bool hasAttachments;
 }
 
 struct MrkDocumentPage {
@@ -222,10 +228,10 @@ service MrkClientService {
 service MrkUserService {
   MrkUserSession authMrkUser(1: string login; 2: string password, 3: string ip, 4: string langCode, 5: i32 cacheVersion) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
-  list<MrkUser> getAllMrkUsers(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  i32 getCountAllMrkUsers(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  MrkUserPage getMrkUserPage(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkUser changeMrkUser(1: string token, 2: MrkUser toUpdate, 3: string password, 4:string idToRemove) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
+//пока не надо
   list<MrkClient> getAllMrkClients(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   i32 getCountAllMrkClients(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 

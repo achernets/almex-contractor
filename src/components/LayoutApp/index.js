@@ -13,7 +13,7 @@ const LayoutApp = ({ children }) => <Layout className={styles.layuot_app}>
 </Layout>;
 
 const SubLayout = ({ children }) => <Layout className={styles.layuot_sub}>
-  <Content>
+  <Content style={{ display: 'flex' }}>
     {children}
   </Content>
 </Layout>;

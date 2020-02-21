@@ -38757,6 +38757,12 @@ MrkDocumentType = {
   'INPUT' : 1,
   'OUTPUT' : 2
 };
+MrkDocResponceType = {
+  'OPTIONAL_NEW' : 0,
+  'REQUIRED_SAME' : 1,
+  'REQUIRED_NEW' : 2,
+  'PROHIBITED' : 3
+};
 MrkHistoryKey = {
   'CLIENT_LOGIN' : 0,
   'CLIENT_CREATED' : 1,
@@ -39826,6 +39832,7 @@ MrkDocument = class {
   constructor(args) {
     this.id = null;
     this.extId = null;
+    this.extIteration = null;
     this.accountId = null;
     this.patternId = null;
     this.patternName = null;
@@ -39847,12 +39854,16 @@ MrkDocument = class {
     this.extRespPatternId = null;
     this.extRespReq = null;
     this.hasAttachments = null;
+    this.hasDigitalSign = null;
     if (args) {
       if (args.id !== undefined && args.id !== null) {
         this.id = args.id;
       }
       if (args.extId !== undefined && args.extId !== null) {
         this.extId = args.extId;
+      }
+      if (args.extIteration !== undefined && args.extIteration !== null) {
+        this.extIteration = args.extIteration;
       }
       if (args.accountId !== undefined && args.accountId !== null) {
         this.accountId = args.accountId;
@@ -39917,6 +39928,9 @@ MrkDocument = class {
       if (args.hasAttachments !== undefined && args.hasAttachments !== null) {
         this.hasAttachments = args.hasAttachments;
       }
+      if (args.hasDigitalSign !== undefined && args.hasDigitalSign !== null) {
+        this.hasDigitalSign = args.hasDigitalSign;
+      }
     }
   }
 
@@ -39946,147 +39960,161 @@ MrkDocument = class {
         break;
         case 3:
         if (ftype == Thrift.Type.STRING) {
-          this.accountId = input.readString().value;
+          this.extIteration = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 4:
         if (ftype == Thrift.Type.STRING) {
-          this.patternId = input.readString().value;
+          this.accountId = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 5:
         if (ftype == Thrift.Type.STRING) {
-          this.patternName = input.readString().value;
+          this.patternId = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 6:
         if (ftype == Thrift.Type.STRING) {
-          this.name = input.readString().value;
+          this.patternName = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 7:
+        if (ftype == Thrift.Type.STRING) {
+          this.name = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 8:
         if (ftype == Thrift.Type.I32) {
           this.type = input.readI32().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 8:
+        case 9:
         if (ftype == Thrift.Type.I64) {
           this.createDate = input.readI64().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 9:
+        case 10:
         if (ftype == Thrift.Type.STRING) {
           this.parentId = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 10:
+        case 11:
         if (ftype == Thrift.Type.BOOL) {
           this.viewed = input.readBool().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 11:
+        case 12:
         if (ftype == Thrift.Type.I64) {
           this.sendDate = input.readI64().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 12:
+        case 13:
         if (ftype == Thrift.Type.I64) {
           this.receiveDate = input.readI64().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 13:
+        case 14:
         if (ftype == Thrift.Type.STRING) {
           this.creatorId = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 14:
+        case 15:
         if (ftype == Thrift.Type.STRING) {
           this.groupNumber = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 15:
+        case 16:
         if (ftype == Thrift.Type.I32) {
           this.signInSystem = input.readI32().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 16:
+        case 17:
         if (ftype == Thrift.Type.STRING) {
           this.extCameFrom = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 17:
+        case 18:
         if (ftype == Thrift.Type.STRING) {
           this.extNumber = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 18:
+        case 19:
         if (ftype == Thrift.Type.STRING) {
           this.extAuthorName = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 19:
+        case 20:
         if (ftype == Thrift.Type.STRING) {
           this.extAuthorEmail = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 20:
+        case 21:
         if (ftype == Thrift.Type.STRING) {
           this.extRespExecId = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 21:
+        case 22:
         if (ftype == Thrift.Type.STRING) {
           this.extRespPatternId = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 22:
+        case 23:
         if (ftype == Thrift.Type.I32) {
           this.extRespReq = input.readI32().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 23:
+        case 24:
         if (ftype == Thrift.Type.BOOL) {
           this.hasAttachments = input.readBool().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 25:
+        if (ftype == Thrift.Type.BOOL) {
+          this.hasDigitalSign = input.readBool().value;
         } else {
           input.skip(ftype);
         }
@@ -40112,109 +40140,119 @@ MrkDocument = class {
       output.writeString(this.extId);
       output.writeFieldEnd();
     }
+    if (this.extIteration !== null && this.extIteration !== undefined) {
+      output.writeFieldBegin('extIteration', Thrift.Type.STRING, 3);
+      output.writeString(this.extIteration);
+      output.writeFieldEnd();
+    }
     if (this.accountId !== null && this.accountId !== undefined) {
-      output.writeFieldBegin('accountId', Thrift.Type.STRING, 3);
+      output.writeFieldBegin('accountId', Thrift.Type.STRING, 4);
       output.writeString(this.accountId);
       output.writeFieldEnd();
     }
     if (this.patternId !== null && this.patternId !== undefined) {
-      output.writeFieldBegin('patternId', Thrift.Type.STRING, 4);
+      output.writeFieldBegin('patternId', Thrift.Type.STRING, 5);
       output.writeString(this.patternId);
       output.writeFieldEnd();
     }
     if (this.patternName !== null && this.patternName !== undefined) {
-      output.writeFieldBegin('patternName', Thrift.Type.STRING, 5);
+      output.writeFieldBegin('patternName', Thrift.Type.STRING, 6);
       output.writeString(this.patternName);
       output.writeFieldEnd();
     }
     if (this.name !== null && this.name !== undefined) {
-      output.writeFieldBegin('name', Thrift.Type.STRING, 6);
+      output.writeFieldBegin('name', Thrift.Type.STRING, 7);
       output.writeString(this.name);
       output.writeFieldEnd();
     }
     if (this.type !== null && this.type !== undefined) {
-      output.writeFieldBegin('type', Thrift.Type.I32, 7);
+      output.writeFieldBegin('type', Thrift.Type.I32, 8);
       output.writeI32(this.type);
       output.writeFieldEnd();
     }
     if (this.createDate !== null && this.createDate !== undefined) {
-      output.writeFieldBegin('createDate', Thrift.Type.I64, 8);
+      output.writeFieldBegin('createDate', Thrift.Type.I64, 9);
       output.writeI64(this.createDate);
       output.writeFieldEnd();
     }
     if (this.parentId !== null && this.parentId !== undefined) {
-      output.writeFieldBegin('parentId', Thrift.Type.STRING, 9);
+      output.writeFieldBegin('parentId', Thrift.Type.STRING, 10);
       output.writeString(this.parentId);
       output.writeFieldEnd();
     }
     if (this.viewed !== null && this.viewed !== undefined) {
-      output.writeFieldBegin('viewed', Thrift.Type.BOOL, 10);
+      output.writeFieldBegin('viewed', Thrift.Type.BOOL, 11);
       output.writeBool(this.viewed);
       output.writeFieldEnd();
     }
     if (this.sendDate !== null && this.sendDate !== undefined) {
-      output.writeFieldBegin('sendDate', Thrift.Type.I64, 11);
+      output.writeFieldBegin('sendDate', Thrift.Type.I64, 12);
       output.writeI64(this.sendDate);
       output.writeFieldEnd();
     }
     if (this.receiveDate !== null && this.receiveDate !== undefined) {
-      output.writeFieldBegin('receiveDate', Thrift.Type.I64, 12);
+      output.writeFieldBegin('receiveDate', Thrift.Type.I64, 13);
       output.writeI64(this.receiveDate);
       output.writeFieldEnd();
     }
     if (this.creatorId !== null && this.creatorId !== undefined) {
-      output.writeFieldBegin('creatorId', Thrift.Type.STRING, 13);
+      output.writeFieldBegin('creatorId', Thrift.Type.STRING, 14);
       output.writeString(this.creatorId);
       output.writeFieldEnd();
     }
     if (this.groupNumber !== null && this.groupNumber !== undefined) {
-      output.writeFieldBegin('groupNumber', Thrift.Type.STRING, 14);
+      output.writeFieldBegin('groupNumber', Thrift.Type.STRING, 15);
       output.writeString(this.groupNumber);
       output.writeFieldEnd();
     }
     if (this.signInSystem !== null && this.signInSystem !== undefined) {
-      output.writeFieldBegin('signInSystem', Thrift.Type.I32, 15);
+      output.writeFieldBegin('signInSystem', Thrift.Type.I32, 16);
       output.writeI32(this.signInSystem);
       output.writeFieldEnd();
     }
     if (this.extCameFrom !== null && this.extCameFrom !== undefined) {
-      output.writeFieldBegin('extCameFrom', Thrift.Type.STRING, 16);
+      output.writeFieldBegin('extCameFrom', Thrift.Type.STRING, 17);
       output.writeString(this.extCameFrom);
       output.writeFieldEnd();
     }
     if (this.extNumber !== null && this.extNumber !== undefined) {
-      output.writeFieldBegin('extNumber', Thrift.Type.STRING, 17);
+      output.writeFieldBegin('extNumber', Thrift.Type.STRING, 18);
       output.writeString(this.extNumber);
       output.writeFieldEnd();
     }
     if (this.extAuthorName !== null && this.extAuthorName !== undefined) {
-      output.writeFieldBegin('extAuthorName', Thrift.Type.STRING, 18);
+      output.writeFieldBegin('extAuthorName', Thrift.Type.STRING, 19);
       output.writeString(this.extAuthorName);
       output.writeFieldEnd();
     }
     if (this.extAuthorEmail !== null && this.extAuthorEmail !== undefined) {
-      output.writeFieldBegin('extAuthorEmail', Thrift.Type.STRING, 19);
+      output.writeFieldBegin('extAuthorEmail', Thrift.Type.STRING, 20);
       output.writeString(this.extAuthorEmail);
       output.writeFieldEnd();
     }
     if (this.extRespExecId !== null && this.extRespExecId !== undefined) {
-      output.writeFieldBegin('extRespExecId', Thrift.Type.STRING, 20);
+      output.writeFieldBegin('extRespExecId', Thrift.Type.STRING, 21);
       output.writeString(this.extRespExecId);
       output.writeFieldEnd();
     }
     if (this.extRespPatternId !== null && this.extRespPatternId !== undefined) {
-      output.writeFieldBegin('extRespPatternId', Thrift.Type.STRING, 21);
+      output.writeFieldBegin('extRespPatternId', Thrift.Type.STRING, 22);
       output.writeString(this.extRespPatternId);
       output.writeFieldEnd();
     }
     if (this.extRespReq !== null && this.extRespReq !== undefined) {
-      output.writeFieldBegin('extRespReq', Thrift.Type.I32, 22);
+      output.writeFieldBegin('extRespReq', Thrift.Type.I32, 23);
       output.writeI32(this.extRespReq);
       output.writeFieldEnd();
     }
     if (this.hasAttachments !== null && this.hasAttachments !== undefined) {
-      output.writeFieldBegin('hasAttachments', Thrift.Type.BOOL, 23);
+      output.writeFieldBegin('hasAttachments', Thrift.Type.BOOL, 24);
       output.writeBool(this.hasAttachments);
+      output.writeFieldEnd();
+    }
+    if (this.hasDigitalSign !== null && this.hasDigitalSign !== undefined) {
+      output.writeFieldBegin('hasDigitalSign', Thrift.Type.BOOL, 25);
+      output.writeBool(this.hasDigitalSign);
       output.writeFieldEnd();
     }
     output.writeFieldStop();
@@ -40826,6 +40864,7 @@ MrkDocumentData = class {
     this.document = null;
     this.items = null;
     this.atts = null;
+    this.documentDigitalSign = null;
     if (args) {
       if (args.document !== undefined && args.document !== null) {
         this.document = new MrkDocument(args.document);
@@ -40835,6 +40874,9 @@ MrkDocumentData = class {
       }
       if (args.atts !== undefined && args.atts !== null) {
         this.atts = Thrift.copyList(args.atts, [MrkAttachment]);
+      }
+      if (args.documentDigitalSign !== undefined && args.documentDigitalSign !== null) {
+        this.documentDigitalSign = new MrkDigitalSign(args.documentDigitalSign);
       }
     }
   }
@@ -40889,6 +40931,14 @@ MrkDocumentData = class {
           input.skip(ftype);
         }
         break;
+        case 4:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.documentDigitalSign = new MrkDigitalSign();
+          this.documentDigitalSign.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
         default:
           input.skip(ftype);
       }
@@ -40927,6 +40977,11 @@ MrkDocumentData = class {
         }
       }
       output.writeListEnd();
+      output.writeFieldEnd();
+    }
+    if (this.documentDigitalSign !== null && this.documentDigitalSign !== undefined) {
+      output.writeFieldBegin('documentDigitalSign', Thrift.Type.STRUCT, 4);
+      this.documentDigitalSign.write(output);
       output.writeFieldEnd();
     }
     output.writeFieldStop();
@@ -41323,7 +41378,7 @@ MrkAlmexSysUserPage = class {
   }
 
 };
-MRK_CURRENT_VERSION = 'mrk-1.0.2';
+MRK_CURRENT_VERSION = 'mrk-1.0.1';
 //
 // Autogenerated by Thrift Compiler (0.13.0)
 //
@@ -45165,16 +45220,20 @@ MrkClientService_getAllDocumentPatterns_result = class {
   }
 
 };
-MrkClientService_prepareDocumentByPattern_args = class {
+MrkClientService_prepareDraftDocument_args = class {
   constructor(args) {
     this.token = null;
     this.docPatternId = null;
+    this.documentId = null;
     if (args) {
       if (args.token !== undefined && args.token !== null) {
         this.token = args.token;
       }
       if (args.docPatternId !== undefined && args.docPatternId !== null) {
         this.docPatternId = args.docPatternId;
+      }
+      if (args.documentId !== undefined && args.documentId !== null) {
+        this.documentId = args.documentId;
       }
     }
   }
@@ -45203,6 +45262,13 @@ MrkClientService_prepareDocumentByPattern_args = class {
           input.skip(ftype);
         }
         break;
+        case 3:
+        if (ftype == Thrift.Type.STRING) {
+          this.documentId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
         default:
           input.skip(ftype);
       }
@@ -45213,7 +45279,7 @@ MrkClientService_prepareDocumentByPattern_args = class {
   }
 
   write (output) {
-    output.writeStructBegin('MrkClientService_prepareDocumentByPattern_args');
+    output.writeStructBegin('MrkClientService_prepareDraftDocument_args');
     if (this.token !== null && this.token !== undefined) {
       output.writeFieldBegin('token', Thrift.Type.STRING, 1);
       output.writeString(this.token);
@@ -45224,13 +45290,18 @@ MrkClientService_prepareDocumentByPattern_args = class {
       output.writeString(this.docPatternId);
       output.writeFieldEnd();
     }
+    if (this.documentId !== null && this.documentId !== undefined) {
+      output.writeFieldBegin('documentId', Thrift.Type.STRING, 3);
+      output.writeString(this.documentId);
+      output.writeFieldEnd();
+    }
     output.writeFieldStop();
     output.writeStructEnd();
     return;
   }
 
 };
-MrkClientService_prepareDocumentByPattern_result = class {
+MrkClientService_prepareDraftDocument_result = class {
   constructor(args) {
     this.success = null;
     this.validError = null;
@@ -45300,7 +45371,7 @@ MrkClientService_prepareDocumentByPattern_result = class {
   }
 
   write (output) {
-    output.writeStructBegin('MrkClientService_prepareDocumentByPattern_result');
+    output.writeStructBegin('MrkClientService_prepareDraftDocument_result');
     if (this.success !== null && this.success !== undefined) {
       output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
       this.success.write(output);
@@ -46921,30 +46992,31 @@ MrkClientServiceClient = class {
     throw 'getAllDocumentPatterns failed: unknown result';
   }
 
-  prepareDocumentByPattern (token, docPatternId) {
+  prepareDraftDocument (token, docPatternId, documentId) {
     const self = this;
     return new Promise((resolve, reject) => {
-      self.send_prepareDocumentByPattern(token, docPatternId, (error, result) => {
+      self.send_prepareDraftDocument(token, docPatternId, documentId, (error, result) => {
         return error ? reject(error) : resolve(result);
       });
     });
   }
 
-  send_prepareDocumentByPattern (token, docPatternId, callback) {
+  send_prepareDraftDocument (token, docPatternId, documentId, callback) {
     const params = {
       token: token,
-      docPatternId: docPatternId
+      docPatternId: docPatternId,
+      documentId: documentId
     };
-    const args = new MrkClientService_prepareDocumentByPattern_args(params);
+    const args = new MrkClientService_prepareDraftDocument_args(params);
     try {
-      this.output.writeMessageBegin('prepareDocumentByPattern', Thrift.MessageType.CALL, this.seqid);
+      this.output.writeMessageBegin('prepareDraftDocument', Thrift.MessageType.CALL, this.seqid);
       args.write(this.output);
       this.output.writeMessageEnd();
       const self = this;
       this.output.getTransport().flush(true, () => {
         let error = null, result = null;
         try {
-          result = self.recv_prepareDocumentByPattern();
+          result = self.recv_prepareDraftDocument();
         } catch (e) {
           error = e;
         }
@@ -46959,7 +47031,7 @@ MrkClientServiceClient = class {
     }
   }
 
-  recv_prepareDocumentByPattern () {
+  recv_prepareDraftDocument () {
     const ret = this.input.readMessageBegin();
     const mtype = ret.mtype;
     if (mtype == Thrift.MessageType.EXCEPTION) {
@@ -46968,7 +47040,7 @@ MrkClientServiceClient = class {
       this.input.readMessageEnd();
       throw x;
     }
-    const result = new MrkClientService_prepareDocumentByPattern_result();
+    const result = new MrkClientService_prepareDraftDocument_result();
     result.read(this.input);
     this.input.readMessageEnd();
 
@@ -46981,7 +47053,7 @@ MrkClientServiceClient = class {
     if (null !== result.success) {
       return result.success;
     }
-    throw 'prepareDocumentByPattern failed: unknown result';
+    throw 'prepareDraftDocument failed: unknown result';
   }
 
   logout (token) {

@@ -5,11 +5,11 @@ include "Kaz_DocumentService.thrift"
 include "Kaz_types.thrift"
 include "HB.thrift"
 
-/** Открытое api системы AlmexECM mrk version mrk-1.0.2 */
+/** Открытое api системы AlmexECM mrk version mrk-1.0.1 */
 namespace java com.devtech.mrk.thrift.gen
 
 /** Версия продукта AlmexECM mrk */
-const string MRK_CURRENT_VERSION = "mrk-1.0.2";
+const string MRK_CURRENT_VERSION = "mrk-1.0.1";
 
 enum MrkContactType {
   EMAIL,
@@ -92,30 +92,43 @@ enum MrkDocumentType {
   OUTPUT
 }
 
+enum MrkDocResponceType {
+  /* Необязательно */
+  OPTIONAL_NEW,
+  /** Обязательно требуется ответ в рамках текущего документа */
+  REQUIRED_SAME,
+  /** Обязательно требуется ответ в виде нового документа */
+  REQUIRED_NEW,
+  /** Запрещен */
+  PROHIBITED
+}
+
 struct MrkDocument {
   1: optional string id;
   2: optional string extId;
-  3: optional string accountId;
-  4: string patternId;
-  5: string patternName;
-  6: string name;
-  7: MrkDocumentType type;
-  8: optional i64 createDate;
-  9: optional string parentId;
-  10: bool viewed;
-  11: optional i64 sendDate;
-  12: optional i64 receiveDate;
-  13: optional string creatorId;
-  14: optional string groupNumber;
-  15: optional Kaz_DocumentService.SignInSystem signInSystem;
-  16: optional string extCameFrom;
-  17: optional string extNumber;
-  18: optional string extAuthorName;
-  19: optional string extAuthorEmail;
-  20: optional string extRespExecId;
-  21: optional string extRespPatternId;
-  22: optional Kaz_DocumentService.DocPatternStageRequirement extRespReq;
-  23: bool hasAttachments;
+  3: optional string extIteration;
+  4: optional string accountId;
+  5: string patternId;
+  6: string patternName;
+  7: string name;
+  8: MrkDocumentType type;
+  9: optional i64 createDate;
+  10: optional string parentId;
+  11: bool viewed;
+  12: optional i64 sendDate;
+  13: optional i64 receiveDate;
+  14: optional string creatorId;
+  15: optional string groupNumber;
+  16: optional Kaz_DocumentService.SignInSystem signInSystem;
+  17: optional string extCameFrom;
+  18: optional string extNumber;
+  19: optional string extAuthorName;
+  20: optional string extAuthorEmail;
+  21: optional string extRespExecId;
+  22: optional string extRespPatternId;
+  23: optional MrkDocResponceType extRespReq;
+  24: bool hasAttachments;
+  25: bool hasDigitalSign;
 }
 
 struct MrkDocumentPage {
@@ -167,6 +180,7 @@ struct MrkDocumentData {
   1: MrkDocument document;
   2: list<Kaz_DocumentService.ContentItem> items;
   3: list<MrkAttachment> atts;
+  4: optional MrkDigitalSign documentDigitalSign;
 }
 
 enum MrkHistoryKey {
@@ -243,7 +257,7 @@ service MrkClientService {
   MrkHistoryPage getMrkUserHistoryPage(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
   list<Kaz_DocumentService.DocumentPattern> getAllDocumentPatterns(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-  MrkDocumentData prepareDocumentByPattern(1: string token, 2:common.ID docPatternId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  MrkDocumentData prepareDraftDocument(1: string token, 2:common.ID docPatternId, 3:string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 //  attachAs
 //  create
 //  sign

@@ -39,7 +39,7 @@ export const getAllDocumentPatterns = (extRespPatternId, parentId) => {
       });
       if (!isEmpty(extRespPatternId)) {
         dispatch(setDocumentPattern(find(result, { id: extRespPatternId })));
-        dispatch(prepareDocumentByPattern(extRespPatternId, parentId));
+        dispatch(prepareDraftDocument(extRespPatternId, parentId));
       }
     } catch (error) {
       NotificationError(error, 'getAllDocumentPatterns');
@@ -63,16 +63,17 @@ export const PREPARE_MRK_DOCUMENT_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/PREPARE_M
 export const PREPARE_MRK_DOCUMENT_SUCCESS = 'MODAL_CREATE_MRK_DOCUMENT/PREPARE_MRK_DOCUMENT_SUCCESS';
 export const PREPARE_MRK_DOCUMENT_FAILURE = 'MODAL_CREATE_MRK_DOCUMENT/PREPARE_MRK_DOCUMENT_FAILURE';
 
-export const prepareDocumentByPattern = (id, parentId = null) => {
+export const prepareDraftDocument = (id, parentId = null) => {
   return async (dispatch, getState, api) => {
     dispatch({ type: PREPARE_MRK_DOCUMENT_REQUEST });
     try {
       const {
         auth: { token }
       } = getState();
-      const result = await api.MrkClientServiceClient.prepareDocumentByPattern(
+      const result = await api.MrkClientServiceClient.prepareDraftDocument(
         token,
-        id
+        id,
+        null
       );
       dispatch({
         type: PREPARE_MRK_DOCUMENT_SUCCESS,
@@ -82,7 +83,7 @@ export const prepareDocumentByPattern = (id, parentId = null) => {
         })
       });
     } catch (error) {
-      NotificationError(error, 'prepareDocumentByPattern');
+      NotificationError(error, 'prepareDraftDocument');
       dispatch({ type: PREPARE_MRK_DOCUMENT_FAILURE });
     }
   };

@@ -9,7 +9,7 @@ import { get, isEmpty } from 'lodash';
 import ListDocumentPatterns from './components/ListDocumentPatterns';
 import FormData from './components/FormData';
 import { Modal } from 'components/Modals';
-import { initState, prepareDocumentByPattern, createOrUpdateMrkDocument } from 'redux/actions/Modal/createMrkDocument';
+import { initState, prepareDraftDocument, createOrUpdateMrkDocument } from 'redux/actions/Modal/createMrkDocument';
 import Loader from 'components/Loader';
 import * as Yup from 'yup';
 
@@ -21,7 +21,7 @@ const CreateMrkDocument = ({ hideModal,
   isPrepareFetching,
   isFetching,
   mrkDocumentData,
-  prepareDocumentByPattern,
+  prepareDraftDocument,
   createOrUpdateMrkDocument,
   initState,
   showModal
@@ -94,7 +94,7 @@ const CreateMrkDocument = ({ hideModal,
             }}>
               {I18n.t('CreateMrkDocument.send_in_draft')}
             </Button>
-          ] : [<Button key="submit" loading={isPrepareFetching} disabled={isEmpty(documentPattern)} onClick={() => prepareDocumentByPattern(documentPattern.id, parentId)}>
+          ] : [<Button key="submit" loading={isPrepareFetching} disabled={isEmpty(documentPattern)} onClick={() => prepareDraftDocument(documentPattern.id, parentId)}>
             {I18n.t('common.next')}
           </Button>
             ]}
@@ -122,7 +122,7 @@ const mapDispatchToProps = dispatch =>
     {
       hideModal: actions.hideModal,
       showModal: actions.showModal,
-      prepareDocumentByPattern,
+      prepareDraftDocument,
       createOrUpdateMrkDocument,
       initState
     },

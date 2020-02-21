@@ -62,7 +62,8 @@
       "AttachmentType": true,
       "DocsAPI": true,
       "SignInSystem": true,
-      "PreconditionException": true
+      "PreconditionException": true,
+      "MrkDocResponceType": true
     },
     "rules": {
       "react-hooks/exhaustive-deps": "off",

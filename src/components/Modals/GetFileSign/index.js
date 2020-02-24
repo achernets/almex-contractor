@@ -16,7 +16,7 @@ const GetFileSign = ({ hideModal, submitModal, }) => {
     <Formik
       initialValues={{
         file: null,
-        password: 'Abenov13',
+        password: '',
         fileList: []
       }}
       validationSchema={Yup.object({

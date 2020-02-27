@@ -19,7 +19,7 @@ import {
 } from 'redux/actions/Modal/createMrkDocument';
 
 const initState = {
-  step: 1,
+  step: 0,
   documentPatterns: [],
   documentPattern: null,
   mrkDocumentData: null,
@@ -29,12 +29,17 @@ const initState = {
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case GET_DOCUMENT_PATTERNS_REQUEST:
     case EDIT_MRK_DOCUMENT_REQUEST:
     case CREATE_OR_UPDATE_MRK_DOCUMENT_REQUEST:
     case SEND_DOCUMENT_REQUEST:
       return {
         ...state,
+        isFetching: true
+      };
+    case GET_DOCUMENT_PATTERNS_REQUEST:
+      return {
+        ...state,
+        step: 1,
         isFetching: true
       };
     case GET_DOCUMENT_PATTERNS_SUCCESS:

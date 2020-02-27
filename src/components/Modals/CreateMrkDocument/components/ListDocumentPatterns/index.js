@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
@@ -7,11 +7,9 @@ import { Icon, Typography } from 'antd';
 import { AutoSizer, List } from 'react-virtualized';
 import Scrollbar from 'components/Scrollbar';
 import * as styles from './listDocumentPatterns.module.scss';
-import { getAllDocumentPatterns, setDocumentPattern } from 'redux/actions/Modal/createMrkDocument';
-const ListDocumentPatterns = ({ extRespPatternId, parentId, documentPattern, documentPatterns, getAllDocumentPatterns, setDocumentPattern }) => {
-  useEffect(() => {
-    getAllDocumentPatterns(extRespPatternId, parentId);
-  }, []);
+import { setDocumentPattern } from 'redux/actions/Modal/createMrkDocument';
+const ListDocumentPatterns = ({ documentPattern, documentPatterns, setDocumentPattern }) => {
+
   let listRef = useRef(null);
   const rowRenderer = ({
     key,
@@ -67,7 +65,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAllDocumentPatterns,
       setDocumentPattern
     },
     dispatch

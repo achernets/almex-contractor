@@ -31,30 +31,32 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  height: 32px;
+  overflow: hidden;
   .img {
-    margin-left: -4;
-    margin-right: 4;
+    margin-right: 4px;
   }
   .information {
-    flex: 1;
     overflow: hidden;
     line-height: normal;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     @include icon-remove-hover;
     .name {
       color: $text_right;
-      text-overflow: "ellipsis";
+      text-overflow: ellipsis;
       width: 100%;
+
+      line-height: 18px;
       word-break: break-word;
     }
     .date {
       color: $text_left;
-      text-overflow: "ellipsis";
+      text-overflow: ellipsis;
       width: 100%;
       word-break: break-word;
       font-size: 12px;
+      line-height: 14px;
     }
   }
 }

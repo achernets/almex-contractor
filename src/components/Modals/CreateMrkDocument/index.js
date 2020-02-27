@@ -9,24 +9,33 @@ import { get, isEmpty } from 'lodash';
 import ListDocumentPatterns from './components/ListDocumentPatterns';
 import FormData from './components/FormData';
 import { Modal } from 'components/Modals';
-import { initState, prepareDraftDocument, createOrUpdateMrkDocument } from 'redux/actions/Modal/createMrkDocument';
+import { initState, prepareDraftDocument, getAllDocumentPatterns, createOrUpdateMrkDocument } from 'redux/actions/Modal/createMrkDocument';
 import Loader from 'components/Loader';
 import * as Yup from 'yup';
 
 const CreateMrkDocument = ({ hideModal,
+  newMrkDocument,
   parentId,
   extRespPatternId,
+  extRespReq,
   step,
   documentPattern,
   isPrepareFetching,
   isFetching,
   mrkDocumentData,
   prepareDraftDocument,
+  getAllDocumentPatterns,
   createOrUpdateMrkDocument,
   initState,
   showModal
 }) => {
   useEffect(() => {
+    if (!newMrkDocument) return;
+    if (extRespReq === MrkDocResponceType.REQUIRED_SAME) {
+      prepareDraftDocument(extRespPatternId, parentId);
+    } else {
+      getAllDocumentPatterns(extRespPatternId, parentId);
+    }
     return () => initState();
   }, []);
   return (
@@ -123,6 +132,7 @@ const mapDispatchToProps = dispatch =>
       hideModal: actions.hideModal,
       showModal: actions.showModal,
       prepareDraftDocument,
+      getAllDocumentPatterns,
       createOrUpdateMrkDocument,
       initState
     },

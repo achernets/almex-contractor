@@ -26,8 +26,10 @@ const HeaderDocs = ({ showModal, isFetching, getMrkDocuments, changeMrkDocumentT
           <Button type="primary"
             disabled={isFetching}
             onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
+              newMrkDocument: true,
               parentId: null,
-              extRespPatternId: null
+              extRespPatternId: null,
+              extRespReq: MrkDocResponceType.OPTIONAL_NEW
             })}>
             {I18n.t('MrkDocuments.create')}
           </Button>

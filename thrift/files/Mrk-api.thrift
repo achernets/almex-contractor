@@ -224,6 +224,9 @@ struct MrkAlmexSysUserPage {
 }
 
 service MrkClientService {
+  /** Метод получение времени подписания ЭЦП */
+  string getTimeStampToken(1: common.AuthTokenBase64 token, 2: string data) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  
   map<string, string> getInfo();
   map<string, string> getAllLanguages() throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 

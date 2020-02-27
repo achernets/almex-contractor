@@ -12,6 +12,12 @@ export const log = (...props) => {
 
 export const PUBLIC_URL = process.env.PUBLIC_URL;
 
+export const getToken = () => {
+  const state = store.getState();
+  const { token } = state.auth;
+  return token;
+};
+
 export const userName = ({ firstName, lastName }) => {
   return `${isEmpty(firstName) ? '' : upperFirst(firstName) + ''} ${isEmpty(lastName) ? '' : upperFirst(lastName)}`;
 };
@@ -152,4 +158,33 @@ export const getAttachmentName = ({ fileName }) => {
 
 export const getAttachmentExt = ({ fileName }) => {
   return fileName.substr(fileName.lastIndexOf('.') + 1, fileName.length);
+};
+
+export const getFileExt = (fileName) => {
+  return fileName.substr(fileName.lastIndexOf('.') + 1, fileName.length);
+};
+
+export const attachmentIcon = (fileName) => {
+  switch (getFileExt(fileName)) {
+    case 'doc':
+    case 'docx':
+      return require('../images/attachments/Doc.svg');
+    case 'xls':
+    case 'xlsx':
+      return require('../images/attachments/Xls.svg');
+    case 'pdf':
+      return require('../images/attachments/Pdf.svg');
+    case 'png':
+      return require('../images/attachments/Png.svg');
+    case 'jpg':
+    case 'jpeg':
+    case 'tif':
+    case 'tiff':
+    case 'bmp':
+    case 'wbmp':
+    case 'gif':
+      return require('../images/attachments/Jpg.svg');
+    default:
+      return require('../images/attachments/Undefined.svg');
+  }
 };

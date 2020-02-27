@@ -4,7 +4,7 @@ import { updateMrkDocumentData } from 'redux/actions/Modal/mrkDocument';
 import { actions } from 'react-redux-modals';
 import { notification } from 'antd';
 import { singData } from 'utils/pkcs12';
-import { isEmpty, find } from 'lodash';
+import { isEmpty, reduce, find } from 'lodash';
 import { I18n } from 'react-redux-i18n';
 
 export const GET_DOCUMENT_PATTERNS_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCUMENT_PATTERNS_REQUEST';
@@ -73,7 +73,7 @@ export const prepareDraftDocument = (id, parentId = null) => {
       const result = await api.MrkClientServiceClient.prepareDraftDocument(
         token,
         id,
-        null
+        parentId
       );
       dispatch({
         type: PREPARE_MRK_DOCUMENT_SUCCESS,
@@ -108,7 +108,9 @@ export const editDocument = documentId => {
         type: EDIT_MRK_DOCUMENT_SUCCESS,
         payload: result
       });
-      dispatch(actions.showModal('MODAL_CREATE_MRK_DOCUMENT'));
+      dispatch(actions.showModal('MODAL_CREATE_MRK_DOCUMENT', {
+        newMrkDocument: false
+      }));
     } catch (error) {
       NotificationError(error, 'getMrkDocumentData');
       dispatch({ type: EDIT_MRK_DOCUMENT_FAILURE });
@@ -144,6 +146,10 @@ export const createOrUpdateMrkDocument = (data, send = false, certificate = null
             result.document.id
           );
           const signature = await singData(certificate, infoForSing);
+          attachmentSignature = await reduce(result.atts, async (hash, item) => {
+            hash[item.id] = await singData(certificate, item.attHash, item.attHash);
+            return hash;
+          }, {});
           await api.MrkClientServiceClient.signProfile(token, signature, certificate.publicKey);
         }
         dispatch(sendDocument(signature, attachmentSignature));

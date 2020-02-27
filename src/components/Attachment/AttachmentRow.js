@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Icon } from 'antd';
-import { DOCUMENT } from 'constants/img';
 import * as styles from './attachment.module.scss';
+import { attachmentIcon } from 'utils//helpers';
 import moment from 'moment';
 
 const AttachmentRow = ({ attachment, removeAttachment = null, ...props }) => <div
@@ -9,7 +9,7 @@ const AttachmentRow = ({ attachment, removeAttachment = null, ...props }) => <di
   {...props}
 >
   <Icon component={() =>
-    <img src={DOCUMENT} alt={'DOCUMENT'} />
+    <img src={attachmentIcon(attachment.fileName)} alt={''} />
   } className={styles.img} />
   <div className={styles.information}>
     <Typography.Text className={styles.name} ellipsis={true} >{attachment.fileName}</Typography.Text>

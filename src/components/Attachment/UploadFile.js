@@ -4,8 +4,8 @@ import { Icon, Typography, Progress } from 'antd';
 import * as styles from './attachment.module.scss';
 import { fileReader, getPortions, log } from 'utils/helpers';
 import { connect } from 'react-redux';
-import { DOCUMENT } from 'constants/img';
 import { MrkClientServiceClient } from 'api';
+import { attachmentIcon } from 'utils//helpers';
 
 const UploadFile = ({ file, setAttachment, token }) => {
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ const UploadFile = ({ file, setAttachment, token }) => {
 
   return <div className={styles.attachment}>
     <Icon component={() =>
-      <img src={DOCUMENT} alt={'DOCUMENT'} />
+      <img src={attachmentIcon(file.name)} alt={''} />
     } className={styles.img} />
     <div className={styles.information}>
       <Typography.Text ellipsis>{file.name}</Typography.Text>

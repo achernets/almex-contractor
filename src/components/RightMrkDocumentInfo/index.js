@@ -65,11 +65,14 @@ const RightMrkDocumentInfo = ({ selectedAttachment, toogleViewDocument, mrkDocum
           <Col span={24}>
             <Row gutter={[8, 0]} type="flex" align="middle" justify="end">
               {
+                get(mrkDocumentData, 'document.extRespReq', null) !== MrkDocResponceType.PROHIBITED &&
                 get(mrkDocumentData, 'document.type', null) === MrkDocumentType.INPUT && <Col>
                   <Button
                     onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
+                      newMrkDocument: true,
                       parentId: get(mrkDocumentData, 'document.id', null),
-                      extRespPatternId: get(mrkDocumentData, 'document.extRespPatternId', null)
+                      extRespPatternId: get(mrkDocumentData, 'document.extRespPatternId', null),
+                      extRespReq: get(mrkDocumentData, 'document.extRespReq', MrkDocResponceType.OPTIONAL_NEW)
                     })}
                     type={'primary'}
                   >

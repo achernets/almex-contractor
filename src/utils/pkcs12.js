@@ -1,4 +1,6 @@
 import * as forge from 'utils/forge.min';
+import { MrkClientServiceClient } from 'api';
+import { getToken } from 'utils/helpers';
 import RSA_SIGN from 'jsrsasign';
 
 const getCertificatFromFile = async (file = null, password) => {
@@ -74,14 +76,15 @@ const singData = async ({ privateKey, publicKey }, signData, hash = null) => {
     sig.init(privateKey);
     sig.updateString(mdHex);
     const sigValueHex = sig.sign();
+    const timeStamp = await MrkClientServiceClient.getTimeStampToken(getToken(), mdHex);
     const param = {
       content: { str: sigValueHex },
       //certs: [publicKey],
       signerInfos: [{
         hashAlg: 'sha256',
-        // sAttr: {
-        //   SigningTime: { 'str': result }
-        // },
+        sAttr: {
+          SigningTime: { 'str': timeStamp }
+        },
         signerCert: publicKey,
         sigAlg: 'SHA256withRSA',
         signerPrvKey: privateKey

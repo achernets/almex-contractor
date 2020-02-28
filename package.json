@@ -63,7 +63,8 @@
       "DocsAPI": true,
       "SignInSystem": true,
       "PreconditionException": true,
-      "MrkDocResponceType": true
+      "MrkDocResponceType": true,
+      "MrkDocumentRespStatus": true
     },
     "rules": {
       "react-hooks/exhaustive-deps": "off",

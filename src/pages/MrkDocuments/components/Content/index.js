@@ -14,52 +14,50 @@ import classnames from 'classnames';
 import RightMrkDocumentInfo from 'components/RightMrkDocumentInfo';
 import LeftOnlyOffice from 'components/LeftOnlyOffice';
 import { actions } from 'react-redux-modals';
-import { Attach, Ecp } from 'components/Icons';
+import { invert } from 'lodash';
+import { Attach, Mark } from 'components/Icons';
 
 const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAttachment, editDocument, mrkDocuments, isSearch, count, page, isFetching }) => {
   useEffect(() => {
     getMrkDocuments();
   }, []);
+
+  const getMarkDocument = (respStatus) => {
+    switch (respStatus) {
+      case MrkDocumentRespStatus.REQUIRED:
+        return <Mark fill={'rgba(250, 173, 20, 0.4)'} stroke={'#FAAD14'} />;
+      case MrkDocumentRespStatus.OPTIONAL:
+      case MrkDocumentRespStatus.PROHIBITED:
+        return <Mark fill={'#fffff'} stroke={'#C4C4C4'} />;
+      case MrkDocumentRespStatus.DRAFT:
+        return <Mark fill={'rgba(150, 226, 199, 0.3)'} stroke={'#96E2C7'} />;
+      case MrkDocumentRespStatus.SEND:
+        return <Mark fill={'rgba(92, 194, 103, 0.4)'} stroke={'#5CC267'} />;
+      default:
+        return <Mark fill={'rgba(196, 196, 196, 0.4)'} stroke={'#C4C4C4'} />;
+    }
+  };
+
   return <><Table
     loading={isFetching}
     columns={[
       {
-        title: null,
-        dataIndex: 'signInSystem',
-        width: 34,
-        align: 'center',
-        render: (signInSystem) => {
-          switch (signInSystem) {
-            case SignInSystem.ALMEX:
-              return <Tooltip placement={'right'} title={I18n.t('SignInSystem.ALMEX_TOOLTIP')}>
-                <Ecp style={{ height: 18, width: 18 }} fill={'#faad14'} />
-              </Tooltip>;
-            case SignInSystem.EXTERNAL:
-              return <Tooltip placement={'right'} title={I18n.t('SignInSystem.EXTERNAL_TOOLTIP')}>
-                <Ecp style={{ height: 18, width: 18 }} fill={'#8c8c8c'} />
-              </Tooltip>;
-            case SignInSystem.BOTH:
-              return <Tooltip placement={'right'} title={I18n.t('SignInSystem.BOTH_TOOLTIP')}>
-                <Ecp style={{ height: 18, width: 18 }} fill={'#1890ff'} />
-              </Tooltip>;
-            default:
-              return '';
-          }
-        }
-      },
-      {
         title: I18n.t('MrkDocument.name'),
         dataIndex: 'name',
-        render: (text, { hasAttachments = false }) => {
+        render: (text, { hasAttachments = false, respStatus }) => {
           return <span style={{
             width: '100%',
             display: 'flex',
             alignItems: 'center'
           }}>
+            <Tooltip title={I18n.t(`MrkDocumentRespStatus.${invert(MrkDocumentRespStatus)[respStatus]}`)}>
+              {getMarkDocument(respStatus)}
+            </Tooltip>
             <span style={{
               maxWidth: '100%',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
+              marginLeft: 4,
               marginRight: 4
             }}>{text}</span>
             {hasAttachments && <Tooltip title={I18n.t('MrkDocument.hasAttachments')}>
@@ -97,9 +95,43 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
       {
         title: I18n.t('MrkDocument.createDate'),
         key: 'createDate',
-        width: 140,
-        render: ({ createDate }) => moment(createDate).format('DD.MM.YYYY HH:mm'),
+        width: 100,
+        render: ({ createDate }) => moment(createDate).format('DD.MM.YYYY'),
         ellipsis: true
+      },
+      {
+        title: I18n.t('MrkDocument.signInSystem'),
+        dataIndex: 'signInSystem',
+        ellipsis: false,
+        width: 140,
+        render: (signInSystem) => {
+          switch (signInSystem) {
+            case SignInSystem.ALMEX:
+              return <span style={{
+                color: '#F4B435',
+                display: 'block',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis'
+              }}>{I18n.t('SignInSystem.ALMEX_TOOLTIP')}</span>;
+            case SignInSystem.EXTERNAL:
+              return <span style={{
+                color: '#F4B435', display: 'block',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis'
+              }}>{I18n.t('SignInSystem.EXTERNAL_TOOLTIP')}</span>;
+            case SignInSystem.BOTH:
+              return <span style={{
+                color: '#61B039', display: 'block',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis'
+              }}>{I18n.t('SignInSystem.BOTH_TOOLTIP')}</span>;
+            default:
+              return '';
+          }
+        }
       },
     ]}
     dataSource={mrkDocuments}

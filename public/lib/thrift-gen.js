@@ -32063,6 +32063,8 @@ Document = class {
     this.countResponsibleUsers = null;
     this.responsibleUsers = null;
     this.countConfirmerUsers = null;
+    this.externalNumber = null;
+    this.externalRegDate = null;
     if (args) {
       if (args.id !== undefined && args.id !== null) {
         this.id = args.id;
@@ -32192,6 +32194,12 @@ Document = class {
       }
       if (args.countConfirmerUsers !== undefined && args.countConfirmerUsers !== null) {
         this.countConfirmerUsers = args.countConfirmerUsers;
+      }
+      if (args.externalNumber !== undefined && args.externalNumber !== null) {
+        this.externalNumber = args.externalNumber;
+      }
+      if (args.externalRegDate !== undefined && args.externalRegDate !== null) {
+        this.externalRegDate = args.externalRegDate;
       }
     }
   }
@@ -32570,6 +32578,20 @@ Document = class {
           input.skip(ftype);
         }
         break;
+        case 44:
+        if (ftype == Thrift.Type.STRING) {
+          this.externalNumber = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 45:
+        if (ftype == Thrift.Type.I64) {
+          this.externalRegDate = input.readI64().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
         default:
           input.skip(ftype);
       }
@@ -32837,6 +32859,16 @@ Document = class {
     if (this.countConfirmerUsers !== null && this.countConfirmerUsers !== undefined) {
       output.writeFieldBegin('countConfirmerUsers', Thrift.Type.I32, 43);
       output.writeI32(this.countConfirmerUsers);
+      output.writeFieldEnd();
+    }
+    if (this.externalNumber !== null && this.externalNumber !== undefined) {
+      output.writeFieldBegin('externalNumber', Thrift.Type.STRING, 44);
+      output.writeString(this.externalNumber);
+      output.writeFieldEnd();
+    }
+    if (this.externalRegDate !== null && this.externalRegDate !== undefined) {
+      output.writeFieldBegin('externalRegDate', Thrift.Type.I64, 45);
+      output.writeI64(this.externalRegDate);
       output.writeFieldEnd();
     }
     output.writeFieldStop();
@@ -38596,15 +38628,26 @@ FileStorage = class {
 CertificateInfo = class {
   constructor(args) {
     this.serialNumber = null;
+    this.subjectSerialNumber = null;
+    this.subjectSerialNumberIndividual = null;
     this.issuerDN = null;
     this.subjectDN = null;
     this.signDate = null;
     this.beforeDate = null;
     this.afterDate = null;
     this.signature = null;
+    this.email = null;
+    this.organization = null;
+    this.fullName = null;
     if (args) {
       if (args.serialNumber !== undefined && args.serialNumber !== null) {
         this.serialNumber = args.serialNumber;
+      }
+      if (args.subjectSerialNumber !== undefined && args.subjectSerialNumber !== null) {
+        this.subjectSerialNumber = args.subjectSerialNumber;
+      }
+      if (args.subjectSerialNumberIndividual !== undefined && args.subjectSerialNumberIndividual !== null) {
+        this.subjectSerialNumberIndividual = args.subjectSerialNumberIndividual;
       }
       if (args.issuerDN !== undefined && args.issuerDN !== null) {
         this.issuerDN = args.issuerDN;
@@ -38623,6 +38666,15 @@ CertificateInfo = class {
       }
       if (args.signature !== undefined && args.signature !== null) {
         this.signature = args.signature;
+      }
+      if (args.email !== undefined && args.email !== null) {
+        this.email = args.email;
+      }
+      if (args.organization !== undefined && args.organization !== null) {
+        this.organization = args.organization;
+      }
+      if (args.fullName !== undefined && args.fullName !== null) {
+        this.fullName = args.fullName;
       }
     }
   }
@@ -38646,42 +38698,77 @@ CertificateInfo = class {
         break;
         case 2:
         if (ftype == Thrift.Type.STRING) {
-          this.issuerDN = input.readString().value;
+          this.subjectSerialNumber = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 3:
         if (ftype == Thrift.Type.STRING) {
-          this.subjectDN = input.readString().value;
+          this.subjectSerialNumberIndividual = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 4:
-        if (ftype == Thrift.Type.I64) {
-          this.signDate = input.readI64().value;
+        if (ftype == Thrift.Type.STRING) {
+          this.issuerDN = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 5:
-        if (ftype == Thrift.Type.I64) {
-          this.beforeDate = input.readI64().value;
+        if (ftype == Thrift.Type.STRING) {
+          this.subjectDN = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 6:
         if (ftype == Thrift.Type.I64) {
-          this.afterDate = input.readI64().value;
+          this.signDate = input.readI64().value;
         } else {
           input.skip(ftype);
         }
         break;
         case 7:
+        if (ftype == Thrift.Type.I64) {
+          this.beforeDate = input.readI64().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 8:
+        if (ftype == Thrift.Type.I64) {
+          this.afterDate = input.readI64().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 9:
         if (ftype == Thrift.Type.STRING) {
           this.signature = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 10:
+        if (ftype == Thrift.Type.STRING) {
+          this.email = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 11:
+        if (ftype == Thrift.Type.STRING) {
+          this.organization = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 12:
+        if (ftype == Thrift.Type.STRING) {
+          this.fullName = input.readString().value;
         } else {
           input.skip(ftype);
         }
@@ -38702,34 +38789,59 @@ CertificateInfo = class {
       output.writeString(this.serialNumber);
       output.writeFieldEnd();
     }
+    if (this.subjectSerialNumber !== null && this.subjectSerialNumber !== undefined) {
+      output.writeFieldBegin('subjectSerialNumber', Thrift.Type.STRING, 2);
+      output.writeString(this.subjectSerialNumber);
+      output.writeFieldEnd();
+    }
+    if (this.subjectSerialNumberIndividual !== null && this.subjectSerialNumberIndividual !== undefined) {
+      output.writeFieldBegin('subjectSerialNumberIndividual', Thrift.Type.STRING, 3);
+      output.writeString(this.subjectSerialNumberIndividual);
+      output.writeFieldEnd();
+    }
     if (this.issuerDN !== null && this.issuerDN !== undefined) {
-      output.writeFieldBegin('issuerDN', Thrift.Type.STRING, 2);
+      output.writeFieldBegin('issuerDN', Thrift.Type.STRING, 4);
       output.writeString(this.issuerDN);
       output.writeFieldEnd();
     }
     if (this.subjectDN !== null && this.subjectDN !== undefined) {
-      output.writeFieldBegin('subjectDN', Thrift.Type.STRING, 3);
+      output.writeFieldBegin('subjectDN', Thrift.Type.STRING, 5);
       output.writeString(this.subjectDN);
       output.writeFieldEnd();
     }
     if (this.signDate !== null && this.signDate !== undefined) {
-      output.writeFieldBegin('signDate', Thrift.Type.I64, 4);
+      output.writeFieldBegin('signDate', Thrift.Type.I64, 6);
       output.writeI64(this.signDate);
       output.writeFieldEnd();
     }
     if (this.beforeDate !== null && this.beforeDate !== undefined) {
-      output.writeFieldBegin('beforeDate', Thrift.Type.I64, 5);
+      output.writeFieldBegin('beforeDate', Thrift.Type.I64, 7);
       output.writeI64(this.beforeDate);
       output.writeFieldEnd();
     }
     if (this.afterDate !== null && this.afterDate !== undefined) {
-      output.writeFieldBegin('afterDate', Thrift.Type.I64, 6);
+      output.writeFieldBegin('afterDate', Thrift.Type.I64, 8);
       output.writeI64(this.afterDate);
       output.writeFieldEnd();
     }
     if (this.signature !== null && this.signature !== undefined) {
-      output.writeFieldBegin('signature', Thrift.Type.STRING, 7);
+      output.writeFieldBegin('signature', Thrift.Type.STRING, 9);
       output.writeString(this.signature);
+      output.writeFieldEnd();
+    }
+    if (this.email !== null && this.email !== undefined) {
+      output.writeFieldBegin('email', Thrift.Type.STRING, 10);
+      output.writeString(this.email);
+      output.writeFieldEnd();
+    }
+    if (this.organization !== null && this.organization !== undefined) {
+      output.writeFieldBegin('organization', Thrift.Type.STRING, 11);
+      output.writeString(this.organization);
+      output.writeFieldEnd();
+    }
+    if (this.fullName !== null && this.fullName !== undefined) {
+      output.writeFieldBegin('fullName', Thrift.Type.STRING, 12);
+      output.writeString(this.fullName);
       output.writeFieldEnd();
     }
     output.writeFieldStop();
@@ -38762,6 +38874,14 @@ MrkDocResponceType = {
   'REQUIRED_SAME' : 1,
   'REQUIRED_NEW' : 2,
   'PROHIBITED' : 3
+};
+MrkDocumentRespStatus = {
+  'OPTIONAL' : 0,
+  'REQUIRED' : 1,
+  'PROHIBITED' : 2,
+  'DRAFT' : 3,
+  'SEND' : 4,
+  'CANCELED' : 5
 };
 MrkHistoryKey = {
   'CLIENT_LOGIN' : 0,
@@ -39855,6 +39975,12 @@ MrkDocument = class {
     this.extRespReq = null;
     this.hasAttachments = null;
     this.hasDigitalSign = null;
+    this.documentNumber = null;
+    this.documentRegDate = null;
+    this.externalNumber = null;
+    this.externalRegDate = null;
+    this.cancelDate = null;
+    this.respStatus = null;
     if (args) {
       if (args.id !== undefined && args.id !== null) {
         this.id = args.id;
@@ -39930,6 +40056,24 @@ MrkDocument = class {
       }
       if (args.hasDigitalSign !== undefined && args.hasDigitalSign !== null) {
         this.hasDigitalSign = args.hasDigitalSign;
+      }
+      if (args.documentNumber !== undefined && args.documentNumber !== null) {
+        this.documentNumber = args.documentNumber;
+      }
+      if (args.documentRegDate !== undefined && args.documentRegDate !== null) {
+        this.documentRegDate = args.documentRegDate;
+      }
+      if (args.externalNumber !== undefined && args.externalNumber !== null) {
+        this.externalNumber = args.externalNumber;
+      }
+      if (args.externalRegDate !== undefined && args.externalRegDate !== null) {
+        this.externalRegDate = args.externalRegDate;
+      }
+      if (args.cancelDate !== undefined && args.cancelDate !== null) {
+        this.cancelDate = args.cancelDate;
+      }
+      if (args.respStatus !== undefined && args.respStatus !== null) {
+        this.respStatus = args.respStatus;
       }
     }
   }
@@ -40119,6 +40263,48 @@ MrkDocument = class {
           input.skip(ftype);
         }
         break;
+        case 26:
+        if (ftype == Thrift.Type.STRING) {
+          this.documentNumber = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 27:
+        if (ftype == Thrift.Type.I64) {
+          this.documentRegDate = input.readI64().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 28:
+        if (ftype == Thrift.Type.STRING) {
+          this.externalNumber = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 29:
+        if (ftype == Thrift.Type.I64) {
+          this.externalRegDate = input.readI64().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 30:
+        if (ftype == Thrift.Type.I64) {
+          this.cancelDate = input.readI64().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 31:
+        if (ftype == Thrift.Type.I32) {
+          this.respStatus = input.readI32().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
         default:
           input.skip(ftype);
       }
@@ -40253,6 +40439,36 @@ MrkDocument = class {
     if (this.hasDigitalSign !== null && this.hasDigitalSign !== undefined) {
       output.writeFieldBegin('hasDigitalSign', Thrift.Type.BOOL, 25);
       output.writeBool(this.hasDigitalSign);
+      output.writeFieldEnd();
+    }
+    if (this.documentNumber !== null && this.documentNumber !== undefined) {
+      output.writeFieldBegin('documentNumber', Thrift.Type.STRING, 26);
+      output.writeString(this.documentNumber);
+      output.writeFieldEnd();
+    }
+    if (this.documentRegDate !== null && this.documentRegDate !== undefined) {
+      output.writeFieldBegin('documentRegDate', Thrift.Type.I64, 27);
+      output.writeI64(this.documentRegDate);
+      output.writeFieldEnd();
+    }
+    if (this.externalNumber !== null && this.externalNumber !== undefined) {
+      output.writeFieldBegin('externalNumber', Thrift.Type.STRING, 28);
+      output.writeString(this.externalNumber);
+      output.writeFieldEnd();
+    }
+    if (this.externalRegDate !== null && this.externalRegDate !== undefined) {
+      output.writeFieldBegin('externalRegDate', Thrift.Type.I64, 29);
+      output.writeI64(this.externalRegDate);
+      output.writeFieldEnd();
+    }
+    if (this.cancelDate !== null && this.cancelDate !== undefined) {
+      output.writeFieldBegin('cancelDate', Thrift.Type.I64, 30);
+      output.writeI64(this.cancelDate);
+      output.writeFieldEnd();
+    }
+    if (this.respStatus !== null && this.respStatus !== undefined) {
+      output.writeFieldBegin('respStatus', Thrift.Type.I32, 31);
+      output.writeI32(this.respStatus);
       output.writeFieldEnd();
     }
     output.writeFieldStop();
@@ -43765,6 +43981,162 @@ MrkClientService_createOrUpdateMrkDocument_result = class {
   }
 
 };
+MrkClientService_deleteMrkDocument_args = class {
+  constructor(args) {
+    this.token = null;
+    this.documentId = null;
+    if (args) {
+      if (args.token !== undefined && args.token !== null) {
+        this.token = args.token;
+      }
+      if (args.documentId !== undefined && args.documentId !== null) {
+        this.documentId = args.documentId;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 1:
+        if (ftype == Thrift.Type.STRING) {
+          this.token = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRING) {
+          this.documentId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_deleteMrkDocument_args');
+    if (this.token !== null && this.token !== undefined) {
+      output.writeFieldBegin('token', Thrift.Type.STRING, 1);
+      output.writeString(this.token);
+      output.writeFieldEnd();
+    }
+    if (this.documentId !== null && this.documentId !== undefined) {
+      output.writeFieldBegin('documentId', Thrift.Type.STRING, 2);
+      output.writeString(this.documentId);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkClientService_deleteMrkDocument_result = class {
+  constructor(args) {
+    this.success = null;
+    this.validError = null;
+    this.error = null;
+    if (args instanceof PreconditionException) {
+        this.validError = args;
+        return;
+    }
+    if (args instanceof ServerException) {
+        this.error = args;
+        return;
+    }
+    if (args) {
+      if (args.success !== undefined && args.success !== null) {
+        this.success = args.success;
+      }
+      if (args.validError !== undefined && args.validError !== null) {
+        this.validError = args.validError;
+      }
+      if (args.error !== undefined && args.error !== null) {
+        this.error = args.error;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 0:
+        if (ftype == Thrift.Type.BOOL) {
+          this.success = input.readBool().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 1:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.validError = new PreconditionException();
+          this.validError.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.error = new ServerException();
+          this.error.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_deleteMrkDocument_result');
+    if (this.success !== null && this.success !== undefined) {
+      output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+      output.writeBool(this.success);
+      output.writeFieldEnd();
+    }
+    if (this.validError !== null && this.validError !== undefined) {
+      output.writeFieldBegin('validError', Thrift.Type.STRUCT, 1);
+      this.validError.write(output);
+      output.writeFieldEnd();
+    }
+    if (this.error !== null && this.error !== undefined) {
+      output.writeFieldBegin('error', Thrift.Type.STRUCT, 2);
+      this.error.write(output);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
 MrkClientService_getDocumentInfoForSing_args = class {
   constructor(args) {
     this.token = null;
@@ -46633,6 +47005,69 @@ MrkClientServiceClient = class {
       return result.success;
     }
     throw 'createOrUpdateMrkDocument failed: unknown result';
+  }
+
+  deleteMrkDocument (token, documentId) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      self.send_deleteMrkDocument(token, documentId, (error, result) => {
+        return error ? reject(error) : resolve(result);
+      });
+    });
+  }
+
+  send_deleteMrkDocument (token, documentId, callback) {
+    const params = {
+      token: token,
+      documentId: documentId
+    };
+    const args = new MrkClientService_deleteMrkDocument_args(params);
+    try {
+      this.output.writeMessageBegin('deleteMrkDocument', Thrift.MessageType.CALL, this.seqid);
+      args.write(this.output);
+      this.output.writeMessageEnd();
+      const self = this;
+      this.output.getTransport().flush(true, () => {
+        let error = null, result = null;
+        try {
+          result = self.recv_deleteMrkDocument();
+        } catch (e) {
+          error = e;
+        }
+        callback(error, result);
+      });
+    }
+    catch (e) {
+      if (typeof this.output.getTransport().reset === 'function') {
+        this.output.getTransport().reset();
+      }
+      throw e;
+    }
+  }
+
+  recv_deleteMrkDocument () {
+    const ret = this.input.readMessageBegin();
+    const mtype = ret.mtype;
+    if (mtype == Thrift.MessageType.EXCEPTION) {
+      const x = new Thrift.TApplicationException();
+      x.read(this.input);
+      this.input.readMessageEnd();
+      throw x;
+    }
+    const result = new MrkClientService_deleteMrkDocument_result();
+    result.read(this.input);
+    this.input.readMessageEnd();
+
+    if (null !== result.validError) {
+      throw result.validError;
+    }
+    if (null !== result.error) {
+      throw result.error;
+    }
+    if (null !== result.success) {
+      return result.success;
+    }
+    throw 'deleteMrkDocument failed: unknown result';
   }
 
   getDocumentInfoForSing (token, documentId) {

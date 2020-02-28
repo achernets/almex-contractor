@@ -65,11 +65,12 @@
     "extAuthorName": "Автор",
     "extAuthorEmail": "Email",
     "patternName": "Тип документа",
-    "createDate": "Дата поручения",
+    "createDate": "Дата",
     "send_answer": "Сформировать ответ",
     "show_chain": "Показать цепочку",
     "hide_chain": "Спрятать цепочку",
-    "hasAttachments": "Есть вложения"
+    "hasAttachments": "Есть вложения",
+    "signInSystem": "Подписи"
   },
   "MrkDocumentType": {
     "DRAFT": "Черновики",
@@ -124,8 +125,16 @@
     "ALMEX": "ALMEX",
     "EXTERNAL": "EXTERNAL",
     "BOTH": "BOTH",
-    "ALMEX_TOOLTIP": "Подписано контрагентом",
-    "EXTERNAL_TOOLTIP": "Подписано Вами",
-    "BOTH_TOOLTIP": "Подписано двумя сторонами"
+    "ALMEX_TOOLTIP": "Подписано отправителем",
+    "EXTERNAL_TOOLTIP": "Подписано вами",
+    "BOTH_TOOLTIP": "Подписано всеми"
+  },
+  "MrkDocumentRespStatus": {
+    "OPTIONAL": "Ответ не требуется",
+    "PROHIBITED": "Ответ не требуется",
+    "CANCELED": "Отменен",
+    "REQUIRED": "Требует ответа",
+    "DRAFT": "Подготовлен черновик",
+    "SEND": "Отвечено"
   }
 }

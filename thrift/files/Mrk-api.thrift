@@ -103,6 +103,15 @@ enum MrkDocResponceType {
   PROHIBITED
 }
 
+enum MrkDocumentRespStatus {
+  OPTIONAL,
+  REQUIRED,
+  PROHIBITED,
+  DRAFT,
+  SEND,
+  CANCELED
+}
+
 struct MrkDocument {
   1: optional string id;
   2: optional string extId;
@@ -129,6 +138,12 @@ struct MrkDocument {
   23: optional MrkDocResponceType extRespReq;
   24: bool hasAttachments;
   25: bool hasDigitalSign;
+  26: optional string documentNumber;
+  27: optional common.kazDate documentRegDate;
+  28: optional string externalNumber;
+  29: optional common.kazDate externalRegDate;
+  30: optional i64 cancelDate;
+  31: optional MrkDocumentRespStatus respStatus;
 }
 
 struct MrkDocumentPage {
@@ -248,6 +263,7 @@ service MrkClientService {
   MrkDocumentData markMrkDocumentAsRead(1: string token, 2: string documentId, 3: bool read) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData getMrkDocumentData(1: string token, 2: string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData createOrUpdateMrkDocument(1: string token, 2: MrkDocumentData document) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  bool deleteMrkDocument(1: string token, 2: string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   string getDocumentInfoForSing(1: string token, 2: string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData sendDocument(1: string token, 2: string documentId, 3: string signature, 4: map<string, string> attachmentSignature, 5: string publicKey) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 

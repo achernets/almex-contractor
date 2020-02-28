@@ -13,6 +13,15 @@ const ECP_SVG = ({ color = '#1890FF', ...props }) => <svg width="24" height="34"
   <path d="M12.0347 5.27734C8.4791 5.27734 5.58798 8.16846 5.58798 11.724C5.58798 15.2798 8.4791 18.1709 12.0347 18.1709C15.5904 18.1709 18.4815 15.2798 18.4815 11.724C18.4815 8.16846 15.5904 5.27734 12.0347 5.27734ZM12.0347 17.3079C8.95376 17.3079 6.451 14.8007 6.451 11.724C6.451 8.64734 8.95376 6.14036 12.0347 6.14036C15.1186 6.14036 17.6185 8.64026 17.6185 11.724C17.6185 14.8078 15.1186 17.3079 12.0347 17.3079Z" fill={color} stroke={color} />
 </svg>;
 
+const MARK_SVG = ({ stroke = '#C4C4C4', fill = 'rgba(196, 196, 196, 0.4)', ...props }) => <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <path d="M4.49001 0.5H20.9794L16.9511 5.69356L16.7134 6L16.9511 6.30644L20.9794 11.5H4.49001L0.611802 6L4.49001 0.5Z" fill={fill} stroke={stroke} />
+</svg>;
+
+const Mark = ({ fill, stroke, ...props }) => <Icon
+  component={() => <MARK_SVG fill={fill} stroke={stroke} {...props} />}
+  className={styles.ecp}
+/>;
+
 const Ecp = ({ fill, ...props }) => <Icon
   component={() => <ECP_SVG color={fill} {...props} />}
   className={styles.ecp}
@@ -43,6 +52,7 @@ const Attach = (props) => <Icon
 
 export {
   Close,
+  Mark,
   Ecp,
   Chain,
   CaretUp,

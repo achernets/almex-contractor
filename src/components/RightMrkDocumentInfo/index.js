@@ -19,7 +19,6 @@ const RightMrkDocumentInfo = ({ selectedAttachment, toogleViewDocument, mrkDocum
     if (get(mrkDocumentData, 'document.viewed', true) === false) timeoutViewed = setTimeout(() => toogleViewDocument(get(mrkDocumentData, 'document.id', null), true), 7000);
     return () => clearTimeout(timeoutViewed);
   }, [mrkDocumentData]);
-
   return <Drawer
     width={496}
     placement={'right'}
@@ -65,8 +64,10 @@ const RightMrkDocumentInfo = ({ selectedAttachment, toogleViewDocument, mrkDocum
           <Col span={24}>
             <Row gutter={[8, 0]} type="flex" align="middle" justify="end">
               {
-                get(mrkDocumentData, 'document.extRespReq', null) !== MrkDocResponceType.PROHIBITED &&
-                get(mrkDocumentData, 'document.type', null) === MrkDocumentType.INPUT && <Col>
+                (
+                  get(mrkDocumentData, 'document.respStatus', null) === MrkDocumentRespStatus.OPTIONAL ||
+                  get(mrkDocumentData, 'document.respStatus', null) === MrkDocumentRespStatus.REQUIRED
+                ) && <Col>
                   <Button
                     onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
                       newMrkDocument: true,

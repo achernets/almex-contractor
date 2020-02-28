@@ -1162,6 +1162,10 @@ struct Document {
   42: optional list<DocumentExecution> responsibleUsers;
   /** Общее количество согласующих */
   43: i32 countConfirmerUsers;
+  /** Регистрационный номер входящего документа (исходящий номер в сторонней компании) */
+  44: optional string externalNumber;
+  /** Регистрационная дата входящего документа */
+  45: optional common.kazDate externalRegDate;
 }
 
 /** Список разрешения для вложения */

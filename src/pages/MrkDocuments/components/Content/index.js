@@ -70,28 +70,31 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
       {
         title: I18n.t('MrkDocument.extNumber'),
         dataIndex: 'extNumber',
+        width: 120,
         ellipsis: true
       },
       {
         title: I18n.t('MrkDocument.extCameFrom'),
         dataIndex: 'extCameFrom',
+        width: 150,
         ellipsis: true
       },
       {
         title: I18n.t('MrkDocument.extAuthorName'),
         dataIndex: 'extAuthorName',
+        width: 120,
         ellipsis: true
       },
-      {
-        title: I18n.t('MrkDocument.extAuthorEmail'),
-        dataIndex: 'extAuthorEmail',
-        ellipsis: true
-      },
-      {
-        title: I18n.t('MrkDocument.patternName'),
-        dataIndex: 'patternName',
-        ellipsis: true
-      },
+      // {
+      //   title: I18n.t('MrkDocument.extAuthorEmail'),
+      //   dataIndex: 'extAuthorEmail',
+      //   ellipsis: true
+      // },
+      // {
+      //   title: I18n.t('MrkDocument.patternName'),
+      //   dataIndex: 'patternName',
+      //   ellipsis: true
+      // },
       {
         title: I18n.t('MrkDocument.createDate'),
         key: 'createDate',

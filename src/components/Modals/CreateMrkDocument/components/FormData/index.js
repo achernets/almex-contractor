@@ -31,6 +31,7 @@ const FormData = ({ showModal }) => {
             key={index}
             item={item}
             name={`items.${index}`}
+            patternId={get(values, 'document.patternId', null)}
           />)}
           <FieldArray
             name="attachments"

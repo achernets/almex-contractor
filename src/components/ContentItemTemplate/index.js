@@ -3,8 +3,9 @@ import { Form, Input, Checkbox, DatePicker, Radio, Select } from 'formik-antd';
 import moment from 'moment';
 import { get, keys, map } from 'lodash';
 import { useFormikContext } from 'formik';
+import UserChoice from './UserChoice';
 
-const ContentItemTemplate = ({ item, name }) => {
+const ContentItemTemplate = ({ item, name, patternId }) => {
   const { values, setFieldValue } = useFormikContext();
   const settingLayout = {
     labelAlign: 'left',
@@ -23,6 +24,12 @@ const ContentItemTemplate = ({ item, name }) => {
           name={`${name}.value.strValue`}
         />
       </Form.Item>;
+    case ContentItemType.USER_CHOICE:
+      return <UserChoice
+        name={name}
+        settingLayout={settingLayout}
+        patternId={patternId}
+      />;
     case ContentItemType.COMBO_BOX:
       return <Form.Item
         {...settingLayout}

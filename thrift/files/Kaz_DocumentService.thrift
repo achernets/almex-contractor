@@ -1825,6 +1825,9 @@ service DocumentService {
   *  - outboxUserId по отправителю
   *  - indexMonth по месяцу
   *  - indexDate только условие between
+  *  - externalId внешний идентификатор
+  *  - externalNumber внешний регистрационный номер
+  *  - externalRegDate внешняя дата регистрации
   *  - */
   list<Document> getAllDocuments(1: common.AuthTokenBase64 token, 2: DocumentAccessPolicy accessPolicy, 3: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   /** Получение количества всех документов */

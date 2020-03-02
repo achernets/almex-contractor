@@ -64,7 +64,8 @@
       "SignInSystem": true,
       "PreconditionException": true,
       "MrkDocResponceType": true,
-      "MrkDocumentRespStatus": true
+      "MrkDocumentRespStatus": true,
+      "UserOrGroup": true
     },
     "rules": {
       "react-hooks/exhaustive-deps": "off",

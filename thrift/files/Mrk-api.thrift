@@ -189,6 +189,11 @@ struct MrkDigitalSignDetails {
    5: optional string subjectDN;
    6: optional i64 signDate;
    7: optional string signInSystem;
+   8: optional string subjectSerialNumber;
+   9: optional string subjectSerialNumberIndividual;
+  10: optional string email;
+  11: optional string organization;
+  12: optional string fullName;
 }
 
 struct MrkDocumentData {
@@ -277,11 +282,10 @@ service MrkClientService {
 
   list<Kaz_DocumentService.DocumentPattern> getAllDocumentPatterns(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   MrkDocumentData prepareDraftDocument(1: string token, 2:common.ID docPatternId, 3:string documentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
-//  attachAs
-//  create
-//  sign
-//  send
-//requestConfirmation
+
+  /** нужен для контента "Выбор пользователя" */
+  list<common.UserOrGroup> getAllUsers(1: common.AuthTokenBase64 token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+
   bool logout(1: string token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 }
 

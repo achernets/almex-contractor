@@ -60,7 +60,7 @@
   },
   "MrkDocument": {
     "name": "Краткое содержание",
-    "extNumber": "Исходящий номер",
+    "extNumber": "Исх. номер",
     "extCameFrom": "Отправитель",
     "extAuthorName": "Автор",
     "extAuthorEmail": "Email",

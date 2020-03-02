@@ -1,4 +1,4 @@
-import { isEmpty, upperFirst, get, uniqueId } from 'lodash';
+import { isEmpty, upperFirst, compact, get, uniqueId } from 'lodash';
 import { I18n } from 'react-redux-i18n';
 import { notification } from 'antd';
 import React from 'react';
@@ -24,6 +24,10 @@ export const userName = ({ firstName, lastName }) => {
 
 export const getFio = ({ firstName, lastName, middleName }) => {
   return `${isEmpty(lastName) ? '' : upperFirst(lastName)} ${isEmpty(firstName) ? '' : upperFirst(firstName)[0] + '.'}${isEmpty(middleName) ? '' : upperFirst(middleName)[0] + '.'}`;
+};
+
+export const getFioAlmex = ({ userFirstName, userLastName, userMiddleName }) => {
+  return `${isEmpty(userLastName) ? '' : upperFirst(userLastName)} ${isEmpty(userFirstName) ? '' : upperFirst(userFirstName)[0] + '.'}${isEmpty(userMiddleName) ? '' : upperFirst(userMiddleName)[0] + '.'}`;
 };
 
 export const NotificationError = (error, key = uniqueId('notification_')) => {
@@ -105,6 +109,8 @@ export const getAntdLocale = () => {
 export const getContentItemValue = item => {
   const value = get(item, 'value.strValue', null);
   switch (item.type) {
+    case ContentItemType.USER_CHOICE:
+      return compact(get(item, 'users', [])).map(itm => getFioAlmex(itm)).join(', ');
     case ContentItemType.CHECKBOX:
       return I18n.t(value === 'true' ? 'common.true' : 'common.false');
     case ContentItemType.CALENDAR:

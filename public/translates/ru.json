@@ -70,7 +70,9 @@
     "show_chain": "Показать цепочку",
     "hide_chain": "Спрятать цепочку",
     "hasAttachments": "Есть вложения",
-    "signInSystem": "Подписи"
+    "signInSystem": "Подписи",
+    "externalNumber": "Входящий номер",
+    "externalRegDate": "Входящая дата"
   },
   "MrkDocumentType": {
     "DRAFT": "Черновики",

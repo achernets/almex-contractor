@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Row, Col, Button, Upload } from 'antd';
-import { Form, Input } from 'formik-antd';
+import { Form, Input, DatePicker } from 'formik-antd';
 import { useFormikContext, FieldArray } from 'formik';
 import { I18n } from 'react-redux-i18n';
 import { get, map } from 'lodash';
@@ -8,9 +8,9 @@ import { AttachmentRow, UploadFile } from 'components/Attachment';
 import { ATTACHMENT_ACCEPT } from 'constants/general';
 import ContentItemTemplate from 'components/ContentItemTemplate';
 import Scrollbar from 'components/Scrollbar';
+import moment from 'moment';
 const FormData = ({ showModal }) => {
-  const { values } = useFormikContext();
-
+  const { values, setFieldValue } = useFormikContext();
   return <Scrollbar>
     <div style={{ padding: '12px 24px' }}>
       <Row>
@@ -27,6 +27,31 @@ const FormData = ({ showModal }) => {
           >
             <Input.TextArea name="document.name" rows={3} />
           </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            name="document.externalNumber"
+            label={I18n.t('MrkDocument.externalNumber')}
+          >
+            <Input name="document.externalNumber" />
+          </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            name="document.externalRegDate"
+            label={I18n.t('MrkDocument.externalRegDate')}
+          >
+            <DatePicker
+              name={'document.externalRegDate'}
+              placeholder={''}
+              format={'DD.MM.YYYY HH:mm'}
+              showTime={{ format: 'HH:mm' }}
+              value={get(values, 'document.externalRegDate', -1) === -1 ? null : moment(get(values, 'document.externalRegDate', null))}
+              onChange={(e) => setFieldValue('document.externalRegDate', e === null ? -1 : e.valueOf())}
+            />
+          </Form.Item>
           {map(values.items, (item, index) => <ContentItemTemplate
             key={index}
             item={item}
@@ -40,6 +65,7 @@ const FormData = ({ showModal }) => {
                 labelAlign="left"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
+                hasFeedback={false}
                 name={`attachments`}
                 label={I18n.t('common.attachments')}
               >

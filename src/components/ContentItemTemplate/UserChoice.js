@@ -5,18 +5,20 @@ import { get, find, map, compact, debounce } from 'lodash';
 import { useFormikContext } from 'formik';
 import { MrkClientServiceClient } from 'api';
 import { getFioAlmex, log } from 'utils/helpers';
+import { useMountedState } from 'react-use';
 
 const UserChoice = ({ token, name, patternId, settingLayout }) => {
   const { values, setFieldValue } = useFormikContext();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const isMounted = useMountedState();
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = async (text) => {
-    setLoading(true);
+    if (isMounted()) setLoading(true);
     const fioFilterItem = text ? [new FilterItem({
       field: 'FIO',
       value: text,
@@ -40,11 +42,13 @@ const UserChoice = ({ token, name, patternId, settingLayout }) => {
     });
     try {
       const result = await MrkClientServiceClient.getAllUsers(token, filter);
-      setUsers(result);
-      setLoading(false);
+      if (isMounted()) {
+        setUsers(result);
+        setLoading(false);
+      }
     } catch (error) {
       log('getAllUsers', error);
-      setLoading(false);
+      if (isMounted()) setLoading(false);
     }
   };
 
@@ -53,6 +57,7 @@ const UserChoice = ({ token, name, patternId, settingLayout }) => {
 
   return <Form.Item
     {...settingLayout}
+    hasFeedback={false}
     name={`${name}.users`}
   >
     <Select

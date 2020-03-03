@@ -28,6 +28,14 @@ const Info = ({ mrkDocumentData }) => {
       title={I18n.t('MrkDocument.extAuthorEmail')}
       text={document.extAuthorEmail}
     />
+    <InfoRow
+      title={I18n.t('MrkDocument.externalNumber')}
+      text={document.externalNumber}
+    />
+    <InfoRow
+      title={I18n.t('MrkDocument.externalRegDate')}
+      text={document.externalRegDate !== -1 && document.externalRegDate !== null ? moment(document.externalRegDate).format('HH.mm / DD.MM.YYYY') : null}
+    />
     {map(items, item => <InfoRow
       key={item.id}
       title={item.oName}

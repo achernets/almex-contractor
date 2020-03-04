@@ -15,6 +15,7 @@ import RightMrkDocumentInfo from 'components/RightMrkDocumentInfo';
 import LeftOnlyOffice from 'components/LeftOnlyOffice';
 import { actions } from 'react-redux-modals';
 import { invert } from 'lodash';
+import { getSignInSystemText } from 'utils/helpers';
 import { Attach, Mark } from 'components/Icons';
 
 const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAttachment, editDocument, mrkDocuments, isSearch, count, page, isFetching }) => {
@@ -116,21 +117,21 @@ const Content = ({ getMrkDocuments, showModal, showPreviewDocument, selectedAtta
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis'
-              }}>{I18n.t('SignInSystem.ALMEX_TOOLTIP')}</span>;
+              }}>{getSignInSystemText(signInSystem)}</span>;
             case SignInSystem.EXTERNAL:
               return <span style={{
                 color: '#F4B435', display: 'block',
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis'
-              }}>{I18n.t('SignInSystem.EXTERNAL_TOOLTIP')}</span>;
+              }}>{getSignInSystemText(signInSystem)}</span>;
             case SignInSystem.BOTH:
               return <span style={{
                 color: '#61B039', display: 'block',
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis'
-              }}>{I18n.t('SignInSystem.BOTH_TOOLTIP')}</span>;
+              }}>{getSignInSystemText(signInSystem)}</span>;
             default:
               return '';
           }

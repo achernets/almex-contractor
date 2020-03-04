@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Row, Button, Col } from 'antd';
+import { Typography, Row, /*Button,*/ Col } from 'antd';
 import { AttachmentRow } from 'components/Attachment';
 import classnames from 'classnames';
 import { map, size, reduce, filter } from 'lodash';
@@ -26,9 +26,9 @@ const Attachment = ({ attachment, onClick, active }) => {
           attachment={attachment}
         />
       </Col>
-      <Col span={5} className={styles.tr}>
+      {/* <Col span={5} className={styles.tr}>
         <Button type={'primary'} size={'small'}>Подписать</Button>
-      </Col>
+      </Col> */}
       {size(attachment.digitalSigns) > 0 && <>
         <Col span={24} style={{ paddingLeft: 31 }}>
           {size(almexSigns) > 0 && <><Row gutter={[0, 8]}>

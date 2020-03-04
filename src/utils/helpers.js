@@ -194,3 +194,16 @@ export const attachmentIcon = (fileName) => {
       return require('../images/attachments/Undefined.svg');
   }
 };
+
+export const getSignInSystemText = (signInSystem) => {
+  switch (signInSystem) {
+    case SignInSystem.ALMEX:
+      return I18n.t('SignInSystem.ALMEX_TOOLTIP');
+    case SignInSystem.EXTERNAL:
+      return I18n.t('SignInSystem.EXTERNAL_TOOLTIP');
+    case SignInSystem.BOTH:
+      return I18n.t('SignInSystem.BOTH_TOOLTIP');
+    default:
+      return '';
+  }
+};

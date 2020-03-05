@@ -222,3 +222,15 @@ export const getSignInSystemText = (signInSystem) => {
 export const isDataTime = datatime => {
   return (datatime !== null && datatime !== -1 && datatime !== '' && datatime !== 0);
 };
+
+export const getHbValue = (value, locale) => {
+  if (!value) return '';
+  switch (value.type) {
+    case HBColumnType.NUMBER:
+      return get(value, `value.any`, '');
+    case HBColumnType.USER_CHOICE:
+      return getFioAlmex(get(value, `user`, new UserOrGroup()));
+    default:
+      return get(value, `value.${locale}`, '');
+  }
+};

@@ -4,6 +4,7 @@ import moment from 'moment';
 import { get, keys, map } from 'lodash';
 import { useFormikContext } from 'formik';
 import UserChoice from './UserChoice';
+import HandBook from './HandBook';
 
 const ContentItemTemplate = ({ item, name, patternId }) => {
   const { values, setFieldValue } = useFormikContext();
@@ -91,6 +92,11 @@ const ContentItemTemplate = ({ item, name, patternId }) => {
           {map(item.fields).map((itm, index) => <Radio key={index} value={itm}>{itm}</Radio>)}
         </Radio.Group>
       </Form.Item>;
+    case ContentItemType.HAND_BOOK:
+      return <HandBook
+        name={name}
+        settingLayout={settingLayout}
+      />;
     default:
       return <Form.Item
         {...settingLayout}

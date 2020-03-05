@@ -3,7 +3,7 @@ import { invert } from 'lodash';
 import { Attach, Mark } from 'components/Icons';
 import { Tooltip, Icon } from 'antd';
 import { I18n } from 'react-redux-i18n';
-import { getSignInSystemText } from 'utils/helpers';
+import { getSignInSystemText, isDataTime } from 'utils/helpers';
 import moment from 'moment';
 
 const getMarkDocument = (respStatus) => {
@@ -49,10 +49,35 @@ const name = {
   ellipsis: true
 };
 
-const extNumber = {
-  title: 'MrkDocument.extNumber',
-  dataIndex: 'extNumber',
-  width: 120,
+const patternName = {
+  title: 'MrkDocument.patternName',
+  dataIndex: 'patternName',
+  ellipsis: true
+};
+
+const extNumberAndDate = {
+  title: 'MrkDocument.extNumberAndDate',
+  dataIndex: 'externalNumber',
+  width: 200,
+  render: (_, { externalNumber, externalRegDate }) => {
+    let text = '';
+    if (externalNumber !== null) text = externalNumber;
+    if (isDataTime(externalRegDate)) text = `${text} от ${moment(externalRegDate).format('DD.MM.YYYY')}`;
+    return text;
+  },
+  ellipsis: true
+};
+
+const numberAndDate = {
+  title: 'MrkDocument.numberAndDate',
+  dataIndex: 'documentNumber',
+  width: 200,
+  render: (_, { documentNumber, documentRegDate }) => {
+    let text = '';
+    if (documentNumber !== null) text = documentNumber;
+    if (isDataTime(documentRegDate)) text = `${text} от ${moment(documentRegDate).format('DD.MM.YYYY')}`;
+    return text;
+  },
   ellipsis: true
 };
 
@@ -118,10 +143,10 @@ const remove = {
   key: 'remove',
   dataIndex: 'id',
   width: 40,
-  render: ({ id }) => <Icon type="delete" />,
+  render: () => <Icon type="delete" />,
   ellipsis: true
 };
 
-export const DOCUMENTS_DRAFT = [name, createDate, remove];
-export const DOCUMENTS_INPUT = [name, extNumber, extCameFrom, extAuthorName, createDate, signInSystem];
-export const DOCUMENTS_OUTPUT = [name, extNumber, extCameFrom, extAuthorName, createDate, signInSystem];
+export const DOCUMENTS_DRAFT = [name, numberAndDate, createDate, remove];
+export const DOCUMENTS_INPUT = [name, extNumberAndDate, extCameFrom, extAuthorName, createDate, signInSystem];
+export const DOCUMENTS_OUTPUT = [name, numberAndDate, patternName, createDate, signInSystem];

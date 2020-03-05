@@ -75,7 +75,7 @@ const DigitalInformation = ({
       />
       <InfoRow
         title={'Подписано'}
-        text={moment(signDate).format('HH.mm / DD.MM.YYYY')}
+        text={moment(signDate).format('DD.MM.YYYY HH:mm')}
         leftColWidth={8}
         gutter={[0, 0]}
       />

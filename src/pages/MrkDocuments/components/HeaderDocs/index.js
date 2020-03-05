@@ -24,7 +24,7 @@ const HeaderDocs = ({ showModal, isFetching, getMrkDocuments, changeMrkDocumentT
       <Row type="flex" justify="end" align="middle" gutter={[16, 0]}>
         <Col>
           <Button type="primary"
-            disabled={isFetching}
+            //disabled={isFetching}
             onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
               newMrkDocument: true,
               parentId: null,

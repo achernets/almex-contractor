@@ -15,6 +15,11 @@
     "save_changes_with_ecp": "Сохранить изменения с ЭЦП",
     "confirm_with_ecp": "Подтвердить с ЭЦП"
   },
+  "confirmation": {
+    "title": "Подтвердите действие",
+    "okText": "Подтвердить",
+    "title_remove_document_desc": "Удалить документ \"%{name}\"?"
+  },
   "errors": {
     "UNKNOWN_ERROR": "Неизвестная ошибка",
     "INVALID_PASSWORD": "Неверный пароль",
@@ -60,7 +65,8 @@
   },
   "MrkDocument": {
     "name": "Краткое содержание",
-    "extNumber": "Исх. номер",
+    "extNumberAndDate": "Вхд. номер/дата",
+    "numberAndDate": "Исх. номер/дата",
     "extCameFrom": "Отправитель",
     "extAuthorName": "Автор",
     "extAuthorEmail": "Email",
@@ -72,7 +78,9 @@
     "hasAttachments": "Есть вложения",
     "signInSystem": "Подписи",
     "externalNumber": "Входящий номер",
-    "externalRegDate": "Входящая дата"
+    "externalRegDate": "Входящая дата",
+    "documentNumber": "Исходящий номер",
+    "documentRegDate": "Исходящая дата"
   },
   "MrkDocumentType": {
     "DRAFT": "Черновики",

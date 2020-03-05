@@ -1,6 +1,6 @@
 import { isEmpty, upperFirst, compact, get, uniqueId } from 'lodash';
 import { I18n } from 'react-redux-i18n';
-import { notification } from 'antd';
+import { notification, Modal } from 'antd';
 import React from 'react';
 import moment from 'moment';
 import store from 'redux/store';
@@ -47,6 +47,17 @@ export const NotificationError = (error, key = uniqueId('notification_')) => {
     </>
   });
   log(key, error);
+};
+
+export const confirmationAction = (fn, title, desc) => {
+  Modal.confirm({
+    title: title || I18n.t('confirmation.title'),
+    content: desc || null,
+    okText: I18n.t('confirmation.okText'),
+    okType: 'danger',
+    cancelText: I18n.t('common.cancel'),
+    onOk: () => fn()
+  });
 };
 
 export const fileReader = (file, type = 'readAsBinaryString') => {
@@ -206,4 +217,8 @@ export const getSignInSystemText = (signInSystem) => {
     default:
       return '';
   }
+};
+
+export const isDataTime = datatime => {
+  return (datatime !== null && datatime !== -1 && datatime !== '' && datatime !== 0);
 };

@@ -49,7 +49,10 @@ export default (state = initialState, action) => {
     case CHANGE_MRK_DOCUMENT_TYPE:
       return {
         ...state,
-        mrkDocumentType: action.payload
+        mrkDocumentType: action.payload,
+        mrkDocuments: [],
+        count: 0,
+        page: 1,
       };
     case UPDATE_DOCUMENT:
       return {

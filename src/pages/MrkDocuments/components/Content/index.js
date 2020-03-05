@@ -39,7 +39,7 @@ const Content = ({ getMrkDocuments, removeDocument, mrkDocumentType, showModal, 
     loading={isFetching}
     columns={columns.map(item => {
       let newItem = { ...item };
-      if (newItem.title !== null) newItem.title = I18n.t(newItem.title);
+      if (typeof newItem.title === 'string') newItem.title = I18n.t(newItem.title);
       if (newItem.key === 'remove') newItem.onCell = (record) => {
         return {
           onClick: (e) => {
@@ -71,20 +71,20 @@ const Content = ({ getMrkDocuments, removeDocument, mrkDocumentType, showModal, 
       emptyText: isSearch ? <Empty
         description={I18n.t('MrkDocuments.no_data_search')}
       >
-      </Empty> : <Empty
+      </Empty> : (!isFetching ? <Empty
         imageStyle={{
           height: 0
         }}
         image={null}
         description={<Typography.Text>{I18n.t('MrkDocuments.no_data')}</Typography.Text>}
       >
-          <Button type="primary" onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
-            newMrkDocument: true,
-            parentId: null,
-            extRespPatternId: null,
-            extRespReq: MrkDocResponceType.OPTIONAL_NEW
-          })}>{I18n.t('MrkDocuments.create_empty')}</Button>
-        </Empty>,
+        <Button type="primary" onClick={() => showModal('MODAL_CREATE_MRK_DOCUMENT', {
+          newMrkDocument: true,
+          parentId: null,
+          extRespPatternId: null,
+          extRespReq: MrkDocResponceType.OPTIONAL_NEW
+        })}>{I18n.t('MrkDocuments.create_empty')}</Button>
+      </Empty> : <div></div>),
     }}
   />
     <LeftOnlyOffice close={() => selectedAttachment(null)} />

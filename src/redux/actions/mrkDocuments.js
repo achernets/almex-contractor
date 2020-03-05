@@ -1,7 +1,8 @@
 import { isEmpty, keys, map } from 'lodash';
 import { PAGE_SIZE } from 'constants/table';
-import { NotificationError } from 'utils/helpers';
-import { Modal } from 'antd';
+import { hideMrkDocument } from './mrkDocument';
+import { NotificationError, confirmationAction } from 'utils/helpers';
+import { I18n } from 'react-redux-i18n';
 
 export const GET_MRK_DOCUMENTS_REQUEST = 'PAGE_MRK_DOCUMENTS/GET_MRK_DOCUMENTS_REQUEST';
 export const GET_MRK_DOCUMENTS_SUCCESS = 'PAGE_MRK_DOCUMENTS/GET_MRK_DOCUMENTS_SUCCESS';
@@ -71,6 +72,7 @@ export const changeMrkDocumentType = type => {
       payload: type
     });
     dispatch(getMrkDocuments());
+    dispatch(hideMrkDocument());
   };
 };
 
@@ -91,31 +93,24 @@ export const updateDocument = document => {
 export const REMOVE_DOCUMENT = 'PAGE_MRK_DOCUMENTS/REMOVE_DOCUMENT';
 export const removeDocument = (document) => {
   return async (dispatch, getState, api) => {
-    Modal.confirm({
-      title: 'Подтвердите удаление документа',
-      content: `Подтвердите удаление документа "${document.name}"?`,
-      okText: 'Да',
-      okType: 'danger',
-      cancelText: 'Нет',
-      onOk: async () => {
-        try {
-          const {
-            auth: { token },
-            mrkDocuments: { page }
-          } = getState();
-          await api.MrkClientServiceClient.deleteMrkDocument(
-            token,
-            document.id
-          );
-          dispatch({
-            type: REMOVE_DOCUMENT
-          });
-          dispatch(getMrkDocuments(page));
-        } catch (error) {
-          NotificationError(error, 'deleteMrkDocument');
-        }
+    const fn = async () => {
+      try {
+        const {
+          auth: { token },
+          mrkDocuments: { page }
+        } = getState();
+        await api.MrkClientServiceClient.deleteMrkDocument(
+          token,
+          document.id
+        );
+        dispatch({
+          type: REMOVE_DOCUMENT
+        });
+        dispatch(getMrkDocuments(page));
+      } catch (error) {
+        NotificationError(error, 'deleteMrkDocument');
       }
-    });
-
+    };
+    confirmationAction(fn, null, I18n.t('confirmation.title_remove_document_desc', { name: document.name }));
   };
 };

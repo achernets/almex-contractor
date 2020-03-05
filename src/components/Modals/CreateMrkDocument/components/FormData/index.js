@@ -31,25 +31,25 @@ const FormData = ({ showModal }) => {
             labelAlign="left"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
-            name="document.externalNumber"
-            label={I18n.t('MrkDocument.externalNumber')}
+            name="document.documentNumber"
+            label={I18n.t('MrkDocument.documentNumber')}
           >
-            <Input name="document.externalNumber" />
+            <Input name="document.documentNumber" />
           </Form.Item>
           <Form.Item
             labelAlign="left"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
-            name="document.externalRegDate"
-            label={I18n.t('MrkDocument.externalRegDate')}
+            name="document.documentRegDate"
+            label={I18n.t('MrkDocument.documentRegDate')}
           >
             <DatePicker
-              name={'document.externalRegDate'}
+              name={'document.documentRegDate'}
               placeholder={''}
               format={'DD.MM.YYYY HH:mm'}
               showTime={{ format: 'HH:mm' }}
-              value={get(values, 'document.externalRegDate', -1) === -1 ? null : moment(get(values, 'document.externalRegDate', null))}
-              onChange={(e) => setFieldValue('document.externalRegDate', e === null ? -1 : e.valueOf())}
+              value={get(values, 'document.documentRegDate', -1) === -1 ? null : moment(get(values, 'document.documentRegDate', null))}
+              onChange={(e) => setFieldValue('document.documentRegDate', e === null ? -1 : e.valueOf())}
             />
           </Form.Item>
           {map(values.items, (item, index) => <ContentItemTemplate

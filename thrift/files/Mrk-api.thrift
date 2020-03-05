@@ -2,6 +2,7 @@ include "ex.thrift"
 include "filter.thrift"
 include "common.thrift"
 include "Kaz_DocumentService.thrift"
+include "Kaz_HandBookService.thrift"
 include "Kaz_types.thrift"
 include "HB.thrift"
 
@@ -130,20 +131,23 @@ struct MrkDocument {
   15: optional string groupNumber;
   16: optional Kaz_DocumentService.SignInSystem signInSystem;
   17: optional string extCameFrom;
-  18: optional string extNumber;
-  19: optional string extAuthorName;
-  20: optional string extAuthorEmail;
-  21: optional string extRespExecId;
-  22: optional string extRespPatternId;
-  23: optional MrkDocResponceType extRespReq;
-  24: bool hasAttachments;
-  25: bool hasDigitalSign;
-  26: optional string documentNumber;
-  27: optional common.kazDate documentRegDate;
-  28: optional string externalNumber;
-  29: optional common.kazDate externalRegDate;
-  30: optional i64 cancelDate;
-  31: optional MrkDocumentRespStatus respStatus;
+  18: optional string extAuthorName;
+  19: optional string extAuthorEmail;
+  20: optional string extRespExecId;
+  21: optional string extRespPatternId;
+  22: optional MrkDocResponceType extRespReq;
+  23: bool hasAttachments;
+  24: bool hasDigitalSign;
+  /** номер в системе MRK*/
+  25: optional string documentNumber;
+  /** дата регистрации в системе MRK*/
+  26: optional common.kazDate documentRegDate;
+  /** номер регистрации во внешней системе(ALMEX)*/
+  27: optional string externalNumber;
+  /** дата регистрации во внешней системе(ALMEX)*/
+  28: optional common.kazDate externalRegDate;
+  29: optional i64 cancelDate;
+  30: optional MrkDocumentRespStatus respStatus;
 }
 
 struct MrkDocumentPage {
@@ -285,6 +289,8 @@ service MrkClientService {
 
   /** нужен для контента "Выбор пользователя" */
   list<common.UserOrGroup> getAllUsers(1: common.AuthTokenBase64 token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  Kaz_HandBookService.HandBook getHandBookById(1: common.AuthTokenBase64 token, 2: common.ID id) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  list<HB.HBRow> getAllHandBookRows(1: common.AuthTokenBase64 token, 2: common.ID hbId, 3: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
   bool logout(1: string token) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 }

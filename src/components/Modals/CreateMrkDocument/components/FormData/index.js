@@ -4,7 +4,8 @@ import { Form, Input, DatePicker } from 'formik-antd';
 import { useFormikContext, FieldArray } from 'formik';
 import { I18n } from 'react-redux-i18n';
 import { get, map } from 'lodash';
-import { AttachmentRow, UploadFile } from 'components/Attachment';
+import { UploadFile } from 'components/Attachment';
+import Attachment from 'components/RightMrkDocumentInfo/components/Attachment';
 import { ATTACHMENT_ACCEPT } from 'constants/general';
 import ContentItemTemplate from 'components/ContentItemTemplate';
 import Scrollbar from 'components/Scrollbar';
@@ -70,7 +71,7 @@ const FormData = ({ showModal }) => {
                 label={I18n.t('common.attachments')}
               >
                 <Row gutter={[0, 16]}>
-                  {map(values.attachments, (item, index) => <Col span={12} key={index}>
+                  {map(values.attachments, (item, index) => <Col span={24} key={index}>
                     {item.attachment === null ?
                       <UploadFile
                         file={item.file}
@@ -79,15 +80,15 @@ const FormData = ({ showModal }) => {
                           file: null
                         })}
                       /> :
-                      <AttachmentRow
+                      <Attachment
                         onClick={() => showModal('MODAL_ATTACHMENT_EDIT', {
                           mrkAttachment: item.attachment
                         })}
-                        attachment={item.attachment}
                         removeAttachment={(e) => {
                           e.stopPropagation();
                           arrayHelpers.remove(index);
                         }}
+                        attachment={item.attachment}
                       />}
                   </Col>)}
                   <Col span={24}>

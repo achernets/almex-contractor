@@ -7,7 +7,7 @@ import DigitalInformation from './DigitalInformation';
 import * as styles from '../right-preview.module.scss';
 
 
-const Attachment = ({ attachment, onClick, active }) => {
+const Attachment = ({ attachment, onClick, removeAttachment = null, active }) => {
   const almexSigns = reduce(attachment.digitalSigns, (hash, item) => {
     hash.push(...filter(item.signDetails, { signInSystem: 'ALMEX' }));
     return hash;
@@ -20,10 +20,11 @@ const Attachment = ({ attachment, onClick, active }) => {
     <Row
       className={classnames(styles.attachment, { [styles.att_active]: active })}
       gutter={[0, 8]}>
-      <Col span={19}>
+      <Col span={24}>
         <AttachmentRow
           onClick={() => onClick(attachment)}
           attachment={attachment}
+          removeAttachment={removeAttachment}
         />
       </Col>
       {/* <Col span={5} className={styles.tr}>

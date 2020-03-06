@@ -18,10 +18,16 @@
   max-width: calc(100% - 37px);
   min-width: 150px;
   position: relative;
-  @include icon-remove-hover;
 }
 .remove {
-  @include icon-remove;
+  position: absolute;
+  right: -16px;
+  top: -16px;
+  cursor: pointer;
+  color: #bfbfbf;
+  &:hover {
+    color: $blue;
+  }
 }
 .desc {
   color: $blue;

@@ -10,9 +10,11 @@ import PrivateRoute from 'components/PrivateRoute';
 import StartAppFail from 'components/StartAppFail';
 import { LayoutApp } from 'components/LayoutApp';
 import { ConfigProvider } from 'antd';
-import { getAntdLocale } from 'utils/helpers';
+import { getAntdLocale, log } from 'utils/helpers';
+import SockJsClient from 'react-stomp';
 
-const App = ({ loading, error }) => {
+const App = ({ loading, error, THRIFT }) => {
+
   useEffect(() => {
     const audio = () => {
       if (process.env.NODE_ENV !== 'development') document.getElementById('audio').play();
@@ -22,11 +24,16 @@ const App = ({ loading, error }) => {
       document.removeEventListener('click', audio);
     };
   }, []);
+
   if (error !== null) return <StartAppFail />;
   return (
     <>
       {loading ? <Loader /> :
         <ConfigProvider locale={getAntdLocale()}>
+          <SockJsClient url={`${THRIFT.URL}/${THRIFT.API}/${THRIFT.SOCKET}`} topics={['/ws/mrk']}
+            onMessage={(msg) => log(msg)}
+            debug={true}
+          />
           <Switch>
             <Route path="/signIn" component={SignIn} />
             <Route path="/SignUp" component={SignUp} />
@@ -46,6 +53,7 @@ const App = ({ loading, error }) => {
 };
 
 const mapStateToProps = state => ({
+  THRIFT: state.settings.THRIFT,
   loading: state.asyncInitialState.loading,
   error: state.asyncInitialState.error
 });

@@ -145,14 +145,13 @@ export const createOrUpdateMrkDocument = (data, send = false, certificate = null
             token,
             result.document.id
           );
-          const signature = await singData(certificate, infoForSing);
+          signature = await singData(certificate, infoForSing);
           attachmentSignature = await reduce(result.atts, async (hash, item) => {
             hash[item.id] = await singData(certificate, item.attHash, item.attHash);
             return hash;
           }, {});
-          await api.MrkClientServiceClient.signProfile(token, signature, certificate.publicKey);
         }
-        dispatch(sendDocument(signature, attachmentSignature));
+        dispatch(sendDocument(signature, attachmentSignature, certificate.publicKey));
       } else {
         dispatch(getMrkDocuments());
       }
@@ -169,7 +168,7 @@ export const SEND_DOCUMENT_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_RE
 export const SEND_DOCUMENT_SUCCESS = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_SUCCESS';
 export const SEND_DOCUMENT_FAILURE = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_FAILURE';
 
-export const sendDocument = (signature = null, attachmentSignature = null) => {
+export const sendDocument = (signature = null, attachmentSignature = null, publicKey) => {
   return async (dispatch, getState, api) => {
     dispatch({ type: SEND_DOCUMENT_REQUEST });
     try {
@@ -178,7 +177,7 @@ export const sendDocument = (signature = null, attachmentSignature = null) => {
         mrkDocuments: { page, mrkDocuments },
         modal: { createMrkDocument: { mrkDocumentData: { document: { id } } } }
       } = getState();
-      const result = await api.MrkClientServiceClient.sendDocument(token, id, signature, attachmentSignature);
+      const result = await api.MrkClientServiceClient.sendDocument(token, id, signature, attachmentSignature, publicKey);
       dispatch({
         type: SEND_DOCUMENT_SUCCESS,
         payload: result

@@ -3,7 +3,8 @@
     "LANG": "ru",
     "THRIFT": {
         "URL": "https://dev.almexecm.com:8443",
-        "API": "almex-mrk-server"
+        "API": "almex-mrk-server",
+        "SOCKET": "wsc/ping"
     },
     "MAX_CLIENTS_ORGANIZATION": 5
 }

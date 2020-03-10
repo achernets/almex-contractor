@@ -116,8 +116,12 @@ const CreateMrkDocument = ({ hideModal,
           {step === 1 && <ListDocumentPatterns extRespPatternId={extRespPatternId} parentId={parentId} />}
           {step === 2 && <FormData showModal={showModal} removeEcp={async (attachment, index) => {
             try {
+              const newAttachment = new MrkAttachment({ ...attachment, hasDigitalSign: false, digitalSigns: [], isEditing: true });
               const result = await MrkClientServiceClient.markAttachmentAsEditing(token, attachment.id);
-              setFieldValue(`attachments.${index}.attachment`, new MrkAttachment({ ...attachment, hasDigitalSign: false, digitalSigns: [], isEditing: true }))
+              setFieldValue(`attachments.${index}.attachment`, newAttachment);
+              showModal('MODAL_ATTACHMENT_EDIT', {
+                mrkAttachment: newAttachment
+              });
               log(result);
             } catch (error) {
               log(error);

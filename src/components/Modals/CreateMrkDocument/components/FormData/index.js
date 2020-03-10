@@ -91,9 +91,6 @@ const FormData = ({ showModal, removeEcp }) => {
                         removeEcp={(e) => {
                           e.stopPropagation();
                           removeEcp(item.attachment, index);
-                          showModal('MODAL_ATTACHMENT_EDIT', {
-                            mrkAttachment: item.attachment
-                          });
                         }}
                         attachment={item.attachment}
                       />}

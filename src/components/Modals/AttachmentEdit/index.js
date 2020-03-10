@@ -16,16 +16,14 @@ const AttachmentEdit = ({ mrkAttachment, client, hideModal }) => {
   const loadEditor = () => {
     if (getTypeOnlyOffice(mrkAttachment) === null) return null;
     log('mrkAttachment', mrkAttachment);
-    log('url', getAttachmentUrl(mrkAttachment));
-    log('callback', onlyOfficeCallBackUrl(mrkAttachment));
     setEditor(new DocsAPI.DocEditor(editorId, {
       'document': {
         'fileType': getAttachmentExt(mrkAttachment),
         'key': mrkAttachment.id,
         'permissions': {
           'download': false,
-          'edit': true,
-          'print': true,
+          'edit': !mrkAttachment.hasDigitalSign,
+          'print': !mrkAttachment.hasDigitalSign,
           'review': false
         },
         'title': getAttachmentName(mrkAttachment),

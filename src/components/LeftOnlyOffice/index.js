@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 import ScriptLoader from 'react-render-props-script-loader';
 import Loader from 'components/Loader';
 import { uniqueId } from 'lodash';
-import { getOnlyOfficeUrl, getAttachmentUrl, getAttachmentName, getAttachmentExt, log } from 'utils/helpers';
+import { getOnlyOfficeUrl, getAttachmentUrl, getTypeOnlyOffice, getAttachmentName, getAttachmentExt, log } from 'utils/helpers';
 import { Close } from 'components/Icons';
+import Empty from 'components/Empty';
+import { I18n } from 'react-redux-i18n';
 const editorId = uniqueId('editor_');
 
 const LeftOnlyOffice = ({ mrkAttachment, close }) => {
   const [editor, setEditor] = useState(null);
   const loadEditor = () => {
+    if (getTypeOnlyOffice(mrkAttachment) === null) return null;
     log(mrkAttachment, getAttachmentUrl(mrkAttachment));
     setEditor(new DocsAPI.DocEditor(editorId, {
       'document': {
@@ -29,7 +32,7 @@ const LeftOnlyOffice = ({ mrkAttachment, close }) => {
         'lang': 'ru-RU',
         'mode': 'view',
       },
-      'documentType': 'text',
+      'documentType': getTypeOnlyOffice(mrkAttachment),
       'height': '100%',
       'width': '100%',
       'type': 'desktop'
@@ -67,7 +70,9 @@ const LeftOnlyOffice = ({ mrkAttachment, close }) => {
         if (error) return <h3>Failed to load onlyOfffice: {error.message}</h3>;
         return <div id={editorId} style={{
           height: '100%'
-        }}></div>;
+        }}>
+          {mrkAttachment !== null && getTypeOnlyOffice(mrkAttachment) === null && <Empty description={I18n.t('common.no_view_or_edit_attachment')} />}
+        </div>;
       }}
     </ScriptLoader>
 

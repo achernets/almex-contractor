@@ -42159,6 +42159,7 @@ MrkClientSession = class {
     this.createDate = null;
     this.client = null;
     this.organization = null;
+    this.accountId = null;
     if (args) {
       if (args.id !== undefined && args.id !== null) {
         this.id = args.id;
@@ -42171,6 +42172,9 @@ MrkClientSession = class {
       }
       if (args.organization !== undefined && args.organization !== null) {
         this.organization = new MrkOrganization(args.organization);
+      }
+      if (args.accountId !== undefined && args.accountId !== null) {
+        this.accountId = args.accountId;
       }
     }
   }
@@ -42215,6 +42219,13 @@ MrkClientSession = class {
           input.skip(ftype);
         }
         break;
+        case 5:
+        if (ftype == Thrift.Type.STRING) {
+          this.accountId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
         default:
           input.skip(ftype);
       }
@@ -42244,6 +42255,11 @@ MrkClientSession = class {
     if (this.organization !== null && this.organization !== undefined) {
       output.writeFieldBegin('organization', Thrift.Type.STRUCT, 4);
       this.organization.write(output);
+      output.writeFieldEnd();
+    }
+    if (this.accountId !== null && this.accountId !== undefined) {
+      output.writeFieldBegin('accountId', Thrift.Type.STRING, 5);
+      output.writeString(this.accountId);
       output.writeFieldEnd();
     }
     output.writeFieldStop();
@@ -43157,6 +43173,7 @@ MrkDocumentPage = class {
 MrkAttachment = class {
   constructor(args) {
     this.id = null;
+    this.fileVersion = null;
     this.fileName = null;
     this.account = null;
     this.creator = null;
@@ -43167,9 +43184,13 @@ MrkAttachment = class {
     this.fType = null;
     this.hasDigitalSign = null;
     this.digitalSigns = null;
+    this.isEditing = null;
     if (args) {
       if (args.id !== undefined && args.id !== null) {
         this.id = args.id;
+      }
+      if (args.fileVersion !== undefined && args.fileVersion !== null) {
+        this.fileVersion = args.fileVersion;
       }
       if (args.fileName !== undefined && args.fileName !== null) {
         this.fileName = args.fileName;
@@ -43201,6 +43222,9 @@ MrkAttachment = class {
       if (args.digitalSigns !== undefined && args.digitalSigns !== null) {
         this.digitalSigns = Thrift.copyList(args.digitalSigns, [null]);
       }
+      if (args.isEditing !== undefined && args.isEditing !== null) {
+        this.isEditing = args.isEditing;
+      }
     }
   }
 
@@ -43222,13 +43246,20 @@ MrkAttachment = class {
         }
         break;
         case 2:
+        if (ftype == Thrift.Type.I32) {
+          this.fileVersion = input.readI32().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 3:
         if (ftype == Thrift.Type.STRING) {
           this.fileName = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 3:
+        case 4:
         if (ftype == Thrift.Type.STRUCT) {
           this.account = new MrkAccount();
           this.account.read(input);
@@ -43236,7 +43267,7 @@ MrkAttachment = class {
           input.skip(ftype);
         }
         break;
-        case 4:
+        case 5:
         if (ftype == Thrift.Type.STRUCT) {
           this.creator = new MrkClient();
           this.creator.read(input);
@@ -43244,49 +43275,49 @@ MrkAttachment = class {
           input.skip(ftype);
         }
         break;
-        case 5:
+        case 6:
         if (ftype == Thrift.Type.I64) {
           this.createDate = input.readI64().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 6:
+        case 7:
         if (ftype == Thrift.Type.I64) {
           this.fSize = input.readI64().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 7:
+        case 8:
         if (ftype == Thrift.Type.STRING) {
           this.attHash = input.readString().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 8:
+        case 9:
         if (ftype == Thrift.Type.I32) {
           this.status = input.readI32().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 9:
+        case 10:
         if (ftype == Thrift.Type.I32) {
           this.fType = input.readI32().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 10:
+        case 11:
         if (ftype == Thrift.Type.BOOL) {
           this.hasDigitalSign = input.readBool().value;
         } else {
           input.skip(ftype);
         }
         break;
-        case 11:
+        case 12:
         if (ftype == Thrift.Type.LIST) {
           this.digitalSigns = [];
           const _rtmp321 = input.readListBegin();
@@ -43298,6 +43329,13 @@ MrkAttachment = class {
             this.digitalSigns.push(elem23);
           }
           input.readListEnd();
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 13:
+        if (ftype == Thrift.Type.BOOL) {
+          this.isEditing = input.readBool().value;
         } else {
           input.skip(ftype);
         }
@@ -43318,53 +43356,58 @@ MrkAttachment = class {
       output.writeString(this.id);
       output.writeFieldEnd();
     }
+    if (this.fileVersion !== null && this.fileVersion !== undefined) {
+      output.writeFieldBegin('fileVersion', Thrift.Type.I32, 2);
+      output.writeI32(this.fileVersion);
+      output.writeFieldEnd();
+    }
     if (this.fileName !== null && this.fileName !== undefined) {
-      output.writeFieldBegin('fileName', Thrift.Type.STRING, 2);
+      output.writeFieldBegin('fileName', Thrift.Type.STRING, 3);
       output.writeString(this.fileName);
       output.writeFieldEnd();
     }
     if (this.account !== null && this.account !== undefined) {
-      output.writeFieldBegin('account', Thrift.Type.STRUCT, 3);
+      output.writeFieldBegin('account', Thrift.Type.STRUCT, 4);
       this.account.write(output);
       output.writeFieldEnd();
     }
     if (this.creator !== null && this.creator !== undefined) {
-      output.writeFieldBegin('creator', Thrift.Type.STRUCT, 4);
+      output.writeFieldBegin('creator', Thrift.Type.STRUCT, 5);
       this.creator.write(output);
       output.writeFieldEnd();
     }
     if (this.createDate !== null && this.createDate !== undefined) {
-      output.writeFieldBegin('createDate', Thrift.Type.I64, 5);
+      output.writeFieldBegin('createDate', Thrift.Type.I64, 6);
       output.writeI64(this.createDate);
       output.writeFieldEnd();
     }
     if (this.fSize !== null && this.fSize !== undefined) {
-      output.writeFieldBegin('fSize', Thrift.Type.I64, 6);
+      output.writeFieldBegin('fSize', Thrift.Type.I64, 7);
       output.writeI64(this.fSize);
       output.writeFieldEnd();
     }
     if (this.attHash !== null && this.attHash !== undefined) {
-      output.writeFieldBegin('attHash', Thrift.Type.STRING, 7);
+      output.writeFieldBegin('attHash', Thrift.Type.STRING, 8);
       output.writeString(this.attHash);
       output.writeFieldEnd();
     }
     if (this.status !== null && this.status !== undefined) {
-      output.writeFieldBegin('status', Thrift.Type.I32, 8);
+      output.writeFieldBegin('status', Thrift.Type.I32, 9);
       output.writeI32(this.status);
       output.writeFieldEnd();
     }
     if (this.fType !== null && this.fType !== undefined) {
-      output.writeFieldBegin('fType', Thrift.Type.I32, 9);
+      output.writeFieldBegin('fType', Thrift.Type.I32, 10);
       output.writeI32(this.fType);
       output.writeFieldEnd();
     }
     if (this.hasDigitalSign !== null && this.hasDigitalSign !== undefined) {
-      output.writeFieldBegin('hasDigitalSign', Thrift.Type.BOOL, 10);
+      output.writeFieldBegin('hasDigitalSign', Thrift.Type.BOOL, 11);
       output.writeBool(this.hasDigitalSign);
       output.writeFieldEnd();
     }
     if (this.digitalSigns !== null && this.digitalSigns !== undefined) {
-      output.writeFieldBegin('digitalSigns', Thrift.Type.LIST, 11);
+      output.writeFieldBegin('digitalSigns', Thrift.Type.LIST, 12);
       output.writeListBegin(Thrift.Type.STRUCT, this.digitalSigns.length);
       for (let iter24 in this.digitalSigns) {
         if (this.digitalSigns.hasOwnProperty(iter24)) {
@@ -43373,6 +43416,11 @@ MrkAttachment = class {
         }
       }
       output.writeListEnd();
+      output.writeFieldEnd();
+    }
+    if (this.isEditing !== null && this.isEditing !== undefined) {
+      output.writeFieldBegin('isEditing', Thrift.Type.BOOL, 13);
+      output.writeBool(this.isEditing);
       output.writeFieldEnd();
     }
     output.writeFieldStop();
@@ -47354,6 +47402,162 @@ MrkClientService_getMrkAttachmentById_result = class {
   }
 
 };
+MrkClientService_markAttachmentAsEditing_args = class {
+  constructor(args) {
+    this.token = null;
+    this.attachmentId = null;
+    if (args) {
+      if (args.token !== undefined && args.token !== null) {
+        this.token = args.token;
+      }
+      if (args.attachmentId !== undefined && args.attachmentId !== null) {
+        this.attachmentId = args.attachmentId;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 1:
+        if (ftype == Thrift.Type.STRING) {
+          this.token = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRING) {
+          this.attachmentId = input.readString().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_markAttachmentAsEditing_args');
+    if (this.token !== null && this.token !== undefined) {
+      output.writeFieldBegin('token', Thrift.Type.STRING, 1);
+      output.writeString(this.token);
+      output.writeFieldEnd();
+    }
+    if (this.attachmentId !== null && this.attachmentId !== undefined) {
+      output.writeFieldBegin('attachmentId', Thrift.Type.STRING, 2);
+      output.writeString(this.attachmentId);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
+MrkClientService_markAttachmentAsEditing_result = class {
+  constructor(args) {
+    this.success = null;
+    this.validError = null;
+    this.error = null;
+    if (args instanceof PreconditionException) {
+        this.validError = args;
+        return;
+    }
+    if (args instanceof ServerException) {
+        this.error = args;
+        return;
+    }
+    if (args) {
+      if (args.success !== undefined && args.success !== null) {
+        this.success = args.success;
+      }
+      if (args.validError !== undefined && args.validError !== null) {
+        this.validError = args.validError;
+      }
+      if (args.error !== undefined && args.error !== null) {
+        this.error = args.error;
+      }
+    }
+  }
+
+  read (input) {
+    input.readStructBegin();
+    while (true) {
+      const ret = input.readFieldBegin();
+      const ftype = ret.ftype;
+      const fid = ret.fid;
+      if (ftype == Thrift.Type.STOP) {
+        break;
+      }
+      switch (fid) {
+        case 0:
+        if (ftype == Thrift.Type.BOOL) {
+          this.success = input.readBool().value;
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 1:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.validError = new PreconditionException();
+          this.validError.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        case 2:
+        if (ftype == Thrift.Type.STRUCT) {
+          this.error = new ServerException();
+          this.error.read(input);
+        } else {
+          input.skip(ftype);
+        }
+        break;
+        default:
+          input.skip(ftype);
+      }
+      input.readFieldEnd();
+    }
+    input.readStructEnd();
+    return;
+  }
+
+  write (output) {
+    output.writeStructBegin('MrkClientService_markAttachmentAsEditing_result');
+    if (this.success !== null && this.success !== undefined) {
+      output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+      output.writeBool(this.success);
+      output.writeFieldEnd();
+    }
+    if (this.validError !== null && this.validError !== undefined) {
+      output.writeFieldBegin('validError', Thrift.Type.STRUCT, 1);
+      this.validError.write(output);
+      output.writeFieldEnd();
+    }
+    if (this.error !== null && this.error !== undefined) {
+      output.writeFieldBegin('error', Thrift.Type.STRUCT, 2);
+      this.error.write(output);
+      output.writeFieldEnd();
+    }
+    output.writeFieldStop();
+    output.writeStructEnd();
+    return;
+  }
+
+};
 MrkClientService_getAllMrkAttachments_args = class {
   constructor(args) {
     this.token = null;
@@ -50455,6 +50659,69 @@ MrkClientServiceClient = class {
       return result.success;
     }
     throw 'getMrkAttachmentById failed: unknown result';
+  }
+
+  markAttachmentAsEditing (token, attachmentId) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      self.send_markAttachmentAsEditing(token, attachmentId, (error, result) => {
+        return error ? reject(error) : resolve(result);
+      });
+    });
+  }
+
+  send_markAttachmentAsEditing (token, attachmentId, callback) {
+    const params = {
+      token: token,
+      attachmentId: attachmentId
+    };
+    const args = new MrkClientService_markAttachmentAsEditing_args(params);
+    try {
+      this.output.writeMessageBegin('markAttachmentAsEditing', Thrift.MessageType.CALL, this.seqid);
+      args.write(this.output);
+      this.output.writeMessageEnd();
+      const self = this;
+      this.output.getTransport().flush(true, () => {
+        let error = null, result = null;
+        try {
+          result = self.recv_markAttachmentAsEditing();
+        } catch (e) {
+          error = e;
+        }
+        callback(error, result);
+      });
+    }
+    catch (e) {
+      if (typeof this.output.getTransport().reset === 'function') {
+        this.output.getTransport().reset();
+      }
+      throw e;
+    }
+  }
+
+  recv_markAttachmentAsEditing () {
+    const ret = this.input.readMessageBegin();
+    const mtype = ret.mtype;
+    if (mtype == Thrift.MessageType.EXCEPTION) {
+      const x = new Thrift.TApplicationException();
+      x.read(this.input);
+      this.input.readMessageEnd();
+      throw x;
+    }
+    const result = new MrkClientService_markAttachmentAsEditing_result();
+    result.read(this.input);
+    this.input.readMessageEnd();
+
+    if (null !== result.validError) {
+      throw result.validError;
+    }
+    if (null !== result.error) {
+      throw result.error;
+    }
+    if (null !== result.success) {
+      return result.success;
+    }
+    throw 'markAttachmentAsEditing failed: unknown result';
   }
 
   getAllMrkAttachments (token, filter) {

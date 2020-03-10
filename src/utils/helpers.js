@@ -1,8 +1,9 @@
-import { isEmpty, upperFirst, compact, get, uniqueId } from 'lodash';
+import { isEmpty, upperFirst, includes, compact, get, uniqueId } from 'lodash';
 import { I18n } from 'react-redux-i18n';
 import { notification, Modal } from 'antd';
 import React from 'react';
 import moment from 'moment';
+import { ONLY_OFFICE_TEXT, ONLY_OFFICE_SPREADSHEET, ONLY_OFFICE_PRESENTATION } from 'constants/general';
 import store from 'redux/store';
 
 export const log = (...props) => {
@@ -145,19 +146,11 @@ export const onlyOfficeCallBackUrl = ({ id }) => {
 };
 
 export const getTypeOnlyOffice = (mrkAttachment) => {
-  switch (getAttachmentExt(mrkAttachment)) {
-    case 'xlsx':
-    case 'xls':
-    case 'ods':
-    case 'csv':
-      return 'spreadsheet';
-    case 'pptx':
-    case 'ppt':
-    case 'odp':
-      return 'presentation';
-    default:
-      return 'text';
-  }
+  const ext = getAttachmentExt(mrkAttachment);
+  if (includes(ONLY_OFFICE_TEXT, ext)) return 'text';
+  if (includes(ONLY_OFFICE_SPREADSHEET, ext)) return 'spreadsheet';
+  if (includes(ONLY_OFFICE_PRESENTATION, ext)) return 'presentation';
+  return null;
 };
 
 export const getAttachmentUrl = ({ id }, type = AttachmentType.ORIGINAL) => {

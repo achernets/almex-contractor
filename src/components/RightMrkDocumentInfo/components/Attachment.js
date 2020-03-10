@@ -1,11 +1,11 @@
 import React from 'react';
-import { Typography, Row, /*Button,*/ Col } from 'antd';
+import { Typography, Tooltip, Row, Progress, /*Button,*/ Col } from 'antd';
 import { AttachmentRow } from 'components/Attachment';
 import classnames from 'classnames';
 import { map, size, reduce, filter } from 'lodash';
 import DigitalInformation from './DigitalInformation';
+import { I18n } from 'react-redux-i18n';
 import * as styles from '../right-preview.module.scss';
-
 
 const Attachment = ({ attachment, onClick, removeAttachment = null, active }) => {
   const almexSigns = reduce(attachment.digitalSigns, (hash, item) => {
@@ -27,9 +27,11 @@ const Attachment = ({ attachment, onClick, removeAttachment = null, active }) =>
           removeAttachment={removeAttachment}
         />
       </Col>
-      {/* <Col span={5} className={styles.tr}>
-        <Button type={'primary'} size={'small'}>Подписать</Button>
-      </Col> */}
+      {attachment.isEditing && <Col span={24}>
+        <Tooltip title={I18n.t('common.attchment_editing')}>
+          <Progress percent={100} showInfo={false} status="active" />
+        </Tooltip>
+      </Col>}
       {size(attachment.digitalSigns) > 0 && <>
         <Col span={24} style={{ paddingLeft: 31 }}>
           {size(almexSigns) > 0 && <><Row gutter={[0, 8]}>

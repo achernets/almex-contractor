@@ -13,7 +13,9 @@
     "reset": "Сбросить",
     "save_changes": "Сохранить изменения",
     "save_changes_with_ecp": "Сохранить изменения с ЭЦП",
-    "confirm_with_ecp": "Подтвердить с ЭЦП"
+    "confirm_with_ecp": "Подтвердить с ЭЦП",
+    "attchment_editing": "Вложение редактируется",
+    "no_view_or_edit_attachment": "Просмотр или редактирование не поддерживается"
   },
   "confirmation": {
     "title": "Подтвердите действие",

@@ -33,6 +33,7 @@ export default (state = initialState, action) => {
     case LOGOUT_SUCCESS:
       return {
         ...state,
+        ...initialState,
         token: null
       };
     default:

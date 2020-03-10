@@ -13,7 +13,8 @@ import { ConfigProvider } from 'antd';
 import { getAntdLocale, log } from 'utils/helpers';
 import SockJsClient from 'react-stomp';
 
-const App = ({ loading, error, THRIFT }) => {
+const App = ({ loading, error, THRIFT, accountId = null }) => {
+  const topics = ['/ws/mrk'];
 
   useEffect(() => {
     const audio = () => {
@@ -24,13 +25,15 @@ const App = ({ loading, error, THRIFT }) => {
       document.removeEventListener('click', audio);
     };
   }, []);
-
   if (error !== null) return <StartAppFail />;
+
+  if (accountId !== null) topics.push(`/ws/${accountId}`);
+
   return (
     <>
       {loading ? <Loader /> :
         <ConfigProvider locale={getAntdLocale()}>
-          <SockJsClient url={`${THRIFT.URL}/${THRIFT.API}/${THRIFT.SOCKET}`} topics={['/ws/mrk']}
+          <SockJsClient url={`${THRIFT.URL}/${THRIFT.API}/${THRIFT.SOCKET}`} topics={topics}
             onMessage={(msg) => log(msg)}
             debug={true}
           />
@@ -54,6 +57,7 @@ const App = ({ loading, error, THRIFT }) => {
 
 const mapStateToProps = state => ({
   THRIFT: state.settings.THRIFT,
+  accountId: state.auth.accountId,
   loading: state.asyncInitialState.loading,
   error: state.asyncInitialState.error
 });

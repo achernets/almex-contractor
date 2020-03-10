@@ -64,6 +64,7 @@ struct MrkClientSession {
   2: i64 createDate;
   3: MrkClient client;
   4: MrkOrganization organization;
+  5: string accountId;
 }
 
 struct MrkUser {
@@ -157,16 +158,18 @@ struct MrkDocumentPage {
 
 struct MrkAttachment {
   1: optional string id;
-  2: string fileName;
-  3: optional MrkAccount account;
-  4: optional MrkClient creator;
-  5: optional i64 createDate;
-  6: i64 fSize;
-  7: optional string attHash;
-  8: common.AttachmentStatus status;
-  9: optional common.FileType fType;
-  10: bool hasDigitalSign;
-  11: optional list<MrkDigitalSign> digitalSigns;
+  2: i32 fileVersion;
+  3: string fileName;
+  4: optional MrkAccount account;
+  5: optional MrkClient creator;
+  6: optional i64 createDate;
+  7: i64 fSize;
+  8: optional string attHash;
+  9: common.AttachmentStatus status;
+  10: optional common.FileType fType;
+  11: bool hasDigitalSign;
+  12: optional list<MrkDigitalSign> digitalSigns;
+  13: bool isEditing;
 }
 
 /** Список подписей*/
@@ -277,6 +280,8 @@ service MrkClientService {
   MrkDocumentData sendDocument(1: string token, 2: string documentId, 3: string signature, 4: map<string, string> attachmentSignature, 5: string publicKey) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
 
   MrkAttachment getMrkAttachmentById(1: string token, 2: string attachmentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
+  /** Отметить вложение как открытое, при этом если у него были ЕЦП они будут удалены */
+  bool markAttachmentAsEditing(1: string token, 2: string attachmentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   list<MrkAttachment> getAllMrkAttachments(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   i32 getCountAllMrkAttachments(1: string token, 2: filter.KazFilter filter) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);
   string createLoadableMrkAttachment(1: string token, 2: string mrkDocumentId, 3: string fileName, 4: i64 totalSize, 5: i32 countPortions, 6: string attachmentId) throws (1: ex.PreconditionException validError, 2: ex.ServerException error);

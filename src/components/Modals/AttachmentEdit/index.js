@@ -8,11 +8,13 @@ import Loader from 'components/Loader';
 import { uniqueId } from 'lodash';
 import { I18n } from 'react-redux-i18n';
 import { getOnlyOfficeUrl, getAttachmentUrl, getFio, getTypeOnlyOffice, onlyOfficeCallBackUrl, getAttachmentName, getAttachmentExt, log } from 'utils/helpers';
+import Empty from 'components/Empty';
 const editorId = uniqueId('editor_');
 
 const AttachmentEdit = ({ mrkAttachment, client, hideModal }) => {
   const [editor, setEditor] = useState(null);
   const loadEditor = () => {
+    if (getTypeOnlyOffice(mrkAttachment) === null) return null;
     log('mrkAttachment', mrkAttachment);
     log('url', getAttachmentUrl(mrkAttachment));
     log('callback', onlyOfficeCallBackUrl(mrkAttachment));
@@ -83,7 +85,9 @@ const AttachmentEdit = ({ mrkAttachment, client, hideModal }) => {
         if (error) return <h3>Failed to load onlyOfffice: {error.message}</h3>;
         return <div id={editorId} style={{
           height: '100%'
-        }}></div>;
+        }}>
+          {mrkAttachment !== null && getTypeOnlyOffice(mrkAttachment) === null && <Empty description={I18n.t('common.no_view_or_edit_attachment')} />}
+        </div>;
       }}
     </ScriptLoader>
   </ Modal>;

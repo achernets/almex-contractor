@@ -9,11 +9,14 @@ import { get, isEmpty } from 'lodash';
 import ListDocumentPatterns from './components/ListDocumentPatterns';
 import FormData from './components/FormData';
 import { Modal } from 'components/Modals';
+import { log } from 'utils/helpers';
 import { initState, prepareDraftDocument, getAllDocumentPatterns, createOrUpdateMrkDocument } from 'redux/actions/Modal/createMrkDocument';
 import Loader from 'components/Loader';
+import { MrkClientServiceClient } from 'api';
 import * as Yup from 'yup';
 
 const CreateMrkDocument = ({ hideModal,
+  token,
   newMrkDocument,
   parentId,
   extRespPatternId,
@@ -38,6 +41,7 @@ const CreateMrkDocument = ({ hideModal,
     }
     return () => initState();
   }, []);
+
   return (
     <Formik
       enableReinitialize={true}
@@ -62,7 +66,7 @@ const CreateMrkDocument = ({ hideModal,
         });
         createOrUpdateMrkDocument(data, values.send, values.certificate);
       }}
-    >{({ handleSubmit, values, setValues }) => {
+    >{({ handleSubmit, values, setValues, setFieldValue }) => {
       return (
         <Modal
           visible={true}
@@ -110,7 +114,15 @@ const CreateMrkDocument = ({ hideModal,
         >
           {isFetching && <Loader />}
           {step === 1 && <ListDocumentPatterns extRespPatternId={extRespPatternId} parentId={parentId} />}
-          {step === 2 && <FormData showModal={showModal} />}
+          {step === 2 && <FormData showModal={showModal} removeEcp={async (attachment, index) => {
+            try {
+              const result = await MrkClientServiceClient.markAttachmentAsEditing(token, attachment.id);
+              setFieldValue(`attachments.${index}.attachment`, new MrkAttachment({ ...attachment, hasDigitalSign: false, digitalSigns: [], isEditing: true }))
+              log(result);
+            } catch (error) {
+              log(error);
+            }
+          }} />}
         </Modal>
       );
     }}

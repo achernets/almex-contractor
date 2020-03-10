@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Tooltip, Row, Progress, /*Button,*/ Col } from 'antd';
+import { Typography, Tooltip, Row, Progress, /*Button,*/ Col, Button } from 'antd';
 import { AttachmentRow } from 'components/Attachment';
 import classnames from 'classnames';
 import { map, size, reduce, filter } from 'lodash';
@@ -7,7 +7,7 @@ import DigitalInformation from './DigitalInformation';
 import { I18n } from 'react-redux-i18n';
 import * as styles from '../right-preview.module.scss';
 
-const Attachment = ({ attachment, onClick, removeAttachment = null, active }) => {
+const Attachment = ({ attachment, onClick, removeAttachment = null, removeEcp = null, active }) => {
   const almexSigns = reduce(attachment.digitalSigns, (hash, item) => {
     hash.push(...filter(item.signDetails, { signInSystem: 'ALMEX' }));
     return hash;
@@ -57,6 +57,9 @@ const Attachment = ({ attachment, onClick, removeAttachment = null, active }) =>
             </Row>
           </>}
         </Col>
+        {removeEcp !== null && <Col span={24} className={styles.tc}>
+          <Button type="primary" onClick={removeEcp}>Удалить ецп и редактировать</Button>
+        </Col>}
       </>}
     </Row>
   </>;

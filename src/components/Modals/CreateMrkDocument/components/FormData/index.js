@@ -10,7 +10,7 @@ import { ATTACHMENT_ACCEPT } from 'constants/general';
 import ContentItemTemplate from 'components/ContentItemTemplate';
 import Scrollbar from 'components/Scrollbar';
 import moment from 'moment';
-const FormData = ({ showModal }) => {
+const FormData = ({ showModal, removeEcp }) => {
   const { values, setFieldValue } = useFormikContext();
   return <Scrollbar>
     <div style={{ padding: '12px 24px' }}>
@@ -87,6 +87,13 @@ const FormData = ({ showModal }) => {
                         removeAttachment={(e) => {
                           e.stopPropagation();
                           arrayHelpers.remove(index);
+                        }}
+                        removeEcp={(e) => {
+                          e.stopPropagation();
+                          removeEcp(item.attachment, index);
+                          showModal('MODAL_ATTACHMENT_EDIT', {
+                            mrkAttachment: item.attachment
+                          });
                         }}
                         attachment={item.attachment}
                       />}

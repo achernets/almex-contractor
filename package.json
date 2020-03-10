@@ -68,7 +68,8 @@
       "MrkDocResponceType": true,
       "MrkDocumentRespStatus": true,
       "UserOrGroup": true,
-      "HBColumnType": true
+      "HBColumnType": true,
+      "MrkAttachment": true
     },
     "rules": {
       "react-hooks/exhaustive-deps": "off",

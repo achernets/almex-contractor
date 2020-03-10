@@ -19,7 +19,7 @@ const AttachmentEdit = ({ mrkAttachment, client, hideModal }) => {
     setEditor(new DocsAPI.DocEditor(editorId, {
       'document': {
         'fileType': getAttachmentExt(mrkAttachment),
-        'key': mrkAttachment.id,
+        'key': `${mrkAttachment.id}_${mrkAttachment.fileVersion}`,
         'permissions': {
           'download': false,
           'edit': !mrkAttachment.hasDigitalSign,

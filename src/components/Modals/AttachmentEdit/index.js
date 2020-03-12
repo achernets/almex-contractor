@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Modal } from 'components/Modals';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,16 +7,20 @@ import ScriptLoader from 'react-render-props-script-loader';
 import Loader from 'components/Loader';
 import { uniqueId } from 'lodash';
 import { I18n } from 'react-redux-i18n';
-import { getOnlyOfficeUrl, getAttachmentUrl, getFio, getTypeOnlyOffice, onlyOfficeCallBackUrl, getAttachmentName, getAttachmentExt, log } from 'utils/helpers';
+import { getOnlyOfficeUrl, getAttachmentUrl, getFio, getTypeOnlyOffice, onlyOfficeCallBackUrl, getAttachmentName, getAttachmentExt } from 'utils/helpers';
 import Empty from 'components/Empty';
+import { MrkClientServiceClient } from 'api';
 const editorId = uniqueId('editor_');
+let editor = null;
+const AttachmentEdit = ({ token, mrkAttachment, client, hideModal }) => {
 
-const AttachmentEdit = ({ mrkAttachment, client, hideModal }) => {
-  const [editor, setEditor] = useState(null);
   const loadEditor = () => {
     if (getTypeOnlyOffice(mrkAttachment) === null) return null;
-    log('mrkAttachment', mrkAttachment);
-    setEditor(new DocsAPI.DocEditor(editorId, {
+    if (editor !== null) editor.destroyEditor();
+    editor = new DocsAPI.DocEditor(editorId, {
+      'events': {
+        'onOutdatedVersion': () => hideModal('MODAL_ATTACHMENT_EDIT')
+      },
       'document': {
         'fileType': getAttachmentExt(mrkAttachment),
         'key': `${mrkAttachment.id}_${mrkAttachment.fileVersion}`,
@@ -46,16 +50,30 @@ const AttachmentEdit = ({ mrkAttachment, client, hideModal }) => {
       'height': '100%',
       'width': '100%',
       'type': 'desktop'
-    }));
+    });
   };
 
   useEffect(() => {
     if (editor !== null && mrkAttachment !== null) setTimeout(loadEditor, 200);
-    return () => {
-      if (editor !== null) editor.destroyEditor();
-    };
   }, [mrkAttachment]);
 
+  useEffect(() => {
+    let markInterval = null;
+    const markAttachment = () => {
+      MrkClientServiceClient.markAttachmentAsEditing(token, mrkAttachment.id);
+    };
+    if (!mrkAttachment.hasDigitalSign) {
+      markInterval = setInterval(markAttachment, 15000);
+      markAttachment();
+    }
+    return () => {
+      clearTimeout(markInterval);
+      if (editor !== null) {
+        editor.destroyEditor();
+        editor = null;
+      }
+    };
+  }, []);
   return <Modal
     visible={true}
     centered
@@ -70,7 +88,7 @@ const AttachmentEdit = ({ mrkAttachment, client, hideModal }) => {
       padding: 0,
       overflowY: 'hidden'
     }}
-    title={I18n.t('ONLY_OFFICE')}
+    title={I18n.t('common.editor')}
     footer={null}
   >
     <ScriptLoader

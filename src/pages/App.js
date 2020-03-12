@@ -9,13 +9,13 @@ import Loader from 'components/Loader';
 import PrivateRoute from 'components/PrivateRoute';
 import StartAppFail from 'components/StartAppFail';
 import { LayoutApp } from 'components/LayoutApp';
+import { uniqueId } from 'lodash';
 import { ConfigProvider } from 'antd';
-import { getAntdLocale, log } from 'utils/helpers';
-import SockJsClient from 'react-stomp';
+import { getAntdLocale, /*log */ } from 'utils/helpers';
+import { subscribe, unsubscribe } from 'api';
+const socketId = uniqueId('socket_app_');
 
-const App = ({ loading, error, THRIFT, accountId = null }) => {
-  const topics = ['/ws/mrk'];
-
+const App = ({ loading, error, accountId = null }) => {
   useEffect(() => {
     const audio = () => {
       if (process.env.NODE_ENV !== 'development') document.getElementById('audio').play();
@@ -25,18 +25,21 @@ const App = ({ loading, error, THRIFT, accountId = null }) => {
       document.removeEventListener('click', audio);
     };
   }, []);
-  if (error !== null) return <StartAppFail />;
 
-  if (accountId !== null) topics.push(`/ws/${accountId}`);
+  useEffect(() => {
+    if (accountId === null) {
+      unsubscribe(socketId);
+    } else {
+      subscribe(socketId, `/ws/${accountId}`, msg => { }/*log('app', msg)*/);
+    }
+  }, [accountId]);
+
+  if (error !== null) return <StartAppFail />;
 
   return (
     <>
       {loading ? <Loader /> :
         <ConfigProvider locale={getAntdLocale()}>
-          <SockJsClient url={`${THRIFT.URL}/${THRIFT.API}/${THRIFT.SOCKET}`} topics={topics}
-            onMessage={(msg) => log(msg)}
-            debug={true}
-          />
           <Switch>
             <Route path="/signIn" component={SignIn} />
             <Route path="/SignUp" component={SignUp} />
@@ -56,7 +59,6 @@ const App = ({ loading, error, THRIFT, accountId = null }) => {
 };
 
 const mapStateToProps = state => ({
-  THRIFT: state.settings.THRIFT,
   accountId: state.auth.accountId,
   loading: state.asyncInitialState.loading,
   error: state.asyncInitialState.error

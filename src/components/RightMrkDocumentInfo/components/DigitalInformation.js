@@ -4,6 +4,7 @@ import { Ecp } from 'components/Icons';
 import InfoRow from './InfoRow';
 import moment from 'moment';
 import * as styles from '../right-preview.module.scss';
+import { I18n } from 'react-redux-i18n';
 
 const DigitalInformation = ({
   userName,
@@ -20,61 +21,61 @@ const DigitalInformation = ({
     <Ecp style={{ width: 18, height: 28 }} />
     <Row className={styles.ecp_content} gutter={[0, 8]}>
       <InfoRow
-        title={'userName'}
+        title={I18n.t('MrkDigitalSignDetails.userName')}
         text={userName}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'serialNumber'}
+        title={I18n.t('MrkDigitalSignDetails.serialNumber')}
         text={serialNumber}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'issuerDN'}
+        title={I18n.t('MrkDigitalSignDetails.issuerDN')}
         text={issuerDN}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'subjectDN'}
+        title={I18n.t('MrkDigitalSignDetails.subjectDN')}
         text={subjectDN}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'subjectSerialNumber'}
+        title={I18n.t('MrkDigitalSignDetails.subjectSerialNumber')}
         text={subjectSerialNumber}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'subjectSerialNumberIndividual'}
+        title={I18n.t('MrkDigitalSignDetails.subjectSerialNumberIndividual')}
         text={subjectSerialNumberIndividual}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'email'}
+        title={I18n.t('MrkDigitalSignDetails.email')}
         text={email}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'organization'}
+        title={I18n.t('MrkDigitalSignDetails.organization')}
         text={organization}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'fullName'}
+        title={I18n.t('MrkDigitalSignDetails.fullName')}
         text={fullName}
         leftColWidth={8}
         gutter={[0, 0]}
       />
       <InfoRow
-        title={'Подписано'}
+        title={I18n.t('MrkDigitalSignDetails.signDate')}
         text={moment(signDate).format('DD.MM.YYYY HH:mm')}
         leftColWidth={8}
         gutter={[0, 0]}

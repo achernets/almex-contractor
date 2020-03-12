@@ -84,7 +84,7 @@ const FormData = ({ showModal, removeEcp }) => {
                         onClick={() => showModal('MODAL_ATTACHMENT_EDIT', {
                           mrkAttachment: item.attachment
                         })}
-                        removeAttachment={(e) => {
+                        removeAttachment={item.attachment.isEditing ? null : (e) => {
                           e.stopPropagation();
                           arrayHelpers.remove(index);
                         }}

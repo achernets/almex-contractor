@@ -4,7 +4,7 @@ import { updateMrkDocumentData } from 'redux/actions/Modal/mrkDocument';
 import { actions } from 'react-redux-modals';
 import { notification } from 'antd';
 import { singData } from 'utils/pkcs12';
-import { isEmpty, reduce, find } from 'lodash';
+import { isEmpty, get, reduce, find } from 'lodash';
 import { I18n } from 'react-redux-i18n';
 
 export const GET_DOCUMENT_PATTERNS_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/GET_DOCUMENT_PATTERNS_REQUEST';
@@ -151,7 +151,7 @@ export const createOrUpdateMrkDocument = (data, send = false, certificate = null
             return hash;
           }, {});
         }
-        dispatch(sendDocument(signature, attachmentSignature, certificate.publicKey));
+        dispatch(sendDocument(signature, attachmentSignature, get(certificate, 'publicKey', null)));
       } else {
         dispatch(getMrkDocuments());
       }
@@ -168,7 +168,7 @@ export const SEND_DOCUMENT_REQUEST = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_RE
 export const SEND_DOCUMENT_SUCCESS = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_SUCCESS';
 export const SEND_DOCUMENT_FAILURE = 'MODAL_CREATE_MRK_DOCUMENT/SEND_DOCUMENT_FAILURE';
 
-export const sendDocument = (signature = null, attachmentSignature = null, publicKey) => {
+export const sendDocument = (signature = null, attachmentSignature = null, publicKey = null) => {
   return async (dispatch, getState, api) => {
     dispatch({ type: SEND_DOCUMENT_REQUEST });
     try {

@@ -5,17 +5,19 @@ import { get, find, map, debounce } from 'lodash';
 import { useFormikContext } from 'formik';
 import { MrkClientServiceClient } from 'api';
 import { getHbValue, log } from 'utils/helpers';
-import { useMountedState } from 'react-use';
+import { useMountedState, useFirstMountState } from 'react-use';
 
 const HandBook = ({ token, locale, name, settingLayout }) => {
   const { values, setFieldValue } = useFormikContext();
   const [hbValues, setHbValues] = useState([]);
   const [loading, setLoading] = useState(false);
   const isMounted = useMountedState();
+  const isFirstMount = useFirstMountState();
+
   const column = get(values, `${name}.value.hbValue.column`, null);
 
   useEffect(() => {
-    getHandBookValues();
+    if (isFirstMount) getHandBookValues();
   }, []);
 
   const getHandBookValues = async (text) => {

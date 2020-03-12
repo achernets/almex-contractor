@@ -5,16 +5,17 @@ import { get, find, map, compact, debounce } from 'lodash';
 import { useFormikContext } from 'formik';
 import { MrkClientServiceClient } from 'api';
 import { getFioAlmex, log } from 'utils/helpers';
-import { useMountedState } from 'react-use';
+import { useMountedState, useFirstMountState } from 'react-use';
 
 const UserChoice = ({ token, name, patternId, settingLayout }) => {
   const { values, setFieldValue } = useFormikContext();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const isMounted = useMountedState();
+  const isFirstMount = useFirstMountState();
 
   useEffect(() => {
-    fetchUsers();
+    if (isFirstMount) fetchUsers();
   }, []);
 
   const fetchUsers = async (text) => {

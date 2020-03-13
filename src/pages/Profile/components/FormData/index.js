@@ -71,7 +71,7 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, signProfile, showModa
                   <Client prefix="clientList.0." formItemProps={formItemProps} />
                 }
               </Col>
-              <Col span={24}>
+              {(!values.signed || dirty) && <Col span={24}>
                 <AForm.Item
                   {...formItemProps}
                   label={I18n.t('Profile.verify_your_identity')}
@@ -91,7 +91,7 @@ const FormData = ({ getFullAccountInfo, changeAccountInfo, signProfile, showModa
                     {I18n.t(dirty ? 'common.save_changes_with_ecp' : 'common.confirm_with_ecp')}
                   </Button>
                 </AForm.Item>
-              </Col>
+              </Col>}
               <Col span={24}>
                 <Row type="flex" justify="space-between" align="middle">
                   <Col>

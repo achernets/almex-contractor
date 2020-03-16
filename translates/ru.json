@@ -160,6 +160,7 @@
     "subjectSerialNumberIndividual": "subjectSerialNumberIndividual",
     "email": "Email",
     "organization": "Организация",
-    "fullName": "Полное имя"
+    "fullName": "Полное имя",
+    "bin": "Регистрационный номер"
   }
 }

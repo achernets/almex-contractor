@@ -16,7 +16,8 @@
     "confirm_with_ecp": "Подтвердить с ЭЦП",
     "attchment_editing": "Вложение редактируется",
     "no_view_or_edit_attachment": "Просмотр или редактирование не поддерживается",
-    "editor": "Online редактор"
+    "editor": "Online редактор",
+    "info": "Информация"
   },
   "confirmation": {
     "title": "Подтвердите действие",
@@ -31,19 +32,22 @@
   "form": {
     "required": "Обязательное для заполнения",
     "enter_value": "Введите значение",
-    "select_date": "Укажите дату"
+    "select_date": "Укажите дату",
+    "confirmationPassword": "Пароль не совпадает"
   },
   "notification": {
     "sendDocument_title": "Ваше письмо отправлено",
     "registration_message": "Вы успешно зарегистрировались",
     "registration_description": "Необходимо подтвердить ваш электронный ящик",
     "profile_update_message": "Успешное обновление профиля",
-    "profile_update_description": "Все изменения вступят в силу после выхода из системы"
+    "profile_update_description": "Все изменения вступят в силу после выхода из системы",
+    "profile_notification": "Ваш профиль был подтвержден при помощью ЭЦП. Дальнейшие изменения в профиле приведут к обнулению старой подписи, не забудьте заново подтвердить Ваш профиль при помощи ЭЦП для корректной работы в системе"
   },
   "SignIn": {
     "locale_not_found": "Файл не найден",
     "login": "Логин",
     "password": "Пароль",
+    "confirmationPassword": "Подтвердите пароль",
     "sign_in": "Войти",
     "sign_up": "Зарегистрироватся"
   },

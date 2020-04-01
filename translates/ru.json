@@ -17,6 +17,7 @@
     "attchment_editing": "Вложение редактируется",
     "no_view_or_edit_attachment": "Просмотр или редактирование не поддерживается",
     "editor": "Online редактор",
+    "find_total": "Найдено",
     "info": "Информация"
   },
   "confirmation": {
@@ -72,7 +73,7 @@
   },
   "MrkDocument": {
     "name": "Краткое содержание",
-    "extNumberAndDate": "Вхд. номер/дата",
+    "extNumberAndDate": "Вхд.номер/дата",
     "numberAndDate": "Исх. номер/дата",
     "extCameFrom": "Отправитель",
     "extAuthorName": "Автор",

@@ -41,7 +41,7 @@
     "registration_description": "Необходимо подтвердить ваш электронный ящик",
     "profile_update_message": "Успешное обновление профиля",
     "profile_update_description": "Все изменения вступят в силу после выхода из системы",
-    "profile_notification": "Ваш профиль был подтвержден при помощью ЭЦП. Дальнейшие изменения в профиле приведут к обнулению старой подписи, не забудьте заново подтвердить Ваш профиль при помощи ЭЦП для корректной работы в системе"
+    "profile_notification": "Ваш профиль был подтвержден при помощью ЭЦП. Дальнейшие изменения в профиле приведут к обнулению старой подписи, не забудьте заново подтвердить Ваш профиль при помощи ЭЦП для корректной работы в системе."
   },
   "SignIn": {
     "locale_not_found": "Файл не найден",
@@ -83,7 +83,7 @@
     "show_chain": "Показать цепочку",
     "hide_chain": "Спрятать цепочку",
     "hasAttachments": "Есть вложения",
-    "signInSystem": "Подписи",
+    "signInSystem": "Подписано",
     "externalNumber": "Входящий номер",
     "externalRegDate": "Входящая дата",
     "documentNumber": "Исходящий номер",
@@ -139,12 +139,13 @@
     "password": "Введите пароль"
   },
   "SignInSystem": {
+    "first": "Подписано",
     "ALMEX": "ALMEX",
     "EXTERNAL": "EXTERNAL",
     "BOTH": "BOTH",
-    "ALMEX_TOOLTIP": "Подписано отправителем",
-    "EXTERNAL_TOOLTIP": "Подписано вами",
-    "BOTH_TOOLTIP": "Подписано всеми"
+    "ALMEX_TOOLTIP": "Отправителем",
+    "EXTERNAL_TOOLTIP": "Вами",
+    "BOTH_TOOLTIP": "Всеми"
   },
   "MrkDocumentRespStatus": {
     "OPTIONAL": "Ответ не требуется",
@@ -166,5 +167,14 @@
     "organization": "Организация",
     "fullName": "Полное имя",
     "bin": "Регистрационный номер"
+  },
+  "MrkDocumentView": {
+    "info": "Общая информация",
+    "attachments": "Вложения и подписи"
+  },
+  "Attachment": {
+    "signs_sender": "Подписи отправителя",
+    "signs_my_company": "Подписи вашей компании",
+    "remove_ecp_and_edit": "Удалить ецп и редактировать"
   }
 }

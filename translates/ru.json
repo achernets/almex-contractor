@@ -34,7 +34,9 @@
     "required": "Обязательное для заполнения",
     "enter_value": "Введите значение",
     "select_date": "Укажите дату",
-    "confirmationPassword": "Пароль не совпадает"
+    "confirmationPassword": "Пароль не совпадает",
+    "email": "Проверьте email",
+    "numbers": "Введены неверные символы"
   },
   "notification": {
     "sendDocument_title": "Ваше письмо отправлено",
@@ -117,7 +119,8 @@
   "MrkOrganization": {
     "name": "Название компании",
     "adress": "Почтовый адрес",
-    "edrpo": "ЕГРПОУ"
+    "edrpo": "ЕГРПОУ",
+    "regAdress": "Рег. адрес"
   },
   "Profile": {
     "title": "Информация",

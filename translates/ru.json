@@ -42,6 +42,8 @@
   "notification": {
     "warning": "Предупреждение",
     "version_not_equal": "Версия API отличаются \nВерсия сервера %{vServer}\nВерсия клиента %{vClient}",
+    "new_document": "Поступил новый документ",
+    "button_open": "Открыть",
     "sendDocument_title": "Ваше письмо отправлено",
     "registration_message": "Вы успешно зарегистрировались",
     "registration_description": "Необходимо подтвердить ваш электронный ящик",

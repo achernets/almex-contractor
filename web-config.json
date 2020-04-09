@@ -1,6 +1,6 @@
 {
     "APP_VERSION": 0,
-    "LANG": "ru",
+    "LANG": "uk",
     "THRIFT": {
         "URL": "https://dev.almexecm.com:8443",
         "API": "almex-mrk-server",

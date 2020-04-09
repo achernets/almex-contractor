@@ -1,0 +1,191 @@
+{
+  "common": {
+    "error": "Помилка",
+    "cancel": "Відмінити",
+    "save": "Зберегти",
+    "next": "Далі",
+    "attachments": "Вкладення",
+    "add_file": "Додати файл",
+    "true": "Так",
+    "false": "Ні",
+    "close": "Закрити",
+    "add_more": "Додати ще",
+    "reset": "Скинути",
+    "save_changes": "Зберегти зміни",
+    "save_changes_with_ecp": "Зберегти зміни з ЄЦП",
+    "confirm_with_ecp": "Підтвердити з ЄЦП",
+    "attchment_editing": "Вкладення редагується",
+    "no_view_or_edit_attachment": "Перегляд або редагуванн не підтримується",
+    "editor": "Online редактор",
+    "find_total": "Знайдено",
+    "form_is_invalid": "Не заповнені обов'язкові поля або некоректно заповнені поля",
+    "info": "Інформація",
+    "info_to_admin": "Зверніться до адміністратора"
+  },
+  "confirmation": {
+    "title": "Підтвердити  Подтвердите дію",
+    "okText": "Підтвердити",
+    "title_remove_document_desc": "Видалити документ \"%{name}\"?"
+  },
+  "errors": {
+    "UNKNOWN_ERROR": "Невідома помилка",
+    "INVALID_PASSWORD": "Невірний пароль",
+    "FILE_NOT_SUPPORT": "Файл не підтримується"
+  },
+  "form": {
+    "required": "Обов'язкове для заповнення",
+    "enter_value": "Введіть значення",
+    "select_date": "Вкажіть дату",
+    "confirmationPassword": "Пароль не співпадає",
+    "email": "Перевірте email",
+    "numbers": "Введено неверні символи"
+  },
+  "notification": {
+    "warning": "Попередження",
+    "version_not_equal": "Версия API не співпадає \nВерсія сервера %{vServer}\nВерсія клієнта %{vClient}",
+    "new_document": "Поступив новий документ",
+    "button_open": "Відкрити",
+    "sendDocument_title": "Ваш лист відправлено",
+    "registration_message": "Ви успішно зареєструвалися",
+    "registration_description": "Необхідно підтвердити ваш email",
+    "profile_update_message": "Успішне оновление профілю",
+    "profile_update_description": "Всі зміни вступлять в силу післе вихода з системи",
+    "profile_notification": "Ваш профіль був підтверджений при допомогою ЕЦП. Подальші зміни в профілі приведуть до обнуління старої підпису, не забудьте заново підтвердити Ваш профіль за допомогою ЕЦП для коректної роботи в системі.",
+    "profile_sign_description": "Профіль користувача посвідчений за допомогою ЕЦП."
+  },
+  "SignIn": {
+    "locale_not_found": "Файл не знайдено",
+    "login": "Логін",
+    "password": "Пароль",
+    "confirmationPassword": "Підтвердити пароль",
+    "sign_in": "Увійти",
+    "sign_up": "Зареєструватись"
+  },
+  "UserMenu": {
+    "edit": "Редагувати інформацію",
+    "change_password": "Змінити пароль",
+    "logout": "Вийти"
+  },
+  "ChangePassword": {
+    "title": "Змінити пароль",
+    "oldPassword": "Старий пароль",
+    "password": "Новий пароль",
+    "confirmation": "Повторіть пароль",
+    "password_not_match": "Пароль не співпадає"
+  },
+  "MrkDocuments": {
+    "no_data": "Ласкаво просимо в AlmexSign! Тепер ви можете написати звернення.",
+    "no_data_search": "За вашим запитом нічого не знайдено",
+    "create": "Створити",
+    "create_empty": "Створити",
+    "search": "Короткий зміст"
+  },
+  "MrkDocument": {
+    "name": "Короткий зміст",
+    "extNumberAndDate": "Вхд.номер/дата",
+    "numberAndDate": "Вих. номер/дата",
+    "extCameFrom": "Відправник",
+    "extAuthorName": "Автор",
+    "extAuthorEmail": "Email",
+    "patternName": "Тип документа",
+    "createDate": "Дата",
+    "send_answer": "Сформувати відповідь",
+    "show_chain": "Показати ланцюжок",
+    "hide_chain": "Сховати ланцюжок",
+    "hasAttachments": "Є вкладення",
+    "signInSystem": "Підписано",
+    "externalNumber": "Вхідний номер",
+    "externalRegDate": "Вхідна дата",
+    "documentNumber": "Вихідний номер",
+    "documentRegDate": "Вихідна дата"
+  },
+  "MrkDocumentType": {
+    "DRAFT": "Чернетки",
+    "INPUT": "Вхідні",
+    "OUTPUT": "Вихідні"
+  },
+  "CreateMrkDocument": {
+    "title": "Створити / редагувати документ",
+    "allowedDocumentPatterns": "Доступні типи документів",
+    "send_doc_ecp": "Надіслати з ЕЦП",
+    "send_doc": "Відправити",
+    "send_in_draft": "У чернетки"
+  },
+  "MrkClient": {
+    "lastName": "Прізвище",
+    "firstName": "Ім'я",
+    "middleName": "По батькові",
+    "position": "Посада",
+    "birthDate": "Дата народження",
+    "contacts": "Контакти",
+    "contacts_email": "Контактний email",
+    "contacts_phone": "Контактний телефон",
+    "inn": "ІПН",
+    "login": "Логін"
+  },
+  "MrkOrganization": {
+    "name": "Назва компанії",
+    "adress": "Поштова адреса",
+    "edrpo": "ЄДРПОУ",
+    "regAdress": "Реєстр. адреса"
+  },
+  "Profile": {
+    "title": "Інформація",
+    "type_account": "Тип аккаунта",
+    "legal_entity": "Юридична особа",
+    "info_legal_entity": "Інформація про Юр. особі",
+    "info_basic": "Основна інформація",
+    "add_user": "Додати співробітника",
+    "select_chief": "Призначити головним",
+    "client": "Співробітник",
+    "verify_your_identity": "Підтвердіть свою особистість"
+  },
+  "SignUp": {
+    "title": "Реєстрація",
+    "registration": "Зареєструватися"
+  },
+  "GetFileSign": {
+    "title": "Підтвердити з ЕЦП",
+    "file": "Вкажіть файл ЕЦП",
+    "password": "Введіть пароль"
+  },
+  "SignInSystem": {
+    "first": "Підписано",
+    "ALMEX": "ALMEX",
+    "EXTERNAL": "EXTERNAL",
+    "BOTH": "BOTH",
+    "ALMEX_TOOLTIP": "Відправником",
+    "EXTERNAL_TOOLTIP": "Вами",
+    "BOTH_TOOLTIP": "Всіма"
+  },
+  "MrkDocumentRespStatus": {
+    "OPTIONAL": "Відповідь не потрібна",
+    "PROHIBITED": "Відповідь не потрібна",
+    "CANCELED": "Скасовано",
+    "REQUIRED": "Вимагає відповіді",
+    "DRAFT": "Підготовлено чернетку",
+    "SEND": "Відповів"
+  },
+  "MrkDigitalSignDetails": {
+    "userName": "Користувач",
+    "serialNumber": "Серійний номер",
+    "issuerDN": "Ким виданий",
+    "subjectDN": "Кому видано",
+    "signDate": "Підписано",
+    "legalNumber": "Номер",
+    "individualNumber": "Індивідуальний номер",
+    "email": "Email",
+    "organization": "Організація",
+    "fullName": "Повне ім'я",
+    "bin": "Реєстраційний номер"
+  },
+  "MrkDocumentView": {
+    "info": "Загальна інформація",
+    "attachments": "Вкладення і підписи"
+  },
+  "Attachment": {
+    "signs_sender": "Підписи відправника",
+    "signs_my_company": "Підписи вашої компанії",
+    "remove_ecp_and_edit": "Видалити ЕЦП і редагувати"
+  }
+}

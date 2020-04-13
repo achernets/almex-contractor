@@ -6,5 +6,6 @@
         "API": "almex-mrk-server",
         "SOCKET": "wsc/ping"
     },
-    "MAX_CLIENTS_ORGANIZATION": 5
+    "MAX_CLIENTS_ORGANIZATION": 5,
+    "SEND_DOC_WITH_ECP": false
 }

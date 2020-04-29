@@ -1,0 +1,27 @@
+[
+	{
+		"issuerCNs": [
+			"АЦСК ТОВ \"КС\""
+		],
+		"address": "ca.ksystems.com.ua",
+		"ocspAccessPointAddress": "ca.ksystems.com.ua/services/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "ca.ksystems.com.ua",
+		"tspAddress": "ca.ksystems.com.ua",
+		"tspAddressPort": "80"
+	},
+	{
+		"issuerCNs": [
+			"АЦСК АТ КБ «ПРИВАТБАНК»",
+			"АЦСК ПАТ КБ «ПРИВАТБАНК»",
+			"АЦСК «ПРИВАТБАНК»"
+		],
+		"address": "acsk.privatbank.ua",
+		"ocspAccessPointAddress": "acsk.privatbank.ua/services/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "acsk.privatbank.ua",
+		"tspAddress": "acsk.privatbank.ua",
+		"tspAddressPort": "80",
+		"directAccess": true
+	}
+]

@@ -7,5 +7,19 @@
         "SOCKET": "wsc/ping"
     },
     "MAX_CLIENTS_ORGANIZATION": 5,
-    "SEND_DOC_WITH_ECP": false
+    "SEND_DOC_WITH_ECP": false,
+    "IIT": {
+        "encoding": "utf-8",
+        "httpProxyServiceURL": "Server/ProxyHandler.php",
+        "directAccess": false,
+        "CAs": "/Data/CAs.json",
+        "CACertificates": "/Data/CACertificates.p7b",
+        "allowedKeyMediaTypes": [
+            "е.ключ ІІТ Алмаз-1К",
+            "е.ключ ІІТ Кристал-1",
+            "ID-карта громадянина (БЕН)",
+            "е.ключ ІІТ Алмаз-1К (PKCS#11)",
+            "е.ключ ІІТ Кристал-1 (PKCS#11)"
+        ]
+    }
 }

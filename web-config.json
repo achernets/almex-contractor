@@ -1,25 +1,26 @@
 {
-    "APP_VERSION": 0,
-    "LANG": "uk",
-    "THRIFT": {
-        "URL": "https://dev.almexecm.com:8443",
-        "API": "almex-mrk-server",
-        "SOCKET": "wsc/ping"
-    },
-    "MAX_CLIENTS_ORGANIZATION": 5,
-    "SEND_DOC_WITH_ECP": false,
-    "IIT": {
-        "encoding": "utf-8",
-        "httpProxyServiceURL": "Server/ProxyHandler.php",
-        "directAccess": false,
-        "CAs": "/Data/CAs.json",
-        "CACertificates": "/Data/CACertificates.p7b",
-        "allowedKeyMediaTypes": [
-            "е.ключ ІІТ Алмаз-1К",
-            "е.ключ ІІТ Кристал-1",
-            "ID-карта громадянина (БЕН)",
-            "е.ключ ІІТ Алмаз-1К (PKCS#11)",
-            "е.ключ ІІТ Кристал-1 (PKCS#11)"
-        ]
-    }
+  "APP_VERSION": 0,
+  "LANG": "uk",
+  "THRIFT": {
+    "URL": "https://dev.almexecm.com:8443",
+    "API": "almex-mrk-server",
+    "SOCKET": "wsc/ping"
+  },
+  "MAX_CLIENTS_ORGANIZATION": 5,
+  "SEND_DOC_WITH_ECP": false,
+  "UA": true,
+  "IIT": {
+    "encoding": "utf-8",
+    "httpProxyServiceURL": "https://dev.almexecm.com:8443/almex-mrk-server/ProxyHandler",
+    "directAccess": true,
+    "CAs": "/Data/CAs.json",
+    "CACertificates": "/Data/CACertificates.p7b",
+    "allowedKeyMediaTypes": [
+      "е.ключ ІІТ Алмаз-1К",
+      "е.ключ ІІТ Кристал-1",
+      "ID-карта громадянина (БЕН)",
+      "е.ключ ІІТ Алмаз-1К (PKCS#11)",
+      "е.ключ ІІТ Кристал-1 (PKCS#11)"
+    ]
+  }
 }

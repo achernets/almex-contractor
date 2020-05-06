@@ -7,7 +7,7 @@
     "SOCKET": "wsc/ping"
   },
   "MAX_CLIENTS_ORGANIZATION": 5,
-  "SEND_DOC_WITH_ECP": false,
+  "SEND_DOC_WITH_ECP": true,
   "UA": true,
   "IIT": {
     "encoding": "utf-8",

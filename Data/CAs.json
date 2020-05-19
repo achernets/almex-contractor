@@ -1,6 +1,31 @@
 [
 	{
 		"issuerCNs": [
+			"АЦСК АТ КБ «ПРИВАТБАНК»",
+			"АЦСК ПАТ КБ «ПРИВАТБАНК»",
+			"АЦСК «ПРИВАТБАНК»"
+		],
+		"address": "acsk.privatbank.ua",
+		"ocspAccessPointAddress": "acsk.privatbank.ua/services/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "acsk.privatbank.ua",
+		"tspAddress": "acsk.privatbank.ua",
+		"tspAddressPort": "80",
+		"directAccess": true
+	},
+	{
+		"issuerCNs": [
+			"АЦСК ТОВ \"КС\""
+		],
+		"address": "ca.ksystems.com.ua",
+		"ocspAccessPointAddress": "ca.ksystems.com.ua/services/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "ca.ksystems.com.ua",
+		"tspAddress": "ca.ksystems.com.ua",
+		"tspAddressPort": "80"
+	},
+	{
+		"issuerCNs": [
 			"КНЕДП - ІДД ДПС",
 			"Акредитований центр сертифікації ключів ІДД ДФС",
 			"Акредитований центр сертифікації ключів ІДД Міндоходів",
@@ -55,17 +80,6 @@
 	},
 	{
 		"issuerCNs": [
-			"АЦСК ТОВ \"КС\""
-		],
-		"address": "ca.ksystems.com.ua",
-		"ocspAccessPointAddress": "ca.ksystems.com.ua/services/ocsp/",
-		"ocspAccessPointPort": "80",
-		"cmpAddress": "ca.ksystems.com.ua",
-		"tspAddress": "ca.ksystems.com.ua",
-		"tspAddressPort": "80"
-	},
-	{
-		"issuerCNs": [
 			"АЦСК ДП «УСС»",
 			"АЦСК ДП \"УСС\""
 		],
@@ -87,20 +101,6 @@
 		"cmpAddress": "csk.ukrsibbank.com",
 		"tspAddress": "csk.ukrsibbank.com",
 		"tspAddressPort": "80"
-	},
-	{
-		"issuerCNs": [
-			"АЦСК АТ КБ «ПРИВАТБАНК»",
-			"АЦСК ПАТ КБ «ПРИВАТБАНК»",
-			"АЦСК «ПРИВАТБАНК»"
-		],
-		"address": "acsk.privatbank.ua",
-		"ocspAccessPointAddress": "acsk.privatbank.ua/services/ocsp/",
-		"ocspAccessPointPort": "80",
-		"cmpAddress": "acsk.privatbank.ua",
-		"tspAddress": "acsk.privatbank.ua",
-		"tspAddressPort": "80",
-		"directAccess": true
 	},
 	{
 		"issuerCNs": [

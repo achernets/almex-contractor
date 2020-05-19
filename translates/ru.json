@@ -20,12 +20,17 @@
     "find_total": "Найдено",
     "form_is_invalid": "Не заполнены обязательные поля или не корректно заполнены поля",
     "info": "Информация",
-    "info_to_admin": "Обратитесь к администратору"
+    "info_to_admin": "Обратитесь к администратору",
+    "sign": "Подписать",
+    "remove": "Удалить",
+    "download_p7s": "Скачать p7s"
   },
   "confirmation": {
     "title": "Подтвердите действие",
     "okText": "Подтвердить",
-    "title_remove_document_desc": "Удалить документ \"%{name}\"?"
+    "title_remove_document_desc": "Удалить документ \"%{name}\"?",
+    "remove_attachment": "Удалить вложение \"%{name}\"?",
+    "remove_ecp_and_edit": "Удалить ЄЦП \"%{name}\" и редактировать?"
   },
   "errors": {
     "UNKNOWN_ERROR": "Неизвестная ошибка",

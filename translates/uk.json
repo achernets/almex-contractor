@@ -20,12 +20,17 @@
     "find_total": "Знайдено",
     "form_is_invalid": "Не заповнені обов'язкові поля або некоректно заповнені поля",
     "info": "Інформація",
-    "info_to_admin": "Зверніться до адміністратора"
+    "info_to_admin": "Зверніться до адміністратора",
+    "sign": "Підписати",
+    "remove": "Видалити",
+    "download_p7s": "Завантажити p7s"
   },
   "confirmation": {
     "title": "Підтвердити дію",
     "okText": "Підтвердити",
-    "title_remove_document_desc": "Видалити документ \"%{name}\"?"
+    "title_remove_document_desc": "Видалити документ \"%{name}\"?",
+    "remove_attachment": "Видалити вкладення \"%{name}\"?",
+    "remove_ecp_and_edit": "Видалити ЕЦП \"%{name}\" і редагувати?"
   },
   "errors": {
     "UNKNOWN_ERROR": "Невідома помилка",

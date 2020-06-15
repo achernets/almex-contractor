@@ -35,7 +35,8 @@
   "errors": {
     "UNKNOWN_ERROR": "Невідома помилка",
     "INVALID_PASSWORD": "Невірний пароль",
-    "FILE_NOT_SUPPORT": "Файл не підтримується"
+    "FILE_NOT_SUPPORT": "Файл не підтримується",
+    "nca_layer_connect_errror": "Модуль NCA Layer не знайдено"
   },
   "form": {
     "required": "Обов'язкове для заповнення",

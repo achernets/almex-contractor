@@ -8,6 +8,7 @@
   },
   "MAX_CLIENTS_ORGANIZATION": 5,
   "SEND_DOC_WITH_ECP": true,
+  "MIDDLE_NAME_REQUIRED": false,
   "IIT": {
     "encoding": "utf-8",
     "httpProxyServiceURL": "https://dev.almexecm.com:8443/almex-mrk-server/ProxyHandler",

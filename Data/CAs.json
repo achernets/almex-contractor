@@ -11,18 +11,8 @@
 		"cmpAddress": "acsk.privatbank.ua",
 		"tspAddress": "acsk.privatbank.ua",
 		"tspAddressPort": "80",
-		"directAccess": true
-	},
-	{
-		"issuerCNs": [
-			"АЦСК ТОВ \"КС\""
-		],
-		"address": "ca.ksystems.com.ua",
-		"ocspAccessPointAddress": "ca.ksystems.com.ua/services/ocsp/",
-		"ocspAccessPointPort": "80",
-		"cmpAddress": "ca.ksystems.com.ua",
-		"tspAddress": "ca.ksystems.com.ua",
-		"tspAddressPort": "80"
+		"directAccess": true,
+		"qscdSNInCert": true
 	},
 	{
 		"issuerCNs": [
@@ -41,7 +31,9 @@
 	},
 	{
 		"issuerCNs": [
+			"\"Дія\". Кваліфікований надавач електронних довірчих послуг",
 			"АЦСК органів юстиції України",
+			"\"DIIA\". Qualified Trust Services Provider",
 			"CA of the Justice of Ukraine",
 			"АЦСК Держінформ'юсту"
 		],
@@ -51,10 +43,13 @@
 		"cmpAddress": "ca.informjust.ua",
 		"tspAddress": "ca.informjust.ua",
 		"tspAddressPort": "80",
-		"directAccess": true
+		"directAccess": true,
+		"qscdSNInCert": true
 	},
 	{
 		"issuerCNs": [
+			"КНЕДП ЦСК Укрзалізниці",
+			"QTSP of the Ukrzaliznytsia CA",
 			"Акредитований центр сертифікації ключів Укрзалізниці",
 			"ЦСК Укрзалізниці"
 		],
@@ -80,6 +75,7 @@
 	},
 	{
 		"issuerCNs": [
+			"КНЕДП ДП \"УСС\"",
 			"АЦСК ДП «УСС»",
 			"АЦСК ДП \"УСС\""
 		],
@@ -93,6 +89,7 @@
 	},
 	{
 		"issuerCNs": [
+			"КНЕДП АТ \"УКРСИББАНК\"",
 			"АЦСК Публічного акціонерного товариства \"УкрСиббанк\""
 		],
 		"address": "csk.ukrsibbank.com",
@@ -101,6 +98,43 @@
 		"cmpAddress": "csk.ukrsibbank.com",
 		"tspAddress": "csk.ukrsibbank.com",
 		"tspAddressPort": "80"
+	},
+	{
+		"issuerCNs": [
+			"Акредитований центр сертифікації ключів АТ \"Альфа-Банк\""
+		],
+		"address": "ca.alfabank.kiev.ua",
+		"ocspAccessPointAddress": "ca.alfabank.kiev.ua/services/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "ca.alfabank.kiev.ua",
+		"tspAddress": "ca.alfabank.kiev.ua",
+		"tspAddressPort": "80"
+	},
+	{
+		"issuerCNs": [
+			"КНЕДП Акціонерного товариства “КРЕДІ АГРІКОЛЬ БАНК”",
+			"QTSP of Joint-stock company \"CREDIT-AGRICOLE BANK\""
+		],
+		"address": "ca.credit-agricole.ua",
+		"ocspAccessPointAddress": "ca.credit-agricole.ua/services/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "ca.credit-agricole.ua",
+		"tspAddress": "ca.credit-agricole.ua",
+		"tspAddressPort": "80",
+		"directAccess": true
+	},
+	{
+		"issuerCNs": [
+			"КНЕДП ТОВ \"ДЕПОЗИТ САЙН\"",
+			"QTSP of the DEPOSIT SIGN LLC"
+		],
+		"address": "ca.depositsign.com",
+		"ocspAccessPointAddress": "ca.depositsign.com/services/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "ca.depositsign.com",
+		"tspAddress": "ca.depositsign.com",
+		"tspAddressPort": "80",
+		"directAccess": true
 	},
 	{
 		"issuerCNs": [
@@ -125,7 +159,8 @@
 		"ocspAccessPointPort": "80",
 		"cmpAddress": "acsk.dpsu.gov.ua",
 		"tspAddress": "acsk.dpsu.gov.ua",
-		"tspAddressPort": "80"
+		"tspAddressPort": "80",
+		"qscdSNInCert": true
 	},
 	{
 		"issuerCNs": [
@@ -153,7 +188,8 @@
 	},
 	{
 		"issuerCNs": [
-			"АЦСК Національного банку України"
+			"АЦСК Національного банку України",
+			"National Bank of Ukraine Certificate authority ECDSA"
 		],
 		"address": "canbu.bank.gov.ua",
 		"ocspAccessPointAddress": "canbu.bank.gov.ua/services/ocsp/",
@@ -193,36 +229,10 @@
 	},
 	{
 		"issuerCNs": [
-			"Акредитований центр сертифікації ключів ПАТ \"НДУ\"",
-			"Акредитований центр сертифікації ключів ПАТ НДУ"
-		],
-		"address": "ca.csd.ua",
-		"ocspAccessPointAddress": "ca.csd.ua/public/ocsp",
-		"ocspAccessPointPort": "80",
-		"cmpAddress": "ca.csd.ua/public/x509/cmp",
-		"tspAddress": "ca.csd.ua/public/tsa",
-		"tspAddressPort": "80",
-		"certsInKey": true,
-		"cmpCompatibility": 3
-	},
-	{
-		"issuerCNs": [
 			"АЦСК 'eSign' ТОВ 'Алтерсайн'"
 		],
 		"address": "ca.altersign.com.ua",
 		"ocspAccessPointAddress": "ca.altersign.com.ua/services/ocsp/",
-		"ocspAccessPointPort": "80",
-		"cmpAddress": "",
-		"tspAddress": "",
-		"tspAddressPort": "",
-		"cmpCompatibility": 0
-	},
-	{
-		"issuerCNs": [
-			"АЦСК ДП 'Український інститут інтелектуальної власності'"
-		],
-		"address": "acsk.uipv.org",
-		"ocspAccessPointAddress": "ocsp.acsk.uipv.org",
 		"ocspAccessPointPort": "80",
 		"cmpAddress": "",
 		"tspAddress": "",
@@ -244,6 +254,8 @@
 	},
 	{
 		"issuerCNs": [
+			"КНЕДП органів прокуратури України",
+			"QTSP of the Prosecution Bodies of Ukraine",
 			"АЦСК Генеральної прокуратури України"
 		],
 		"address": "ca.gp.gov.ua",
@@ -254,5 +266,41 @@
 		"tspAddressPort": "80",
 		"certsInKey": true,
 		"cmpCompatibility": 1
+	},
+	{
+		"issuerCNs": [
+			"\"АЦСК TOB 'Інтер-Метл'\""
+		],
+		"address": "cesaris.itsway.kiev.ua",
+		"ocspAccessPointAddress": "cesaris.itsway.kiev.ua/services/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "",
+		"tspAddress": "cesaris.itsway.kiev.ua/services/tsp/",
+		"tspAddressPort": "80",
+		"certsInKey": true,
+		"directAccess": true,
+		"cmpCompatibility": 0
+	},
+	{
+		"issuerCNs": [
+			"Засвідчувальний центр Національного банку України"
+		],
+		"address": "zc.bank.gov.ua",
+		"ocspAccessPointAddress": "zc.bank.gov.ua/queries/ocsp/",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "",
+		"tspAddress": "",
+		"tspAddressPort": ""
+	},
+	{
+		"issuerCNs": [
+			"ЦСК ПуАТ \"КБ \"АКОРДБАНК\""
+		],
+		"address": "ca.accordbank.com.ua",
+		"ocspAccessPointAddress": "ca.accordbank.com.ua/public/ocsp",
+		"ocspAccessPointPort": "80",
+		"cmpAddress": "",
+		"tspAddress": "",
+		"tspAddressPort": "80"
 	}
 ]

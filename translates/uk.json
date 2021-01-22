@@ -24,7 +24,8 @@
     "sign": "Підписати",
     "remove": "Видалити",
     "download_p7s": "Скачати p7s",
-    "send": "Надіслати"
+    "send": "Надіслати",
+    "functions": "Функції"
   },
   "confirmation": {
     "title": "Підтвердити дію",

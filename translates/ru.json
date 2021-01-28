@@ -25,7 +25,8 @@
     "remove": "Удалить",
     "download_p7s": "Скачать p7s",
     "send": "Отправить",
-    "functions": "Функции"
+    "functions": "Функции",
+    "password_tooltip": "Пароль должен содержать:\n 2 цифры, 2 спец.символа \n и большую букву"
   },
   "confirmation": {
     "title": "Подтвердите действие",
@@ -46,7 +47,8 @@
     "select_date": "Укажите дату",
     "confirmationPassword": "Пароль не совпадает",
     "email": "Проверьте email",
-    "numbers": "Введены неверные символы"
+    "numbers": "Введены неверные символы",
+    "password_regexp": "Пароль не отвечает требованиям"
   },
   "notification": {
     "warning": "Предупреждение",

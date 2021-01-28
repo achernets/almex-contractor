@@ -64,7 +64,8 @@
     "profile_sign_description": "Профиль пользователя удостоверен при помощи ЭЦП.",
     "change_password": "Ваш пароль успешно изменён.",
     "reset_password": "На ваш email отправлено дальнейшие инструкции.",
-    "confirm_registration": "Email %{email} подтверждён"
+    "confirm_registration": "Email %{email} подтверждён",
+    "error_allowed_attachment": "Поддерживаются такие разширения файлов "
   },
   "SignIn": {
     "locale_not_found": "Файл не найден",

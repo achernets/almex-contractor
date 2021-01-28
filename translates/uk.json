@@ -64,7 +64,8 @@
     "profile_sign_description": "Профіль користувача підтвердженний за допомогою ЕЦП.",
     "change_password": "Ваш пароль успішно змінено.",
     "reset_password": "На ваш email відправлено подальші інструкції.",
-    "confirm_registration": "Email %{email} підтверджено"
+    "confirm_registration": "Email %{email} підтверджено",
+    "error_allowed_attachment": "Підтримуються такі розширення файлів"
   },
   "SignIn": {
     "locale_not_found": "Файл не знайдено",

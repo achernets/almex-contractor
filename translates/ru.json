@@ -23,6 +23,7 @@
     "info_to_admin": "Обратитесь к администратору",
     "sign": "Подписать",
     "remove": "Удалить",
+    "download": "download",
     "download_p7s": "Скачать p7s",
     "send": "Отправить",
     "functions": "Функции",
@@ -167,7 +168,10 @@
   "GetFileSign": {
     "title": "Подтвердить с ЭЦП",
     "file": "Укажите файл ЭЦП",
-    "password": "Введите пароль"
+    "password": "Введите пароль",
+    "type": "Тип носителя",
+    "file_type": "Файл",
+    "token_type": "Токен"
   },
   "SignInSystem": {
     "first": "Подписано",
@@ -207,5 +211,12 @@
     "signs_sender": "Подписи отправителя",
     "signs_my_company": "Подписи вашей компании",
     "remove_ecp_and_edit": "Удалить ЭЦП и редактировать"
+  },
+  "IIT": {
+    "notSupported": "notSupported",
+    "isNativeLibraryNeedUpdate": "isNativeLibraryNeedUpdate",
+    "isWebExtensionInstalled": "isWebExtensionInstalled",
+    "isNativeLibraryInstalled": "isNativeLibraryInstalled",
+    "tokenNotFound": "tokenNotFound"
   }
 }

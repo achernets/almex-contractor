@@ -27,7 +27,7 @@
     "download_p7s": "Скачати p7s",
     "send": "Надіслати",
     "functions": "Функції",
-    "password_tooltip": "Пароль має містити:\n 2 цифри,\n 2 спец. символа\n та велику літеру"
+    "password_tooltip": "Довжина паролю від 6 знаків латиницею.\nПароль має містити:\n 1 велику літеру\n 2 спец. символа\n 2 цифри. "
   },
   "confirmation": {
     "title": "Підтвердити дію",
@@ -118,7 +118,8 @@
     "externalNumber": "Вхідний номер",
     "externalRegDate": "Вхідна дата",
     "documentNumber": "Вихідний номер",
-    "documentRegDate": "Вихідна дата"
+    "documentRegDate": "Вихідна дата",
+    "sendDate": "Дата відправки"
   },
   "MrkDocumentType": {
     "DRAFT": "Чернетки",

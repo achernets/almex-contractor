@@ -118,7 +118,8 @@
     "externalNumber": "Входящий номер",
     "externalRegDate": "Входящая дата",
     "documentNumber": "Исходящий номер",
-    "documentRegDate": "Исходящая дата"
+    "documentRegDate": "Исходящая дата",
+    "sendDate": "Дата отправки"
   },
   "MrkDocumentType": {
     "DRAFT": "Черновики",

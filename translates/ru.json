@@ -23,7 +23,7 @@
     "info_to_admin": "Обратитесь к администратору",
     "sign": "Подписать",
     "remove": "Удалить",
-    "download": "download",
+    "download": "Скачать",
     "download_p7s": "Скачать p7s",
     "send": "Отправить",
     "functions": "Функции",
@@ -66,7 +66,10 @@
     "change_password": "Ваш пароль успешно изменён.",
     "reset_password": "На ваш email отправлено дальнейшие инструкции.",
     "confirm_registration": "Email %{email} подтверждён",
-    "error_allowed_attachment": "Поддерживаются такие разширения файлов "
+    "error_allowed_attachment": "Поддерживаются такие разширения файлов ",
+    "file_not_found": "Фаил не найден",
+    "gen_file": "Генерация файла %{name}",
+    "gen_file_error": "Произошла ошибка при генерации файла %{name}"
   },
   "SignIn": {
     "locale_not_found": "Файл не найден",
@@ -211,7 +214,8 @@
   "Attachment": {
     "signs_sender": "Подписи отправителя",
     "signs_my_company": "Подписи вашей компании",
-    "remove_ecp_and_edit": "Удалить ЭЦП и редактировать"
+    "remove_ecp_and_edit": "Удалить ЭЦП и редактировать",
+    "gen_file": "Скачать версию для печати"
   },
   "IIT": {
     "notSupported": "notSupported",

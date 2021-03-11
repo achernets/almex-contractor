@@ -2,7 +2,7 @@
   "APP_VERSION": 0,
   "LANG": "uk",
   "THRIFT": {
-    "URL": "https://dev.almexecm.com:8443",
+    "URL": "https://qa.almexecm.com:8443",
     "API": "almex-mrk-server",
     "SOCKET": "wsc/ping"
   },
@@ -10,7 +10,7 @@
   "SEND_DOC_WITH_ECP": true,
   "IIT": {
     "encoding": "utf-8",
-    "httpProxyServiceURL": "https://dev.almexecm.com:8443/almex-mrk-server/ProxyHandler",
+    "httpProxyServiceURL": "https://qa.almexecm.com:8443/almex-mrk-server/ProxyHandler",
     "directAccess": true,
     "CAs": "/Data/CAs.json",
     "CACertificates": "/Data/CACertificates.p7b",
